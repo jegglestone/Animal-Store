@@ -1,7 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore", "AnimalStore\AnimalStore.csproj", "{DCA7C49F-0762-4F12-A991-B102976FFCAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Web", "AnimalStore\AnimalStore.Web.csproj", "{DCA7C49F-0762-4F12-A991-B102976FFCAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Data", "..\AnimalStore.Data\AnimalStore.Data\AnimalStore.Data.csproj", "{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Services", "..\AnimalStore.Services\AnimalStore.Services\AnimalStore.Services.csproj", "{6904372C-2116-43B4-8C01-428C5021C97D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CA159F5E-EBBD-444A-8594-40A03574AD69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{CA3E3A79-CBDD-4441-B937-7E07A89930C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Web.UnitTests", "..\AnimalStore\Tests\Unit\AnimalStore.Web.UnitTests\AnimalStore.Web.UnitTests.csproj", "{BF87B06A-7963-4572-9B68-976B1FE602C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Data.UnitTests", "..\AnimalStore\Tests\Unit\AnimalStore.Data.UnitTests\AnimalStore.Data.UnitTests.csproj", "{E37FB169-8D42-4B07-899B-DFC692966DBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Services.UnitTests", "..\AnimalStore\Tests\Unit\AnimalStore.Services.UnitTests\AnimalStore.Services.UnitTests.csproj", "{9A518821-E10C-477B-9FCC-911B259DAFFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,8 +27,34 @@ Global
 		{DCA7C49F-0762-4F12-A991-B102976FFCAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCA7C49F-0762-4F12-A991-B102976FFCAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCA7C49F-0762-4F12-A991-B102976FFCAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6904372C-2116-43B4-8C01-428C5021C97D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6904372C-2116-43B4-8C01-428C5021C97D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6904372C-2116-43B4-8C01-428C5021C97D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6904372C-2116-43B4-8C01-428C5021C97D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF87B06A-7963-4572-9B68-976B1FE602C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF87B06A-7963-4572-9B68-976B1FE602C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF87B06A-7963-4572-9B68-976B1FE602C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF87B06A-7963-4572-9B68-976B1FE602C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E37FB169-8D42-4B07-899B-DFC692966DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E37FB169-8D42-4B07-899B-DFC692966DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E37FB169-8D42-4B07-899B-DFC692966DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E37FB169-8D42-4B07-899B-DFC692966DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A518821-E10C-477B-9FCC-911B259DAFFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A518821-E10C-477B-9FCC-911B259DAFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A518821-E10C-477B-9FCC-911B259DAFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A518821-E10C-477B-9FCC-911B259DAFFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CA3E3A79-CBDD-4441-B937-7E07A89930C1} = {CA159F5E-EBBD-444A-8594-40A03574AD69}
+		{BF87B06A-7963-4572-9B68-976B1FE602C1} = {CA3E3A79-CBDD-4441-B937-7E07A89930C1}
+		{E37FB169-8D42-4B07-899B-DFC692966DBA} = {CA3E3A79-CBDD-4441-B937-7E07A89930C1}
+		{9A518821-E10C-477B-9FCC-911B259DAFFC} = {CA3E3A79-CBDD-4441-B937-7E07A89930C1}
 	EndGlobalSection
 EndGlobal
