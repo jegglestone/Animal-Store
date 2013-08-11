@@ -4,6 +4,8 @@ using System.Linq;
 using System.Data;
 using System.Data.Entity;
 using AnimalStore.Model;
+using AnimalStore.Data.Configuration;
+using AnimalStore.Model.Interfaces;
 
 namespace AnimalStore.Data
 {
@@ -15,6 +17,11 @@ namespace AnimalStore.Data
 
         public DataContext()
             :base(nameOrConnectionString: DataContext.ConnectionStringName) {}
+
+        static DataContext()
+        {
+            Database.SetInitializer(new CustomDatabaseInitialiser());
+        }
 
         public static string ConnectionStringName
         {
@@ -32,6 +39,31 @@ namespace AnimalStore.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+        }
+
+        public override int SaveChanges()
+        {
+            ApplyRules();
+            return base.SaveChanges();
+        }
+
+        private void ApplyRules()
+        {
+            foreach (var entry in this.ChangeTracker.Entries()
+                        .Where (
+                            e => e.Entity is IAuditInfo &&
+                            (e.State==EntityState.Added) ||
+                            (e.State==EntityState.Modified)))
+            {
+                IAuditInfo e = (IAuditInfo)entry.Entity;
+
+                if (entry.State == EntityState.Added)
+                {
+                    e.CreatedOn = DateTime.Now;
+                }
+
+                e.ModifiedOn = DateTime.Now;
+            }
         }
     }
 }

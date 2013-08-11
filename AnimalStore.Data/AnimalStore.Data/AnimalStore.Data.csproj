@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Configuration\AnimalConfiguration.cs" />
     <Compile Include="Configuration\BreedConfiguration.cs" />
+    <Compile Include="Configuration\CustomDatabaseInitialiser.cs" />
     <Compile Include="Configuration\SpeciesConfiguration.cs" />
     <Compile Include="DbContext\DataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
