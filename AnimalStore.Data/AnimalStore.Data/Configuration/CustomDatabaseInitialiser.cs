@@ -13,14 +13,14 @@ namespace AnimalStore.Data.Configuration
     {
         protected override void Seed(DataContext context)
         {
-            #region "Add some species to database"
+ /*           #region "Add some species to database"
 
             string[] speciesList = new string[2] {
                 "Bird",
                 "Cat"
             };
 
-            int speciesCount = speciesList.Length + 1;
+            int speciesCount = speciesList.Length-1;
             while ((speciesCount--) != 0)
             {
                 Species species = new Species();
@@ -41,7 +41,7 @@ namespace AnimalStore.Data.Configuration
                 "Great Dane"
             };
 
-            int breedCount = breedList.Length + 1;
+            int breedCount = breedList.Length-1;
             while ((breedCount--) != 0)
             {
                 Breed breed = new Breed();
@@ -51,14 +51,17 @@ namespace AnimalStore.Data.Configuration
             }
 
             #endregion
-
+*/
             #region "Add some dog story data to database"
 
             Species dogSpecies = new Species { Name = "Dog"};
             Breed dalmatian = new Breed { Name = "Dalmatian", Species = dogSpecies };
             Breed goldenRetriever = new Breed { Name = "Golden Retriever", Species = dogSpecies };
 
-            List<Animal> animals = new List<Animal>();
+            context.Species.Add(dogSpecies);
+            context.Breeds.Add(dalmatian);
+            context.Breeds.Add(goldenRetriever);
+
             context.Animals.Add(new Animal { Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian });
             context.Animals.Add(new Animal { Age = 1, Desc = "A young Golden Retriever. Well behaved and trained.", Name = "Goldie", isLitter = false, isSold = false, Breed = goldenRetriever });
 

@@ -38,7 +38,10 @@ namespace AnimalStore.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Configurations.Add(new AnimalConfiguration());
+            modelBuilder.Configurations.Add(new BreedConfiguration());
+            modelBuilder.Configurations.Add(new SpeciesConfiguration());
+            //base.OnModelCreating(modelBuilder);
         }
 
         public override int SaveChanges()
