@@ -1,11 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Web", "AnimalStore\AnimalStore.Web.csproj", "{DCA7C49F-0762-4F12-A991-B102976FFCAD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Data", "..\AnimalStore.Data\AnimalStore.Data\AnimalStore.Data.csproj", "{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Services", "..\AnimalStore.Services\AnimalStore.Services\AnimalStore.Services.csproj", "{6904372C-2116-43B4-8C01-428C5021C97D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CA159F5E-EBBD-444A-8594-40A03574AD69}"
 EndProject
@@ -21,24 +17,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Acceptance", "Acceptance", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Model", "..\AnimalStore.Model\AnimalStore.Model\AnimalStore.Model.csproj", "{B574DB16-1972-4BFB-A0CB-5198139851F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Services", "..\AnimalStore.Web.API\AnimalStore.Web.API\AnimalStore.Services.csproj", "{BB811415-0BF8-44C8-96C2-7BE4048CA8CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Web", "AnimalStore.Web\AnimalStore.Web.csproj", "{E0B4D07B-42AE-4908-BDBA-F93C59D15739}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DCA7C49F-0762-4F12-A991-B102976FFCAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCA7C49F-0762-4F12-A991-B102976FFCAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCA7C49F-0762-4F12-A991-B102976FFCAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCA7C49F-0762-4F12-A991-B102976FFCAD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6904372C-2116-43B4-8C01-428C5021C97D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6904372C-2116-43B4-8C01-428C5021C97D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6904372C-2116-43B4-8C01-428C5021C97D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6904372C-2116-43B4-8C01-428C5021C97D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{913FF8D0-57D0-419F-AFCC-D8D274556F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{913FF8D0-57D0-419F-AFCC-D8D274556F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{913FF8D0-57D0-419F-AFCC-D8D274556F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,6 +47,14 @@ Global
 		{B574DB16-1972-4BFB-A0CB-5198139851F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B574DB16-1972-4BFB-A0CB-5198139851F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B574DB16-1972-4BFB-A0CB-5198139851F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB811415-0BF8-44C8-96C2-7BE4048CA8CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB811415-0BF8-44C8-96C2-7BE4048CA8CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB811415-0BF8-44C8-96C2-7BE4048CA8CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB811415-0BF8-44C8-96C2-7BE4048CA8CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0B4D07B-42AE-4908-BDBA-F93C59D15739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0B4D07B-42AE-4908-BDBA-F93C59D15739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0B4D07B-42AE-4908-BDBA-F93C59D15739}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0B4D07B-42AE-4908-BDBA-F93C59D15739}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
