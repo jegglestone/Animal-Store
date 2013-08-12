@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}</ProjectGuid>
+    <ProjectGuid>{BF0DC99A-ADCE-47C1-B18D-2C32588C1F71}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AnimalStore.Data</RootNamespace>
-    <AssemblyName>AnimalStore.Data</AssemblyName>
+    <RootNamespace>AnimalStore.Model.UnitTests</RootNamespace>
+    <AssemblyName>AnimalStore.Model.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,14 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\AnimalStore.Web\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,26 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\AnimalConfiguration.cs" />
-    <Compile Include="Configuration\BreedConfiguration.cs" />
-    <Compile Include="Configuration\CustomDatabaseInitialiser.cs" />
-    <Compile Include="Configuration\SpeciesConfiguration.cs" />
-    <Compile Include="DbContext\DataContext.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AnimalRepository.cs" />
-    <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\AnimalStore.Model\AnimalStore.Model\AnimalStore.Model.csproj">
-      <Project>{b574db16-1972-4bfb-a0cb-5198139851f5}</Project>
-      <Name>AnimalStore.Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

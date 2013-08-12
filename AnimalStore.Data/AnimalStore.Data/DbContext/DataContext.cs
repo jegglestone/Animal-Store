@@ -41,7 +41,6 @@ namespace AnimalStore.Data
             modelBuilder.Configurations.Add(new AnimalConfiguration());
             modelBuilder.Configurations.Add(new BreedConfiguration());
             modelBuilder.Configurations.Add(new SpeciesConfiguration());
-            //base.OnModelCreating(modelBuilder);
         }
 
         public override int SaveChanges()
