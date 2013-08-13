@@ -253,11 +253,11 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AnimalStore.Data\AnimalStore.Data\AnimalStore.Data.csproj">
+    <ProjectReference Include="..\AnimalStore.Data\AnimalStore.Data.csproj">
       <Project>{c42a037c-0680-4d08-9bc0-1f6c1bdbe87f}</Project>
       <Name>AnimalStore.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\AnimalStore.Model\AnimalStore.Model\AnimalStore.Model.csproj">
+    <ProjectReference Include="..\AnimalStore.Model\AnimalStore.Model.csproj">
       <Project>{b574db16-1972-4bfb-a0cb-5198139851f5}</Project>
       <Name>AnimalStore.Model</Name>
     </ProjectReference>
