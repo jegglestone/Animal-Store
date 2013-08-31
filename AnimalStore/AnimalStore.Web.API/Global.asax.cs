@@ -25,7 +25,7 @@ namespace AnimalStore.Web.API
 
             var unity = new UnityContainer();
             unity.RegisterType<AnimalsController>();
-            unity.RegisterType<IRepository<Animal>, GenericRepository<Animal>>(
+            unity.RegisterType<IRepository<Animal>, AnimalsRepository>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<DbContext, DataContext>(
                 new HierarchicalLifetimeManager());
