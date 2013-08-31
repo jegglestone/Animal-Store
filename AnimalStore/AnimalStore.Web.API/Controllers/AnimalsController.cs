@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace AnimalStore.Web.API.Controllers
+namespace AnimalStore.Services.Controllers
 {
     public class AnimalsController : ApiController
     {
@@ -18,6 +18,7 @@ namespace AnimalStore.Web.API.Controllers
         }
 
         // GET api/animals
+        [HttpGet]
         public IEnumerable<Animal> Get()
         {
             var animals = _animalRepository.GetAll()
@@ -28,22 +29,26 @@ namespace AnimalStore.Web.API.Controllers
         }
 
         // GET api/animals/5
+        [HttpGet]
         public Animal Get(int id)
         {
             return _animalRepository.GetById(id);
         }
 
         // POST api/animals
+        [HttpPost]
         public void Post([FromBody]string value)
         {
         }
 
         // PUT api/animals/5
+        [HttpPut]
         public void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/animals/5
+        [HttpDelete]
         public void Delete(int id)
         {
             _animalRepository.Delete(id);
