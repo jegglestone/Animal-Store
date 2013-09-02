@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnimalStore.Data.Repositories
 {
@@ -19,7 +16,7 @@ namespace AnimalStore.Data.Repositories
         {
             if (context == null)
                 throw new ArgumentNullException(
-                    "An instance of DbContext is required to use this generic repository", "Null DbContext");
+                    "context", "An instance of DbContext is required to use this generic repository");
 
             this.Context = context;
             this.DBSet = this.Context.Set<T>();

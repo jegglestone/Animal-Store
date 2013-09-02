@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System;
-using System.Collections.Generic;
-using System.Web.Http;
 using System.Web.Http.Dependencies;
 using Microsoft.Practices.Unity;
 
@@ -12,7 +7,7 @@ namespace AnimalStore.Web.API.DependencyResolution
 {
     public class ScopeContainer : IDependencyScope
     {
-        protected IUnityContainer container;
+        protected readonly IUnityContainer _container;
 
         public ScopeContainer(IUnityContainer container)
         {
@@ -20,36 +15,24 @@ namespace AnimalStore.Web.API.DependencyResolution
             {
                 throw new ArgumentNullException("container");
             }
-            this.container = container;
+            _container = container;
         }
 
         public object GetService(Type serviceType)
         {
-            if (container.IsRegistered(serviceType))
-            {
-                return container.Resolve(serviceType);
-            }
-            else
-            {
-                return null;
-            }
+            return _container.IsRegistered(serviceType) ? 
+                _container.Resolve(serviceType) : null;
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            if (container.IsRegistered(serviceType))
-            {
-                return container.ResolveAll(serviceType);
-            }
-            else
-            {
-                return new List<object>();
-            }
+            return _container.IsRegistered(serviceType) ? 
+                _container.ResolveAll(serviceType) : new List<object>();
         }
 
         public void Dispose()
         {
-            container.Dispose();
+            _container.Dispose();
         }
     }
 
@@ -62,7 +45,7 @@ namespace AnimalStore.Web.API.DependencyResolution
 
         public IDependencyScope BeginScope()
         {
-            var child = container.CreateChildContainer();
+            var child = _container.CreateChildContainer();
             return new ScopeContainer(child);
         }
     }

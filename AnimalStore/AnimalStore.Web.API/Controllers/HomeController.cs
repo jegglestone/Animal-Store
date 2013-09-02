@@ -1,9 +1,5 @@
-﻿using AnimalStore.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using AnimalStore.Data.DataContext;
 
 namespace AnimalStore.Web.API.Controllers
 {
@@ -11,7 +7,7 @@ namespace AnimalStore.Web.API.Controllers
     {
         public ActionResult Index()
         {
-            DataContext dataContext = new DataContext();
+            var dataContext = new DataContext();
             dataContext.Database.Initialize(true);
 
             return View();

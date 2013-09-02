@@ -1,25 +1,33 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using AnimalStore.Data.Repositories;
+using NUnit.Framework;
+using Rhino.Mocks;
 
 namespace AnimalStore.Data.UnitTests
 {
     [TestFixture]
     public class GenericRepositoryTests
     {
-        // TODO
-        //setup fake dbcontext
+        [SetUp]
+        public void SetUp()
+        {
+            
+         
+        }
 
-        [Test]
-        public void GenericRepositoryConstructorTest()
-        {}
+        //[Test]
+        //public void GenericRepositoryConstructor_ThrowsCorrectExceptionWhenNoDbContextIsInjected()
+        //{
+        //    //act
+        //    var ex = Assert.Throws<Exception>(() => new GenericRepository<Animal>(null));
+        //    Assert.That(ex.Message, Is.EqualTo("context"));
+        //    Assert.That(ex.InnerException, Is.EqualTo("An instance of DbContext is required to use this generic repository"));
+        //}
 
         [Test]
         public void GetAll_ReturnsIQueryableT()
-        {}
+        {
+        }
 
         [Test]
         public void GetById_ReturnsObjectOfTypeT()

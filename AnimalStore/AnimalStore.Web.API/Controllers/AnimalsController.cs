@@ -1,17 +1,15 @@
 ﻿using AnimalStore.Model;
 using AnimalStore.Data.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
-namespace AnimalStore.Services.Controllers
+namespace AnimalStore.Web.API.Controllers
 {
     public class AnimalsController : ApiController
     {
-        private IRepository<Animal> _animalRepository;
+        private readonly IRepository<Animal> _animalRepository;
+
         public AnimalsController(IRepository<Animal> animalRepository)
         {
             _animalRepository = animalRepository;

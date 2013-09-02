@@ -1,14 +1,11 @@
-﻿using AnimalStore.Data;
+﻿using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Model;
-using AnimalStore.Services.Controllers;
+using AnimalStore.Web.API.App_Start;
+using AnimalStore.Web.API.Controllers;
 using AnimalStore.Web.API.DependencyResolution;
 using Microsoft.Practices.Unity;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -18,8 +15,7 @@ namespace AnimalStore.Web.API
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-
-        void ConfigureApi(HttpConfiguration config)
+        static void ConfigureApi(HttpConfiguration config)
         {
             //config.DependencyResolver = new SimpleContainer();  //home-made simple IoC container
 
