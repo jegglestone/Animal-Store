@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fakes\Animal.cs" />
+    <Compile Include="Fakes\Breed.cs" />
+    <Compile Include="Fakes\FakeAnimalDbSet.cs" />
+    <Compile Include="Fakes\FakeBreedDbSet.cs" />
+    <Compile Include="Fakes\FakeDbContext.cs" />
+    <Compile Include="Fakes\FakeDbSet.cs" />
     <Compile Include="GenericRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
