@@ -54,6 +54,8 @@
     <Compile Include="Fakes\FakeBreedDbSet.cs" />
     <Compile Include="Fakes\FakeDbContext.cs" />
     <Compile Include="Fakes\FakeDbSet.cs" />
+    <Compile Include="Fakes\FakeSpeciesDbSet.cs" />
+    <Compile Include="Fakes\Species.cs" />
     <Compile Include="GenericRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

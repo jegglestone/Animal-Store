@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 
 namespace AnimalStore.Data.UnitTests.Fakes
 {
-    class FakeDbContext
+    internal class FakeDbContext
     {
+        public IDbSet<Animal> Animals { get; set; }
+        public IDbSet<Species> Species { get; set; }
+        public IDbSet<Breed> Breeds { get; set; }
+
+
     }
 }

@@ -1,7 +1,4 @@
-﻿using System.Data.Entity;
-using AnimalStore.Data.Repositories;
-using NUnit.Framework;
-using Rhino.Mocks;
+﻿using NUnit.Framework;
 
 namespace AnimalStore.Data.UnitTests
 {
