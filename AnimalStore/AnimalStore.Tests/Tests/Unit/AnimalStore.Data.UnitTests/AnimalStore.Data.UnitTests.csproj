@@ -48,14 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fakes\Animal.cs" />
-    <Compile Include="Fakes\Breed.cs" />
     <Compile Include="Fakes\FakeAnimalDbSet.cs" />
     <Compile Include="Fakes\FakeBreedDbSet.cs" />
     <Compile Include="Fakes\FakeDbContext.cs" />
     <Compile Include="Fakes\FakeDbSet.cs" />
     <Compile Include="Fakes\FakeSpeciesDbSet.cs" />
-    <Compile Include="Fakes\Species.cs" />
     <Compile Include="GenericRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,6 +63,10 @@
     <ProjectReference Include="..\..\..\..\AnimalStore.Data\AnimalStore.Data.csproj">
       <Project>{c42a037c-0680-4d08-9bc0-1f6c1bdbe87f}</Project>
       <Name>AnimalStore.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\AnimalStore.Model\AnimalStore.Model.csproj">
+      <Project>{B574DB16-1972-4BFB-A0CB-5198139851F5}</Project>
+      <Name>AnimalStore.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

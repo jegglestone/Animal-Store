@@ -9,7 +9,7 @@ using AnimalStore.Model.Interfaces;
 
 namespace AnimalStore.Data.DataContext
 {
-    public class DataContext : DbContext
+    public class DataContext : DbContext, IDataContext
     {
         public IDbSet<Animal> Animals { get; set; }
         public IDbSet<Species> Species { get; set; }

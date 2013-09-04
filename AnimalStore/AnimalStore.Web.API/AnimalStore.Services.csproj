@@ -163,7 +163,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnimalsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DependencyResolution\SimpleContainer.cs" />
     <Compile Include="DependencyResolution\UnityContainer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
