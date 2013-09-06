@@ -40,9 +40,23 @@ namespace AnimalStore.Data.UnitTests
 
 
         [Test]
-        public void GetById_ReturnsObjectOfTypeT()
+        public void GetById_ExecutesTheQuery()
         {
+            //arrange
+            var testDog = new Animal() { Id=1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false };
+            var context = new FakeAnimalsDbContext();
+            context.Animals.Add(testDog);
 
+            using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(context))
+            {
+                //act
+                using (var repo = new AnimalsRepository(uow))
+                {
+                    //assert
+                    var dog = repo.GetById(1);
+                    Assert.That(dog, Is.EqualTo(testDog));
+                }
+            }
         }
 
         [Test]

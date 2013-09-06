@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace AnimalStore.Data.Repositories
 {
-    public interface IRepository<T> 
+    public interface IRepository<T> :IDisposable 
         where T : class
     {
         IQueryable<T> GetAll();

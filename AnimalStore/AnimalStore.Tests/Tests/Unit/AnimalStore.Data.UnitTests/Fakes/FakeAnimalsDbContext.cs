@@ -4,11 +4,18 @@ using AnimalStore.Model;
 
 namespace AnimalStore.Data.UnitTests.Fakes
 {
-    internal class FakeAnimalsDbContext : IAnimalsDataContext
+    internal class FakeAnimalsDbContext : DbContext, IAnimalsDataContext
     {
         public IDbSet<Animal> Animals { get; set; }
         public IDbSet<Species> Species { get; set; }
         public IDbSet<Breed> Breeds { get; set; }
+
+        public FakeAnimalsDbContext()
+        {
+            Animals = new FakeAnimalDbSet();
+            Breeds = new FakeBreedDbSet();
+            Species = new FakeSpeciesDbSet();
+        }
 
         public int SaveChanges()
         {
