@@ -1,11 +1,11 @@
 ﻿using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
+using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
 using AnimalStore.Web.API.App_Start;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Web.API.DependencyResolution;
 using Microsoft.Practices.Unity;
-using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -17,13 +17,15 @@ namespace AnimalStore.Web.API
     {
         static void ConfigureApi(HttpConfiguration config)
         {
-            //config.DependencyResolver = new SimpleContainer();  //home-made simple IoC container
-
             var unity = new UnityContainer();
             unity.RegisterType<AnimalsController>();
+            unity.RegisterType<IUnitOfWork, UnitOfWork<AnimalsDataContext>>(
+                new HierarchicalLifetimeManager());
+            unity.RegisterType<IContext, AnimalsDataContext>(
+                new HierarchicalLifetimeManager());
             unity.RegisterType<IRepository<Animal>, AnimalsRepository>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<DbContext, DataContext>(
+            unity.RegisterType<IAnimalsDataContext, AnimalsDataContext>(
                 new HierarchicalLifetimeManager());
             config.DependencyResolver = new IoCContainer(unity);
         }

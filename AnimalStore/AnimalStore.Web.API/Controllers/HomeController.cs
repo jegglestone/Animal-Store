@@ -7,7 +7,7 @@ namespace AnimalStore.Web.API.Controllers
     {
         public ActionResult Index()
         {
-            var dataContext = new DataContext();
+            var dataContext = new AnimalsDataContext();
             dataContext.Database.Initialize(true);
 
             return View();

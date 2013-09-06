@@ -1,69 +1,87 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace AnimalStore.Data.UnitTests.Fakes
 {
+    /// <summary>
+    /// A fake DbSet allowing us to create and maintain a collection for testing our Repositories
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class FakeDbSet<T> : IDbSet<T>
         where T : class, new()
     {
+        readonly ObservableCollection<T> _items;
+        readonly IQueryable _query;
+
+        public FakeDbSet()
+        {
+            _items = new ObservableCollection<T>();
+            _query = _items.AsQueryable();
+        }
 
         public T Add(T entity)
         {
-            throw new System.NotImplementedException();
+            _items.Add(entity);
+            return entity;
         }
 
         public T Attach(T entity)
         {
-            throw new System.NotImplementedException();
+            _items.Add(entity);
+            return entity;
         }
 
         public TDerivedEntity Create<TDerivedEntity>() where TDerivedEntity : class, T
         {
-            throw new System.NotImplementedException();
+            return System.Activator.CreateInstance<TDerivedEntity>();
         }
 
         public T Create()
         {
-            throw new System.NotImplementedException();
+            return new T();
         }
 
-        public T Find(params object[] keyValues)
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract T Find(params object[] keyValues);
 
-        public System.Collections.ObjectModel.ObservableCollection<T> Local
+        public ObservableCollection<T> Local
         {
-            get { throw new System.NotImplementedException(); }
+            get { return _items; }
         }
 
         public T Remove(T entity)
         {
-            throw new System.NotImplementedException();
+            _items.Remove(entity);
+            return entity;
         }
 
-        public System.Collections.Generic.IEnumerator<T> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return _items.GetEnumerator();
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+       IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return _items.GetEnumerator();
         }
 
-        public System.Type ElementType
+        public Type ElementType
         {
-            get { throw new System.NotImplementedException(); }
+            get { return _query.ElementType; }
         }
 
-        public System.Linq.Expressions.Expression Expression
+        public Expression Expression
         {
-            get { throw new System.NotImplementedException(); }
+            get { return _query.Expression; }
         }
 
-        public System.Linq.IQueryProvider Provider
+        public IQueryProvider Provider
         {
-            get { throw new System.NotImplementedException(); }
+            get { return _query.Provider; }
         }
     }
 }

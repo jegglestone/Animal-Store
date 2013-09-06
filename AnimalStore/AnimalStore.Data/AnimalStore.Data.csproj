@@ -49,15 +49,17 @@
     <Compile Include="Configuration\BreedConfiguration.cs" />
     <Compile Include="Configuration\CustomDatabaseInitialiser.cs" />
     <Compile Include="Configuration\SpeciesConfiguration.cs" />
-    <Compile Include="DataContext\DataContext.cs" />
+    <Compile Include="DataContext\AnimalsDataContext.cs" />
+    <Compile Include="DataContext\IAnimalsDataContext.cs" />
+    <Compile Include="DataContext\IContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AnimalsRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="UnitsOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitsOfWork\UnitOfWork.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UnitsOfWork\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

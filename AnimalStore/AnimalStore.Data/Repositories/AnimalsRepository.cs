@@ -1,12 +1,14 @@
-﻿using AnimalStore.Model;
-using System.Data.Entity;
+﻿using AnimalStore.Data.DataContext;
+using AnimalStore.Data.UnitsOfWork;
+using AnimalStore.Model;
 
 namespace AnimalStore.Data.Repositories
 {
     public class AnimalsRepository : GenericRepository<Animal>
     {
-        public AnimalsRepository(DbContext context) : 
-            base(context)
-        { }
+        public AnimalsRepository(IUnitOfWork unitOfWork) :
+            base(unitOfWork)
+        {
+        }
     }
 }

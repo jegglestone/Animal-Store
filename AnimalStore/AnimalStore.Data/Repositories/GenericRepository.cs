@@ -3,6 +3,8 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using AnimalStore.Data.DataContext;
+using AnimalStore.Data.UnitsOfWork;
 
 namespace AnimalStore.Data.Repositories
 {
@@ -12,13 +14,13 @@ namespace AnimalStore.Data.Repositories
         protected DbSet<T> DBSet {get; set;}
         protected DbContext Context { get; set; }
 
-        public GenericRepository(DbContext context)
+        public GenericRepository(IUnitOfWork unitOfWork)  //(IAnimalsDataContext context)
         {
-            if (context == null)
+            if (unitOfWork == null || unitOfWork.Context == null)
                 throw new ArgumentNullException(
-                    "context", "An instance of DbContext is required to use this generic repository");
+                    "unitOfWork", "An instance of UnitOfWork with a DbContext is required to use this generic repository");
 
-            this.Context = context;
+            this.Context = (DbContext)unitOfWork.Context;
             this.DBSet = this.Context.Set<T>();
         }
 
