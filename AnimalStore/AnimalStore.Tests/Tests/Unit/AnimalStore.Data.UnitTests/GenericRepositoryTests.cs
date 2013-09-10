@@ -10,12 +10,12 @@ namespace AnimalStore.Data.UnitTests
     [TestFixture]
     public class GenericRepositoryTests
     {
-        private IDataContext _dbContext;
+        private IAnimalsDataContext _dbContext;
 
         [SetUp]
         public void SetUp()
         {
-            _dbContext = new FakeDbContext();
+            _dbContext = new FakeAnimalsDbContext();
 
             var dogSpecies = new Species { Name = "Dog" };
             var dalmatian = new Breed { Name = "Dalmatian", Species = dogSpecies };
@@ -25,8 +25,8 @@ namespace AnimalStore.Data.UnitTests
             _dbContext.Breeds.Add(dalmatian);
             _dbContext.Breeds.Add(goldenRetriever);
 
-            _dbContext.Animals.Add(new Animal { Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian });
-            _dbContext.Animals.Add(new Animal { Age = 1, Desc = "A young Golden Retriever. Well behaved and trained.", Name = "Goldie", isLitter = false, isSold = false, Breed = goldenRetriever });
+            _dbContext.Animals.Add(new Animal { Id=1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian });
+            _dbContext.Animals.Add(new Animal { Id=2, Age = 1, Desc = "A young Golden Retriever. Well behaved and trained.", Name = "Goldie", isLitter = false, isSold = false, Breed = goldenRetriever });
 
         }
 
@@ -39,6 +39,7 @@ namespace AnimalStore.Data.UnitTests
         //    Assert.That(ex.InnerException, Is.EqualTo("An instance of DbContext is required to use this generic repository"));
         //}
 
+<<<<<<< HEAD
         [Test]
         public void GetAll_ReturnsIQueryableT()
         {
@@ -51,10 +52,27 @@ namespace AnimalStore.Data.UnitTests
             // assert
             Assert.That(results, Is.Not.Null);
         }
+=======
+>>>>>>> 8ef14f536d796b1ef223fe3dd19e0d9143aae71d
 
         [Test]
-        public void GetById_ReturnsObjectOfTypeT()
+        public void GetById_ExecutesTheQuery()
         {
+            //arrange
+            var testDog = new Animal() { Id=1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false };
+            var context = new FakeAnimalsDbContext();
+            context.Animals.Add(testDog);
+
+            using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(context))
+            {
+                //act
+                using (var repo = new AnimalsRepository(uow))
+                {
+                    //assert
+                    var dog = repo.GetById(1);
+                    Assert.That(dog, Is.EqualTo(testDog));
+                }
+            }
         }
 
         [Test]

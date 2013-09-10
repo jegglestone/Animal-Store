@@ -4,9 +4,9 @@ using System.Data.Entity;
 namespace AnimalStore.Data.Configuration
 {
     public class CustomDatabaseInitialiser : 
-        DropCreateDatabaseIfModelChanges<DataContext.DataContext>
+        DropCreateDatabaseIfModelChanges<DataContext.AnimalsDataContext>
     {
-        protected override void Seed(DataContext.DataContext context)
+        protected override void Seed(DataContext.AnimalsDataContext context)
         {
              #region "Add some dog story data to database"
 

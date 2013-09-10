@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using AnimalStore.Data.DataContext;
+using AnimalStore.Data.UnitsOfWork;
 
 namespace AnimalStore.Data.Repositories
 {
@@ -11,15 +12,15 @@ namespace AnimalStore.Data.Repositories
         where T : class
     {
         protected DbSet<T> DBSet {get; set;}
-        protected DbContext Context { get; set; }
+        protected IContext Context { get; set; }
 
-        public GenericRepository(IDataContext context)
+        public GenericRepository(IUnitOfWork unitOfWork)
         {
-            if (context == null)
+            if (unitOfWork == null || unitOfWork.Context == null)
                 throw new ArgumentNullException(
-                    "context", "An instance of DbContext is required to use this generic repository");
+                    "unitOfWork", "An instance of UnitOfWork with a DbContext is required to use this generic repository");
 
-            this.Context = (DbContext) context;
+            this.Context = (IContext)unitOfWork.Context;
             this.DBSet = this.Context.Set<T>();
         }
 
@@ -74,6 +75,10 @@ namespace AnimalStore.Data.Repositories
         {
             DbEntityEntry entry = this.Context.Entry(entity);
             entry.State = EntityState.Detached;
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
