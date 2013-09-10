@@ -10,79 +10,97 @@ namespace AnimalStore.Data.UnitTests
     [TestFixture]
     public class GenericRepositoryTests
     {
-        private IAnimalsDataContext _dbContext;
+        private IAnimalsDataContext _fakeDbContext;
 
         [SetUp]
         public void SetUp()
         {
-            _dbContext = new FakeAnimalsDbContext();
+            _fakeDbContext = new FakeAnimalsDbContext();
 
-            var dogSpecies = new Species { Name = "Dog" };
-            var dalmatian = new Breed { Name = "Dalmatian", Species = dogSpecies };
-            var goldenRetriever = new Breed { Name = "Golden Retriever", Species = dogSpecies };
+            //var dogSpecies = new Species { Name = "Dog" };
+            //var dalmatian = new Breed { Name = "Dalmatian", Species = dogSpecies };
+            //var goldenRetriever = new Breed { Name = "Golden Retriever", Species = dogSpecies };
 
-            _dbContext.Species.Add(dogSpecies);
-            _dbContext.Breeds.Add(dalmatian);
-            _dbContext.Breeds.Add(goldenRetriever);
+            //_dbContext.Species.Add(dogSpecies);
+            //_dbContext.Breeds.Add(dalmatian);
+            //_dbContext.Breeds.Add(goldenRetriever);
 
-            _dbContext.Animals.Add(new Animal { Id=1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian });
-            _dbContext.Animals.Add(new Animal { Id=2, Age = 1, Desc = "A young Golden Retriever. Well behaved and trained.", Name = "Goldie", isLitter = false, isSold = false, Breed = goldenRetriever });
+            //_dbContext.Animals.Add(new Animal { Id=1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian });
+            //_dbContext.Animals.Add(new Animal { Id=2, Age = 1, Desc = "A young Golden Retriever. Well behaved and trained.", Name = "Goldie", isLitter = false, isSold = false, Breed = goldenRetriever });
 
         }
-
-        //[Test]
-        //public void GenericRepositoryConstructor_ThrowsCorrectExceptionWhenNoDbContextIsInjected()
-        //{
-        //    //act
-        //    var ex = Assert.Throws<Exception>(() => new GenericRepository<Animal>(null));
-        //    Assert.That(ex.Message, Is.EqualTo("context"));
-        //    Assert.That(ex.InnerException, Is.EqualTo("An instance of DbContext is required to use this generic repository"));
-        //}
-
-<<<<<<< HEAD
-        [Test]
-        public void GetAll_ReturnsIQueryableT()
-        {
-            // arrange
-            var repository = new GenericRepository<Animal>(_dbContext);
-
-            // act
-            var results = repository.GetAll();
-
-            // assert
-            Assert.That(results, Is.Not.Null);
-        }
-=======
->>>>>>> 8ef14f536d796b1ef223fe3dd19e0d9143aae71d
 
         [Test]
         public void GetById_ExecutesTheQuery()
         {
             //arrange
-            var testDog = new Animal() { Id=1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false };
-            var context = new FakeAnimalsDbContext();
-            context.Animals.Add(testDog);
+            var dogSpecies = new Species { Id=1, Name = "Dog" };
+            var dalmatian = new Breed { Id=1, Name = "Dalmatian", Species = dogSpecies };
+            var testDog = new Animal() { Id = 1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
 
-            using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(context))
+            using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
             {
-                //act
                 using (var repo = new AnimalsRepository(uow))
                 {
-                    //assert
+                    //act
+                    repo.Add(testDog);
                     var dog = repo.GetById(1);
+
+                    //assert
                     Assert.That(dog, Is.EqualTo(testDog));
                 }
             }
+
         }
 
         [Test]
         public void Add_AddsObjectT()
         {
+            var dogSpecies = new Species { Id = 1, Name = "Dog" };
+            var dalmatian = new Breed { Id = 1, Name = "Dalmatian", Species = dogSpecies };
+            var testDog = new Animal() { Id = 1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
+
+            using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
+            {
+                using (var repo = new AnimalsRepository(uow))
+                {
+                    //act
+                    repo.Add(testDog);
+
+                    //assert
+                    Assert.That(repo.GetById(1), Is.EqualTo(testDog));
+                }
+            }
+
         }
 
         [Test]
         public void Delete_DeletesObjectT()
         {
+            var dogSpecies = new Species { Id = 1, Name = "Dog" };
+            var dalmatian = new Breed { Id = 1, Name = "Dalmatian", Species = dogSpecies };
+            var testDog = new Animal() { Id = 1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
+
+            using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
+            {
+                using (var repo = new AnimalsRepository(uow))
+                {                
+                    //act
+                    repo.Add(testDog);
+                    Assert.That(repo.GetById(1), Is.EqualTo(testDog));
+                    repo.Delete(1);
+
+                    //assert
+                    //Assert.That(repo.GetById(1));
+                }
+            }
+
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _fakeDbContext.Dispose();
         }
     }
 }

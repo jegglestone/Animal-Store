@@ -1,5 +1,4 @@
-﻿using AnimalStore.Data.DataContext;
-using AnimalStore.Data.UnitsOfWork;
+﻿using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
 
 namespace AnimalStore.Data.Repositories

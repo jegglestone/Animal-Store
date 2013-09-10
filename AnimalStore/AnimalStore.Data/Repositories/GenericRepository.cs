@@ -11,69 +11,69 @@ namespace AnimalStore.Data.Repositories
     public class GenericRepository<T> : IRepository<T> 
         where T : class
     {
-        protected DbSet<T> DBSet {get; set;}
+        protected IDbSet<T> DBSet {get; set;}
         protected IContext Context { get; set; }
 
-        public GenericRepository(IUnitOfWork unitOfWork)
+        protected GenericRepository(IUnitOfWork unitOfWork)
         {
             if (unitOfWork == null || unitOfWork.Context == null)
                 throw new ArgumentNullException(
                     "unitOfWork", "An instance of UnitOfWork with a DbContext is required to use this generic repository");
 
-            this.Context = (IContext)unitOfWork.Context;
-            this.DBSet = this.Context.Set<T>();
+            Context = unitOfWork.Context;
+            DBSet = Context.Set<T>();
         }
 
         public IQueryable<T> GetAll()
         {
-            return this.DBSet;
+            return DBSet;
         }
 
         public T GetById(int id)
         {
-            return this.DBSet.Find(id);
+            return DBSet.Find(id);
         }
 
         public void Add(T entity)
         {
-            DbEntityEntry entry = this.Context.Entry(entity);
+            DbEntityEntry entry = Context.Entry(entity);
             if (entry.State != EntityState.Detached)
                 entry.State = EntityState.Added;
             else
-                this.DBSet.Add(entity);
+                DBSet.Add(entity);
         }
 
         public void Update(T entity)
         {
-            DbEntityEntry entry = this.Context.Entry(entity);
+            DbEntityEntry entry = Context.Entry(entity);
             if (entry.State == EntityState.Detached)
-                this.DBSet.Attach(entity);
+                DBSet.Attach(entity);
             entry.State = EntityState.Modified;
         }
 
         public void Delete(T entity)
         {
-            DbEntityEntry entry = this.Context.Entry(entity);
+            DbEntityEntry entry = Context.Entry(entity);
             if (entry.State != EntityState.Deleted)
                 entry.State = EntityState.Deleted;
             else
             {
-                this.DBSet.Attach(entity);
-                this.DBSet.Remove(entity);
+                DBSet.Attach(entity);
+                DBSet.Remove(entity);
             }
         }
 
         public void Delete(int id)
         {
-            var entity = this.DBSet.Find(id);
+            var entity = DBSet.Find(id);
 
             if (entity != null)
-                this.Delete(entity);
+                Delete(entity);
         }
 
         public void Detach(T entity)
         {
-            DbEntityEntry entry = this.Context.Entry(entity);
+            DbEntityEntry entry = Context.Entry(entity);
             entry.State = EntityState.Detached;
         }
 
