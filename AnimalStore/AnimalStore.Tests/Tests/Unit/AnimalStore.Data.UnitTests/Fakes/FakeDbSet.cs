@@ -1,10 +1,13 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using AnimalStore.Model;
 
 namespace AnimalStore.Data.UnitTests.Fakes
 {
     public abstract class FakeDbSet<T> : IDbSet<T>
         where T : class, new()
     {
+        public List<T> _collection { get; set; }
 
         public T Add(T entity)
         {

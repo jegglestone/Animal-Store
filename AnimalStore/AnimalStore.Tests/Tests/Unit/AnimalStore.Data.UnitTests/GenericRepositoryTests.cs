@@ -1,4 +1,5 @@
-﻿using AnimalStore.Data.DataContext;
+﻿using System.Collections.Generic;
+using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Data.UnitTests.Fakes;
 using AnimalStore.Model;
@@ -48,7 +49,7 @@ namespace AnimalStore.Data.UnitTests
             var results = repository.GetAll();
 
             // assert
-           // Assert.That(results.GetType);
+            Assert.That(results, Is.Not.Null);
         }
 
         [Test]
