@@ -1,10 +1,9 @@
 ﻿using System.Web.Http;
 using System.Net.Http.Formatting;
 using System.Linq;
+using AnimalStore.Common.Constants;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
-using AnimalStore.Common;
-
 namespace AnimalStore.Web.API.App_Start
 {
     public static class WebApiConfig
@@ -29,11 +28,11 @@ namespace AnimalStore.Web.API.App_Start
             // Json and Xml support
             _config.Formatters.JsonFormatter.MediaTypeMappings.Add(
                 new QueryStringMapping(
-                    MediaTypeFormatConstants.Keys.FORMATQUERYSTRINGKEY, MediaTypeFormatConstants.Values.JSON, "application/json"));
+                    MediaTypeFormats.Keys.FORMATQUERYSTRINGKEY, MediaTypeFormats.Values.JSON, "application/json"));
 
             _config.Formatters.XmlFormatter.MediaTypeMappings.Add(
                 new QueryStringMapping(
-                    MediaTypeFormatConstants.Keys.FORMATQUERYSTRINGKEY, MediaTypeFormatConstants.Values.XML, "application/xml"));
+                    MediaTypeFormats.Keys.FORMATQUERYSTRINGKEY, MediaTypeFormats.Values.XML, "application/xml"));
 
             MakeJsonCamelCase();
 
