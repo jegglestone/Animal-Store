@@ -35,13 +35,23 @@ namespace AnimalStore.Web.API.App_Start
                 new QueryStringMapping(
                     MediaTypeFormatConstants.Keys.FORMATQUERYSTRINGKEY, MediaTypeFormatConstants.Values.XML, "application/xml"));
 
-            // Make json Camel Case
+            MakeJsonCamelCase();
+
+            SetDefaultMediaTypeToJson();
+
+        }
+
+        private static void MakeJsonCamelCase()
+        {
             var jsonFormatter = _config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver =
                 new CamelCasePropertyNamesContractResolver();
+        }
 
-            // Make json default media type within the browser
-            _config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+        private static void SetDefaultMediaTypeToJson()
+        {
+            _config.Formatters.JsonFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("text/html"));
         }
     }
 }
