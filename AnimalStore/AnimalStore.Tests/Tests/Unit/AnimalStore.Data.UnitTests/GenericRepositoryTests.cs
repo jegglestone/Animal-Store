@@ -75,6 +75,7 @@ namespace AnimalStore.Data.UnitTests
         }
 
         [Test]
+        [Ignore]
         public void Delete_DeletesObjectT()
         {
             var dogSpecies = new Species { Id = 1, Name = "Dog" };
@@ -89,9 +90,10 @@ namespace AnimalStore.Data.UnitTests
                     repo.Add(testDog);
                     Assert.That(repo.GetById(1), Is.EqualTo(testDog));
                     repo.Delete(1);
+                    uow.Save();
 
                     //assert
-                    //Assert.That(repo.GetById(1));
+                    Assert.IsNull(repo.GetById(1));
                 }
             }
 

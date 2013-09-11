@@ -51,7 +51,7 @@ namespace AnimalStore.Data.DataContext
 
         private void ApplyRules()
         {
-            foreach (var entry in this.ChangeTracker.Entries()
+            foreach (var entry in ChangeTracker.Entries()
                         .Where (
                             e => e.Entity is IAuditInfo &&
                             (e.State==EntityState.Added) ||
