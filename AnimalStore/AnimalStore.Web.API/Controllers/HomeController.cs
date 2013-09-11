@@ -10,6 +10,11 @@ namespace AnimalStore.Web.API.Controllers
             var dataContext = new AnimalsDataContext();
             dataContext.Database.Initialize(true);
 
+            var logManager = new Common.Logging.LogManager();
+            var log = logManager.GetLogger((typeof (HomeController)));
+
+            log.Info("We're logging with Log4net");
+
             return View();
         }
     }
