@@ -17,7 +17,7 @@ namespace AnimalStore.Data.UnitTests.Fakes
             Species = new FakeSpeciesDbSet();
         }
 
-        public int SaveChanges()
+        public new int SaveChanges()
         {
             throw new System.NotImplementedException();
         }
@@ -32,7 +32,7 @@ namespace AnimalStore.Data.UnitTests.Fakes
             throw new System.NotImplementedException();
         }
 
-        public void Dispose()
+        public new void Dispose()
         {
         }
     }

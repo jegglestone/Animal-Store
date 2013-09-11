@@ -65,6 +65,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AnimalStore.Common.UnitTests\AnimalStore.Common.UnitTests.csproj">
+      <Project>{15a41e3b-e37d-4668-9d35-3e5377f6ff6e}</Project>
+      <Name>AnimalStore.Common.UnitTests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AnimalStore.Model\AnimalStore.Model.csproj">
       <Project>{b574db16-1972-4bfb-a0cb-5198139851f5}</Project>
       <Name>AnimalStore.Model</Name>
