@@ -43,7 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\MediaTypeFormatConstants.cs" />
-    <Compile Include="Logging\Interfaces\ILogger.cs" />
+    <Compile Include="Logging\EventLogHelper.cs" />
+    <Compile Include="Logging\Interfaces\ILoggerWrapper.cs" />
     <Compile Include="Logging\Interfaces\ILogManager.cs" />
     <Compile Include="Logging\LoggerAdapter.cs" />
     <Compile Include="Logging\LogLevel.cs" />
@@ -51,7 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Logging\Log4net.config" />
+    <None Include="Log4net.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

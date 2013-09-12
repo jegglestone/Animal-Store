@@ -1,9 +1,13 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Web.Http;
 using System.Net.Http.Formatting;
 using System.Linq;
 using AnimalStore.Common.Constants;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
+
 namespace AnimalStore.Web.API.App_Start
 {
     public static class WebApiConfig
@@ -16,11 +20,18 @@ namespace AnimalStore.Web.API.App_Start
 
             configureMediaTypeMappings();
 
+            createEventLogFileIfNotExists();
+
             _config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+        }
+
+        private static void createEventLogFileIfNotExists()
+        {
+            Common.Logging.EventLogHelper.InitialiseEventLog();
         }
 
         private static void configureMediaTypeMappings()

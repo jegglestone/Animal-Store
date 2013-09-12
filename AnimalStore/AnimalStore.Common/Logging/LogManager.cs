@@ -1,6 +1,6 @@
 ﻿using System;
 using AnimalStore.Common.Logging.Interfaces;
-using log4net;
+using log4net.Config;
 
 namespace AnimalStore.Common.Logging
 {
@@ -8,7 +8,7 @@ namespace AnimalStore.Common.Logging
     {
         static LogManager()
         {
-            log4net.Config.XmlConfigurator.Configure(
+            XmlConfigurator.Configure(
                 new System.IO.FileInfo("log4net.config"));
         }
 
