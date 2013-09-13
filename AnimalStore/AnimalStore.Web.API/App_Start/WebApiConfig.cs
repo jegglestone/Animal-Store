@@ -36,7 +36,6 @@ namespace AnimalStore.Web.API.App_Start
 
         private static void configureMediaTypeMappings()
         {
-            // Json and Xml support
             _config.Formatters.JsonFormatter.MediaTypeMappings.Add(
                 new QueryStringMapping(
                     MediaTypeFormats.Keys.FORMATQUERYSTRINGKEY, MediaTypeFormats.Values.JSON, "application/json"));

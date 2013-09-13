@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace AnimalStore.Common.Logging
 {
@@ -11,19 +10,12 @@ namespace AnimalStore.Common.Logging
 
            if (!EventLog.SourceExists(eventlogName))
            {
-               try
-               {
-                   EventLog.CreateEventSource(eventlogName, eventlogName);
+               EventLog.CreateEventSource(eventlogName, eventlogName);
 
-                   var eventLog = new EventLog { Source = eventlogName, Log = eventlogName };
-                   eventLog.Source = eventlogName;
-                   eventLog.WriteEntry("The " + eventlogName + " was successfully created.", 
-                       EventLogEntryType.Information);
-               }
-               catch (Exception e)
-               {
-                   throw e;
-               }
+               var eventLog = new EventLog { Source = eventlogName, Log = eventlogName };
+               eventLog.Source = eventlogName;
+               eventLog.WriteEntry("The " + eventlogName + " was successfully created.", 
+                                   EventLogEntryType.Information);
            }
        }
     }
