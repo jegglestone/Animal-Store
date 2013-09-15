@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Services", "AnimalStore.Web.API\AnimalStore.Services.csproj", "{BB811415-0BF8-44C8-96C2-7BE4048CA8CB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2DE462EE-7F1A-467E-BB93-A9EF1F0DDCEB}"
@@ -29,6 +29,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Web.UnitTests", "AnimalStore.Tests\Tests\Unit\AnimalStore.Web.UnitTests\AnimalStore.Web.UnitTests.csproj", "{E9A75B37-B77E-4E19-9B4B-850887BB30F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Data", "AnimalStore.Data\AnimalStore.Data.csproj", "{C42A037C-0680-4D08-9BC0-1F6C1BDBE87F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{86727352-3704-4FE9-BBD6-9D126E6CBFC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

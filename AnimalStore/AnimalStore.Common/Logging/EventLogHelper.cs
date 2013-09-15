@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using AnimalStore.Common.Constants;
+using System.Diagnostics;
 using System.Security;
 
 namespace AnimalStore.Common.Logging
@@ -7,25 +8,29 @@ namespace AnimalStore.Common.Logging
     {
         public static void InitialiseEventLog()
        {
-           const string eventlogName = "AnimalStore.Events";
+           const string EVENT_LOG_NAME = EventLogConstants.EVENT_LOG_NAME;
 
            try
            {
-               if (!EventLog.SourceExists(eventlogName))
+               if (!EventLog.SourceExists(EVENT_LOG_NAME))
                {
-                   EventLog.CreateEventSource(eventlogName, eventlogName);
+                   EventLog.CreateEventSource(EVENT_LOG_NAME, EVENT_LOG_NAME);
 
-                   var eventLog = new EventLog { Source = eventlogName, Log = eventlogName };
-                   eventLog.Source = eventlogName;
-                   eventLog.WriteEntry("The " + eventlogName + " was successfully created.",
-                                       EventLogEntryType.Information);
+                   var eventLog = new EventLog { Source = EVENT_LOG_NAME, Log = EVENT_LOG_NAME };
+
+                   eventLog.Source = EVENT_LOG_NAME;
+
+                   eventLog.WriteEntry(EVENT_LOG_NAME + " successfully created.", EventLogEntryType.Information);
                }
            }
            catch(SecurityException)
            {
                string user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+
                string eventLogRegistryKey ="HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\EventLog\\Security";
-               string message ="In order to use logging, the Event logs must be accessible. You must grant " + user + "read permissions on the registry key " + eventLogRegistryKey;
+
+               string message ="In order to use logging, the Event logs must be accessible. You must grant " + user + " read permissions on the registry key " + eventLogRegistryKey;
+
                throw new SecurityException(message);
            }
        }
