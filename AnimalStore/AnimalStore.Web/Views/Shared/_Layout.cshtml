@@ -16,11 +16,17 @@
                 </div>
                 <div class="float-right">
                     <section id="login">
+                        <div style="text-align:center">Home | FAQ | Contact Us | Privacy</div>
                         @Html.Partial("_LoginPartial")
                     </section>
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Buy", "Index", "Buy")</li>
+                            <li>@Html.ActionLink("Sell", "Index", "Sell")</li>
+                            <li>@Html.ActionLink("News", "Index", "News")</li>
+                            <li>@Html.ActionLink("Our Community", "Index", "Community")</li>
+                            <li>@Html.ActionLink("Dogs A-Z", "Index", "DogsAZ")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         </ul>
