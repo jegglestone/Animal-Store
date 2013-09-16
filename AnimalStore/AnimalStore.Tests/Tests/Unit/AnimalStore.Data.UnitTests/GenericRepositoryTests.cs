@@ -35,7 +35,7 @@ namespace AnimalStore.Data.UnitTests
             //arrange
             var dogSpecies = new Species { Id=1, Name = "Dog" };
             var dalmatian = new Breed { Id=1, Name = "Dalmatian", Species = dogSpecies };
-            var testDog = new Animal() { Id = 1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
+            var testDog = new Animal() { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
 
             using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
             {
@@ -57,7 +57,7 @@ namespace AnimalStore.Data.UnitTests
         {
             var dogSpecies = new Species { Id = 1, Name = "Dog" };
             var dalmatian = new Breed { Id = 1, Name = "Dalmatian", Species = dogSpecies };
-            var testDog = new Animal() { Id = 1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
+            var testDog = new Animal() { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
 
             using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
             {
@@ -79,7 +79,7 @@ namespace AnimalStore.Data.UnitTests
         {
             var dogSpecies = new Species { Id = 1, Name = "Dog" };
             var dalmatian = new Breed { Id = 1, Name = "Dalmatian", Species = dogSpecies };
-            var testDog = new Animal() { Id = 1, Age = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
+            var testDog = new Animal() { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
 
             using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
             {
