@@ -8,7 +8,8 @@ namespace AnimalStore.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public string Desc { get; set; }
-        public int Age { get; set; }
+        public int AgeInYears { get; set; }
+        public int AgeInMonth { get; set; }
         public bool isLitter { get; set; }
         public bool isSold { get; set; }
         public int Price { get; set; }
