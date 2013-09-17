@@ -7,10 +7,10 @@
             public const string FORMATQUERYSTRINGKEY = "format";
         }
 
-        public class Values
+        public enum Values
         {
-            public const string JSON = "json";
-            public const string XML = "xml";
+            JSON,
+            XML
         }
     }
 }

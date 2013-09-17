@@ -38,11 +38,11 @@ namespace AnimalStore.Web.API.App_Start
         {
             _config.Formatters.JsonFormatter.MediaTypeMappings.Add(
                 new QueryStringMapping(
-                    MediaTypeFormats.Keys.FORMATQUERYSTRINGKEY, MediaTypeFormats.Values.JSON, "application/json"));
+                    MediaTypeFormats.Keys.FORMATQUERYSTRINGKEY, MediaTypeFormats.Values.JSON.ToString(), "application/json"));
 
             _config.Formatters.XmlFormatter.MediaTypeMappings.Add(
                 new QueryStringMapping(
-                    MediaTypeFormats.Keys.FORMATQUERYSTRINGKEY, MediaTypeFormats.Values.XML, "application/xml"));
+                    MediaTypeFormats.Keys.FORMATQUERYSTRINGKEY, MediaTypeFormats.Values.XML.ToString(), "application/xml"));
 
             MakeJsonCamelCase();
 

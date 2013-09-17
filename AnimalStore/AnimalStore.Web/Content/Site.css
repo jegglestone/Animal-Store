@@ -160,6 +160,10 @@ footer {
         text-decoration: none;
     }
 
+    #login a:hover {
+        background-color: #7AC0DA;
+    }
+
     #login a.username {
         background: none;
         margin: 0;
@@ -204,6 +208,21 @@ ul#menu {
             text-decoration: none;
         }
 
+/* top nav
+----------------------------------------------------------*/
+#topnav {
+    margin-bottom:10px
+}
+
+    #topnav ul li a {
+        background-color: #fff;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+    }
+
+    #topnav ul li a:hover {
+        text-decoration: underline;
+    }
 
 /* page elements
 ----------------------------------------------------------*/

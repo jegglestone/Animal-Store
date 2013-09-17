@@ -10,7 +10,7 @@ namespace AnimalStore.Web.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.Message = "Your first stop for finding and advertising dogs in the UK.";
 
             return View();
         }
