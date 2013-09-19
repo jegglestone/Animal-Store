@@ -12,6 +12,7 @@ namespace AnimalStore.Model
         public int AgeInMonth { get; set; }
         public bool isLitter { get; set; }
         public bool isSold { get; set; }
+        public bool isFemale { get; set; }
         public int Price { get; set; }
         public Breed Breed { get; set; }
         public DateTime CreatedOn { get; set; }

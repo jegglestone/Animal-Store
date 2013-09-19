@@ -14,14 +14,14 @@
                 <div class="float-left">
                     <p class="site-title">
                         <img src="~/Images/paw_small.jpg" alt="Dog" style="margin-right: 10px; margin-top: 15px;" />
-                        @Html.ActionLink("Dogicious", "Index", "Home")
+                        @Html.ActionLink("DogStore", "Index", "Home")
                     </p>
                 </div>
                 <div class="float-right">
                     <section id="login">
                         <nav id="topnav">
                             <ul>
-                                <li>Home </li>
+                                <li>@Html.ActionLink("Home", "Index", "Home") </li>
                                 <li>| FAQ </li>
                                 <li>| @Html.ActionLink("Contact", "Contact", "Home")</li>
                                 <li>| Terms </li>
@@ -34,11 +34,11 @@
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Buy", "Index", "Buy")</li>
-                            <li>@Html.ActionLink("Sell", "Index", "Sell")</li>
-                            <li>@Html.ActionLink("News", "Index", "News")</li>
-                            <li>@Html.ActionLink("Our Community", "Index", "Community")</li>
-                            <li>@Html.ActionLink("Dogs A-Z", "Index", "DogsAZ")</li>
+                            <li>@Html.ActionLink("Buy", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Sell", "Index", "Home")</li>
+                            <li>@Html.ActionLink("News", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Our Community", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Dogs A-Z", "Index", "Home")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         </ul>
@@ -55,7 +55,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    <p>&copy; @DateTime.Now.Year - DogStore. All rights Reserved.</p>
                 </div>
             </div>
         </footer>

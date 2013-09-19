@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace AnimalStore.Web.Controllers
 {
@@ -17,16 +13,18 @@ namespace AnimalStore.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "Thanks for visiting. Here at xxx, we are dedicated to helping you find the ideal pet for you or you family or the ideal new home for your existing animals.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Get in touch.";
 
             return View();
         }
+
+
     }
 }
