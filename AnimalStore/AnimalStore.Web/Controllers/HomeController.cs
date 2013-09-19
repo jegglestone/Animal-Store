@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using AnimalStore.Common.Constants;
 
 namespace AnimalStore.Web.Controllers
 {
@@ -13,7 +14,7 @@ namespace AnimalStore.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Thanks for visiting. Here at xxx, we are dedicated to helping you find the ideal pet for you or you family or the ideal new home for your existing animals.";
+            ViewBag.Message = "Thanks for visiting. Here at " + SiteNames.DOGSTORE_SITE_NAME + ", we are dedicated to helping you find the ideal pet for you or you family or the ideal new home for your existing animals.";
 
             return View();
         }
@@ -24,7 +25,5 @@ namespace AnimalStore.Web.Controllers
 
             return View();
         }
-
-
     }
 }

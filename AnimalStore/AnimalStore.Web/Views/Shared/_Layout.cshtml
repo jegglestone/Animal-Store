@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using AnimalStore.Common.Constants
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -14,7 +15,7 @@
                 <div class="float-left">
                     <p class="site-title">
                         <img src="~/Images/paw_small.jpg" alt="Dog" style="margin-right: 10px; margin-top: 15px;" />
-                        @Html.ActionLink("DogStore", "Index", "Home")
+                        @Html.ActionLink(@SiteNames.DOGSTORE_SITE_NAME, "Index", "Home")
                     </p>
                 </div>
                 <div class="float-right">
@@ -55,7 +56,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - DogStore. All rights Reserved.</p>
+                    <p>&copy; @DateTime.Now.Year - @SiteNames.DOGSTORE_SITE_NAME. All rights Reserved.</p>
                 </div>
             </div>
         </footer>
