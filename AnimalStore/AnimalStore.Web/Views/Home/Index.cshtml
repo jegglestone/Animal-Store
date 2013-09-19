@@ -10,36 +10,43 @@
                 <h2>@ViewBag.Message</h2>
             </hgroup>
             <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
+                Search through thousands of 
+                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">adverts</a> for <mark>puppies and dogs</mark> throughout the UK or advertise your own dog with
+                @SiteNames.DOGSTORE_SITE_NAME. If you have any questions about this site please @Html.ActionLink("contact", "contact", "home") us or visit
                 <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
+            </p>
+            <p style="float:right; margin-left:5px;">
+                <img src="~/Images/3607850-sweet-dachshund--teckel--dog-sitting-on-a-white-background.jpg" alt="Dog" />
             </p>
         </div>
     </section>
 }
-<h3>We suggest the following:</h3>
+<h3>Finding your perfect pet:</h3>
 <ol class="round">
     <li class="one">
         <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="/home/About#gettingStarted">Learn more…</a>
+        @SiteNames.DOGSTORE_SITE_NAME gives you a safe, fast and friendly new way to find or advertise dogs in the UK. Getting started has never been easier than with 
+        our brand new site dedicated to helping you find your perfect pet.
+        <a href="/home/About#gettingStarted">Learn more…</a>        
     </li>
 
     <li class="two">
         <h5>Create an account</h5>
-        NuGet makes it easy to install and update free libraries and tools.
+        Registration is free, quick and easy - no long forms to fill in. Just follow the link below and you can start advertising or making contact with sellers.
         <a href="/home/About#register">Learn more…</a>
     </li>
 
     <li class="three">
-        <h5>Start making contact</h5>
-        Use our growing network of site users to reach out dog sellers and buyers or get to know other owners.
+        <h5>Advertise your dog for free!</h5>
+        Once our registered, you can begin to advertise your dog to our growing audience or search our database of dogs and sellers. No charges or fees.
         <a href="/home/About#start">Learn more…</a>
+    </li>
+
+    <li class="four">
+        <h5>Find a pet!</h5>
+        Use our search widget to find dogs, services or simply get int touch with one of our registered breeders.
+        <br />
+        <br />
+        @Html.Partial("_TabbedSearchPartial")
     </li>
 </ol>

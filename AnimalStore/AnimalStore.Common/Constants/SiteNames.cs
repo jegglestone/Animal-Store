@@ -5,6 +5,6 @@
     /// </summary>
     public class SiteNames
     {
-        public const string DOGSTORE_SITE_NAME = "Dogstore";
+        public const string DOGSTORE_SITE_NAME = "Dogs Mad";
     }
 }
