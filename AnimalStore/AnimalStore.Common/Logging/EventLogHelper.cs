@@ -25,13 +25,17 @@ namespace AnimalStore.Common.Logging
            }
            catch(SecurityException)
            {
-               string user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+               var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
+               if (windowsIdentity != null)
+               {
+                   string user = windowsIdentity.Name;
 
-               string eventLogRegistryKey ="HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\EventLog\\Security";
+                   const string eventLogRegistryKey = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\EventLog\\Security";
 
-               string message ="In order to use logging, the Event logs must be accessible. You must grant " + user + " read permissions on the registry key " + eventLogRegistryKey;
+                   string message ="In order to use logging, the Event logs must be accessible. You must grant " + user + " read permissions on the registry key " + eventLogRegistryKey;
 
-               throw new SecurityException(message);
+                   throw new SecurityException(message);
+               }
            }
        }
     }

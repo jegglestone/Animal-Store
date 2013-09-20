@@ -5,6 +5,8 @@ Online store for selling animals as pets
 
 This is an application that I've created as a place for browsing and selling animals (well, just dogs for now) as pets.
 
+Advertising : local press, forums, Google? Pet magazines.
+
 
 ##Technology stack
 
