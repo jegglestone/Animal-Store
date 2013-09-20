@@ -169,6 +169,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ContactInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\aspnet-AnimalStore.Web-20130812193316.mdf" />
