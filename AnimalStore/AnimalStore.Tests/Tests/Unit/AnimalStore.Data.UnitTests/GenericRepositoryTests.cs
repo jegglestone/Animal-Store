@@ -32,7 +32,6 @@ namespace AnimalStore.Data.UnitTests
         [Test]
         public void GetById_ExecutesTheQuery()
         {
-            //arrange
             var dogSpecies = new Species { Id=1, Name = "Dog" };
             var dalmatian = new Breed { Id=1, Name = "Dalmatian", Species = dogSpecies };
             var testDog = new Animal { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
@@ -41,14 +40,11 @@ namespace AnimalStore.Data.UnitTests
             {
                 using (var repo = new AnimalsRepository(uow))
                 {
-                    //act
+                   //act
                     repo.Add(testDog);
-                    var dog = repo.GetById(1);
-
-                    uow.Save();
 
                     //assert
-                    Assert.That(dog, Is.EqualTo(testDog));
+                    Assert.That(repo.GetById(1), Is.EqualTo(testDog));
                 }
             }
         }
