@@ -12,7 +12,7 @@ namespace AnimalStore.Data.Repositories
         where T : class
     {
         protected IDbSet<T> DBSet {get; set;}
-        protected IContext Context { get; set; }
+        public IContext Context { get; set; }
 
         protected GenericRepository(IUnitOfWork unitOfWork)
         {

@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using AnimalStore.Data.DataContext;
 using AnimalStore.Model;
+using Rhino.Mocks;
 
 namespace AnimalStore.Data.UnitTests.Fakes
 {
@@ -12,14 +13,20 @@ namespace AnimalStore.Data.UnitTests.Fakes
 
         public FakeAnimalsDbContext()
         {
-            Animals = new FakeAnimalDbSet();
-            Breeds = new FakeBreedDbSet();
-            Species = new FakeSpeciesDbSet();
+            Animals = MockRepository.GenerateMock<IDbSet<Animal>>();
+            Breeds = MockRepository.GenerateMock<IDbSet<Breed>>();
+            Species = MockRepository.GenerateMock<IDbSet<Species>>();
+
+            Database.SetInitializer<FakeAnimalsDbContext>(null);
+
+            //Animals = new FakeAnimalDbSet();
+            //Breeds = new FakeBreedDbSet();
+            //Species = new FakeSpeciesDbSet();
         }
 
         public new int SaveChanges()
         {
-            throw new System.NotImplementedException();
+            return 1;
         }
 
         public void SetModified(object entity)

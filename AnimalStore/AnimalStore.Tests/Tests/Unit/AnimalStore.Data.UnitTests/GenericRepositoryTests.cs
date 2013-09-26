@@ -35,7 +35,7 @@ namespace AnimalStore.Data.UnitTests
             //arrange
             var dogSpecies = new Species { Id=1, Name = "Dog" };
             var dalmatian = new Breed { Id=1, Name = "Dalmatian", Species = dogSpecies };
-            var testDog = new Animal() { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
+            var testDog = new Animal { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
 
             using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
             {
@@ -45,11 +45,12 @@ namespace AnimalStore.Data.UnitTests
                     repo.Add(testDog);
                     var dog = repo.GetById(1);
 
+                    uow.Save();
+
                     //assert
                     Assert.That(dog, Is.EqualTo(testDog));
                 }
             }
-
         }
 
         [Test]
@@ -57,7 +58,7 @@ namespace AnimalStore.Data.UnitTests
         {
             var dogSpecies = new Species { Id = 1, Name = "Dog" };
             var dalmatian = new Breed { Id = 1, Name = "Dalmatian", Species = dogSpecies };
-            var testDog = new Animal() { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
+            var testDog = new Animal { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
 
             using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
             {
@@ -70,11 +71,9 @@ namespace AnimalStore.Data.UnitTests
                     Assert.That(repo.GetById(1), Is.EqualTo(testDog));
                 }
             }
-
         }
 
         [Test]
-        [Ignore]
         public void Delete_DeletesObjectT()
         {
             var dogSpecies = new Species { Id = 1, Name = "Dog" };
@@ -84,18 +83,16 @@ namespace AnimalStore.Data.UnitTests
             using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
             {
                 using (var repo = new AnimalsRepository(uow))
-                {                
-                    //act
+                {          
                     repo.Add(testDog);
-                    Assert.That(repo.GetById(1), Is.EqualTo(testDog));
+
+                    //act
                     repo.Delete(1);
-                    uow.Save();
 
                     //assert
-                    Assert.IsNull(repo.GetById(1));
+                    Assert.That(repo.Context.Entry(testDog).State.ToString() == "Deleted");
                 }
             }
-
         }
 
         [TearDown]

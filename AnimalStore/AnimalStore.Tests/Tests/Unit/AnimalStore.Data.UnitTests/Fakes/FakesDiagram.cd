@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AnimalStore.Data.UnitTests.Fakes.FakeAnimalsDbContext">
+    <Position X="6.25" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAAEAQAAACAAACAAAAAQAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Fakes\FakeAnimalsDbContext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnimalStore.Data.UnitTests.Fakes.FakeDbSet&lt;T&gt;">
+    <Position X="3" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIABAAAAAAEABAgAAAABAAAAJBIAEAUAAAAAAAAAAA=</HashCode>
+      <FileName>Fakes\FakeDbSet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnimalStore.Data.UnitTests.Fakes.FakeAnimalDbSet">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Fakes\FakeDerivedDbSets.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimalStore.Data.UnitTests.Fakes.FakeSpeciesDbSet">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Fakes\FakeDerivedDbSets.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimalStore.Data.UnitTests.Fakes.FakeBreedDbSet">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Fakes\FakeDerivedDbSets.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimalStore.Data.UnitTests.GenericRepositoryTests">
+    <Position X="5.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAgAAAAABAQAAAACAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>GenericRepositoryTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimalStore.Data.UnitsOfWork.UnitOfWork&lt;TContext&gt;">
+    <Position X="10.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnimalStore.Data.DataContext.AnimalsDataContext">
+    <Position X="11" Y="3.5" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnimalStore.Data.Repositories.GenericRepository&lt;T&gt;">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
