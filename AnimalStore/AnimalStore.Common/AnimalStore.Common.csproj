@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\EventLog.cs" />
-    <Compile Include="Constants\MediaTypeFormatConstants.cs" />
+    <Compile Include="Constants\MediaTypeFormats.cs" />
     <Compile Include="Constants\SiteNames.cs" />
     <Compile Include="Logging\EventLogHelper.cs" />
     <Compile Include="Logging\Interfaces\ILoggerWrapper.cs" />
