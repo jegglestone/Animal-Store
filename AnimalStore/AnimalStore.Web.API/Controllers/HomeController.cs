@@ -23,7 +23,6 @@ namespace AnimalStore.Web.API.Controllers
             log.Error("Something has gone wrong", new Exception());
             log.Fatal("Oh dear, this is terrible");
 
-            
             return View();
         }
     }
