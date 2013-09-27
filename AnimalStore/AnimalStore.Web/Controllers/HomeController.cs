@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using AnimalStore.Common.Constants;
 
 namespace AnimalStore.Web.Controllers
@@ -24,6 +25,13 @@ namespace AnimalStore.Web.Controllers
             ViewBag.Message = "Get in touch.";
 
             return View();
+        }
+
+        public ActionResult Find()
+        {
+            // TODO: perform siteMap search, animal search, service search and breeder search
+
+            throw new NotImplementedException();
         }
     }
 }
