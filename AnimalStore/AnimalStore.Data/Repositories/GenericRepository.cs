@@ -8,7 +8,7 @@ using AnimalStore.Data.UnitsOfWork;
 
 namespace AnimalStore.Data.Repositories
 {
-    public class GenericRepository<T> : IRepository<T> 
+    public abstract class GenericRepository<T> : IRepository<T> 
         where T : class
     {
         protected IDbSet<T> DBSet {get; set;}
