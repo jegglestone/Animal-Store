@@ -8,13 +8,10 @@ namespace AnimalStore.Web.API.Controllers
     {
         public ActionResult Index()
         {
-            var dataContext = new AnimalsDataContext();
-            dataContext.Database.Initialize(true);
-
             var logManager = new Common.Logging.LogManager();
             var log = logManager.GetLogger((typeof (HomeController)));
 
-            // TODO:move into unit test and mock up the eventlog etc.
+            // TODO: move into unit test and mock up the eventlog etc.
             log.Info("We're logging with Log4net 1");
             log.Info("We're logging with Log4net 2");
             log.Info("We're logging with Log4net 3");

@@ -40,6 +40,9 @@ namespace AnimalStore.Web.API
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var dataContext = new AnimalsDataContext();
+            dataContext.Database.Initialize(true);
         }
     }
 }
