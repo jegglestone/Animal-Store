@@ -8,12 +8,14 @@ namespace AnimalStore.Data.UnitTests.Fakes
     internal class FakeAnimalsDbContext : DbContext, IAnimalsDataContext
     {
         public IDbSet<Animal> Animals { get; set; }
+        public IDbSet<Dog> Dogs { get; set; }
         public IDbSet<Species> Species { get; set; }
         public IDbSet<Breed> Breeds { get; set; }
 
         public FakeAnimalsDbContext()
         {
             Animals = MockRepository.GenerateMock<IDbSet<Animal>>();
+            Dogs = MockRepository.GenerateMock<IDbSet<Dog>>();
             Breeds = MockRepository.GenerateMock<IDbSet<Breed>>();
             Species = MockRepository.GenerateMock<IDbSet<Species>>();
 

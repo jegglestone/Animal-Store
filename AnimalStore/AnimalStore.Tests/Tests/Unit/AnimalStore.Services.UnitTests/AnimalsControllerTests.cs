@@ -15,12 +15,12 @@ namespace AnimalStore.Services.UnitTests
     [TestFixture]
     public class AnimalsControllerTests
     {
-        private readonly IRepository<Animal> _repository;
+        private readonly IRepository<Dog> _repository;
         private readonly IUnitOfWork _unitofWork;
 
         public AnimalsControllerTests ()
 	    {
-            _repository = MockRepository.GenerateMock<AnimalStore.Data.Repositories.IRepository<Animal>>();
+            _repository = MockRepository.GenerateMock<AnimalStore.Data.Repositories.IRepository<Dog>>();
             _unitofWork = MockRepository.GenerateMock<IUnitOfWork>();
 
             StubRepositoryGetAll();
@@ -28,43 +28,43 @@ namespace AnimalStore.Services.UnitTests
 
         private void StubRepositoryGetAll()
         {
-            var animalsListWith30Items = new List<Animal>()
+            var animalsListWith30Items = new List<Dog>()
             {
-                new Animal() { Name = "dog1" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
+                new Dog() { Name = "dog1" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
 
-                new Animal() { Name = "dog", CreatedOn = DateTime.Today },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
+                new Dog() { Name = "dog", CreatedOn = DateTime.Today },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
 
-                new Animal() { Name = "dog2"},
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
+                new Dog() { Name = "dog2"},
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
 
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
 
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
 
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
-                new Animal() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2" },
             };
             _repository.Stub(x => x.GetAll()).Return(animalsListWith30Items.AsQueryable());
         }
@@ -73,7 +73,7 @@ namespace AnimalStore.Services.UnitTests
         public void Get_CallRepositoryGetAllMethod()
         {
             // arrange
-             var animalsController = new AnimalsController(_repository, _unitofWork);
+             var animalsController = new DogsController(_repository, _unitofWork);
 
             // act
             var result = animalsController.Get();
@@ -86,7 +86,7 @@ namespace AnimalStore.Services.UnitTests
         public void Get_ReturnsUpTo25Items()
         {
             // arrange
-            var animalsController = new AnimalsController(_repository, _unitofWork);
+            var animalsController = new DogsController(_repository, _unitofWork);
 
             // act
             var result = animalsController.Get();
@@ -99,7 +99,7 @@ namespace AnimalStore.Services.UnitTests
         public void Get_ReturnsItemsOrderedByDateCreatedDescending()
         {
             // arrange
-            var animalsController = new AnimalsController(_repository, _unitofWork);
+            var animalsController = new DogsController(_repository, _unitofWork);
 
             // act
             var result = animalsController.Get();
@@ -112,9 +112,9 @@ namespace AnimalStore.Services.UnitTests
         public void Get_ById_ReturnsSingleItemWithMatchingIdAndCallsRepositoryGetById()
         {
              // arrange
-            var animalsController = new AnimalsController(_repository, _unitofWork);
+            var animalsController = new DogsController(_repository, _unitofWork);
 
-            _repository.Stub(x => x.GetById(4)).Return(new Animal() { Name="dog", Id=4 });
+            _repository.Stub(x => x.GetById(4)).Return(new Dog() { Name = "dog", Id = 4 });
 
             // act
             var result = animalsController.Get(4);
