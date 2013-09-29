@@ -63,7 +63,5 @@ namespace AnimalStore.Web.API.Controllers
             _animalRepository.Delete(id);
             _unitOfWork.Save();
         }
-
-
     }
 }
