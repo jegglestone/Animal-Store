@@ -1,11 +1,25 @@
 ﻿Feature: MenuNavigation
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+	In order to allow user navigation of the Website
+	As a user
+	I want to be able to get to the page that I want
 
-@mytag
-Scenario: Add two numbers
-	Given I have entered 50 into the calculator
-	And I have entered 70 into the calculator
-	When I press add
-	Then the result should be 120 on the screen
+Background: 
+	Given I am on the 'Home' page
+
+Scenario Outline: The main menu navigates to different hub pages
+	When I select the '<MenuItem>' option from the main menu
+	Then I am taken to the '<Page>' page
+Examples:
+	| MenuItem | Page  |
+	| Home     | Home  |
+	| About    | About |
+	| Contact  | Contact  |
+
+Scenario Outline: The top sub menu navigates to different hub pages
+	When I select the '<MenuItem>' option from the sub menu
+	Then I am taken to the '<Page>' page
+Examples:
+	| MenuItem | Page  |
+	| Home     | Home  |
+	| About    | About |
+	| Contact  | Contact  |
