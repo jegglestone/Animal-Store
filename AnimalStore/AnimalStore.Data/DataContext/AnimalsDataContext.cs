@@ -12,6 +12,7 @@ namespace AnimalStore.Data.DataContext
     public class AnimalsDataContext : DbContext, IAnimalsDataContext
     {
         public IDbSet<Animal> Animals { get; set; }
+        public IDbSet<Dog> Dogs { get; set; }
         public IDbSet<Species> Species { get; set; }
         public IDbSet<Breed> Breeds { get; set; }
 

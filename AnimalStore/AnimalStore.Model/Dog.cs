@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnimalStore.Services.UnitTests
+namespace AnimalStore.Model
 {
-    public class Class1
+    public class Dog : Animal
     {
     }
 }

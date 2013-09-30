@@ -22,11 +22,11 @@ namespace AnimalStore.Data.UnitTests
         {
             var dogSpecies = new Species { Id=1, Name = "Dog" };
             var dalmatian = new Breed { Id=1, Name = "Dalmatian", Species = dogSpecies };
-            var testDog = new Animal { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
+            var testDog = new Dog { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
 
             using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
             {
-                using (var repo = new AnimalsRepository(uow))
+                using (var repo = new DogsRepository(uow))
                 {
                    //act
                     repo.Add(testDog);
@@ -42,11 +42,11 @@ namespace AnimalStore.Data.UnitTests
         {
             var dogSpecies = new Species { Id = 1, Name = "Dog" };
             var dalmatian = new Breed { Id = 1, Name = "Dalmatian", Species = dogSpecies };
-            var testDog = new Animal { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
+            var testDog = new Dog { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
 
             using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
             {
-                using (var repo = new AnimalsRepository(uow))
+                using (var repo = new DogsRepository(uow))
                 {
                     //act
                     repo.Add(testDog);
@@ -62,11 +62,11 @@ namespace AnimalStore.Data.UnitTests
         {
             var dogSpecies = new Species { Id = 1, Name = "Dog" };
             var dalmatian = new Breed { Id = 1, Name = "Dalmatian", Species = dogSpecies };
-            var testDog = new Animal() { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
+            var testDog = new Dog() { Id = 1, AgeInYears = 4, Desc = "A well behaved dalmatian.", Name = "Jessie", isLitter = false, isSold = false, Breed = dalmatian };
 
             using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
             {
-                using (var repo = new AnimalsRepository(uow))
+                using (var repo = new DogsRepository(uow))
                 {          
                     repo.Add(testDog);
 

@@ -18,12 +18,12 @@ namespace AnimalStore.Web.API
         static void ConfigureApi(HttpConfiguration config)
         {
             var unity = new UnityContainer();
-            unity.RegisterType<AnimalsController>();
+            unity.RegisterType<DogsController>();
             unity.RegisterType<IUnitOfWork, UnitOfWork<AnimalsDataContext>>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IContext, AnimalsDataContext>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IRepository<Animal>, AnimalsRepository>(
+            unity.RegisterType<IRepository<Dog>, DogsRepository>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IAnimalsDataContext, AnimalsDataContext>(
                 new HierarchicalLifetimeManager());
@@ -40,6 +40,9 @@ namespace AnimalStore.Web.API
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var dataContext = new AnimalsDataContext();
+            dataContext.Database.Initialize(true);
         }
     }
 }
