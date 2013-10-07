@@ -11,7 +11,7 @@ namespace AnimalStore.Data.Repositories
     public abstract class GenericRepository<T> : IRepository<T> 
         where T : class
     {
-        protected IDbSet<T> DBSet {get; set;}
+        private IDbSet<T> DBSet {get; set;}
         public IContext Context { get; set; }
 
         protected GenericRepository(IUnitOfWork unitOfWork)

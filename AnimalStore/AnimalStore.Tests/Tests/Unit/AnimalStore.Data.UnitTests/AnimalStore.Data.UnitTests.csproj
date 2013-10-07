@@ -49,10 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BreedRepositoryTests.cs" />
     <Compile Include="Fakes\FakeAnimalsDbContext.cs" />
     <Compile Include="Fakes\FakeDbSet.cs" />
     <Compile Include="Fakes\FakeDerivedDbSets.cs" />
-    <Compile Include="GenericRepositoryTests.cs" />
+    <Compile Include="DogRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWorkTests.cs" />
   </ItemGroup>

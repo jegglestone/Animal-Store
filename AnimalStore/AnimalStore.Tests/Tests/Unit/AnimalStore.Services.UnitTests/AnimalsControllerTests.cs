@@ -5,8 +5,6 @@ using Rhino.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
 
@@ -20,7 +18,7 @@ namespace AnimalStore.Services.UnitTests
 
         public AnimalsControllerTests ()
 	    {
-            _repository = MockRepository.GenerateMock<AnimalStore.Data.Repositories.IRepository<Dog>>();
+            _repository = MockRepository.GenerateMock<IRepository<Dog>>();
             _unitofWork = MockRepository.GenerateMock<IUnitOfWork>();
 
             StubRepositoryGetAll();
@@ -73,10 +71,10 @@ namespace AnimalStore.Services.UnitTests
         public void Get_CallRepositoryGetAllMethod()
         {
             // arrange
-             var animalsController = new DogsController(_repository, _unitofWork);
+             var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = animalsController.Get();
+            var result = dogsController.Get();
 
             // assert
             _repository.AssertWasCalled(X => X.GetAll());
@@ -86,10 +84,10 @@ namespace AnimalStore.Services.UnitTests
         public void Get_ReturnsUpTo25Items()
         {
             // arrange
-            var animalsController = new DogsController(_repository, _unitofWork);
+            var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = animalsController.Get();
+            var result = dogsController.Get();
 
             // assert
             Assert.That(result.ToList().Count, Is.EqualTo(25));
@@ -99,10 +97,10 @@ namespace AnimalStore.Services.UnitTests
         public void Get_ReturnsItemsOrderedByDateCreatedDescending()
         {
             // arrange
-            var animalsController = new DogsController(_repository, _unitofWork);
+            var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = animalsController.Get();
+            var result = dogsController.Get();
 
             // assert
             Assert.That(result.ToList()[0].CreatedOn, Is.EqualTo(DateTime.Today));
@@ -112,12 +110,12 @@ namespace AnimalStore.Services.UnitTests
         public void Get_ById_ReturnsSingleItemWithMatchingIdAndCallsRepositoryGetById()
         {
              // arrange
-            var animalsController = new DogsController(_repository, _unitofWork);
+            var dogsController = new DogsController(_repository, _unitofWork);
 
             _repository.Stub(x => x.GetById(4)).Return(new Dog() { Name = "dog", Id = 4 });
 
             // act
-            var result = animalsController.Get(4);
+            var result = dogsController.Get(4);
 
             // assert
             _repository.AssertWasCalled(x => x.GetById(4));

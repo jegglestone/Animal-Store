@@ -18,9 +18,9 @@ namespace AnimalStore.Web.API.Controllers
             _dogsRepository = animalRepository;
         }
 
-        // GET api/animals
+        // GET api/dogs
         [HttpGet]
-        public IEnumerable<Animal> Get()
+        public IEnumerable<Dog> Get()
         {
             var animals = _dogsRepository.GetAll()
                                            .OrderByDescending(a => a.CreatedOn)
@@ -29,14 +29,14 @@ namespace AnimalStore.Web.API.Controllers
             return animals;
         }
 
-        // GET api/animals/5
+        // GET api/dogs/5
         [HttpGet]
-        public Animal Get(int id)
+        public Dog Get(int id)
         {
             return _dogsRepository.GetById(id);
         }
 
-        // POST api/animals
+        // POST api/dogs
         [HttpPost]
         public void Post([FromBody] string value)
         {
@@ -46,7 +46,7 @@ namespace AnimalStore.Web.API.Controllers
             _unitOfWork.Save();
         }
 
-        // PUT api/animals/5
+        // PUT api/dogs/5
         [HttpPut]
         public void Put(int id, [FromBody] string value)
         {
@@ -56,7 +56,7 @@ namespace AnimalStore.Web.API.Controllers
             _unitOfWork.Save();
         }
 
-        // DELETE api/animals/5
+        // DELETE api/dogs/5
         [HttpDelete]
         public void Delete(int id)
         {

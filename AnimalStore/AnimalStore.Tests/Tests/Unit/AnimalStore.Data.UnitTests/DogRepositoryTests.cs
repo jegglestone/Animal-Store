@@ -1,4 +1,6 @@
-﻿using AnimalStore.Data.DataContext;
+﻿using System;
+using System.Linq;
+using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Data.UnitTests.Fakes;
 using AnimalStore.Model;
@@ -7,7 +9,7 @@ using NUnit.Framework;
 namespace AnimalStore.Data.UnitTests
 {
     [TestFixture]
-    public class GenericRepositoryTests
+    public class DogRepositoryTests
     {
         private IAnimalsDataContext _fakeDbContext;
 
