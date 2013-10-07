@@ -81,7 +81,9 @@
     <Compile Include="Utils\WebDriverAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Features\AboutPage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AboutPage.feature.cs</LastGenOutput>

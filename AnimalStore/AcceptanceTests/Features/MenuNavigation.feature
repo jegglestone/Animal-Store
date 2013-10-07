@@ -22,4 +22,4 @@ Examples:
 	| MenuItem | Page  |
 	| Home     | Home  |
 	| About    | About |
-	| Contact  | Contact  |
+	| Contact  | Contact |

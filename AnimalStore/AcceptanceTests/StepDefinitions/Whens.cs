@@ -7,13 +7,6 @@ namespace AcceptanceTests.StepDefinitions
     [Binding]
     public class Whens : Steps
     {
-        //private readonly IWebDriver _webDriver;
-
-        public Whens()
-        {
-            //_webDriver = new FirefoxDriver();
-        }
-
         [When(@"I select the '(.*)' option from the main menu")]
         [When(@"I click on a '(.*)'")]
         public void WhenIClickOnA(string linkText)

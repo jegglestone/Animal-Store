@@ -6,12 +6,6 @@ namespace AcceptanceTests.StepDefinitions
     [Binding]
     public class Givens : Steps
     {
-        //private readonly IWebDriver _webDriver;
-
-        public Givens()
-        {
-        }
-
         [Given(@"I am on the '(.*)' page")]
         public void GivenIAmOnTheFollowingPage(string pageName)
         {
