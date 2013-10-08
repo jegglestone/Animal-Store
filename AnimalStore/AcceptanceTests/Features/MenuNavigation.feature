@@ -13,7 +13,7 @@ Examples:
 	| MenuItem | Page  |
 	| Home     | Home  |
 	| About    | About |
-	| Contact  | Contact  |
+	| Contact  | Contact |
 
 Scenario Outline: The top sub menu navigates to different hub pages
 	When I select the '<MenuItem>' option from the sub menu

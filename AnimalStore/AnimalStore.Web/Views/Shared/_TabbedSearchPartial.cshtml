@@ -44,6 +44,7 @@
 	border-width: 0;
 	padding: 1em 1.4em;
 	background: none;
+
 }
 .ui-menu .ui-menu-item a.ui-state-focus,
 .ui-menu .ui-menu-item a.ui-state-active {
@@ -87,19 +88,32 @@
         <li><a href="#fragment-3"><span>Breeders</span></a></li>
     </ul>
     <div id="fragment-1">
-        <h5>Select breed and area/postcode</h5>
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
+        <h5>Find Pets</h5>
+        <p>Search through thousands of adverts for dogs and puppies for sale in the UK.</p> 
+        <div style="float:left; width:70px;">Breed: </div>
+        <div>
+            <select>
+                <option>Afghan Hound</option>
+                <option>Greyhound</option>
+                <option>Terrier</option>
+            </select>
+        </div> 
+        
+        <div style="float:left; width:70px;">
+            Location: 
+        </div>
+        <div>
+            <input type="text" id="location" />
+        </div>
+        <input type="button" value="Search" id="search" />
     </div>
     <div id="fragment-2">
-        <h5>Select service-type and area/postcode</h5>
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        <h5>Find Services</h5>
+        Select service-type and area/postcode
     </div>
     <div id="fragment-3">
-        <h5>Select breed type and area/postcode</h5>
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        <h5>Find Breeders</h5>
+        Select breed type and area/postcode.
     </div>
 </div>
 <script type="text/javascript">

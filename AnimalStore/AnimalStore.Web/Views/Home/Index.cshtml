@@ -21,32 +21,36 @@
         </div>
     </section>
 }
+
+<h3>Search:</h3>
+
+@Html.Partial("_TabbedSearchPartial")
+
 <h3>Finding your perfect pet:</h3>
+
 <ol class="round">
     <li class="one">
         <h5>Getting Started</h5>
         @SiteNames.DOGSTORE_SITE_NAME gives you a safe, fast and friendly new way to find or advertise dogs in the UK. Getting started is quick and simple with 
-        our brand new site dedicated to helping you find your perfect pet.
+        our brand new site dedicated to helping you find your perfect dog.
         <a href="/home/About#gettingStarted">Learn more…</a>        
     </li>
 
     <li class="two">
         <h5>Create an account</h5>
-        Registration is free, quick and easy - no long forms to fill in. Just follow the link below and you can start advertising or making contact with sellers.
+        Registration is free, quick and easy - no long forms to fill in. Just follow the link below to join and you can start advertising or making contact with sellers.
         <a href="/home/About#register">Learn more…</a>
     </li>
 
     <li class="three">
         <h5>Advertise your dog for free!</h5>
-        Once our registered, you can begin to advertise your dog to our growing audience or search our database of dogs and sellers. No charges or fees.
+        Once registered, you can begin to advertise your dog to our growing audience of customers. No charges or fees.
         <a href="/home/About#start">Learn more…</a>
     </li>
 
     <li class="four">
         <h5>Find a pet!</h5>
-        Use our search widget to find dogs, services or simply get int touch with one of our registered breeders.
-        <br />
-        <br />
-        @Html.Partial("_TabbedSearchPartial")
+        Use our <a>search</a> widget to find dogs, services or simply get in touch with one of our registered breeders.
+        <a href="/home/About#start">Learn more…</a>
     </li>
 </ol>
