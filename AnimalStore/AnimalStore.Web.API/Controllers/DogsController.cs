@@ -12,21 +12,21 @@ namespace AnimalStore.Web.API.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Dog> _dogsRepository;
 
-        public DogsController(IRepository<Dog> animalRepository, IUnitOfWork unitOfWork)
+        public DogsController(IRepository<Dog> dogsRepository, IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _dogsRepository = animalRepository;
+            _dogsRepository = dogsRepository;
         }
 
         // GET api/dogs
         [HttpGet]
         public IEnumerable<Dog> Get()
         {
-            var animals = _dogsRepository.GetAll()
-                                           .OrderByDescending(a => a.CreatedOn)
-                                           .Take(25);
+            var dogs = _dogsRepository.GetAll()
+                .OrderByDescending(a => a.CreatedOn)
+                .Take(25);
 
-            return animals;
+            return dogs;
         }
 
         // GET api/dogs/5

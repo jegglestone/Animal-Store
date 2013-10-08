@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using AnimalStore.Data.DataContext;
+﻿using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Data.UnitTests.Fakes;
 using AnimalStore.Model;

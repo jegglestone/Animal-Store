@@ -69,7 +69,6 @@ namespace AnimalStore.Data.DataContext
             }
         }
 
-
         public void SetModified(object entity)
         {
             throw new NotImplementedException();
