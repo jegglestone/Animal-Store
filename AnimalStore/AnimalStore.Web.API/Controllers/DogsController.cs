@@ -22,7 +22,7 @@ namespace AnimalStore.Web.API.Controllers
 
         // GET api/dogs
         [HttpGet]
-        public Results<Dog> Get(int page = 1, int pageSize = 25)
+        public PageableResults<Dog> Get(int page = 1, int pageSize = 25)
         {
             var dogs = _dogsRepository.GetAll()
                 .OrderByDescending(a => a.CreatedOn);
@@ -36,7 +36,7 @@ namespace AnimalStore.Web.API.Controllers
             var nextUrl = page < totalPages - 1 ? "http://localhost:49425/api/dogs?page=" + (page + 1) + "&pageSize=" + pageSize : "";
             var prevUrl = page > 1 ? "http://localhost:49425/api/dogs?page=" + (page - 1) + "&pageSize=" + pageSize : "";
 
-            return new Results<Dog> { 
+            return new PageableResults<Dog> { 
                 Data = pagedResults,
                 NextPage = nextUrl,
                 PrevPage = prevUrl,
