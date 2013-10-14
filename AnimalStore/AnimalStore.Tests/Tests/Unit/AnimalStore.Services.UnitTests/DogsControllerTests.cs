@@ -28,41 +28,41 @@ namespace AnimalStore.Services.UnitTests
         {
             var animalsListWith30Items = new List<Dog>()
             {
-                new Dog() { Name = "dog1" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog1", CreatedOn = DateTime.Today.AddHours(-1) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
+                new Dog() { Name = "Flossie", CreatedOn = DateTime.Today.AddHours(-1) },
 
                 new Dog() { Name = "dog", CreatedOn = DateTime.Today },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
 
-                new Dog() { Name = "dog2"},
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
 
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
+                new Dog() { Name = "Rex", CreatedOn = DateTime.Today.AddHours(-2) },
 
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
 
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
-                new Dog() { Name = "dog2" },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
+                new Dog() { Name = "Tip", CreatedOn = DateTime.Today.AddHours(-3) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
             };
             _repository.Stub(x => x.GetAll()).Return(animalsListWith30Items.AsQueryable());
         }
@@ -81,7 +81,7 @@ namespace AnimalStore.Services.UnitTests
         }
 
         [Test]
-        public void Get_ReturnsUpTo25Items()
+        public void Get_ReturnsUpTo25Items_WithNoPageLimitSpecified()
         {
             // arrange
             var dogsController = new DogsController(_repository, _unitofWork);
@@ -90,7 +90,88 @@ namespace AnimalStore.Services.UnitTests
             var result = dogsController.Get();
 
             // assert
-            Assert.That(result.Count(), Is.EqualTo(25));
+            Assert.That(result.Data.Count(), Is.EqualTo(25));
+        }
+
+        [Test]
+        public void Get_ReturnsSpecifiedNumberOfResultSetWhenPaging()
+        {
+            // arrange
+            var dogsController = new DogsController(_repository, _unitofWork);
+
+            // act
+            var result = dogsController.Get(1, 10);
+
+            // assert
+            Assert.That(result.Data.Count(), Is.EqualTo(10));
+        }
+
+        [TestCase(1, 10, "Flossie", Description="we expect the first page to have this dog")]
+        [TestCase(2, 10, "Rex", Description = "we expect the second page to have this dog")]
+        [TestCase(3, 10, "Tip", Description = "we expect the third page to have this dog")]
+        public void get_ReturnsTheSpecifiedPage(int pageNumber, int pageSize, string expectedDogName)
+        {
+             // arrange
+            var dogsController = new DogsController(_repository, _unitofWork);
+
+            // act
+            var result = dogsController.Get(pageNumber, pageSize);
+
+            // assert
+            Assert.That(result.Data.ToList().Where(dog => dog.Name == expectedDogName).First(), Is.Not.Null);
+
+        }
+
+        [Test]
+        public void Get_ReturnsTheCorrectTotalCount()
+        {
+            // arrange
+            var dogsController = new DogsController(_repository, _unitofWork);
+
+            // act
+            var result = dogsController.Get(1, 10);
+
+            // assert
+            Assert.That(result.TotalCount, Is.EqualTo(30));
+        }
+
+        [Test]
+        public void Get_ReturnsTheCorrectPageCount()
+        {
+            // arrange
+            var dogsController = new DogsController(_repository, _unitofWork);
+
+            // act
+            var result = dogsController.Get(1, 9);
+
+            // assert
+            Assert.That(result.TotalPages, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void Get_ReturnsTheCorrectNextPageUrl()
+        {
+            // arrange
+            var dogsController = new DogsController(_repository, _unitofWork);
+
+            // act
+            var result = dogsController.Get(1, 10);
+
+            // assert
+            Assert.That(result.NextPage.Contains("?page=2"));
+        }
+
+        [Test]
+        public void Get_ReturnsTheCorrectPrevPageUrl()
+        {
+            // arrange
+            var dogsController = new DogsController(_repository, _unitofWork);
+
+            // act
+            var result = dogsController.Get(2, 10);
+
+            // assert
+            Assert.That(result.PrevPage.Contains("?page=1"));
         }
 
         [Test]
@@ -100,10 +181,10 @@ namespace AnimalStore.Services.UnitTests
             var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = dogsController.Get();
+            var result = dogsController.Get(0, 25);
 
             // assert
-            Assert.That(result.ToList()[0].CreatedOn, Is.EqualTo(DateTime.Today));
+            Assert.That(result.Data.ToList()[0].CreatedOn, Is.EqualTo(DateTime.Today));
         }
 
         [Test]

@@ -4,6 +4,8 @@ using AnimalStore.Data.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System;
+using System.Web.Http.Routing;
 
 namespace AnimalStore.Web.API.Controllers
 {
@@ -20,13 +22,27 @@ namespace AnimalStore.Web.API.Controllers
 
         // GET api/dogs
         [HttpGet]
-        public IEnumerable<Dog> Get()
+        public PageableResults<Dog> Get(int page = 1, int pageSize = 25)
         {
             var dogs = _dogsRepository.GetAll()
-                .OrderByDescending(a => a.CreatedOn)
-                .Take(25);
+                .OrderByDescending(a => a.CreatedOn);
 
-            return dogs;
+            var totalCount = dogs.Count();
+            var totalPages = (int)Math.Ceiling((double) totalCount / pageSize);
+
+            var pagedResults = dogs.Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var nextUrl = page < totalPages - 1 ? "http://localhost:49425/api/dogs?page=" + (page + 1) + "&pageSize=" + pageSize : "";
+            var prevUrl = page > 1 ? "http://localhost:49425/api/dogs?page=" + (page - 1) + "&pageSize=" + pageSize : "";
+
+            return new PageableResults<Dog> { 
+                Data = pagedResults,
+                NextPage = nextUrl,
+                PrevPage = prevUrl,
+                TotalCount = totalCount,
+                TotalPages = totalPages
+            };
         }
 
         // GET api/dogs/5

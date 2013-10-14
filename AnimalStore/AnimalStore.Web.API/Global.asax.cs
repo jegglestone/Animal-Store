@@ -6,6 +6,7 @@ using AnimalStore.Web.API.App_Start;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Web.API.DependencyResolution;
 using Microsoft.Practices.Unity;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
