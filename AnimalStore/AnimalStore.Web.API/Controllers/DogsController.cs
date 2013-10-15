@@ -1,11 +1,9 @@
 ﻿using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
 using AnimalStore.Data.Repositories;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System;
-using System.Web.Http.Routing;
 
 namespace AnimalStore.Web.API.Controllers
 {
