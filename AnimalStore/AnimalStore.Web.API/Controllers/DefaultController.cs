@@ -1,15 +1,14 @@
 ﻿using System.Web.Mvc;
-using AnimalStore.Data.DataContext;
 using System;
 
 namespace AnimalStore.Web.API.Controllers
 {
-    public class HomeController : Controller
+    public class DefaultController : Controller
     {
         public ActionResult Index()
         {
             var logManager = new Common.Logging.LogManager();
-            var log = logManager.GetLogger((typeof (HomeController)));
+            var log = logManager.GetLogger((typeof (DefaultController)));
 
             // TODO: move into unit test and mock up the eventlog etc.
             log.Info("We're logging with Log4net 1");

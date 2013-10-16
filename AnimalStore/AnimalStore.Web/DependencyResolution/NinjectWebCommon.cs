@@ -1,17 +1,20 @@
-[assembly: WebActivator.PreApplicationStartMethod(typeof(AnimalStore.Web.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(AnimalStore.Web.App_Start.NinjectWebCommon), "Stop")]
+using System;
+using System.Web;
+using AnimalStore.Model;
+using AnimalStore.Web.API.Controllers;
+using AnimalStore.Web.DependencyResolution;
+using AnimalStore.Web.Repository;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Ninject;
+using Ninject.Syntax;
+using Ninject.Web.Common;
+using Ninject.Extensions.Conventions;
 
-namespace AnimalStore.Web.App_Start
+[assembly: WebActivator.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
+
+namespace AnimalStore.Web.DependencyResolution
 {
-    using System;
-    using System.Web;
-
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
-    using Ninject;
-    using Ninject.Web.Common;
-    using Ninject.Extensions.Conventions;
-
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -52,12 +55,15 @@ namespace AnimalStore.Web.App_Start
         /// Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
-        private static void RegisterServices(IKernel kernel)
+        private static void RegisterServices(IBindingRoot kernel)
         {
             kernel.Bind(
                 x => x.FromThisAssembly()
                     .SelectAllClasses()
                     .BindAllInterfaces());
+
+            kernel.Bind<IController<Breed>>().To<BreedsController>();
+            kernel.Bind<ISearchRepository>().To<InProcSearchRepository>(); // Can be switched out to HttpSearchRepository for remote consumption
         }        
     }
 }

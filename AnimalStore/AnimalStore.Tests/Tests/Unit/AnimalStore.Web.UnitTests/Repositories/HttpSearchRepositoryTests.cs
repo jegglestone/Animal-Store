@@ -1,12 +1,9 @@
-﻿using System.Net.Http;
-using AnimalStore.Web.Repository;
-using NUnit.Framework;
-using Rhino.Mocks;
+﻿using NUnit.Framework;
 
-namespace AnimalStore.Web.UnitTests
+namespace AnimalStore.Web.UnitTests.Repositories
 {
     [TestFixture]
-    public class IHttpSearchRepositoryTests
+    public class HttpSearchRepositoryTests
     {
         //[Ignore]
         //[Test]

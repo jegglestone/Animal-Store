@@ -6,7 +6,7 @@ using AnimalStore.Web.Repository;
 using NUnit.Framework;
 using Rhino.Mocks;
 
-namespace AnimalStore.Web.UnitTests
+namespace AnimalStore.Web.UnitTests.Repositories
 {
     [TestFixture]
     public class InProcSearchRepositoryTests
