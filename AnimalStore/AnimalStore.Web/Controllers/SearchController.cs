@@ -18,7 +18,7 @@ namespace AnimalStore.Web.Controllers
         //
         // GET: /Search/
 
-        public ActionResult Index()
+        public PartialViewResult Index()
         {
             _searchViewModel.Breeds = _searchRepository.GetBreeds();
 

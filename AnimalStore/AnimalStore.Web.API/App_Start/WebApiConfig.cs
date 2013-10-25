@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Net.Http.Formatting;
 using System.Linq;
 using AnimalStore.Common.Constants;
@@ -47,7 +44,6 @@ namespace AnimalStore.Web.API.App_Start
             MakeJsonCamelCase();
 
             SetDefaultMediaTypeToJson();
-
         }
 
         private static void MakeJsonCamelCase()
