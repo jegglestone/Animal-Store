@@ -9,7 +9,7 @@ namespace AnimalStore.Web.API.DependencyResolution
     {
         protected readonly IUnityContainer _container;
 
-        public ScopeContainer(IUnityContainer container)
+        internal ScopeContainer(IUnityContainer container)
         {
             if (container == null)
             {

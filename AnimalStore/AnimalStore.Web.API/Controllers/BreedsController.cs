@@ -6,7 +6,7 @@ using AnimalStore.Model;
 
 namespace AnimalStore.Web.API.Controllers
 {
-    public class BreedsController : ApiController
+    public class BreedsController : ApiController, IController<Breed>
     {
         private readonly IRepository<Breed> _breedsRepository;
 
@@ -19,9 +19,7 @@ namespace AnimalStore.Web.API.Controllers
         [HttpGet]
         public IEnumerable<Breed> Get()
         {
-            var breeds = _breedsRepository.GetAll()
-                .OrderByDescending(x => x.Name)
-                .Reverse();
+            var breeds = _breedsRepository.GetAll().ToList().OrderByDescending(x => x.Name).Reverse();
 
             return breeds;
         }
