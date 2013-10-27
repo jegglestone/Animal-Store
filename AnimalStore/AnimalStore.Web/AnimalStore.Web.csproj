@@ -317,6 +317,10 @@
       <Project>{02ebd9de-36e8-4bde-bffe-180b7d7cd64a}</Project>
       <Name>AnimalStore.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AnimalStore.Model\AnimalStore.Model.csproj">
+      <Project>{b574db16-1972-4bfb-a0cb-5198139851f5}</Project>
+      <Name>AnimalStore.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
