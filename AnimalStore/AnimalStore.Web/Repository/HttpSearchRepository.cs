@@ -19,6 +19,7 @@ namespace AnimalStore.Web.Repository
             _httpClient = httpClient;
         }
 
+        // abstract come of this into a generic
         public List<Breed> GetBreeds()
         {
             //Send a GET WebRequest
