@@ -4,6 +4,13 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AnimalStore.Web.App_Start;
+using AnimalStore.Web.DependencyResolution;
+
+using AnimalStore.Web.Controllers;
+using AnimalStore.Web.Repository;
+using Microsoft.Practices.Unity;
+using AnimalStore.Web.ViewModels;
+using System.Net.Http;
 
 namespace AnimalStore.Web
 {
@@ -18,6 +25,8 @@ namespace AnimalStore.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            Bootstrapper.Initialise();
         }
     }
 }

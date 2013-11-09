@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalStore.Services", "AnimalStore.Web.API\AnimalStore.Services.csproj", "{BB811415-0BF8-44C8-96C2-7BE4048CA8CB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2DE462EE-7F1A-467E-BB93-A9EF1F0DDCEB}"
@@ -99,5 +99,8 @@ Global
 		{D069CCBB-07B0-4D56-ACAD-6E76EDB4DB77} = {27111D7A-E30E-4ED2-8D91-F0E648C239FB}
 		{E9A75B37-B77E-4E19-9B4B-850887BB30F4} = {27111D7A-E30E-4ED2-8D91-F0E648C239FB}
 		{1639780E-2AA7-4284-A454-90F8734DF807} = {665B57CE-1982-48AE-89B7-953212518318}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
 	EndGlobalSection
 EndGlobal
