@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using AnimalStore.Model;
+﻿using System.Web.Mvc;
 
 namespace AnimalStore.Web.ViewModels
 {
     public class SearchViewModel
     {
-        public IEnumerable<Breed> Breeds { get; set; }
+        public SelectList BreedsSelectList { get; set; }
      // public IList <Location> Locations {get; set; }
-
-        public SelectList BreedSelectList { get; set; }
+        public int SelectedBreed { get; set; }
+        public string Location { get; set; }
     }
 }

@@ -17,12 +17,11 @@ namespace AnimalStore.Web.Controllers
             _searchRepository = searchRepository;
         }
 
-        //TODO: Unit test!
-        public ActionResult Index()
+        public ViewResult Index()
         {
             ViewBag.Message = "Your first stop for finding and advertising dogs in the UK.";
 
-            _searchViewModel.Breeds =_searchRepository.GetBreeds();
+            _searchViewModel.BreedsSelectList = new SelectList(_searchRepository.GetBreeds(), "id", "name");
 
             return View(_searchViewModel);
         }

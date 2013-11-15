@@ -9,7 +9,7 @@ using Rhino.Mocks;
 namespace AnimalStore.Web.UnitTests.Controllers
 {
     [TestFixture]
-    public class SearchControllerTests
+    public class HomeControllerTests
     {
         private readonly SearchViewModel _searchViewModel;
         private readonly ISearchRepository _searchRepository;
@@ -23,7 +23,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 new Breed() { Name = "Blood Hound" },
             };
 
-        public SearchControllerTests()
+        public HomeControllerTests()
         {
             _searchViewModel = MockRepository.GenerateMock<SearchViewModel>();
             _searchRepository = MockRepository.GenerateMock<ISearchRepository>();
@@ -32,16 +32,30 @@ namespace AnimalStore.Web.UnitTests.Controllers
         }
 
         [Test]
-        public void Index_Redirects_To_HomeController_Index()
+        public void Index_CallsRepository()
         {
             // arrange
-            var searchController = new SearchController(_searchViewModel, _searchRepository);
+            var homeController = new SearchController(_searchViewModel, _searchRepository);
 
             // act
-            var result = searchController.Index();
+            homeController.Index();
 
             // assert
-            Assert.That(result.);
+            _searchRepository.AssertWasCalled(x => x.GetBreeds());
+        }
+
+        [Test]
+        public void Index_Returns_SearchViewModel()
+        {
+            // arrange
+            var homeController = new HomeController(_searchViewModel, _searchRepository);
+
+            // act
+            var result = homeController.Index();
+
+            // assert
+            Assert.NotNull(result);
+            Assert.That(result.Model, Is.EqualTo(_searchViewModel));
         }
     }
 }

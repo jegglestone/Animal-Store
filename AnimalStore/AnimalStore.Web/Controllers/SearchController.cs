@@ -18,29 +18,29 @@ namespace AnimalStore.Web.Controllers
         //
         // GET: /Search/
 
-        public PartialViewResult Index()
+        public ActionResult Index()
         {
-            _searchViewModel.Breeds = _searchRepository.GetBreeds();
-
-            return PartialView("_TabbedSearchPartial", _searchViewModel);
+            return RedirectToAction("Index", "Home");
         }
 
         //
-        // POST: /Search/Create
+        // GET: /Search/DogSearchResults
 
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [HttpGet]
+        public ActionResult DogSearch(SearchViewModel viewModel)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            // get dogs from database by calling a repo that calls the API (and use TDD)
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View("_TabbedSearchPartial");
-            }
+            // build some kind of list<dog> model
+
+            // redirect to a view result
+            return RedirectToAction("DogSearchResults", "Search");
+        }
+
+        //TODO: Move to searchresults controller
+        public ViewResult DogSearchResults()
+        {
+            return View();
         }
     }
 }

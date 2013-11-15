@@ -610,6 +610,7 @@ tr.pager td {
 .ui-tabs {
 	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
 	padding: .2em;
+    width: 550px;
 }
 .ui-tabs .ui-tabs-nav {
 	margin: 0;
@@ -639,6 +640,11 @@ tr.pager td {
 .ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
 	cursor: text;
 }
+.ui-state-default {
+	border: 1px solid #dddddd;
+	font-weight: bold;
+	color: #0073ea;
+}
 .ui-tabs .ui-tabs-nav li a, /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
 .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
 	cursor: pointer;
@@ -648,7 +654,6 @@ tr.pager td {
 	border-width: 0;
 	padding: 1em 1.4em;
 	background: none;
-
 }
 .ui-menu .ui-menu-item a.ui-state-focus,
 .ui-menu .ui-menu-item a.ui-state-active {
@@ -667,8 +672,11 @@ tr.pager td {
 .ui-state-active a:link,
 .ui-state-active a:visited {
 	color: #999999;
+    background: #7AC0DA;
 	text-decoration: none;
 }
+
+
 
 /*
     .ui-state-active .ui-icon {
