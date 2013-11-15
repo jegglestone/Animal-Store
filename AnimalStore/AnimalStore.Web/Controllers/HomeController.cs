@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Http;
 using System.Web.Mvc;
 using AnimalStore.Common.Constants;
 using AnimalStore.Web.Repository;
@@ -24,9 +23,6 @@ namespace AnimalStore.Web.Controllers
             ViewBag.Message = "Your first stop for finding and advertising dogs in the UK.";
 
             _searchViewModel.Breeds =_searchRepository.GetBreeds();
-
-            // TODO: Inject
-            var searchRepoTMP = new HttpSearchRepository(new HttpClient());
 
             return View(_searchViewModel);
         }

@@ -1,6 +1,9 @@
 ﻿@*<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/flick/jquery-ui.css">*@
 @*TODO: move to CSS file when complete*@
 
+@using System.Web.UI.WebControls
+@model AnimalStore.Web.ViewModels.SearchViewModel
+
 <style type="text/css">
 
 
@@ -25,11 +28,15 @@
             <p>Search through thousands of adverts for dogs and puppies for sale in the UK.</p> 
             <div style="float:left; width:70px;">Breed: </div>
         <div>
-            <select>
-                <option>Afghan Hound</option>
-                <option>Greyhound</option>
-                <option>Terrier</option>
-            </select>
+            @Html.DropDownList("Breeds", 
+            new SelectList
+                    (
+                        Model.Breeds.Select(x => new { Value = x.Id, Text = x.Name }),
+                        "Value",
+                        "Text")
+                    )
+                )
+
         </div> 
         
             <div style="float:left; width:70px;">
