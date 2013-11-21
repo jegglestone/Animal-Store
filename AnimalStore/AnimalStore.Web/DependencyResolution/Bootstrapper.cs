@@ -3,7 +3,6 @@ using Microsoft.Practices.Unity;
 using Unity.Mvc4;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;
-using System.Net.Http;
 
 namespace AnimalStore.Web.DependencyResolution
 {
@@ -33,14 +32,6 @@ namespace AnimalStore.Web.DependencyResolution
             new HierarchicalLifetimeManager());
         container.RegisterType<SearchViewModel>(
             new HierarchicalLifetimeManager());
-
-        /*Unity tries to create the HttpClient using the HttpClient(HttpMessageHandler) but that is an abstract class, 
-        so it can't create an instance of it - use the factory method to register it instead */
-        container.RegisterType<HttpClient>(
-            new InjectionFactory(x =>
-                new HttpClient {  }
-            )
-        ); 
     }
   }
 }

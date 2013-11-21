@@ -1,6 +1,4 @@
-﻿@*<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/flick/jquery-ui.css">*@
-
-@model AnimalStore.Web.ViewModels.SearchViewModel
+﻿@model AnimalStore.Web.ViewModels.SearchViewModel
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -24,16 +22,30 @@
                 <tr>
                     <td>Breed: </td>
                     <td>@Html.DropDownListFor(x => x.SelectedBreed,
-                                               Model.BreedsSelectList,
-                                               "Select a breed to search for"
-                                               ))
-
+                                              Model.BreedsSelectList,
+                                              "Select a breed to search for"
+                             )
                     </td>
                 </tr>
                 <tr>
-                    <td>Location:</td>
-                    <td>@Html.TextBoxFor(x => x.Location)</td>
+                    <td colspan="2" style="padding: 0 0 0 0;">
+                        <table>
+                            <tr>
+                                <td rowspan="2">Within</td>
+                                <td><input id="IsNationalSearch" type="radio" value="False" name="IsNationalSearch" checked="checked" class="radio"></td>
+                                <td>A town or postcode</td>
+                                <td>@Html.TextBoxFor(x => x.Location)</td>
+                            </tr>
+                            <tr>
+
+                                <td><input id="IsLOcationSearch" type="radio" value="true" name="IsNationalSearch" checked="checked" class="radio"></td> 
+                                <td>UK</td>
+                                <td>@Html.TextBoxFor(x => x.Location)</td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
+
                 <tr><td colspan="2"><input type="submit" name="submit" id="search" value="Go" /></td></tr>
             </table>    
         }

@@ -31,17 +31,17 @@ namespace AnimalStore.Web.UnitTests.Controllers
             _searchRepository.Stub(x => x.GetBreeds()).Return(breedsList);
         }
 
-        [Test]
-        public void Index_Redirects_To_HomeController_Index()
-        {
-            // arrange
-            var searchController = new SearchController(_searchViewModel, _searchRepository);
+        //[Test]
+        //public void Index_Redirects_To_HomeController_Index()
+        //{
+        //    // arrange
+        //    var searchController = new SearchController(_searchViewModel, _searchRepository);
 
-            // act
-            var result = searchController.Index();
+        //    // act
+        //    var result = searchController.Index();
 
-            // assert
-            Assert.That(result.);
-        }
+        //    // assert
+        //    Assert.That(result.);
+        //}
     }
 }

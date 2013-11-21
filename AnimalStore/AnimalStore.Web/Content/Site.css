@@ -85,10 +85,14 @@ h5, h6 {
     font-size: 1em;
 }
 
-    h5 a:link, h5 a:visited, h5 a:active {
-        padding: 0;
-        text-decoration: none;
-    }
+h5 a:link, h5 a:visited, h5 a:active {
+    padding: 0;
+    text-decoration: none;
+}
+
+.radio {
+    width: 25px;
+}
 
 
 /* main layout
@@ -449,8 +453,7 @@ input, textarea {
     color: #333;
     font-size: 1.2em;
     margin: 5px 0 6px 0;
-    padding: 5px;
-    width: 300px;
+    width: 250px;
 }
 
 textarea {
@@ -556,7 +559,7 @@ table {
 th {
     font-size: 1.2em;
     text-align: left;
-    border: none 0px;
+    border: none 0;
     padding-left: 0;
 }
 
@@ -583,7 +586,7 @@ th {
     th.asc a:after, th.desc a:after {
         display: block;
         position: absolute;
-        right: 0em;
+        right: 0;
         top: 0;
         font-size: 0.75em;
     }
@@ -596,14 +599,9 @@ th {
         content: '▼';
     }
 
-td {
-    padding: 0.25em 2em 0.25em 0em;
-    border: 0 none;
-}
-
-tr.pager td {
+/*tr.pager td {
     padding: 0 0.25em 0 0;
-}
+}*/
 
 
 /* Tab Control*/

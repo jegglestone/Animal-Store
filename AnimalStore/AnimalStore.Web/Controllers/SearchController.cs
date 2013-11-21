@@ -15,13 +15,6 @@ namespace AnimalStore.Web.Controllers
             _searchRepository = searchRepository;
         }
 
-        //
-        // GET: /Search/
-
-        public ActionResult Index()
-        {
-            return RedirectToAction("Index", "Home");
-        }
 
         //
         // GET: /Search/DogSearchResults
@@ -37,7 +30,7 @@ namespace AnimalStore.Web.Controllers
             return RedirectToAction("DogSearchResults", "Search");
         }
 
-        //TODO: Move to searchresults controller
+        //TODO: Move to searchresults controller and return SearchResults ViewModel
         public ViewResult DogSearchResults()
         {
             return View();

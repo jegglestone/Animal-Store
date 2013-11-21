@@ -11,8 +11,9 @@ namespace AnimalStore.Web.UnitTests.Controllers
     [TestFixture]
     public class HomeControllerTests
     {
-        private readonly SearchViewModel _searchViewModel;
-        private readonly ISearchRepository _searchRepository;
+        private SearchViewModel _searchViewModel;
+        private ISearchRepository _searchRepository;
+        private HomeController _homeController;
 
         private readonly List<Breed> breedsList = new List<Breed>()
             {
@@ -23,22 +24,20 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 new Breed() { Name = "Blood Hound" },
             };
 
-        public HomeControllerTests()
+        [SetUp]
+        public void Init()
         {
             _searchViewModel = MockRepository.GenerateMock<SearchViewModel>();
             _searchRepository = MockRepository.GenerateMock<ISearchRepository>();
-
             _searchRepository.Stub(x => x.GetBreeds()).Return(breedsList);
+            _homeController = new HomeController(_searchViewModel, _searchRepository);            
         }
 
         [Test]
         public void Index_CallsRepository()
         {
-            // arrange
-            var homeController = new SearchController(_searchViewModel, _searchRepository);
-
             // act
-            homeController.Index();
+            _homeController.Index();
 
             // assert
             _searchRepository.AssertWasCalled(x => x.GetBreeds());
@@ -47,11 +46,8 @@ namespace AnimalStore.Web.UnitTests.Controllers
         [Test]
         public void Index_Returns_SearchViewModel()
         {
-            // arrange
-            var homeController = new HomeController(_searchViewModel, _searchRepository);
-
             // act
-            var result = homeController.Index();
+            var result = _homeController.Index();
 
             // assert
             Assert.NotNull(result);

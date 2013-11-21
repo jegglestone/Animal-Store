@@ -28,7 +28,9 @@ namespace AnimalStore.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Thanks for visiting. Here at " + SiteNames.DOGSTORE_SITE_NAME + ", we are dedicated to helping you find the ideal pet for you or you family or the ideal new home for your existing animals.";
+            ViewBag.Message = string.Format(
+                "Thanks for visiting. Here at {0}, we are dedicated to helping you find the ideal pet for you or you family or the ideal new home for your existing animals.", 
+                    SiteNames.DOGSTORE_SITE_NAME);
 
             return View();
         }
@@ -43,7 +45,6 @@ namespace AnimalStore.Web.Controllers
         public ActionResult Find()
         {
             // TODO: perform siteMap search, animal search, service search and breeder search
-
             throw new NotImplementedException();
         }
     }
