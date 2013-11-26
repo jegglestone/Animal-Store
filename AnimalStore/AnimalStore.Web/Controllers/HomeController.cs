@@ -20,7 +20,6 @@ namespace AnimalStore.Web.Controllers
             _contactInformation = contactInformation;
         }
 
-
         public ViewResult Index()
         {
             ViewBag.Message = ConfigurationManager.AppSettings[AppSettingKeys.ApplicationMainSlogan];
