@@ -51,13 +51,11 @@ namespace AnimalStore.Web.DependencyResolution
         /// <summary>
         /// Register abstract or complex types using factory method
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="container">Ioc container</param>
         private static void RegisterFactoryTypes(IUnityContainer container)
         {
             if (container == null) throw new ArgumentNullException("container");
 
-            // Unity tries to create HttpClient using HttpClient(HttpMessageHandler) ctor. 
-            // HttpMessageHandler is abstract, so it can't create an instance of it - need factory method to register it
             container.RegisterType<HttpClient>(
                 new InjectionFactory(x =>
                                      new HttpClient()

@@ -23,8 +23,7 @@
                     <td>Breed: </td>
                     <td>@Html.DropDownListFor(x => x.SelectedBreed,
                                               Model.BreedsSelectList,
-                                              "Select a breed to search for"
-                             )
+                                              "Select a breed to search for")
                     </td>
                 </tr>
                 <tr>
@@ -32,16 +31,12 @@
                         <table>
                             <tr>
                                 <td rowspan="2">Within</td>
-                                <td>
-                                    @Html.RadioButtonFor(x => x.IsNationalSearch, false, new {@class="radio"})
-                                </td>
+                                <td>@Html.RadioButtonFor(x => x.IsNationalSearch, false, new {@class="radio"})</td>
                                 <td>A town or postcode</td>
                                 <td>@Html.TextBoxFor(x => x.Location)</td>
                             </tr>
                             <tr>
-                                <td>
-                                    @Html.RadioButtonFor(x => x.IsNationalSearch, true, new {@class="radio"})
-                                </td> 
+                                <td>@Html.RadioButtonFor(x => x.IsNationalSearch, true, new {@class="radio"})</td> 
                                 <td colspan="2">UK</td>
                             </tr>
                         </table>

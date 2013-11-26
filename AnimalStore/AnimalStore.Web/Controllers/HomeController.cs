@@ -44,11 +44,5 @@ namespace AnimalStore.Web.Controllers
 
             return View(_contactInformation);
         }
-
-        public ActionResult Find()
-        {
-            // TODO: perform siteMap search, animal search, service search and breeder search
-            throw new NotImplementedException();
-        }
     }
 }

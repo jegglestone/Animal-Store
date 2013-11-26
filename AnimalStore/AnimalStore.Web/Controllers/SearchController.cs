@@ -29,7 +29,7 @@ namespace AnimalStore.Web.Controllers
             return RedirectToAction("DogSearchResults", "Search");
         }
 
-        //TODO: Move to searchresults controller and return SearchResults ViewModel
+        //TODO: Move to searchresults controller and return SearchResults ViewModel??
         public ViewResult DogSearchResults()
         {
             return View();
