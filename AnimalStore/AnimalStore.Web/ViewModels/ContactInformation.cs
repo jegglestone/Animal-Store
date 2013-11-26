@@ -1,24 +1,27 @@
-﻿namespace AnimalStore.Web.ViewModels
+﻿using System.Web.Configuration;
+
+namespace AnimalStore.Web.ViewModels
 {
     public class ContactInformation
     {
-        public string MainPhone 
-        { 
-            get { return _mainPhone; } 
+        public string MainPhone
+        {
+            get { return WebConfigurationManager.AppSettings[AppSettingKeys.MainPhone]; }
         }
 
         public string OutOfHoursPhone
         {
-            get { return _outOfHoursPhone; }
+            get { return WebConfigurationManager.AppSettings[AppSettingKeys.OutOfHoursPhone]; }
         }
 
-        public string Email 
-        { 
-            get { return _email; } 
+        public string Email
+        {
+            get { return WebConfigurationManager.AppSettings[AppSettingKeys.Email]; }
         }
 
-        private const string _mainPhone = "0113";
-        private const string _outOfHoursPhone = "0113";
-        private const string _email = "joe@animalstore.com";
+        public string MarketingEmail
+        {
+            get { return WebConfigurationManager.AppSettings[AppSettingKeys.MarketingEmail]; }
+        }
     }
 }

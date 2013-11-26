@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
-using System.Net.Http;
 using System.Runtime.Serialization.Json;
-using System.Threading.Tasks;
 using AnimalStore.Common.Logging;
 using AnimalStore.Model;
 
@@ -15,39 +13,59 @@ namespace AnimalStore.Web.Repository
         private static readonly string API_base_URL = ConfigurationManager.AppSettings["WebAPIUrl"];
         private static readonly string breeds_Url = API_base_URL + "/breeds";
 
-        public HttpSearchRepository()
+        private readonly LogManager _logManager;
+        private readonly DataContractJsonSerializer _dataContractJsonSerializer;
+
+        private IList<Breed> _breeds; 
+
+        public HttpSearchRepository(
+            LogManager logManager
+            , DataContractJsonSerializer dataContractJsonSerializer
+            , IList<Breed> breeds
+            )
         {
+            _logManager = logManager;
+            _dataContractJsonSerializer = dataContractJsonSerializer;
+            _breeds = breeds;
         }
 
-        // abstract come of this into a generic
-        public List<Breed> GetBreeds()
+        public IList<Breed> GetBreeds()
         {
-            //Send a GET WebRequest
             var request = WebRequest.Create(breeds_Url);
+            var response = GetResponse(request);
 
-            //Receive the Json formatted data
-            var response = request.GetResponse();
-
-            //Deserialize the object(s)
-            var jsonSerializer =
-                new DataContractJsonSerializer(typeof(List<Breed>));
-
-            var breeds = new List<Breed>();
             try
             {
-                breeds = (List<Breed>)jsonSerializer.ReadObject(response.GetResponseStream());
+                if (response != null) 
+                    return _breeds = (List<Breed>)_dataContractJsonSerializer.ReadObject(response.GetResponseStream());
             }
             catch (Exception e)
             {
-                var logManager = new LogManager();
-                var log = logManager.GetLogger((typeof(HttpSearchRepository)));
-
+                //TODO: aspect/cross cutting concern - look into having a filter attribute
+                var log = _logManager.GetLogger((typeof(HttpSearchRepository)));
                 log.Error("Response from Breeds service resulted in an error", e);
             }
 
-            return breeds;
+            return _breeds;
         }
 
+        private WebResponse GetResponse(WebRequest request)
+        {
+            WebResponse response = null;
+            try
+            {
+                response = request.GetResponse();
+            }
+            catch (WebException e)
+            {
+                var log = _logManager.GetLogger((typeof(HttpSearchRepository)));
+                log.Error("Web Service not available", e);
+            }
+
+            return response;
+        }
+
+        #region async stuff
         //public IList<Breed> GetBreedsAsync()
         //{
         //    //// use httpClient to consume Api
@@ -68,5 +86,6 @@ namespace AnimalStore.Web.Repository
         //    var requestMessage = new HttpRequestMessage() { RequestUri = _httpClient.BaseAddress };
         //    Task<HttpResponseMessage> getTask = _httpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead);
         //}
+        #endregion
     }
 }

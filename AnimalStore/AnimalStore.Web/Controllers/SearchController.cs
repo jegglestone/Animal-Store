@@ -15,7 +15,6 @@ namespace AnimalStore.Web.Controllers
             _searchRepository = searchRepository;
         }
 
-
         //
         // GET: /Search/DogSearchResults
 

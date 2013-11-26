@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using AnimalStore.Model;
-using AnimalStore.Web.Controllers;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;
 using NUnit.Framework;
@@ -30,18 +29,5 @@ namespace AnimalStore.Web.UnitTests.Controllers
 
             _searchRepository.Stub(x => x.GetBreeds()).Return(breedsList);
         }
-
-        //[Test]
-        //public void Index_Redirects_To_HomeController_Index()
-        //{
-        //    // arrange
-        //    var searchController = new SearchController(_searchViewModel, _searchRepository);
-
-        //    // act
-        //    var result = searchController.Index();
-
-        //    // assert
-        //    Assert.That(result.);
-        //}
     }
 }

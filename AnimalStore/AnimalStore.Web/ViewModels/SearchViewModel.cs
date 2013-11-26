@@ -8,5 +8,6 @@ namespace AnimalStore.Web.ViewModels
         // public SelectList Locations {get; set; }
         public int SelectedBreed { get; set; }
         public string Location { get; set; }
+        public bool IsNationalSearch { get; set; }
     }
 }

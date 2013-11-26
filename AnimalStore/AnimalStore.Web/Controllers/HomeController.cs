@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Web.Mvc;
 using AnimalStore.Common.Constants;
 using AnimalStore.Web.Repository;
@@ -10,16 +11,18 @@ namespace AnimalStore.Web.Controllers
     {
         private readonly SearchViewModel _searchViewModel;
         private readonly ISearchRepository _searchRepository;
+        private readonly ContactInformation _contactInformation;
 
-        public HomeController(SearchViewModel searchViewModel, ISearchRepository searchRepository)
+        public HomeController(SearchViewModel searchViewModel, ISearchRepository searchRepository, ContactInformation contactInformation)
         {
             _searchViewModel = searchViewModel;
             _searchRepository = searchRepository;
+            _contactInformation = contactInformation;
         }
 
         public ViewResult Index()
         {
-            ViewBag.Message = "Your first stop for finding and advertising dogs in the UK.";
+            ViewBag.Message = ConfigurationManager.AppSettings[AppSettingKeys.ApplicationMainSlogan];
 
             _searchViewModel.BreedsSelectList = new SelectList(_searchRepository.GetBreeds(), "id", "name");
 
@@ -29,7 +32,7 @@ namespace AnimalStore.Web.Controllers
         public ActionResult About()
         {
             ViewBag.Message = string.Format(
-                "Thanks for visiting. Here at {0}, we are dedicated to helping you find the ideal pet for you or you family or the ideal new home for your existing animals.", 
+                ConfigurationManager.AppSettings[AppSettingKeys.AboutPageMainSlogan], 
                     SiteNames.DOGSTORE_SITE_NAME);
 
             return View();
@@ -37,9 +40,9 @@ namespace AnimalStore.Web.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Get in touch.";
+            ViewBag.Message = ConfigurationManager.AppSettings[AppSettingKeys.ContactPageMainSlogan];
 
-            return View();
+            return View(_contactInformation);
         }
 
         public ActionResult Find()

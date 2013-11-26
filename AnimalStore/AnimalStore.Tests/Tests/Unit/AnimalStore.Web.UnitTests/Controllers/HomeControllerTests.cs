@@ -14,6 +14,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
         private SearchViewModel _searchViewModel;
         private ISearchRepository _searchRepository;
         private HomeController _homeController;
+        private ContactInformation _contactInformation;
 
         private readonly List<Breed> breedsList = new List<Breed>()
             {
@@ -29,8 +30,10 @@ namespace AnimalStore.Web.UnitTests.Controllers
         {
             _searchViewModel = MockRepository.GenerateMock<SearchViewModel>();
             _searchRepository = MockRepository.GenerateMock<ISearchRepository>();
+            _contactInformation = MockRepository.GenerateMock<ContactInformation>();
+
             _searchRepository.Stub(x => x.GetBreeds()).Return(breedsList);
-            _homeController = new HomeController(_searchViewModel, _searchRepository);            
+            _homeController = new HomeController(_searchViewModel, _searchRepository, _contactInformation);            
         }
 
         [Test]

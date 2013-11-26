@@ -5,7 +5,7 @@ namespace AnimalStore.Web.Repository
 {
     public interface ISearchRepository
     {
-        List<Breed> GetBreeds();
+        IList<Breed> GetBreeds();
         // Locations 
     }
 }

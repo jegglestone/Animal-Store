@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-namespace AnimalStore.Web
+namespace AnimalStore.Web.App_Start
 {
     public class BundleConfig
     {

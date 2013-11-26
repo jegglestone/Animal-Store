@@ -32,20 +32,21 @@
                         <table>
                             <tr>
                                 <td rowspan="2">Within</td>
-                                <td><input id="IsNationalSearch" type="radio" value="False" name="IsNationalSearch" checked="checked" class="radio"></td>
+                                <td>
+                                    @Html.RadioButtonFor(x => x.IsNationalSearch, false, new {@class="radio"})
+                                </td>
                                 <td>A town or postcode</td>
                                 <td>@Html.TextBoxFor(x => x.Location)</td>
                             </tr>
                             <tr>
-
-                                <td><input id="IsLOcationSearch" type="radio" value="true" name="IsNationalSearch" checked="checked" class="radio"></td> 
-                                <td>UK</td>
-                                <td>@Html.TextBoxFor(x => x.Location)</td>
+                                <td>
+                                    @Html.RadioButtonFor(x => x.IsNationalSearch, true, new {@class="radio"})
+                                </td> 
+                                <td colspan="2">UK</td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-
                 <tr><td colspan="2"><input type="submit" name="submit" id="search" value="Go" /></td></tr>
             </table>    
         }
