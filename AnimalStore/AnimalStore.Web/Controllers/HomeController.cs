@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Web.Mvc;
 using AnimalStore.Common.Constants;
 using AnimalStore.Web.Repository;
@@ -7,6 +6,7 @@ using AnimalStore.Web.ViewModels;
 
 namespace AnimalStore.Web.Controllers
 {
+    [OutputCache(Duration = 100)]
     public class HomeController : Controller
     {
         private readonly SearchViewModel _searchViewModel;
@@ -19,6 +19,7 @@ namespace AnimalStore.Web.Controllers
             _searchRepository = searchRepository;
             _contactInformation = contactInformation;
         }
+
 
         public ViewResult Index()
         {
