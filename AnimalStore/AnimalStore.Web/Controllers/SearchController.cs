@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using AnimalStore.Model;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;
 
@@ -6,12 +8,10 @@ namespace AnimalStore.Web.Controllers
 {
     public class SearchController : Controller
     {
-        private readonly SearchViewModel _searchViewModel;
         private readonly ISearchRepository _searchRepository;
 
-        public SearchController(SearchViewModel searchViewModel, ISearchRepository searchRepository)
+        public SearchController(ISearchRepository searchRepository)
         {
-            _searchViewModel = searchViewModel;
             _searchRepository = searchRepository;
         }
 
@@ -21,12 +21,12 @@ namespace AnimalStore.Web.Controllers
         [HttpGet]
         public ActionResult DogSearch(SearchViewModel viewModel)
         {
-            // get dogs from database by calling a repo that calls the API (and use TDD)
+            PageableResults<Dog> searchResults = null;
 
-            // build some kind of list<dog> model
+            if (viewModel.IsNationalSearch)
+                searchResults = _searchRepository.GetDogs(1, 25);
 
-            // redirect to a view result
-            return RedirectToAction("DogSearchResults", "Search");
+            return RedirectToAction("DogSearchResults", "SearchResults", new { searchResults });
         }
 
         //TODO: Move to searchresults controller and return SearchResults ViewModel??

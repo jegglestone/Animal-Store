@@ -6,6 +6,6 @@ namespace AnimalStore.Web.Repository
     public interface ISearchRepository
     {
         IList<Breed> GetBreeds();
-        // Locations 
+        PageableResults<Dog> GetDogs(int page, int pageSize);
     }
 }

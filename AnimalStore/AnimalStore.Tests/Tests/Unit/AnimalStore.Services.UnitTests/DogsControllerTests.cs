@@ -74,7 +74,7 @@ namespace AnimalStore.Services.UnitTests
              var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            dogsController.Get();
+            dogsController.GetPaged();
 
             // assert
             _repository.AssertWasCalled(X => X.GetAll());
@@ -87,7 +87,7 @@ namespace AnimalStore.Services.UnitTests
             var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = dogsController.Get();
+            var result = dogsController.GetPaged();
 
             // assert
             Assert.That(result.Data.Count(), Is.EqualTo(25));
@@ -100,7 +100,7 @@ namespace AnimalStore.Services.UnitTests
             var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = dogsController.Get(1, 10);
+            var result = dogsController.GetPaged(1, 10);
 
             // assert
             Assert.That(result.Data.Count(), Is.EqualTo(10));
@@ -115,7 +115,7 @@ namespace AnimalStore.Services.UnitTests
             var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = dogsController.Get(pageNumber, pageSize);
+            var result = dogsController.GetPaged(pageNumber, pageSize);
 
             // assert
             Assert.That(result.Data.ToList().Where(dog => dog.Name == expectedDogName).First(), Is.Not.Null);
@@ -129,7 +129,7 @@ namespace AnimalStore.Services.UnitTests
             var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = dogsController.Get(1, 10);
+            var result = dogsController.GetPaged(1, 10);
 
             // assert
             Assert.That(result.TotalCount, Is.EqualTo(30));
@@ -142,7 +142,7 @@ namespace AnimalStore.Services.UnitTests
             var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = dogsController.Get(1, 9);
+            var result = dogsController.GetPaged(1, 9);
 
             // assert
             Assert.That(result.TotalPages, Is.EqualTo(4));
@@ -155,7 +155,7 @@ namespace AnimalStore.Services.UnitTests
             var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = dogsController.Get(1, 10);
+            var result = dogsController.GetPaged(1, 10);
 
             // assert
             Assert.That(result.NextPage.Contains("?page=2"));
@@ -168,7 +168,7 @@ namespace AnimalStore.Services.UnitTests
             var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = dogsController.Get(2, 10);
+            var result = dogsController.GetPaged(2, 10);
 
             // assert
             Assert.That(result.PrevPage.Contains("?page=1"));
@@ -181,7 +181,7 @@ namespace AnimalStore.Services.UnitTests
             var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = dogsController.Get(0, 25);
+            var result = dogsController.GetPaged(0, 25);
 
             // assert
             Assert.That(result.Data.ToList()[0].CreatedOn, Is.EqualTo(DateTime.Today));

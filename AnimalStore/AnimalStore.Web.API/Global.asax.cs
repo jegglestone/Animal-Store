@@ -1,4 +1,5 @@
-﻿using AnimalStore.Data.DataContext;
+﻿using System;
+using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
@@ -46,6 +47,11 @@ namespace AnimalStore.Web.API
 
             var dataContext = new AnimalsDataContext();
             dataContext.Database.Initialize(true);
+
+            var logManager = new Common.Logging.LogManager();
+            var log = logManager.GetLogger((typeof(WebApiApplication)));
+
+            log.Info(Common.Constants.SiteNames.DOGSTORE_SITE_NAME + " Service API is starting up and database initialisation is complete");
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Mvc;
 using AnimalStore.Model;
+using AnimalStore.Web.Facades;
 using AnimalStore.Web.Helpers;
 using Microsoft.Practices.Unity;
 using Unity.Mvc4;
@@ -47,7 +48,15 @@ namespace AnimalStore.Web.DependencyResolution
                 new HierarchicalLifetimeManager());
             container.RegisterType<IExceptionHelper, ExceptionHelper>(
                 new HierarchicalLifetimeManager());
+            container.RegisterType<IConfiguration, Configuration>(
+                new HierarchicalLifetimeManager());
+            container.RegisterType<IDataContractJsonSerializerWrapper, DataContractJsonSerializerWrapper>(
+                new HierarchicalLifetimeManager());
             container.RegisterType<ContactInformation>(
+                new HierarchicalLifetimeManager());
+            container.RegisterType<IWebAPIRequestWrapper, WebAPIRequestWrapper>(
+                new HierarchicalLifetimeManager());
+            container.RegisterType<IResponseStreamHelper, ResponseStreamHelper>(
                 new HierarchicalLifetimeManager());
         }
 

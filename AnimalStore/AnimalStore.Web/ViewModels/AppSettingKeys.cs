@@ -9,5 +9,6 @@
         public const string OutOfHoursPhone = "OutOfHoursPhone";
         public const string Email = "Email";
         public const string MarketingEmail = "MarketingEmail";
+        public const string WebAPIUrl = "WebAPIUrl";
     }
 }

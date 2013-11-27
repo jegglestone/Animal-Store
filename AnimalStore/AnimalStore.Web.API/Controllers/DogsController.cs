@@ -7,7 +7,7 @@ using System;
 
 namespace AnimalStore.Web.API.Controllers
 {
-    public class DogsController : ApiController
+    public class DogsController : ApiController, IPageableResults<Dog>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Dog> _dogsRepository;
@@ -20,7 +20,7 @@ namespace AnimalStore.Web.API.Controllers
 
         // GET api/dogs
         [HttpGet]
-        public PageableResults<Dog> Get(int page = 1, int pageSize = 25)
+        public PageableResults<Dog> GetPaged(int page = 1, int pageSize = 25)
         {
             var dogs = _dogsRepository.GetAll()
                 .OrderByDescending(a => a.CreatedOn);

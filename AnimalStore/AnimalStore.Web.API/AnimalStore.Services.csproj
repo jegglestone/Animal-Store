@@ -170,6 +170,7 @@
     <Compile Include="Controllers\DogsController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\IController.cs" />
+    <Compile Include="Controllers\IPageableResults.cs" />
     <Compile Include="DependencyResolution\UnityContainer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

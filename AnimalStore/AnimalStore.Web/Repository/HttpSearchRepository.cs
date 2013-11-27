@@ -1,43 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Net;
-using System.Runtime.Serialization.Json;
 using AnimalStore.Model;
+using AnimalStore.Web.Facades;
 using AnimalStore.Web.Helpers;
 
 namespace AnimalStore.Web.Repository
 {
-    // TODO: Unit test
     public class HttpSearchRepository : ISearchRepository
     {
-        private static readonly string _API_base_URL = ConfigurationManager.AppSettings["WebAPIUrl"];
-        private static readonly string _breeds_Url = _API_base_URL + "/breeds";
+        private string _API_base_URL {
+            get { return _configuration.GetWebAPIUrl(); }
+        }
+
+        private string _breeds_Url {
+            get { return _API_base_URL + "/breeds"; }
+        }
+
+        private string _dogs_Url {
+            get { return _API_base_URL + "/dogs"; }
+        }
+
+        private IList<Breed> _breeds;
+        private PageableResults<Dog> _dogs; 
 
         private readonly IExceptionHelper _exceptionHelper;
-        private readonly DataContractJsonSerializer _dataContractJsonSerializer;
+        private readonly IDataContractJsonSerializerWrapper _dataContractJsonSerializerWrapper;
+        private readonly IConfiguration _configuration;
+        private readonly IWebAPIRequestWrapper _webAPIRequestWrapper;
+        private readonly IResponseStreamHelper _responseStreamHelper;
 
-        private IList<Breed> _breeds; 
-
-        public HttpSearchRepository(DataContractJsonSerializer dataContractJsonSerializer, IList<Breed> breeds, IExceptionHelper exceptionHelper)
+        public HttpSearchRepository(IDataContractJsonSerializerWrapper dataContractJsonSerializerWrapper,
+            IExceptionHelper exceptionHelper, IConfiguration configuration, IWebAPIRequestWrapper webAPIRequestWrapper, IResponseStreamHelper responseStreamHelper)
         {
-            _dataContractJsonSerializer = dataContractJsonSerializer;
-            _breeds = breeds;
+            _dataContractJsonSerializerWrapper = dataContractJsonSerializerWrapper;
             _exceptionHelper = exceptionHelper;
+            _configuration = configuration;
+            _webAPIRequestWrapper = webAPIRequestWrapper;
+            _responseStreamHelper = responseStreamHelper;
+            _breeds = new List<Breed>();
+            _dogs = new PageableResults<Dog>();
+
         }
 
         public IList<Breed> GetBreeds()
         {
-            var request = WebRequest.Create(_breeds_Url);
-            var response = GetResponse(request);
-
+            var response = GetResponse(_breeds_Url);
             try
             {
-                _breeds = (List<Breed>) _dataContractJsonSerializer.ReadObject(response.GetResponseStream());
+                using (var stream = _responseStreamHelper.GetResponseStream(response))
+                {
+                    var apiResponseData = _dataContractJsonSerializerWrapper.ReadObject(stream);
+                    if (apiResponseData != null)
+                    {
+                        _breeds = (List<Breed>)apiResponseData;
+                    }
+                }
             }
             catch (Exception e)
             {
-                _exceptionHelper.HandleException("Response from Breeds service resulted in an error", e, (typeof (HttpSearchRepository)));
+                _exceptionHelper.HandleException("Response from Breeds service resulted in an error in GetBreeds()", e, (typeof (HttpSearchRepository)));
             }
             finally
             {
@@ -47,12 +69,38 @@ namespace AnimalStore.Web.Repository
             return _breeds;
         } 
 
-        private WebResponse GetResponse(WebRequest request)
+        public PageableResults<Dog> GetDogs(int page, int pageSize)
+        {
+            var response = GetResponse(string.Format("{0}?page={1}&pageSize={2}", _dogs_Url, page, pageSize));
+            try
+            {
+                using (var stream = _responseStreamHelper.GetResponseStream(response))
+                {
+                    var apiResponseData = _dataContractJsonSerializerWrapper.ReadObject(stream);
+                    if (apiResponseData != null)
+                    {
+                        _dogs = (PageableResults<Dog>)apiResponseData;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                _exceptionHelper.HandleException("Response from Breeds service resulted in an error in GetDogs()", e, (typeof(HttpSearchRepository)));
+            }
+            finally
+            {
+                DisposeOfWebResponse(response);
+            }
+
+            return _dogs;
+        }
+
+        private WebResponse GetResponse(string url)
         {
             WebResponse response = null;
             try
             {
-                response = request.GetResponse();
+                response = _webAPIRequestWrapper.GetResponse(url);
             }
             catch (WebException e)
             {
@@ -62,14 +110,14 @@ namespace AnimalStore.Web.Repository
             return response;
         }
 
-        private void DisposeOfWebResponse(WebResponse response)
+        private static void DisposeOfWebResponse(WebResponse response)
         {
-            if (response != null)
-            {
-                response.Close();
-                response.Dispose();
-            }
+            if (response == null) return;
+            response.Close();
+            response.Dispose();
         }
+
+
 
         #region async stuff
         //public IList<Breed> GetBreedsAsync()
