@@ -1,0 +1,19 @@
+﻿@model AnimalStore.Model.PageableResults<AnimalStore.Model.Dog>
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Age (Months)</td>
+    </tr>
+    @foreach (var dog in Model.Data)
+    {
+        <tr>
+            <th colspan="2">@dog.Desc</th>
+        </tr>
+        <tr>
+            <td>@dog.Name</td>
+            <td>@dog.AgeInMonths</td>
+        </tr>
+    } 
+
+</table>

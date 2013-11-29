@@ -25,13 +25,7 @@ namespace AnimalStore.Web.Controllers
             if (viewModel.IsNationalSearch)
                 searchResults = _searchRepository.GetDogs(1, 25);
 
-            return RedirectToAction("DogSearchResults", "SearchResults", new { searchResults });
-        }
-
-        //TODO: Move to searchresults controller and return SearchResults ViewModel??
-        public ViewResult DogSearchResults()
-        {
-            return View();
+            return View(searchResults);
         }
     }
 }

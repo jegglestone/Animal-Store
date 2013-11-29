@@ -37,10 +37,10 @@ namespace AnimalStore.Model
         [DataMember(Name = "breed")]
         public Breed Breed { get; set; }
 
-        [DataMember(Name = "createdOn")]
+        [IgnoreDataMember]
         public DateTime CreatedOn { get; set; }
 
-        [DataMember(Name = "modifiedOn")]
-        public DateTime ModifiedOn { get; set; }
+        [IgnoreDataMember]
+        public DateTime ModifiedOn { get; set; }        
     }
 }

@@ -56,7 +56,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
         }
 
         [Test]
-        public void DogSearch_NationalSearch_Return_Redirect_To_DogSearchResults_With_Full_List_Of_Dogs_Found()
+        public void DogSearch_NationalSearch_Return_View_With_Full_List_Of_Dogs_Found()
         {
             var dogs = new List<Dog>()
                     {
@@ -76,12 +76,10 @@ namespace AnimalStore.Web.UnitTests.Controllers
             var SearchController = new SearchController(searchRepository);
 
             // act
-            var result = (RedirectToRouteResult)SearchController.DogSearch(_searchViewModel);
+            var result = (ViewResult)SearchController.DogSearch(_searchViewModel);
 
             // assert
-            Assert.That(result.RouteValues["controller"], Is.EqualTo("SearchResults"));
-            Assert.That(result.RouteValues["action"], Is.EqualTo("DogSearchResults"));
-            Assert.That(result.RouteValues["searchResults"], Is.EqualTo(pageableResults));
+            Assert.That(result.Model, Is.EqualTo(pageableResults));
         }
     }
 }

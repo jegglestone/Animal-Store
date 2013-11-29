@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using AnimalStore.Model;
 using AnimalStore.Web.Facades;
+using AnimalStore.Web.Factories;
 using AnimalStore.Web.Helpers;
 
 namespace AnimalStore.Web.Repository
@@ -50,7 +51,7 @@ namespace AnimalStore.Web.Repository
             {
                 using (var stream = _responseStreamHelper.GetResponseStream(response))
                 {
-                    var apiResponseData = _dataContractJsonSerializerWrapper.ReadObject(stream);
+                    var apiResponseData = _dataContractJsonSerializerWrapper.ReadObject(stream, DataContractJsonSerializerFactory.GetDataContractJsonSerializer(typeof(List<Breed>)));
                     if (apiResponseData != null)
                     {
                         _breeds = (List<Breed>)apiResponseData;
@@ -76,7 +77,7 @@ namespace AnimalStore.Web.Repository
             {
                 using (var stream = _responseStreamHelper.GetResponseStream(response))
                 {
-                    var apiResponseData = _dataContractJsonSerializerWrapper.ReadObject(stream);
+                    var apiResponseData = _dataContractJsonSerializerWrapper.ReadObject(stream, DataContractJsonSerializerFactory.GetDataContractJsonSerializer(typeof(PageableResults<Dog>)));
                     if (apiResponseData != null)
                     {
                         _dogs = (PageableResults<Dog>)apiResponseData;

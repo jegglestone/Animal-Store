@@ -10,7 +10,6 @@ using Unity.Mvc4;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;
 using AnimalStore.Common.Logging;
-using System.Runtime.Serialization.Json;
 
 namespace AnimalStore.Web.DependencyResolution
 {
@@ -77,12 +76,6 @@ namespace AnimalStore.Web.DependencyResolution
             container.RegisterType<IList<Breed>, List<Breed>>(
                 new InjectionFactory(x =>
                                      new List<Breed>()
-                    )
-                );
-
-            container.RegisterType<DataContractJsonSerializer>(
-                new InjectionFactory(x =>
-                                     new DataContractJsonSerializer(typeof (List<Breed>))
                     )
                 );
         }

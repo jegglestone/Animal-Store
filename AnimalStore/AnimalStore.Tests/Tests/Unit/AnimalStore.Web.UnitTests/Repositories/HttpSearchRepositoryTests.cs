@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization.Json;
 using AnimalStore.Model;
 using AnimalStore.Web.Facades;
 using AnimalStore.Web.Helpers;
@@ -51,7 +52,7 @@ namespace AnimalStore.Web.UnitTests.Repositories
             _responseStreamHelper.Stub(x => x.GetResponseStream(Arg<WebResponse>.Is.Anything)).Return(null);
 
             var stubJsonSerializerWrapper = MockRepository.GenerateMock<IDataContractJsonSerializerWrapper>();
-            stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything)).Return(_breedsList);
+            stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything, Arg<DataContractJsonSerializer>.Is.Anything)).Return(_breedsList);
 
             var searchRepository = new HttpSearchRepository(stubJsonSerializerWrapper, _exceptionHandler, _configMgr,
                 _webAPIRequestWrapper, _responseStreamHelper);
@@ -60,7 +61,7 @@ namespace AnimalStore.Web.UnitTests.Repositories
             var result = searchRepository.GetBreeds().ToList();
 
             // assert
-            Assert.That(result.First().Id == 1 && result.First().Name=="Dalmatian");
+            Assert.That(result.First().Id == 1 && result.First().Name == "Dalmatian");
             Assert.That(result.Count == _breedsList.Count);
         }
 
@@ -71,9 +72,9 @@ namespace AnimalStore.Web.UnitTests.Repositories
             _responseStreamHelper.Stub(x => x.GetResponseStream(Arg<WebResponse>.Is.Anything)).Return(null);
 
             var stubJsonSerializerWrapper = MockRepository.GenerateMock<IDataContractJsonSerializerWrapper>();
-            stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything)).Return(null);
+            stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything, Arg<DataContractJsonSerializer>.Is.Anything)).Return(null);
 
-            var searchRepository = new HttpSearchRepository(stubJsonSerializerWrapper, _exceptionHandler, _configMgr, 
+            var searchRepository = new HttpSearchRepository(stubJsonSerializerWrapper, _exceptionHandler, _configMgr,
                 _webAPIRequestWrapper, _responseStreamHelper);
 
             // act
@@ -90,8 +91,8 @@ namespace AnimalStore.Web.UnitTests.Repositories
             _responseStreamHelper.Stub(x => x.GetResponseStream(Arg<WebResponse>.Is.Anything)).Return(null);
 
             var stubJsonSerializerWrapper = MockRepository.GenerateMock<IDataContractJsonSerializerWrapper>();
-            stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything)).Return(
-                new PageableResults<Dog>(){Data = _dogsList});
+            stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything, Arg<DataContractJsonSerializer>.Is.Anything)).Return(
+                new PageableResults<Dog>() { Data = _dogsList });
 
             var searchRepository = new HttpSearchRepository(stubJsonSerializerWrapper, _exceptionHandler, _configMgr,
                 _webAPIRequestWrapper, _responseStreamHelper);

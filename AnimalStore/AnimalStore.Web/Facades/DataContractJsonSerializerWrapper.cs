@@ -5,16 +5,9 @@ namespace AnimalStore.Web.Facades
 {
     public class DataContractJsonSerializerWrapper : IDataContractJsonSerializerWrapper
     {
-        private readonly DataContractJsonSerializer _dataContractJsonSerializer;
-
-        public DataContractJsonSerializerWrapper(DataContractJsonSerializer dataContractJsonSerializer)
+        public object ReadObject(Stream stream, DataContractJsonSerializer dataContractJsonSerializer)
         {
-            _dataContractJsonSerializer = dataContractJsonSerializer;
-        }
-
-        public object ReadObject(Stream stream)
-        {
-            return _dataContractJsonSerializer.ReadObject(stream);
+            return dataContractJsonSerializer.ReadObject(stream);
         }
     }
 }
