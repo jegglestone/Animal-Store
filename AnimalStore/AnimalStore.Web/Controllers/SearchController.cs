@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AnimalStore.Model;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;

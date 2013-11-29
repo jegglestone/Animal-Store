@@ -45,7 +45,7 @@ namespace AnimalStore.Web.Repository
 
         public IList<Breed> GetBreeds()
         {
-            var response = GetResponse(_breeds_Url);
+            var response = _webAPIRequestWrapper.GetResponse(_breeds_Url);
             try
             {
                 using (var stream = _responseStreamHelper.GetResponseStream(response))
@@ -71,7 +71,7 @@ namespace AnimalStore.Web.Repository
 
         public PageableResults<Dog> GetDogs(int page, int pageSize)
         {
-            var response = GetResponse(string.Format("{0}?page={1}&pageSize={2}", _dogs_Url, page, pageSize));
+            var response = _webAPIRequestWrapper.GetResponse(string.Format("{0}?page={1}&pageSize={2}&format=json", _dogs_Url, page, pageSize));
             try
             {
                 using (var stream = _responseStreamHelper.GetResponseStream(response))
@@ -85,7 +85,7 @@ namespace AnimalStore.Web.Repository
             }
             catch (Exception e)
             {
-                _exceptionHelper.HandleException("Response from Breeds service resulted in an error in GetDogs()", e, (typeof(HttpSearchRepository)));
+                _exceptionHelper.HandleException("Response from Dogs service resulted in an error in GetDogs()", e, (typeof(HttpSearchRepository)));
             }
             finally
             {
@@ -93,21 +93,6 @@ namespace AnimalStore.Web.Repository
             }
 
             return _dogs;
-        }
-
-        private WebResponse GetResponse(string url)
-        {
-            WebResponse response = null;
-            try
-            {
-                response = _webAPIRequestWrapper.GetResponse(url);
-            }
-            catch (WebException e)
-            {
-                _exceptionHelper.HandleException("Web Service not available", e, (GetType()));
-            }
-
-            return response;
         }
 
         private static void DisposeOfWebResponse(WebResponse response)

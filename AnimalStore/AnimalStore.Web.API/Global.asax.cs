@@ -1,5 +1,4 @@
-﻿using System;
-using AnimalStore.Data.DataContext;
+﻿using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;

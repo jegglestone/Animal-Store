@@ -6,19 +6,19 @@ namespace AnimalStore.Model
     [DataContract]
     public class PageableResults<T>
     {
-        [DataMember]
+        [DataMember(Name = "data")]
         public IEnumerable<T> Data { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "id")]
         public int TotalPages { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "totalCount")]
         public int TotalCount { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "nextPage")]
         public string NextPage { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "prevPage")]
         public string PrevPage { get; set; }
     }
 }

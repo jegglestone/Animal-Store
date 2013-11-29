@@ -51,13 +51,13 @@ namespace AnimalStore.Web.DependencyResolution
             container.RegisterType<IConfiguration, Configuration>(
                 new HierarchicalLifetimeManager());
             container.RegisterType<IDataContractJsonSerializerWrapper, DataContractJsonSerializerWrapper>(
-                new HierarchicalLifetimeManager());
+                new TransientLifetimeManager());
             container.RegisterType<ContactInformation>(
                 new HierarchicalLifetimeManager());
             container.RegisterType<IWebAPIRequestWrapper, WebAPIRequestWrapper>(
-                new HierarchicalLifetimeManager());
+                new TransientLifetimeManager());
             container.RegisterType<IResponseStreamHelper, ResponseStreamHelper>(
-                new HierarchicalLifetimeManager());
+                new TransientLifetimeManager());
         }
 
         /// <summary>
