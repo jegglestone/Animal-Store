@@ -118,8 +118,7 @@ namespace AnimalStore.Services.UnitTests
             var result = dogsController.GetPaged(pageNumber, pageSize);
 
             // assert
-            Assert.That(result.Data.ToList().Where(dog => dog.Name == expectedDogName).First(), Is.Not.Null);
-
+            Assert.That(result.Data.ToList().First(dog => dog.Name == expectedDogName), Is.Not.Null);
         }
 
         [Test]
@@ -146,6 +145,20 @@ namespace AnimalStore.Services.UnitTests
 
             // assert
             Assert.That(result.TotalPages, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void Get_ReturnsTheCurrentPage()
+        {
+            // arrange
+            var dogsController = new DogsController(_repository, _unitofWork);
+            int page = 2;
+
+            // act
+            var result = dogsController.GetPaged(page, 4);
+
+            // assert
+            Assert.That(result.CurrentPageNumber, Is.EqualTo(page));
         }
 
         [Test]

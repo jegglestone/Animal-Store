@@ -12,13 +12,16 @@ namespace AnimalStore.Model
         [DataMember(Name = "id")]
         public int TotalPages { get; set; }
 
-        [DataMember(Name = "totalCount")]
+        [DataMember(Name = "total_count")]
         public int TotalCount { get; set; }
 
-        [DataMember(Name = "nextPage")]
+        [DataMember(Name = "next_page")]
         public string NextPage { get; set; }
 
-        [DataMember(Name = "prevPage")]
+        [DataMember(Name = "prev_page")]
         public string PrevPage { get; set; }
+
+        [DataMember(Name = "current_page_number")]
+        public int CurrentPageNumber { get; set; }
     }
 }

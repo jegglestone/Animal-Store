@@ -1,4 +1,5 @@
-﻿using AnimalStore.Data.DataContext;
+﻿using System.Data.SqlClient;
+using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
@@ -44,11 +45,18 @@ namespace AnimalStore.Web.API
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            var dataContext = new AnimalsDataContext();
-            dataContext.Database.Initialize(true);
-
             var logManager = new Common.Logging.LogManager();
             var log = logManager.GetLogger((typeof(WebApiApplication)));
+
+            try
+            {
+                var dataContext = new AnimalsDataContext();
+                dataContext.Database.Initialize(true);
+            }
+            catch (SqlException e)
+            {
+                log.Error("SQL Exception - mostly likely the database is in use and can't be dropped and initialised", e);
+            }
 
             log.Info(Common.Constants.SiteNames.DOGSTORE_SITE_NAME + " Service API is starting up and database initialisation is complete");
         }

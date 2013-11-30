@@ -12,7 +12,8 @@ namespace AnimalStore.Data.Configuration
             Property(p => p.AgeInYears).IsRequired();
             Property(p => p.AgeInMonths).IsOptional();
             Property(p => p.Name).HasMaxLength(30);
-            Property(p => p.Desc).HasMaxLength(300);
+            Property(p => p.Headline).HasMaxLength(200);
+            Property(p => p.FullDescription).HasMaxLength(1000);
             Property(p => p.Price).IsOptional();
         }
     }

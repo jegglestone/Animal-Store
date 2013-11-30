@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using AnimalStore.Data.UnitsOfWork;
+﻿using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
 using AnimalStore.Data.Repositories;
 using System.Linq;
@@ -39,6 +38,7 @@ namespace AnimalStore.Web.API.Controllers
                 Data = pagedResults,
                 NextPage = nextUrl,
                 PrevPage = prevUrl,
+                CurrentPageNumber = page,
                 TotalCount = totalCount,
                 TotalPages = totalPages
             };

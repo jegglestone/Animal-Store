@@ -13,22 +13,25 @@ namespace AnimalStore.Model
         [DataMember(Name = "name")]
         public string Name { get; set; }
 
-        [DataMember(Name = "desc")]
-        public string Desc { get; set; }
+        [DataMember(Name = "headline")]
+        public string Headline { get; set; }
 
-        [DataMember(Name = "ageInYears")]
+        [DataMember(Name = "full_description")]
+        public string FullDescription { get; set; }
+
+        [DataMember(Name = "age_in_years")]
         public int AgeInYears { get; set; }
 
-        [DataMember(Name = "ageInMonths")]
+        [DataMember(Name = "age_in_months")]
         public int AgeInMonths { get; set; }
 
-        [DataMember(Name = "isLitter")]
+        [DataMember(Name = "is_litter")]
         public bool isLitter { get; set; }
 
-        [DataMember(Name = "isSold")]
+        [DataMember(Name = "is_sold")]
         public bool isSold { get; set; }
 
-        [DataMember(Name = "isFemale")]
+        [DataMember(Name = "is_female")]
         public bool isFemale { get; set; }
 
         [DataMember(Name = "price")]

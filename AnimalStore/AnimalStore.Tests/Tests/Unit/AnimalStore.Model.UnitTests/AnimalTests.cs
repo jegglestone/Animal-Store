@@ -30,7 +30,7 @@ namespace AnimalStore.Model.UnitTests
             // act
             animal.Id = id;
             animal.Name = name;
-            animal.Desc = desc;
+            animal.Headline = desc;
             animal.AgeInYears = age;
             animal.isLitter = isLitter;
             animal.isSold = isSold;
@@ -42,7 +42,7 @@ namespace AnimalStore.Model.UnitTests
             // assert
             Assert.That(animal.Id, Is.EqualTo(id));
             Assert.That(animal.Name, Is.EqualTo(name));
-            Assert.That(animal.Desc, Is.EqualTo(desc));
+            Assert.That(animal.Headline, Is.EqualTo(desc));
             Assert.That(animal.AgeInYears, Is.EqualTo(age));
             Assert.That(animal.isLitter, Is.EqualTo(isLitter));
             Assert.That(animal.isSold, Is.EqualTo(isSold));
