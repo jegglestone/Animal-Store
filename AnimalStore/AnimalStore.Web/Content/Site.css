@@ -118,6 +118,10 @@ h5 a:link, h5 a:visited, h5 a:active {
         background: url("../Images/heroAccent.png") no-repeat;
     }
 
+    .normal-Paragraph {
+
+    }
+
 header .content-wrapper {
     padding-top: 20px; 
 }

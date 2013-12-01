@@ -8,7 +8,7 @@
     });
 </script>
 <div id="tabs">
-    <ul>
+    <ul style="min-width:300px; overflow: hidden;"> @*>*@
         <li><a href="#fragment-1"><span>Dogs</span></a></li>
         <li><a href="#fragment-2"><span>Services</span></a></li>
         <li><a href="#fragment-3"><span>Breeders</span></a></li>
@@ -16,9 +16,13 @@
     <div id="fragment-1">
         @using (Html.BeginForm("DogSearch", "Search", Model, FormMethod.Get))
         {
-            <h5>Find Pets</h5>
-            <p>Search through thousands of adverts for dogs and puppies for sale in the UK.</p> 
-            <table>
+            <table style="clear: left">
+                <tr>
+                    <td colspan ="2"><h5>Find dogs locally or nationally</h5></td>
+                </tr>
+                <tr>
+                    <td colspan ="2"><p class="normal-Paragraph">Search through thousands of adverts for dogs and puppies for sale in the UK.</p></td>
+                </tr> 
                 <tr>
                     <td>Breed: </td>
                     <td>@Html.DropDownListFor(x => x.SelectedBreed,
