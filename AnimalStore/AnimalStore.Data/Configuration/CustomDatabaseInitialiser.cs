@@ -28,7 +28,7 @@ namespace AnimalStore.Data.Configuration
 
 #endregion
 
-            #region breeds
+#region breeds
 
             var mixedBreedDog = new Breed { Species = dogSpecies, Name = "Mixed Breed (dog)", Category=miscellaneous };
             var affenpinscher= new Breed { Species=dogSpecies, Name="Affenpinscher", Category= toy };
@@ -423,22 +423,533 @@ namespace AnimalStore.Data.Configuration
 
 #region dogs
 
-            // blood hounds
-            context.Dogs.Add(new Dog { AgeInYears = 2, Headline = "2 yr old Blood-hound. Well-behaved, likes children", FullDescription = "2 yr old Blood-hound. Well-behaved, likes children, no health problems and properly toilet trained. See for yourself", Name = "Spud", isLitter = false, isSold = false, Breed = bloodhound });
-            
-            // dalmatians
-            context.Dogs.Add(new Dog { AgeInYears = 4, Headline = "A well behaved dalmatian.", FullDescription = "cocco is a pure toy dlamatian bitch ,she is four half months old,is pedigree with 3 generation certificate.has been fully vet checked and had both vaccinations.flea treated and wormed on pancur.is use to other dogs and household noises.likes to go in the car and loves her walks.is part trainned and doing well on going outside.loves children and likes to be cuddled and played with.mum is a black toy poodle and can be seen .dad is a chocolate toy poodle with clear eye certificat a copy of eye certificate will go with cocco.i was keeping cocco but she isnt getting the attention she should be.so looking for loving caring home where she will get lots of love and attention.please ring for futher information,will only go to the right home thanks", Name = "Cocco", isLitter = false, isSold = false, isFemale = true, Breed = dalmatian });
-            context.Dogs.Add(new Dog { AgeInYears = 0, Headline = "6 brand new dalmations. Pedigree standard, all healthy and fit.", FullDescription = "6 brand new dalmations. Pedigree standard, all healthy and fit. Ready in 5 weeks after wheaning", Name = null, isLitter = true, isSold = false, Breed = dalmatian });
+#region affenpinschers
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 2,
+                Headline = "2 yr old Affen Pinscher. Well-behaved, likes children",
+                FullDescription = "2 yr old. Well-behaved, likes children, no health problems and properly toilet trained. See for yourself",
+                Name = "Spud",
+                isLitter = false,
+                isSold = false,
+                Price = 250,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 5,
+                Headline = "im selling my little affenpincher girl",
+                FullDescription = "im having to sell my scuffy little friend she is perfect in everyway she is house trained can be left a sensible lenth of time gets on with all different animals not nasty in any way adores children and is a perfect lapdog will sit on your kn....",
+                Name = "Scuffy",
+                isLitter = false,
+                isSold = false,
+                Price = 125,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 2,
+                Headline = "2 yr old Affen Pinscher. Needs home",
+                FullDescription = "2 yr old. Well-behaved, good guard dog",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 250,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 3,
+                Headline = "3yr old Affen Pinscher. good home needed",
+                FullDescription = "3 yr old. Well-behaved, good guard dog good home needed",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 190,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "0 yr old Affen Pinscher. Needs home",
+                FullDescription = "puppy dog - really well behaved",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 250,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "Litter of affenpinschers great",
+                FullDescription = "Brand new litter from award winning stud and bitch. Perfect lineage, real crufts quality",
+                Name = null,
+                isLitter = true,
+                isSold = false,
+                Price = 1200,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 2,
+                Headline = "2 yr old Affen Pinscher. Needs home",
+                FullDescription = "2 yr old. Well-behaved, good guard dog",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 600,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "Litter of affenpinschers great",
+                FullDescription = "litter of Well-behaved, good guard dogs",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 400,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 2,
+                Headline = "2 yr old Affen Pinscher. Needs home",
+                FullDescription = "2 yr old. Well-behaved, good guard dog",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 350,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 2,
+                Headline = "2 yr old Affen Pinscher. Well-behaved, likes children",
+                FullDescription = "2 yr old. Well-behaved, likes children, no health problems and properly toilet trained. See for yourself",
+                Name = "Spud",
+                isLitter = false,
+                isSold = false,
+                Price = 500,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 5,
+                Headline = "im selling my little affenpincher girl",
+                FullDescription = "im having to sell my scuffy little friend she is perfect in everyway she is house trained can be left a sensible lenth of time gets on with all different animals not nasty in any way adores children and is a perfect lapdog will sit on your kn....",
+                Name = "Scuffy",
+                isLitter = false,
+                isSold = false,
+                Price = 600,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 2,
+                Headline = "2 yr old Affen Pinscher. Needs home",
+                FullDescription = "2 yr old. Well-behaved, good guard dog",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 980,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 3,
+                Headline = "3yr old Affen Pinscher. good home needed",
+                FullDescription = "3 yr old. Well-behaved, good guard dog good home needed",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 80,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "0 yr old Affen Pinscher. Needs home",
+                FullDescription = "puppy dog - really well behaved",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 700,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "Litter of affenpinschers great",
+                FullDescription = "Brand new litter from award winning stud and bitch. Perfect lineage, real crufts quality",
+                Name = null,
+                isLitter = true,
+                isSold = false,
+                Price = 600,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 3,
+                Headline = "3yr old Affen Pinscher. good home needed",
+                FullDescription = "3 yr old. Well-behaved, good guard dog good home needed",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 400,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "0 yr old Affen Pinscher. Needs home",
+                FullDescription = "puppy dog - really well behaved",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 300,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "Litter of affenpinschers great",
+                FullDescription = "Brand new litter from award winning stud and bitch. Perfect lineage, real crufts quality",
+                Name = null,
+                isLitter = true,
+                isSold = false,
+                Price = 300,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 2,
+                Headline = "2 yr old Affen Pinscher. Needs home",
+                FullDescription = "2 yr old. Well-behaved, good guard dog",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 600,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "Litter of affenpinschers great",
+                FullDescription = "litter of Well-behaved, good guard dogs",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 700,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 2,
+                Headline = "2 yr old Affen Pinscher. Needs home",
+                FullDescription = "2 yr old. Well-behaved, good guard dog",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 300,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 2,
+                Headline = "2 yr old Affen Pinscher. Well-behaved, likes children",
+                FullDescription = "2 yr old. Well-behaved, likes children, no health problems and properly toilet trained. See for yourself",
+                Name = "Spud",
+                isLitter = false,
+                isSold = false,
+                Price = 400,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 5,
+                Headline = "im selling my little affenpincher girl",
+                FullDescription = "im having to sell my scuffy little friend she is perfect in everyway she is house trained can be left a sensible lenth of time gets on with all different animals not nasty in any way adores children and is a perfect lapdog will sit on your kn....",
+                Name = "Scuffy",
+                isLitter = false,
+                isSold = false,
+                Price = 100,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "0 yr old Affen Pinscher. Needs home",
+                FullDescription = "puppy dog - really well behaved",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 300,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "Litter of affenpinschers great",
+                FullDescription = "Brand new litter from award winning stud and bitch. Perfect lineage, real crufts quality",
+                Name = null,
+                isLitter = true,
+                isSold = false,
+                Price = 300,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 2,
+                Headline = "2 yr old Affen Pinscher. Needs home",
+                FullDescription = "2 yr old. Well-behaved, good guard dog",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 600,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "Litter of affenpinschers great",
+                FullDescription = "litter of Well-behaved, good guard dogs",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 700,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 3,
+                Headline = "3yr old Affen Pinscher. good home needed",
+                FullDescription = "3 yr old. Well-behaved, good guard dog good home needed",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 80,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "0 yr old Affen Pinscher. Needs home",
+                FullDescription = "puppy dog - really well behaved",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 700,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "Litter of affenpinschers great",
+                FullDescription = "Brand new litter from award winning stud and bitch. Perfect lineage, real crufts quality",
+                Name = null,
+                isLitter = true,
+                isSold = false,
+                Price = 600,
+                Breed = affenpinscher
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 3,
+                Headline = "3yr old Affen Pinscher. good home needed",
+                FullDescription = "3 yr old. Well-behaved, good guard dog good home needed",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Price = 400,
+                Breed = affenpinscher
+            });
+#endregion
 
-            // golden retrievers
-            context.Dogs.Add(new Dog { AgeInYears = 1, Headline = "A young Golden Retriever. Well behaved and trained.", FullDescription = "XXXX STUNNING ENGLISH BULLDOG PUPPIES XXXXXXXXXX. 29 CHAMPIONS INCLUDING OCOBO & MY STYLE XXXX XXXX DONT MISSS OUT ON THESE GORGEOUS BABIES XXXXX XXXXX ONLY OUR PICK OF LITTER AVAILABLE XXXXX We have a litter of kc registered english bulldogs for sale 1 boy remaing stunning examples of this breed many champions in there pedigree large heads straight tails rose ears heavy boned lot of wrinkle come with 4 weeks free insurance 1st injections kc papers mum and dad can both be seen! They are our family pets well handled use to all household noises brought up with our children no breathing problems or health issues ready to go to there new homes for more information please call us ( reduced to £1650 with kc registration papers)",Name = "Goldie", isLitter = false, isSold = false, Breed = goldenRetriever });
+#region akitas
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 1,
+                Headline = "4 female akita puppies!",
+                FullDescription = "4 female akita puppies, Ready to go NOW!! 10 weeks old 300 Ono call or email . ",
+                Name = "",
+                isLitter = true,
+                isSold = false,
+                Breed = akita
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                AgeInMonths = 2,
+                Headline = "Gorgeous Pedigree Akitas 7 Week Old Pups",
+                FullDescription = "We have adorable bear headed black and white girls available. The puppies will be fleaed, wormed and vaccinated as well as vet checked. Your puppy will also have 4 weeks free insurance. They will be ready to leave us on 8th December, however....",
+                Price = 700,
+                Name = "",
+                isLitter = false,
+                isSold = false,
+                Breed = akita
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 1,
+                Headline = "beautiful Akita pup",
+                FullDescription = "beautiful Akita pup She born on 16/09/2013 she was warm And fleat she is full pedigree akita but she don't come with the KC registrert. reason for sale landlord don't accept dog. Please any more information call on 07587916471",
+                Name = "lynn",
+                isLitter = false,
+                isSold = false,
+                isFemale = true,
+                Breed = akita
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 7,
+                Headline = "Japanese Akita Pups Ready To Go",
+                FullDescription = "I have a lovely litter of 7 there is 6 left 3 girls 3boys looking for forever homes handled all the time be myself and my young children very playful ready to go they are eight week I also have mum and dad as there my pets more than welcome t....",
+                Name = "Spud",
+                isLitter = false,
+                isSold = false,
+                isFemale = true,
+                Price = 300,
+                Breed = akita
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 1,
+                FullDescription = "WE ARE PROUD TO OFFER TWO EXCEPTIONAL MALE, AMERICAN AKITA PUPPIES. PUPPIES ARE KC REGISTERED AND HAVE BEEN FLEAD AND WORMED UP TO DATE.PUPPIES HAVE OUTSTANDING BONE STRUCTURE AND SUBSTANCE,COMPLIMENTED WITH A HEALTHY COAT.PUPPIES ARE 5 WEEKS...",
+                Headline = " AMERICAN AKITA PUPPIES  .",
+                Name = null,
+                isLitter = false,
+                isSold = false,
+                Breed = akita
+            });
+#endregion
 
-            // german sheperds
-            context.Dogs.Add(new Dog { AgeInYears = 7, Headline = "Middle aged female Germen Sheperds - loves kids!", FullDescription = "A fairly old Alsatian requires a new home as we can't look after her anymore. Please get in touch. She likes walks and bones but other than that she's not high maintenance at all!", Name = "Spud", isLitter = false, isSold = false, isFemale = true, Breed = germanShepherd });
-            
-            // mixed breed
-            context.Dogs.Add(new Dog { AgeInYears = 0, AgeInMonths = 3, Headline = "A litter of healthy pups - 2 males, 3 bitches!", FullDescription = "A litter of healthy pups - 2 males, 3 bitches! Dad is an Alsatian, mum is a Chihuhua so bit off there", Name = "Spud", isLitter = true, isSold = false, Breed = mixedBreedDog });
-            
+#region blood hounds
+
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 2,
+                Headline = "2 yr old Blood-hound. Well-behaved, likes children",
+                FullDescription = "2 yr old Blood-hound. Well-behaved, likes children, no health problems and properly toilet trained. See for yourself",
+                Name = "Spud",
+                isLitter = false,
+                isSold = false,
+                Price = 500,
+                Breed = bloodhound
+            });
+
+#endregion
+
+#region dalmatians
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 4,
+                Headline = "A well behaved dalmatian.",
+                FullDescription = "cocco is a pure toy dlamatian bitch ,she is four half months old,is pedigree with 3 generation certificate.has been fully vet checked and had both vaccinations.flea treated and wormed on pancur.is use to other dogs and household noises.likes to go in the car and loves her walks.is part trainned and doing well on going outside.loves children and likes to be cuddled and played with.mum is a black toy poodle and can be seen .dad is a chocolate toy poodle with clear eye certificat a copy of eye certificate will go with cocco.i was keeping cocco but she isnt getting the attention she should be.so looking for loving caring home where she will get lots of love and attention.please ring for futher information,will only go to the right home thanks",
+                Name = "Cocco",
+                isLitter = false,
+                isSold = false,
+                isFemale = true,
+                Breed = dalmatian
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "6 brand new dalmations. Pedigree standard, all healthy and fit.",
+                FullDescription = "6 brand new dalmations. Pedigree standard, all healthy and fit. Ready in 5 weeks after wheaning",
+                Name = null,
+                isLitter = true,
+                isSold = false,
+                Breed = dalmatian
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears =5,
+                Headline = "A well behaved dalmatian.",
+                FullDescription = "Rocky is a pure toy dlamatian bitch ,she is four half months old,is pedigree with 3 generation certificate.has been fully vet checked and had both vaccinations.flea treated and wormed on pancur.is use to other dogs and household noises.likes to go in the car and loves her walks.is part trainned and doing well on going outside.loves children and likes to be cuddled and played with.mum is a black toy poodle and can be seen .dad is a chocolate toy poodle with clear eye certificat a copy of eye certificate will go with cocco.i was keeping cocco but she isnt getting the attention she should be.so looking for loving caring home where she will get lots of love and attention.please ring for futher information,will only go to the right home thanks",
+                Name = "Rocky",
+                isLitter = false,
+                isSold = false,
+                isFemale = true,
+                Breed = dalmatian
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "6 brand new dalmations. Pedigree standard, all healthy and fit.",
+                FullDescription = "6 brand new dalmations. Pedigree standard, all healthy and fit. Ready in 3 weeks after wheaning",
+                Name = null,
+                isLitter = true,
+                isSold = false,
+                Breed = dalmatian
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                AgeInMonths = 1,
+                Headline = "6 brand new dalmations. Pedigree standard, all healthy and fit.",
+                FullDescription = "6 brand new dalmations. Pedigree standard, all healthy and fit. Ready in 3 weeks after wheaning",
+                Name = null,
+                isLitter = true,
+                isSold = true,
+                Breed = dalmatian
+            });
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                Headline = "6 brand new dalmations. Pedigree standard, all healthy and fit.",
+                FullDescription = "6 brand new dalmations. Pedigree standard, all healthy and fit. Ready in 3 weeks after wheaning",
+                Name = null,
+                isLitter = true,
+                isSold = true,
+                Breed = dalmatian
+            });
+#endregion
+
+#region golden retrievers
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 1,
+                Headline = "A young Golden Retriever. Well behaved and trained.",
+                FullDescription = "XXXX STUNNING ENGLISH BULLDOG PUPPIES XXXXXXXXXX. 29 CHAMPIONS INCLUDING OCOBO & MY STYLE XXXX XXXX DONT MISSS OUT ON THESE GORGEOUS BABIES XXXXX XXXXX ONLY OUR PICK OF LITTER AVAILABLE XXXXX We have a litter of kc registered english bulldogs for sale 1 boy remaing stunning examples of this breed many champions in there pedigree large heads straight tails rose ears heavy boned lot of wrinkle come with 4 weeks free insurance 1st injections kc papers mum and dad can both be seen! They are our family pets well handled use to all household noises brought up with our children no breathing problems or health issues ready to go to there new homes for more information please call us ( reduced to £1650 with kc registration papers)",
+                Name = "Goldie",
+                isLitter = false,
+                isSold = false,
+                Price = 325,
+                Breed = goldenRetriever
+            });
+#endregion
+
+#region german sheperds
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 7,
+                Headline = "Middle aged female Germen Sheperds - loves kids!",
+                FullDescription = "A fairly old Alsatian requires a new home as we can't look after her anymore. Please get in touch. She likes walks and bones but other than that she's not high maintenance at all!",
+                Name = "Spud",
+                isLitter = false,
+                isSold = false,
+                isFemale = true,
+                Breed = germanShepherd
+            });
+
+#endregion
+
+#region mixed breed
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 0,
+                AgeInMonths = 3,
+                Headline = "A litter of healthy pups - 2 males, 3 bitches!",
+                FullDescription = "A litter of healthy pups - 2 males, 3 bitches! Dad is an Alsatian, mum is a Chihuhua so bit off there",
+                Name = "Spud",
+                isLitter = true,
+                isSold = false,
+                Breed = mixedBreedDog
+            });
+#endregion
+
 #endregion
 
             base.Seed(context);
