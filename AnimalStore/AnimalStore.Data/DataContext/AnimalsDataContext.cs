@@ -48,7 +48,22 @@ namespace AnimalStore.Data.DataContext
         public override int SaveChanges()
         {
             ApplyRules();
-            return base.SaveChanges();
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException e)
+            {
+                foreach (var entityValidationError in e.EntityValidationErrors)
+                {
+                    var logManager = new Common.Logging.LogManager();
+                    var log = logManager.GetLogger((typeof(AnimalsDataContext)));
+
+                    log.Error("Entity Validation Error in configuring test data " + entityValidationError.Entry + ", " + entityValidationError.ValidationErrors.ToString(), e);
+                }
+
+                throw e;
+            }
         }
 
         private void ApplyRules()

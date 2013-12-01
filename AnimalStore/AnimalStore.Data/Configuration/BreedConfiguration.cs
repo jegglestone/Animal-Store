@@ -7,7 +7,7 @@ namespace AnimalStore.Data.Configuration
     {
         public BreedConfiguration()
         {
-            this.Property(p => p.Name).IsRequired().HasMaxLength(30);
+            this.Property(p => p.Name).IsRequired().HasMaxLength(70);
         }
     }
 }
