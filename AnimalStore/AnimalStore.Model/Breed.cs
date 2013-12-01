@@ -12,5 +12,7 @@ namespace AnimalStore.Model
 
         [DataMember(Name = "species")]
         public Species Species { get; set; }
+
+        public Category Category { get; set; }
     }
 }
