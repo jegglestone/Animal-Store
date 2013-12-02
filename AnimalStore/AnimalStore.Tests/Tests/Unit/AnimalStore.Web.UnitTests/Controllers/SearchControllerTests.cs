@@ -14,15 +14,6 @@ namespace AnimalStore.Web.UnitTests.Controllers
     {
         private SearchViewModel _searchViewModel;
 
-        private readonly List<Breed> breedsList = new List<Breed>()
-            {
-                new Breed() { Name = "Dalmatian" },
-                new Breed() { Name = "Afghan Hound" },
-                new Breed() { Name = "Rottweiler" },
-                new Breed() { Name = "Whippet" },
-                new Breed() { Name = "Blood Hound" },
-            };
-
         [TestFixtureSetUp]
         public void SearchControllerTestsSetup()
         {
@@ -30,7 +21,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
         }
 
         [Test]
-        public void DogSearch_NationalSearch_Calls_SearchRepository()
+        public void DogSearch_NationalSearch_Calls_SearchRepository_GetDogs_When_NationalSearch_For_all_breeds()
         {
             // arrange
             var searchRepository = MockRepository.GenerateMock<ISearchRepository>();
@@ -45,18 +36,19 @@ namespace AnimalStore.Web.UnitTests.Controllers
                     });
 
             _searchViewModel.IsNationalSearch = true;
+            _searchViewModel.SelectedBreed = 0;
 
             var SearchController = new SearchController(searchRepository);
 
             // act
-            SearchController.DogSearch(_searchViewModel);
+            SearchController.Dogs(_searchViewModel);
 
             // assert
             searchRepository.AssertWasCalled(x => x.GetDogs(1, 25));
         }
 
         [Test]
-        public void DogSearch_NationalSearch_Return_View_With_Full_List_Of_Dogs_Found()
+        public void DogSearch_NationalSearch_Return_View_With_Full_List_Of_Dogs_Found_When_NationalSearch_For_all_breeds()
         {
             var dogs = new List<Dog>()
                     {
@@ -72,11 +64,67 @@ namespace AnimalStore.Web.UnitTests.Controllers
             searchRepository.Stub(x => x.GetDogs(1, 25)).Return(pageableResults);
 
             _searchViewModel.IsNationalSearch = true;
+            _searchViewModel.SelectedBreed = 0;
 
             var SearchController = new SearchController(searchRepository);
 
             // act
-            var result = (ViewResult)SearchController.DogSearch(_searchViewModel);
+            var result = (ViewResult)SearchController.Dogs(_searchViewModel);
+
+            // assert
+            Assert.That(result.Model, Is.EqualTo(pageableResults));
+        }
+
+        [Test]
+        public void DogSearch_NationalSearch_Calls_SearchRepository_GetDogsByBreed_When_NationalSearch_For_Specific_Breed()
+        {
+            // arrange
+            var searchRepository = MockRepository.GenerateMock<ISearchRepository>();
+            searchRepository.Stub(x => x.GetDogs(1, 25)).Return(
+                new PageableResults<Dog>()
+                {
+                    Data = new List<Dog>()
+                            {
+                                new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, isFemale = false, isSold = false},
+                                new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, isFemale = true, isSold = false},
+                            }
+                });
+
+            _searchViewModel.IsNationalSearch = true;
+            _searchViewModel.SelectedBreed = 4;
+
+            var SearchController = new SearchController(searchRepository);
+
+            // act
+            SearchController.Dogs(_searchViewModel);
+
+            // assert
+            searchRepository.AssertWasCalled(x => x.GetDogs(1, 25, 4));
+        }
+
+        [Test]
+        public void DogSearch_NationalSearch_Return_View_With_Full_List_Of_Dogs_Found_When_NationalSearch_For_Specific_Breed()
+        {
+            var dogs = new List<Dog>()
+                    {
+                        new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, isFemale = false, isSold = false},
+                        new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, isFemale = true, isSold = false},
+                    };
+            var pageableResults = new PageableResults<Dog>()
+            {
+                Data = dogs
+            };
+
+            var searchRepository = MockRepository.GenerateMock<ISearchRepository>();
+            searchRepository.Stub(x => x.GetDogs(1, 25, 3)).Return(pageableResults);
+
+            _searchViewModel.IsNationalSearch = true;
+            _searchViewModel.SelectedBreed = 3;
+
+            var SearchController = new SearchController(searchRepository);
+
+            // act
+            var result = (ViewResult)SearchController.Dogs(_searchViewModel);
 
             // assert
             Assert.That(result.Model, Is.EqualTo(pageableResults));

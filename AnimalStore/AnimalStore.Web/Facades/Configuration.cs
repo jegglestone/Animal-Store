@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using AnimalStore.Web.Facades.Interfaces;
 using AnimalStore.Web.ViewModels;
 
 namespace AnimalStore.Web.Facades

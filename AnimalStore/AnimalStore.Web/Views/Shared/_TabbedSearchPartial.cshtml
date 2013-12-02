@@ -1,4 +1,5 @@
-﻿@model AnimalStore.Web.ViewModels.SearchViewModel
+﻿@using AnimalStore.Web.ViewModels
+@model AnimalStore.Web.ViewModels.SearchViewModel
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -8,13 +9,13 @@
     });
 </script>
 <div id="tabs">
-    <ul style="min-width:300px; overflow: hidden;"> @*>*@
+    <ul>
         <li><a href="#fragment-1"><span>Dogs</span></a></li>
         <li><a href="#fragment-2"><span>Services</span></a></li>
         <li><a href="#fragment-3"><span>Breeders</span></a></li>
     </ul>
     <div id="fragment-1">
-        @using (Html.BeginForm("DogSearch", "Search", Model, FormMethod.Get))
+        @using (Html.BeginForm("Dogs", "Search", Model, FormMethod.Get))
         {
             <table style="clear: left">
                 <tr>
@@ -27,7 +28,7 @@
                     <td>Breed: </td>
                     <td>@Html.DropDownListFor(x => x.SelectedBreed,
                                               Model.BreedsSelectList,
-                                              "Breed (any)")
+                                              SearchViewModel.AnyBreed)
                     </td>
                 </tr>
                 <tr>

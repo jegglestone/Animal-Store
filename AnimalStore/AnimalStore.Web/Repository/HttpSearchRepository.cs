@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using AnimalStore.Common.Helpers;
 using AnimalStore.Model;
-using AnimalStore.Web.Facades;
+using AnimalStore.Web.Facades.Interfaces;
 using AnimalStore.Web.Factories;
-using AnimalStore.Web.Helpers;
+using AnimalStore.Web.Helpers.Interfaces;
 
 namespace AnimalStore.Web.Repository
 {
@@ -24,7 +25,6 @@ namespace AnimalStore.Web.Repository
 
         private IList<Breed> _breeds;
         private PageableResults<Dog> _dogs; 
-
         private readonly IExceptionHelper _exceptionHelper;
         private readonly IDataContractJsonSerializerWrapper _dataContractJsonSerializerWrapper;
         private readonly IConfiguration _configuration;
@@ -41,7 +41,6 @@ namespace AnimalStore.Web.Repository
             _responseStreamHelper = responseStreamHelper;
             _breeds = new List<Breed>();
             _dogs = new PageableResults<Dog>();
-
         }
 
         public IList<Breed> GetBreeds()
@@ -73,6 +72,18 @@ namespace AnimalStore.Web.Repository
         public PageableResults<Dog> GetDogs(int page, int pageSize)
         {
             var response = _webAPIRequestWrapper.GetResponse(string.Format("{0}?page={1}&pageSize={2}&format=json", _dogs_Url, page, pageSize));
+            return GetDogsByResponse(response);
+        }
+
+        // TODO: Unit test
+        public PageableResults<Dog> GetDogs(int page, int pageSize, int breedId)
+        {
+            var response = _webAPIRequestWrapper.GetResponse(string.Format("{0}?page={1}&pageSize={2}&breedid={3}&format=json", _dogs_Url + "/breed", page, pageSize, breedId));
+            return GetDogsByResponse(response);
+        }
+
+        private PageableResults<Dog> GetDogsByResponse(WebResponse response)
+        {
             try
             {
                 using (var stream = _responseStreamHelper.GetResponseStream(response))
@@ -103,8 +114,6 @@ namespace AnimalStore.Web.Repository
             response.Dispose();
         }
 
-
-
         #region async stuff
         //public IList<Breed> GetBreedsAsync()
         //{
@@ -127,5 +136,6 @@ namespace AnimalStore.Web.Repository
         //    Task<HttpResponseMessage> getTask = _httpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead);
         //}
         #endregion
+
     }
 }

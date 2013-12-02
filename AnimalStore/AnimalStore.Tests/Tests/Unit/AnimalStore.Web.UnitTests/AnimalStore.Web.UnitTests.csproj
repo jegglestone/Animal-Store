@@ -55,6 +55,10 @@
     <Compile Include="Repositories\HttpSearchRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\AnimalStore.Common\AnimalStore.Common.csproj">
+      <Project>{02EBD9DE-36E8-4BDE-BFFE-180B7D7CD64A}</Project>
+      <Name>AnimalStore.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\AnimalStore.Model\AnimalStore.Model.csproj">
       <Project>{b574db16-1972-4bfb-a0cb-5198139851f5}</Project>
       <Name>AnimalStore.Model</Name>

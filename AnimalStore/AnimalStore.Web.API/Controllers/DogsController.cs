@@ -44,6 +44,37 @@ namespace AnimalStore.Web.API.Controllers
             };
         }
 
+        // GET api/Dogs/Breed/
+
+        //TODO: Unit test. Do something with breedName
+        [HttpGet]
+        public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string breedName = null)
+        {
+            var dogs = _dogsRepository.GetAll()
+                .Where(x => x.Breed.Id == breedId)
+                .OrderByDescending(a => a.CreatedOn);
+
+            var totalCount = dogs.Count();
+            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+
+            var pagedResults = dogs.Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            // TODO: page urls
+            var nextUrl = "";
+            var prevUrl = "";
+
+            return new PageableResults<Dog>
+            {
+                Data = pagedResults,
+                NextPage = nextUrl,
+                PrevPage = prevUrl,
+                CurrentPageNumber = page,
+                TotalCount = totalCount,
+                TotalPages = totalPages
+            };
+        }
+
         // GET api/dogs/5
         [HttpGet]
         public Dog Get(int id)

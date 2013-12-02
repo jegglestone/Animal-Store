@@ -48,6 +48,8 @@
     <Compile Include="Constants\EventLog.cs" />
     <Compile Include="Constants\MediaTypeFormats.cs" />
     <Compile Include="Constants\SiteNames.cs" />
+    <Compile Include="Helpers\ExceptionHelper.cs" />
+    <Compile Include="Helpers\IExceptionHelper.cs" />
     <Compile Include="Logging\EventLogHelper.cs" />
     <Compile Include="Logging\Interfaces\ILoggerWrapper.cs" />
     <Compile Include="Logging\Interfaces\ILogManager.cs" />

@@ -10,6 +10,12 @@ namespace AnimalStore.Web.API.App_Start
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "SpecificBreedDogSearch",
+                url: "Dogs/Breed",
+                defaults: new { Controller = "Dogs", action = "GetPaged", breedName = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Default", action = "Index", id = UrlParameter.Optional }

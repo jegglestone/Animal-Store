@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Net;
+using AnimalStore.Web.Helpers.Interfaces;
 
 namespace AnimalStore.Web.Helpers
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
-using AnimalStore.Web.Helpers;
+using AnimalStore.Common.Helpers;
+using AnimalStore.Web.Facades.Interfaces;
 
 namespace AnimalStore.Web.Facades
 {

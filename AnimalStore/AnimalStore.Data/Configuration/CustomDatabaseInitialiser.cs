@@ -30,7 +30,7 @@ namespace AnimalStore.Data.Configuration
 
 #region breeds
 
-            var mixedBreedDog = new Breed { Species = dogSpecies, Name = "Mixed Breed (dog)", Category=miscellaneous };
+            var mixedBreedDog = new Breed { Species = dogSpecies, Name = "Mixed Breed", Category=miscellaneous };
             var affenpinscher= new Breed { Species=dogSpecies, Name="Affenpinscher", Category= toy };
             var afghanHound= new Breed { Species=dogSpecies, Name="Afghan Hound", Category = hound };
             var airedaleTerrier= new Breed { Species=dogSpecies, Name="Airedale Terrier", Category= terrier };

@@ -194,7 +194,7 @@ namespace AnimalStore.Services.UnitTests
             var dogsController = new DogsController(_repository, _unitofWork);
 
             // act
-            var result = dogsController.GetPaged(0, 25);
+            var result = dogsController.GetPaged(0, 20);
 
             // assert
             Assert.That(result.Data.ToList()[0].CreatedOn, Is.EqualTo(DateTime.Today));

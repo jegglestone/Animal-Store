@@ -8,6 +8,7 @@ namespace AnimalStore.Web.Controllers
     public class SearchController : Controller
     {
         private readonly ISearchRepository _searchRepository;
+        private const int _defaultPageSize = 25;
 
         public SearchController(ISearchRepository searchRepository)
         {
@@ -15,17 +16,30 @@ namespace AnimalStore.Web.Controllers
         }
 
         //
-        // GET: /Search/DogSearchResults
+        // GET: /Search/Dogs
 
         [HttpGet]
-        public ActionResult DogSearch(SearchViewModel viewModel)
+        public ActionResult Dogs(SearchViewModel viewModel)
         {
             PageableResults<Dog> searchResults = null;
 
             if (viewModel.IsNationalSearch)
-                searchResults = _searchRepository.GetDogs(1, 25);
+                searchResults = HandleNationalDogSearch(viewModel);
 
             return View(searchResults);
+        }
+
+        private PageableResults<Dog> HandleNationalDogSearch(SearchViewModel viewModel)
+        {
+            if (!IsSearchingForAnyBreed(viewModel.SelectedBreed))
+                return _searchRepository.GetDogs(1, _defaultPageSize, viewModel.SelectedBreed);
+            return _searchRepository.GetDogs(1, _defaultPageSize);
+        }
+
+        private static bool IsSearchingForAnyBreed(int selectedBreed)
+        {
+            var isSearchingForAnyBreed = selectedBreed == 0;
+            return isSearchingForAnyBreed;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Json;
+using AnimalStore.Web.Facades.Interfaces;
 
 namespace AnimalStore.Web.Facades
 {
