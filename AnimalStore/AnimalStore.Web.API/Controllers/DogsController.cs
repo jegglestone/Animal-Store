@@ -25,28 +25,14 @@ namespace AnimalStore.Web.API.Controllers
             var dogs = _dogsRepository.GetAll()
                 .OrderByDescending(a => a.CreatedOn);
 
-            var totalCount = dogs.Count();
-            var totalPages = (int)Math.Ceiling((double) totalCount / pageSize);
+            var baseUrl = "http://localhost:49425/api/dogs?page=";
 
-            var pagedResults = dogs.Skip((page - 1) * pageSize)
-                .Take(pageSize);
-
-            var nextUrl = page < totalPages - 1 ? "http://localhost:49425/api/dogs?page=" + (page + 1) + "&pageSize=" + pageSize : "";
-            var prevUrl = page > 1 ? "http://localhost:49425/api/dogs?page=" + (page - 1) + "&pageSize=" + pageSize : "";
-
-            return new PageableResults<Dog> { 
-                Data = pagedResults,
-                NextPage = nextUrl,
-                PrevPage = prevUrl,
-                CurrentPageNumber = page,
-                TotalCount = totalCount,
-                TotalPages = totalPages
-            };
+            return GetPageableDogResults(dogs, page, pageSize, baseUrl);
         }
 
         // GET api/Dogs/Breed/
 
-        //TODO: Unit test. Do something with breedName
+        //TODO: Unit test. Do something with breedName. Add url tests
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string breedName = null)
         {
@@ -54,15 +40,21 @@ namespace AnimalStore.Web.API.Controllers
                 .Where(x => x.Breed.Id == breedId)
                 .OrderByDescending(a => a.CreatedOn);
 
+            var baseUrl = "http://localhost:49425/api/Dogs/Breed?breedId=" + breedId + "&page=";
+
+            return GetPageableDogResults(dogs, page, pageSize, baseUrl);
+        }
+
+        private PageableResults<Dog> GetPageableDogResults(IOrderedQueryable<Dog> dogs, int page, int pageSize, string baseUrl)
+        {
             var totalCount = dogs.Count();
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
             var pagedResults = dogs.Skip((page - 1) * pageSize)
                 .Take(pageSize);
 
-            // TODO: page urls
-            var nextUrl = "";
-            var prevUrl = "";
+            var nextUrl = page < totalPages - 1 ? baseUrl + (page + 1) + "&pageSize=" + pageSize : "";
+            var prevUrl = page > 1 ? baseUrl + (page - 1) + "&pageSize=" + pageSize : "";
 
             return new PageableResults<Dog>
             {
@@ -74,6 +66,7 @@ namespace AnimalStore.Web.API.Controllers
                 TotalPages = totalPages
             };
         }
+
 
         // GET api/dogs/5
         [HttpGet]
