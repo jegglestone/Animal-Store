@@ -14,6 +14,6 @@ namespace AnimalStore.Model
         public Species Species { get; set; }
 
         [DataMember(Name = "category")]
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

@@ -44,5 +44,10 @@ namespace AnimalStore.Web.Controllers
 
             return View(_contactInformation);
         }
+
+        public ActionResult Find()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

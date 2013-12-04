@@ -841,12 +841,28 @@ namespace AnimalStore.Data.Configuration
 
 #endregion
 
+#region bulldogs
+
+            context.Dogs.Add(new Dog
+            {
+                AgeInYears = 4,
+                Headline = "A dangerously behaved Bulldog.",
+                FullDescription = "A tough stocky bulldog",
+                Name = "Stocky",
+                isLitter = false,
+                isSold = false,
+                isFemale = true,
+                Breed = bulldog
+            });
+
+#endregion
+
 #region dalmatians
             context.Dogs.Add(new Dog
             {
                 AgeInYears = 4,
-                Headline = "A well behaved dalmatian.",
-                FullDescription = "cocco is a pure toy dlamatian bitch ,she is four half months old,is pedigree with 3 generation certificate.has been fully vet checked and had both vaccinations.flea treated and wormed on pancur.is use to other dogs and household noises.likes to go in the car and loves her walks.is part trainned and doing well on going outside.loves children and likes to be cuddled and played with.mum is a black toy poodle and can be seen .dad is a chocolate toy poodle with clear eye certificat a copy of eye certificate will go with cocco.i was keeping cocco but she isnt getting the attention she should be.so looking for loving caring home where she will get lots of love and attention.please ring for futher information,will only go to the right home thanks",
+                Headline = "A well behaved Dalmatian.",
+                FullDescription = "cocco is a pure toy Dalmatian bitch ,she is four half months old,is pedigree with 3 generation certificate.has been fully vet checked and had both vaccinations.flea treated and wormed on pancur.is use to other dogs and household noises.likes to go in the car and loves her walks.is part trainned and doing well on going outside.loves children and likes to be cuddled and played with.mum is a black toy poodle and can be seen .dad is a chocolate toy poodle with clear eye certificat a copy of eye certificate will go with cocco.i was keeping cocco but she isnt getting the attention she should be.so looking for loving caring home where she will get lots of love and attention.please ring for futher information,will only go to the right home thanks",
                 Name = "Cocco",
                 isLitter = false,
                 isSold = false,

@@ -15,6 +15,7 @@ namespace AnimalStore.Data.DataContext
         public IDbSet<Dog> Dogs { get; set; }
         public IDbSet<Species> Species { get; set; }
         public IDbSet<Breed> Breeds { get; set; }
+        public IDbSet<Category> Categories { get; set; }
 
         public AnimalsDataContext()
             :base(ConnectionStringName) {}

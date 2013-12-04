@@ -48,7 +48,7 @@ namespace AcceptanceTests.Utils
             return ConfigurationManager.AppSettings["SiteUrl"];
         }
 
-        private static string GetApiBaseUrl()
+        public static string GetApiBaseUrl()
         {
             return ConfigurationManager.AppSettings["APIUrl"];
         }

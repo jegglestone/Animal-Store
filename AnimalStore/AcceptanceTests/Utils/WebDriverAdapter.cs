@@ -21,6 +21,12 @@ namespace AcceptanceTests.Utils
             _webDriver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(5));
         }
 
+        public static void StartAPI()
+        {
+            _webDriver.Url = NavigationHelper.GetApiBaseUrl();
+            _webDriver.Navigate();
+        }
+
         public static void Dispose()
         {
             _webDriver.Close();

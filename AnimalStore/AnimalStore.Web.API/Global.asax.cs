@@ -6,6 +6,7 @@ using AnimalStore.Model;
 using AnimalStore.Web.API.App_Start;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Web.API.DependencyResolution;
+using AnimalStore.Web.API.Strategies;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -28,6 +29,10 @@ namespace AnimalStore.Web.API
             unity.RegisterType<IRepository<Dog>, DogsRepository>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IRepository<Breed>, BreedsRepository>(
+                new HierarchicalLifetimeManager());
+            unity.RegisterType<IDogBreedFilterStrategy, DogBreedFilter>(
+                new HierarchicalLifetimeManager());
+            unity.RegisterType<IDogCategoryFilterStrategy, DogCategoryFilter>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IAnimalsDataContext, AnimalsDataContext>(
                 new HierarchicalLifetimeManager());
