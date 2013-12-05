@@ -200,8 +200,8 @@
     <Compile Include="Helpers\ResponseStreamHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\ISearchRepository.cs" />
-    <Compile Include="Repository\HttpSearchRepository.cs" />
+    <Compile Include="Repository\ISearchAPIFacade.cs" />
+    <Compile Include="Repository\SearchAPIFacade.cs" />
     <Compile Include="ViewModels\AppSettingKeys.cs" />
     <Compile Include="ViewModels\ContactInformation.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />

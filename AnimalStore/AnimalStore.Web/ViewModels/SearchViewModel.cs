@@ -10,5 +10,6 @@ namespace AnimalStore.Web.ViewModels
         public string Location { get; set; }
         public bool IsNationalSearch { get; set; }
         public const string AnyBreed = "Breed (any)";
+        public int pageNumber { get; set; }
     }
 }

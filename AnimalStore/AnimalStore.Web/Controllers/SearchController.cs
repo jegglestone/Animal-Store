@@ -8,6 +8,7 @@ namespace AnimalStore.Web.Controllers
     public class SearchController : Controller
     {
         private readonly ISearchAPIFacade _searchRepository;
+        private const int _firstPage = 1;
         private const int _defaultPageSize = 25;
 
         public SearchController(ISearchAPIFacade searchRepository)
@@ -31,9 +32,11 @@ namespace AnimalStore.Web.Controllers
 
         private PageableResults<Dog> HandleNationalDogSearch(SearchViewModel viewModel)
         {
+            if (viewModel.pageNumber == 0) viewModel.pageNumber = _firstPage;
+
             if (!IsSearchingForAnyBreed(viewModel.SelectedBreed))
-                return _searchRepository.GetDogs(1, _defaultPageSize, viewModel.SelectedBreed);
-            return _searchRepository.GetDogs(1, _defaultPageSize);
+                return _searchRepository.GetDogs(viewModel.pageNumber, _defaultPageSize, viewModel.SelectedBreed);
+            return _searchRepository.GetDogs(viewModel.pageNumber, _defaultPageSize);
         }
 
         private static bool IsSearchingForAnyBreed(int selectedBreed)
