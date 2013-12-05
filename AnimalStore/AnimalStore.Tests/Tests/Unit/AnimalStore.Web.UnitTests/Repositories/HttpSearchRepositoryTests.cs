@@ -5,7 +5,7 @@ using System.Net;
 using System.Runtime.Serialization.Json;
 using AnimalStore.Common.Helpers;
 using AnimalStore.Model;
-using AnimalStore.Web.Facades.Interfaces;
+using AnimalStore.Web.Wrappers.Interfaces;
 using AnimalStore.Web.Helpers.Interfaces;
 using AnimalStore.Web.Repository;
 using NUnit.Framework;
@@ -55,7 +55,7 @@ namespace AnimalStore.Web.UnitTests.Repositories
             var stubJsonSerializerWrapper = MockRepository.GenerateMock<IDataContractJsonSerializerWrapper>();
             stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything, Arg<DataContractJsonSerializer>.Is.Anything)).Return(_breedsList);
 
-            var searchRepository = new HttpSearchRepository(stubJsonSerializerWrapper, _exceptionHandler, _configMgr,
+            var searchRepository = new SearchAPIFacade(stubJsonSerializerWrapper, _exceptionHandler, _configMgr,
                 _webAPIRequestWrapper, _responseStreamHelper);
 
             // act
@@ -75,7 +75,7 @@ namespace AnimalStore.Web.UnitTests.Repositories
             var stubJsonSerializerWrapper = MockRepository.GenerateMock<IDataContractJsonSerializerWrapper>();
             stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything, Arg<DataContractJsonSerializer>.Is.Anything)).Return(null);
 
-            var searchRepository = new HttpSearchRepository(stubJsonSerializerWrapper, _exceptionHandler, _configMgr,
+            var searchRepository = new SearchAPIFacade(stubJsonSerializerWrapper, _exceptionHandler, _configMgr,
                 _webAPIRequestWrapper, _responseStreamHelper);
 
             // act
@@ -95,7 +95,7 @@ namespace AnimalStore.Web.UnitTests.Repositories
             stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything, Arg<DataContractJsonSerializer>.Is.Anything)).Return(
                 new PageableResults<Dog>() { Data = _dogsList });
 
-            var searchRepository = new HttpSearchRepository(stubJsonSerializerWrapper, _exceptionHandler, _configMgr,
+            var searchRepository = new SearchAPIFacade(stubJsonSerializerWrapper, _exceptionHandler, _configMgr,
                 _webAPIRequestWrapper, _responseStreamHelper);
 
             // act

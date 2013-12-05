@@ -3,7 +3,7 @@ using AnimalStore.Model;
 
 namespace AnimalStore.Web.Repository
 {
-    public interface ISearchRepository
+    public interface ISearchAPIFacade
     {
         IList<Breed> GetBreeds();
         PageableResults<Dog> GetDogs(int page, int pageSize);

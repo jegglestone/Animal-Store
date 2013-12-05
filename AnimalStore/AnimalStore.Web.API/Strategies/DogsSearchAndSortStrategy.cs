@@ -49,8 +49,8 @@ namespace AnimalStore.Web.API.Strategies
         public override IEnumerable<Dog> Filter(int categoryId, Expression<Func<Dog, DateTime>> orderBy)
         {
             return _dogsRepository.GetAll()
-                                  .Where(x => x.Breed.Category.Id == categoryId)
-                                  .OrderBy(orderBy).AsEnumerable();
+                 .Where(x => x.Breed.Category.Id == categoryId)
+                 .OrderBy(orderBy).AsEnumerable();
         }
     }
 }

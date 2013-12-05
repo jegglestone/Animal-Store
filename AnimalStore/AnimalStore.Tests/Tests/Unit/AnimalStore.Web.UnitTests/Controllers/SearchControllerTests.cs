@@ -24,7 +24,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
         public void DogSearch_NationalSearch_Calls_SearchRepository_GetDogs_When_NationalSearch_For_all_breeds()
         {
             // arrange
-            var searchRepository = MockRepository.GenerateMock<ISearchRepository>();
+            var searchRepository = MockRepository.GenerateMock<ISearchAPIFacade>();
             searchRepository.Stub(x => x.GetDogs(1, 25)).Return(
                 new PageableResults<Dog>()
                     {
@@ -60,7 +60,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                     Data = dogs
                 };
 
-            var searchRepository = MockRepository.GenerateMock<ISearchRepository>();
+            var searchRepository = MockRepository.GenerateMock<ISearchAPIFacade>();
             searchRepository.Stub(x => x.GetDogs(1, 25)).Return(pageableResults);
 
             _searchViewModel.IsNationalSearch = true;
@@ -79,7 +79,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
         public void DogSearch_NationalSearch_Calls_SearchRepository_GetDogsByBreed_When_NationalSearch_For_Specific_Breed()
         {
             // arrange
-            var searchRepository = MockRepository.GenerateMock<ISearchRepository>();
+            var searchRepository = MockRepository.GenerateMock<ISearchAPIFacade>();
             searchRepository.Stub(x => x.GetDogs(1, 25)).Return(
                 new PageableResults<Dog>()
                 {
@@ -115,7 +115,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 Data = dogs
             };
 
-            var searchRepository = MockRepository.GenerateMock<ISearchRepository>();
+            var searchRepository = MockRepository.GenerateMock<ISearchAPIFacade>();
             searchRepository.Stub(x => x.GetDogs(1, 25, 3)).Return(pageableResults);
 
             _searchViewModel.IsNationalSearch = true;

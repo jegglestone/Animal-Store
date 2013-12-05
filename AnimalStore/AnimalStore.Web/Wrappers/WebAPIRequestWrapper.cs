@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
 using AnimalStore.Common.Helpers;
-using AnimalStore.Web.Facades.Interfaces;
+using AnimalStore.Web.Wrappers.Interfaces;
 
-namespace AnimalStore.Web.Facades
+namespace AnimalStore.Web.Wrappers
 {
     public class WebAPIRequestWrapper : IWebAPIRequestWrapper
     {

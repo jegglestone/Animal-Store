@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace AnimalStore.Web.Facades.Interfaces
+namespace AnimalStore.Web.Wrappers.Interfaces
 {
     public interface IWebAPIRequestWrapper
     {

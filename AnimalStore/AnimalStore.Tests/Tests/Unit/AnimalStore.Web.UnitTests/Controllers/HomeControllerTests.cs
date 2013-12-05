@@ -12,7 +12,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
     public class HomeControllerTests
     {
         private SearchViewModel _searchViewModel;
-        private ISearchRepository _searchRepository;
+        private ISearchAPIFacade _searchRepository;
         private HomeController _homeController;
         private ContactInformation _contactInformation;
 
@@ -29,7 +29,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
         public void Init()
         {
             _searchViewModel = MockRepository.GenerateMock<SearchViewModel>();
-            _searchRepository = MockRepository.GenerateMock<ISearchRepository>();
+            _searchRepository = MockRepository.GenerateMock<ISearchAPIFacade>();
             _contactInformation = MockRepository.GenerateMock<ContactInformation>();
 
             _searchRepository.Stub(x => x.GetBreeds()).Return(breedsList);

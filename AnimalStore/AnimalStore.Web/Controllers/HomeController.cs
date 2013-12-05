@@ -10,10 +10,10 @@ namespace AnimalStore.Web.Controllers
     public class HomeController : Controller
     {
         private readonly SearchViewModel _searchViewModel;
-        private readonly ISearchRepository _searchRepository;
+        private readonly ISearchAPIFacade _searchRepository;
         private readonly ContactInformation _contactInformation;
 
-        public HomeController(SearchViewModel searchViewModel, ISearchRepository searchRepository, ContactInformation contactInformation)
+        public HomeController(SearchViewModel searchViewModel, ISearchAPIFacade searchRepository, ContactInformation contactInformation)
         {
             _searchViewModel = searchViewModel;
             _searchRepository = searchRepository;

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Net;
 using AnimalStore.Common.Helpers;
 using AnimalStore.Model;
-using AnimalStore.Web.Facades.Interfaces;
+using AnimalStore.Web.Wrappers.Interfaces;
 using AnimalStore.Web.Factories;
 using AnimalStore.Web.Helpers.Interfaces;
 
 namespace AnimalStore.Web.Repository
 {
-    public class HttpSearchRepository : ISearchRepository
+    public class SearchAPIFacade : ISearchAPIFacade
     {
         private string _API_base_URL {
             get { return _configuration.GetWebAPIUrl(); }
@@ -31,7 +31,7 @@ namespace AnimalStore.Web.Repository
         private readonly IWebAPIRequestWrapper _webAPIRequestWrapper;
         private readonly IResponseStreamHelper _responseStreamHelper;
 
-        public HttpSearchRepository(IDataContractJsonSerializerWrapper dataContractJsonSerializerWrapper,
+        public SearchAPIFacade(IDataContractJsonSerializerWrapper dataContractJsonSerializerWrapper,
             IExceptionHelper exceptionHelper, IConfiguration configuration, IWebAPIRequestWrapper webAPIRequestWrapper, IResponseStreamHelper responseStreamHelper)
         {
             _dataContractJsonSerializerWrapper = dataContractJsonSerializerWrapper;
@@ -59,7 +59,7 @@ namespace AnimalStore.Web.Repository
             }
             catch (Exception e)
             {
-                _exceptionHelper.HandleException("Response from Breeds service resulted in an error in GetBreeds()", e, (typeof (HttpSearchRepository)));
+                _exceptionHelper.HandleException("Response from Breeds service resulted in an error in GetBreeds()", e, (typeof (SearchAPIFacade)));
             }
             finally
             {
@@ -97,7 +97,7 @@ namespace AnimalStore.Web.Repository
             }
             catch (Exception e)
             {
-                _exceptionHelper.HandleException("Response from Dogs service resulted in an error in GetDogs()", e, (typeof(HttpSearchRepository)));
+                _exceptionHelper.HandleException("Response from Dogs service resulted in an error in GetDogs()", e, (typeof(SearchAPIFacade)));
             }
             finally
             {

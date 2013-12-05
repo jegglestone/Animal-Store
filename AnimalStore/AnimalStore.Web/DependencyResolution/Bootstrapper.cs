@@ -4,8 +4,8 @@ using System.Net.Http;
 using System.Web.Mvc;
 using AnimalStore.Common.Helpers;
 using AnimalStore.Model;
-using AnimalStore.Web.Facades;
-using AnimalStore.Web.Facades.Interfaces;
+using AnimalStore.Web.Wrappers;
+using AnimalStore.Web.Wrappers.Interfaces;
 using AnimalStore.Web.Helpers;
 using AnimalStore.Web.Helpers.Interfaces;
 using Microsoft.Practices.Unity;
@@ -42,7 +42,7 @@ namespace AnimalStore.Web.DependencyResolution
         /// <param name="container">IUnityContainer container</param>
         private static void RegisterSimpleTypes(IUnityContainer container)
         {
-            container.RegisterType<ISearchRepository, HttpSearchRepository>(
+            container.RegisterType<ISearchAPIFacade, SearchAPIFacade>(
                 new HierarchicalLifetimeManager());
             container.RegisterType<SearchViewModel>(
                 new HierarchicalLifetimeManager());

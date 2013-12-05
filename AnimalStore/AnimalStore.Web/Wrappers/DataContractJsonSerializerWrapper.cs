@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Json;
-using AnimalStore.Web.Facades.Interfaces;
+using AnimalStore.Web.Wrappers.Interfaces;
 
-namespace AnimalStore.Web.Facades
+namespace AnimalStore.Web.Wrappers
 {
     public class DataContractJsonSerializerWrapper : IDataContractJsonSerializerWrapper
     {

@@ -40,9 +40,7 @@ namespace AnimalStore.Web.API.Controllers
         }
 
         // GET api/Dogs/Breed/
-
-        //TODO: Unit test. Do something with breedName. Add url tests
-        //TODO: What happens if either list is null or empty
+        //TODO: Do something with breedName. Add url tests
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string breedName = null)
         {
@@ -54,8 +52,22 @@ namespace AnimalStore.Web.API.Controllers
 
             var dogsInSameCategory = _dogCategoryFilterStrategy.Filter(categoryId, sortExpression);
 
-            var dogs = matchingDogs.Concat(dogsInSameCategory);
             var baseUrl = "http://localhost:49425/api/Dogs/Breed?breedId=" + breedId + "&page=";
+
+            IEnumerable<Dog> dogs = null;
+
+            if (dogsInSameCategory != null && matchingDogs != null)
+            {
+                dogs = matchingDogs.Concat(dogsInSameCategory);
+            }
+            else if (dogsInSameCategory == null && matchingDogs != null)
+            {
+                dogs = matchingDogs;
+            }
+            else if (dogsInSameCategory != null)
+            {
+                dogs = dogsInSameCategory;
+            }
 
             return GetPageableDogResults(dogs, page, pageSize, baseUrl);
         }

@@ -73,10 +73,10 @@ namespace AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Nationwide search for any kind of god")]
-        public virtual void NationwideSearchForAnyKindOfGod()
+        [NUnit.Framework.DescriptionAttribute("Nationwide search for any kind of dog")]
+        public virtual void NationwideSearchForAnyKindOfDog()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Nationwide search for any kind of god", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Nationwide search for any kind of dog", ((string[])(null)));
 #line 8
 this.ScenarioSetup(scenarioInfo);
 #line 5
@@ -92,11 +92,11 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Nationwide search for specific kind of god")]
+        [NUnit.Framework.DescriptionAttribute("Nationwide search for specific kind of dog")]
         [NUnit.Framework.TestCaseAttribute("Dalmatian", "Bulldog", null)]
-        public virtual void NationwideSearchForSpecificKindOfGod(string breed, string sameCategory, string[] exampleTags)
+        public virtual void NationwideSearchForSpecificKindOfDog(string breed, string sameCategory, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Nationwide search for specific kind of god", exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Nationwide search for specific kind of dog", exampleTags);
 #line 13
 this.ScenarioSetup(scenarioInfo);
 #line 5

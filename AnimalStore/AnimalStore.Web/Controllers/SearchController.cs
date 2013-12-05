@@ -7,10 +7,10 @@ namespace AnimalStore.Web.Controllers
 {
     public class SearchController : Controller
     {
-        private readonly ISearchRepository _searchRepository;
+        private readonly ISearchAPIFacade _searchRepository;
         private const int _defaultPageSize = 25;
 
-        public SearchController(ISearchRepository searchRepository)
+        public SearchController(ISearchAPIFacade searchRepository)
         {
             _searchRepository = searchRepository;
         }

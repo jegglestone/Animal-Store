@@ -1,8 +1,8 @@
 ﻿using System.Configuration;
-using AnimalStore.Web.Facades.Interfaces;
+using AnimalStore.Web.Wrappers.Interfaces;
 using AnimalStore.Web.ViewModels;
 
-namespace AnimalStore.Web.Facades
+namespace AnimalStore.Web.Wrappers
 {
     public class Configuration : IConfiguration
     {
