@@ -328,6 +328,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_TabbedSearchPartial.cshtml" />
     <Content Include="Views\Search\Dogs.cshtml" />
+    <Content Include="Views\Shared\_PagingPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

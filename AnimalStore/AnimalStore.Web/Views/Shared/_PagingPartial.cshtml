@@ -1,0 +1,18 @@
+﻿@using System.Globalization
+@using System.Web.Mvc.Html
+@using AnimalStore.Web.ViewModels
+@model AnimalStore.Model.PageableResults<AnimalStore.Model.Dog>
+
+@if (Model.TotalPages > 1)
+{
+    for (var i = 1; i < Model.TotalPages + 1; i++)
+        {
+            @Html.ActionLink(i.ToString(CultureInfo.InvariantCulture), "Dogs",
+                            new SearchViewModel
+                                {
+                                    SelectedBreed = int.Parse(Request["SelectedBreed"]),
+                                    IsNationalSearch = bool.Parse(Request["IsNationalSearch"]),
+                                    pageNumber = i
+                                })
+        }
+}

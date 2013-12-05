@@ -1,22 +1,24 @@
 ﻿@using System.Globalization
+@using System.Web.Mvc.Html
 @using AnimalStore.Web.ViewModels
 @model AnimalStore.Model.PageableResults<AnimalStore.Model.Dog>
 
 <table>
     <tr>
-        <td style="width: 20%">Sort By</td>
+        <td style="width: 20%">
+            Sort By :
+            @Html.DropDownList("myDropDown",  new SelectList(
+                  new List<Object>{ 
+                       new { value = 0 , text = "Price (Highest)" },
+                       new { value = 1 , text = "Price (Lowest)" },
+                    },
+                  "value",
+                  "text",
+                   1))
+        </td>
         <td>Page @Model.CurrentPageNumber of @Model.TotalPages</td>
         <td>
-            @for (var i = 1; i < Model.TotalPages + 1; i++)
-            {
-                @Html.ActionLink(i.ToString(CultureInfo.InvariantCulture), "Dogs", 
-                    new SearchViewModel
-                    {
-                        SelectedBreed = int.Parse(Request["SelectedBreed"]),
-                        IsNationalSearch = bool.Parse(Request["IsNationalSearch"]),
-                        pageNumber = i
-                    })
-            }
+            @Html.Partial("_PagingPartial")
         </td>
     </tr>
     @foreach (var dog in Model.Data)
@@ -51,5 +53,13 @@
         </tr>
         <tr><td colspan="2">@dog.FullDescription</td></tr>
         <tr><td colspan="3"><hr /></td></tr>
+        <tr>
+            <td></td>        
+            <td>Page @Model.CurrentPageNumber of @Model.TotalPages</td>
+            <td>
+                @Html.Partial("_PagingPartial")
+            </td>
+
+        </tr>
     } 
 </table>
