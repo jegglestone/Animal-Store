@@ -20,14 +20,23 @@ namespace AnimalStore.Web.Controllers
         // GET: /Search/Dogs
 
         [HttpGet]
-        public ActionResult Dogs(SearchViewModel viewModel)
+        public ActionResult Dogs(SearchViewModel viewModel, string sortBy = null)
         {
             PageableResults<Dog> searchResults = null;
-
+            TempData["searchViewModel"] = viewModel;
+            
             if (viewModel.IsNationalSearch)
                 searchResults = HandleNationalDogSearch(viewModel);
 
             return View(searchResults);
+        }
+
+        [HttpGet]
+        public ActionResult Dogs(string sortBy)
+        {
+            Dogs((SearchViewModel)TempData["searchViewModel"], sortBy);
+
+            return null;
         }
 
         private PageableResults<Dog> HandleNationalDogSearch(SearchViewModel viewModel)

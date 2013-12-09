@@ -22,8 +22,8 @@ namespace AnimalStore.Services.UnitTests
         private readonly IUnitOfWork _unitofWork;
 
 
-        public DogsControllerTests ()
-	    {
+        public DogsControllerTests()
+        {
             _dogsRepository = MockRepository.GenerateMock<IRepository<Dog>>();
             _breedsRepository = MockRepository.GenerateMock<IRepository<Breed>>();
             _unitofWork = MockRepository.GenerateMock<IUnitOfWork>();
@@ -32,7 +32,7 @@ namespace AnimalStore.Services.UnitTests
             _dogCategoryFilterStrategy = MockRepository.GenerateMock<IDogCategoryFilterStrategy>();
 
             StubDogsRepository();
-	    }
+        }
 
         private void StubDogsRepository()
         {

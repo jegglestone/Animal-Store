@@ -75,10 +75,20 @@ namespace AnimalStore.Web.Repository
             return GetDogsByResponse(response);
         }
 
-        // TODO: Unit test
-        public PageableResults<Dog> GetDogs(int page, int pageSize, int breedId)
+        // TODO: Unit test - SortBy
+        public PageableResults<Dog> GetDogs(int page, int pageSize, int breedId, string sortBy = null)
         {
-            var response = _webAPIRequestWrapper.GetResponse(string.Format("{0}?page={1}&pageSize={2}&breedid={3}&format=json", _dogs_Url + "/breed", page, pageSize, breedId));
+            string url = string.Format("{0}?page={1}&pageSize={2}&breedid={3}&format=json", _dogs_Url + "/breed", page, pageSize, breedId);
+            if (sortBy != null)
+            {
+                url = string.Format("{0}?page={1}&pageSize={2}&breedid={3}&sortBy={4}&format=json", _dogs_Url + "/breed", page, pageSize, breedId, sortBy);
+            }
+            else
+            {
+                url = string.Format("{0}?page={1}&pageSize={2}&breedid={3}&format=json", _dogs_Url + "/breed", page, pageSize, breedId);
+            }
+
+            var response = _webAPIRequestWrapper.GetResponse(url);
             return GetDogsByResponse(response);
         }
 

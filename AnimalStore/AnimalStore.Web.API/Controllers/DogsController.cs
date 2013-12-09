@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web.Http;
 using System;
 using AnimalStore.Web.API.Strategies;
+using AnimalStore.Common.Constants;
+using AnimalStore.Common.Helpers;
 
 namespace AnimalStore.Web.API.Controllers
 {
@@ -42,7 +44,7 @@ namespace AnimalStore.Web.API.Controllers
         // GET api/Dogs/Breed/
         //TODO: Do something with breedName. Add url tests
         [HttpGet]
-        public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string breedName = null)
+        public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string breedName = null, string sortBy = null)
         {
             Expression<Func<Dog, DateTime>> sortExpression = dog => dog.CreatedOn;
 
@@ -70,6 +72,16 @@ namespace AnimalStore.Web.API.Controllers
             }
 
             return GetPageableDogResults(dogs, page, pageSize, baseUrl);
+        }
+
+        private Expression<Func<IQueryable<Dog>, IOrderedQueryable<Object>>> GetSortExpression(string sortBy = null)
+        {
+            if (sortBy == SearchSortOptions.PRICE_HIGHEST || sortBy == SearchSortOptions.PRICE_LOWEST)
+            {
+                return q => q.OrderBy(dog => dog.Price);
+            }
+
+            return q => q.OrderBy(dog => dog.CreatedOn);
         }
 
         private static PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl)

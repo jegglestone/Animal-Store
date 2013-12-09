@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @using System.Web.Mvc.Html
 @using AnimalStore.Web.ViewModels
+@using AnimalStore.Common.Constants
 @model AnimalStore.Model.PageableResults<AnimalStore.Model.Dog>
 
 <table>
@@ -9,8 +10,8 @@
             Sort By :
             @Html.DropDownList("myDropDown",  new SelectList(
                   new List<Object>{ 
-                       new { value = 0 , text = "Price (Highest)" },
-                       new { value = 1 , text = "Price (Lowest)" },
+                       new { value = SearchSortOptions.PRICE_HIGHEST, text = SearchSortOptions.PRICE_HIGHEST },
+                       new { value = SearchSortOptions.PRICE_LOWEST , text = SearchSortOptions.PRICE_LOWEST },
                     },
                   "value",
                   "text",
