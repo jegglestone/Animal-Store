@@ -91,10 +91,10 @@ namespace AnimalStore.Services.UnitTests
             var bloodhoundHuntingDog = new Dog() { Name = "Tip", Breed = bloodhound };
             var sameCategoryDogs = new ObservableCollection<Dog>() { bloodhoundHuntingDog };
 
-            _dogBreedFilterStrategy.Expect(action => action.Filter(3, dog => dog.CreatedOn))
+            _dogBreedFilterStrategy.Expect(action => action.Filter(3, "Default Date"))
                 .IgnoreArguments().Return(null);
 
-            _dogCategoryFilterStrategy.Expect(action => action.Filter(3, dog => dog.CreatedOn))
+            _dogCategoryFilterStrategy.Expect(action => action.Filter(3, "Default Date"))
                 .IgnoreArguments().Return(sameCategoryDogs);
 
             _breedsRepository.Stub(x => x.GetById(Arg<int>.Is.Anything))
@@ -123,11 +123,11 @@ namespace AnimalStore.Services.UnitTests
             var matchingDogs = new ObservableCollection<Dog>() { beagleHuntingDog };
 
             var dogBreedFilterStrategy = MockRepository.GenerateMock<IDogBreedFilterStrategy>();
-            dogBreedFilterStrategy.Expect(action => action.Filter(3, dog => dog.CreatedOn))
+            dogBreedFilterStrategy.Expect(action => action.Filter(3, "Default Date"))
                 .IgnoreArguments().Return(matchingDogs);
 
             var dogCategoryFilterStrategy = MockRepository.GenerateMock<IDogCategoryFilterStrategy>();
-            dogCategoryFilterStrategy.Expect(action => action.Filter(3, dog => dog.CreatedOn))
+            dogCategoryFilterStrategy.Expect(action => action.Filter(3, "Default Date"))
                 .IgnoreArguments().Return(null);
 
             _breedsRepository.Stub(x => x.GetById(Arg<int>.Is.Anything))
@@ -158,11 +158,11 @@ namespace AnimalStore.Services.UnitTests
             var sameCategoryDogs = new ObservableCollection<Dog>() { bloodhoundHuntingDog };
 
             var dogBreedFilterStrategy = MockRepository.GenerateMock<IDogBreedFilterStrategy>();
-            dogBreedFilterStrategy.Expect(action => action.Filter(3, dog => dog.CreatedOn))
+            dogBreedFilterStrategy.Expect(action => action.Filter(3, "Default Date"))
                 .IgnoreArguments().Return(matchedDogs);
 
             var dogCategoryFilterStrategy = MockRepository.GenerateMock<IDogCategoryFilterStrategy>();
-            dogCategoryFilterStrategy.Expect(action => action.Filter(3, dog => dog.CreatedOn))
+            dogCategoryFilterStrategy.Expect(action => action.Filter(3, "Default Date"))
                 .IgnoreArguments().Return(sameCategoryDogs);
 
             var breedRepository = MockRepository.GenerateMock<IRepository<Breed>>();

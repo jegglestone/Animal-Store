@@ -46,13 +46,11 @@ namespace AnimalStore.Web.API.Controllers
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string breedName = null, string sortBy = null)
         {
-            Expression<Func<Dog, DateTime>> sortExpression = dog => dog.CreatedOn;
+            IEnumerable<Dog> matchingDogs = _dogBreedFilterStrategy.Filter(breedId, sortBy);
 
-            var matchingDogs = _dogBreedFilterStrategy.Filter(breedId, sortExpression);
+            int categoryId = _breedsRepository.GetById(breedId).Category.Id;
 
-            var categoryId = _breedsRepository.GetById(breedId).Category.Id;
-
-            var dogsInSameCategory = _dogCategoryFilterStrategy.Filter(categoryId, sortExpression);
+            IEnumerable<Dog> dogsInSameCategory = _dogCategoryFilterStrategy.Filter(categoryId, sortBy);
 
             var baseUrl = "http://localhost:49425/api/Dogs/Breed?breedId=" + breedId + "&page=";
 
@@ -72,16 +70,6 @@ namespace AnimalStore.Web.API.Controllers
             }
 
             return GetPageableDogResults(dogs, page, pageSize, baseUrl);
-        }
-
-        private Expression<Func<IQueryable<Dog>, IOrderedQueryable<Object>>> GetSortExpression(string sortBy = null)
-        {
-            if (sortBy == SearchSortOptions.PRICE_HIGHEST || sortBy == SearchSortOptions.PRICE_LOWEST)
-            {
-                return q => q.OrderBy(dog => dog.Price);
-            }
-
-            return q => q.OrderBy(dog => dog.CreatedOn);
         }
 
         private static PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl)
