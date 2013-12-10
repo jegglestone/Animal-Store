@@ -78,15 +78,9 @@ namespace AnimalStore.Web.Repository
         // TODO: Unit test - SortBy
         public PageableResults<Dog> GetDogs(int page, int pageSize, int breedId, string sortBy = null)
         {
-            string url = string.Format("{0}?page={1}&pageSize={2}&breedid={3}&format=json", _dogs_Url + "/breed", page, pageSize, breedId);
-            if (sortBy != null)
-            {
-                url = string.Format("{0}?page={1}&pageSize={2}&breedid={3}&sortBy={4}&format=json", _dogs_Url + "/breed", page, pageSize, breedId, sortBy);
-            }
-            else
-            {
-                url = string.Format("{0}?page={1}&pageSize={2}&breedid={3}&format=json", _dogs_Url + "/breed", page, pageSize, breedId);
-            }
+            var url = sortBy != null 
+                             ? string.Format("{0}?page={1}&pageSize={2}&breedid={3}&sortBy={4}&format=json", _dogs_Url + "/breed", page, pageSize, breedId, sortBy) 
+                             : string.Format("{0}?page={1}&pageSize={2}&breedid={3}&format=json", _dogs_Url + "/breed", page, pageSize, breedId);
 
             var response = _webAPIRequestWrapper.GetResponse(url);
             return GetDogsByResponse(response);

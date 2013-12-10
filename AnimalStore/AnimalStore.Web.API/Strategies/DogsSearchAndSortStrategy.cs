@@ -8,11 +8,16 @@ using AnimalStore.Common.Constants;
 
 namespace AnimalStore.Web.API.Strategies
 {
-    public abstract class DogsSearchAndSortStrategy
+    public interface IDogFilterStrategy
+    {
+        IEnumerable<Dog> Filter(int breedId, string sortBy = null);
+    }
+
+    public abstract class DogsSearchAndSortStrategy :IDogFilterStrategy
     {
         protected IRepository<Dog> _dogsRepository;
 
-        public static class SortExpressions
+        private static class SortExpressions
         {
             public static Expression<Func<Dog, int>> PRICE_ORDER
             {
@@ -25,9 +30,10 @@ namespace AnimalStore.Web.API.Strategies
             }
         }
 
-        public IOrderedQueryable<Dog> SortDogs(IQueryable<Dog> dogs, string sortBy = null)
+        protected static IEnumerable<Dog> SortDogs(IQueryable<Dog> dogs, string sortBy = null)
         {
             IOrderedQueryable<Dog> orderedDogs;
+
             switch (sortBy)
             {
                 case SearchSortOptions.PRICE_HIGHEST:
@@ -47,10 +53,8 @@ namespace AnimalStore.Web.API.Strategies
         public abstract IEnumerable<Dog> Filter(int id, string sortBy = null);
     }
 
-
-    public interface IDogBreedFilterStrategy
+    public interface IDogBreedFilterStrategy : IDogFilterStrategy
     {
-        IEnumerable<Dog> Filter(int breedId, string sortBy = null);
     }
 
     public sealed class DogBreedFilter : DogsSearchAndSortStrategy, IDogBreedFilterStrategy
@@ -67,13 +71,12 @@ namespace AnimalStore.Web.API.Strategies
 
             var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
 
-            return dogsOrdered.AsEnumerable();
+            return dogsOrdered;
         }
     }
 
-    public interface IDogCategoryFilterStrategy
+    public interface IDogCategoryFilterStrategy : IDogFilterStrategy
     {
-        IEnumerable<Dog> Filter(int categoryId, string sortBy);
     }
 
     public sealed class DogCategoryFilter : DogsSearchAndSortStrategy, IDogCategoryFilterStrategy
@@ -90,7 +93,7 @@ namespace AnimalStore.Web.API.Strategies
 
             var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
 
-            return dogsOrdered.AsEnumerable();
+            return dogsOrdered;
         }
     }
 }

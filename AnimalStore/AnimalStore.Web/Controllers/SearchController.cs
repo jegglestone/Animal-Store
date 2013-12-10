@@ -28,15 +28,14 @@ namespace AnimalStore.Web.Controllers
             if (viewModel.IsNationalSearch)
                 searchResults = HandleNationalDogSearch(viewModel);
 
-            return View(searchResults);
+            return View("Dogs", searchResults);
         }
 
         [HttpGet]
-        public ActionResult Dogs(string sortBy)
+        public ActionResult DogsSorted(string sortBy)
         {
-            Dogs((SearchViewModel)TempData["searchViewModel"], sortBy);
-
-            return null;
+            var searchViewModel = TempData["searchViewModel"];
+            return Dogs((SearchViewModel)searchViewModel, sortBy);
         }
 
         private PageableResults<Dog> HandleNationalDogSearch(SearchViewModel viewModel)
