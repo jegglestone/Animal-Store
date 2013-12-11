@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Runtime.Serialization.Json;
 using AnimalStore.Common.Helpers;
 using AnimalStore.Model;
@@ -14,7 +13,7 @@ using Rhino.Mocks;
 namespace AnimalStore.Web.UnitTests.Repositories
 {
     [TestFixture]
-    public class HttpSearchRepositoryTests
+    public class SearchAPIFacadeTests
     {
         IExceptionHelper _exceptionHandler;
         IWebAPIRequestWrapper _webAPIRequestWrapper;
@@ -33,7 +32,7 @@ namespace AnimalStore.Web.UnitTests.Repositories
         private readonly List<Dog> _dogsList = new List<Dog>()
         {
             new Dog() { Id = 1, AgeInYears = 2, isSold = false},
-            new Dog() { Id = 2, AgeInYears =5, isSold = false},
+            new Dog() { Id = 2, AgeInYears = 5, isSold = false},
         };
 
         [TestFixtureSetUp]
@@ -50,8 +49,6 @@ namespace AnimalStore.Web.UnitTests.Repositories
         public void GetBreeds_Returns_List_Breeds()
         {
             // arrange         
-            _responseStreamHelper.Stub(x => x.GetResponseStream(Arg<WebResponse>.Is.Anything)).Return(null);
-
             var stubJsonSerializerWrapper = MockRepository.GenerateMock<IDataContractJsonSerializerWrapper>();
             stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything, Arg<DataContractJsonSerializer>.Is.Anything)).Return(_breedsList);
 
@@ -70,8 +67,6 @@ namespace AnimalStore.Web.UnitTests.Repositories
         public void GetBreeds_Returns_EmptyList_When_No_Data_Returned()
         {
             // arrange         
-            _responseStreamHelper.Stub(x => x.GetResponseStream(Arg<WebResponse>.Is.Anything)).Return(null);
-
             var stubJsonSerializerWrapper = MockRepository.GenerateMock<IDataContractJsonSerializerWrapper>();
             stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything, Arg<DataContractJsonSerializer>.Is.Anything)).Return(null);
 
@@ -89,8 +84,6 @@ namespace AnimalStore.Web.UnitTests.Repositories
         public void GetDogs_Returns_PageableResult_Dogs()
         {
             // arrange         
-            _responseStreamHelper.Stub(x => x.GetResponseStream(Arg<WebResponse>.Is.Anything)).Return(null);
-
             var stubJsonSerializerWrapper = MockRepository.GenerateMock<IDataContractJsonSerializerWrapper>();
             stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything, Arg<DataContractJsonSerializer>.Is.Anything)).Return(
                 new PageableResults<Dog>() { Data = _dogsList });
@@ -100,6 +93,24 @@ namespace AnimalStore.Web.UnitTests.Repositories
 
             // act
             var result = searchRepository.GetDogs(1, 20);
+
+            // assert
+            Assert.That(result.Data.Count() == _dogsList.Count);
+        }
+
+        [Test]
+        public void GetDogs_With_Breed_Returns_PageableResult_Dogs()
+        {
+            // arrange         
+            var stubJsonSerializerWrapper = MockRepository.GenerateMock<IDataContractJsonSerializerWrapper>();
+            stubJsonSerializerWrapper.Stub(x => x.ReadObject(Arg<Stream>.Is.Anything, Arg<DataContractJsonSerializer>.Is.Anything)).Return(
+                new PageableResults<Dog>() { Data = _dogsList });
+
+            var searchRepository = new SearchAPIFacade(stubJsonSerializerWrapper, _exceptionHandler, _configMgr,
+                _webAPIRequestWrapper, _responseStreamHelper);
+
+            // act
+            var result = searchRepository.GetDogs(1, 20, 4);
 
             // assert
             Assert.That(result.Data.Count() == _dogsList.Count);

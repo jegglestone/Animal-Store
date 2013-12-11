@@ -185,6 +185,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="ViewModels\QuerystringKeys.cs" />
+    <Compile Include="ViewModels\SessionStoreKeys.cs" />
     <Compile Include="Wrappers\Configuration.cs" />
     <Compile Include="Wrappers\DataContractJsonSerializerWrapper.cs" />
     <Compile Include="Wrappers\Interfaces\IConfiguration.cs" />

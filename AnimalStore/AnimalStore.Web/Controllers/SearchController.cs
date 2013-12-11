@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Routing;
 using AnimalStore.Model;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;
@@ -20,31 +21,48 @@ namespace AnimalStore.Web.Controllers
         // GET: /Search/Dogs
 
         [HttpGet]
-        public ActionResult Dogs(SearchViewModel viewModel, string sortBy = null)
+        public ActionResult Dogs(SearchViewModel searchViewModel)
         {
             PageableResults<Dog> searchResults = null;
-            TempData["searchViewModel"] = viewModel;
-            
-            if (viewModel.IsNationalSearch)
-                searchResults = HandleNationalDogSearch(viewModel);
+
+            if (searchViewModel.IsNationalSearch)
+                searchResults = HandleNationalDogSearch(searchViewModel);
+
+            Session[SessionStoreKeys.SearchViewModel] = searchViewModel;
 
             return View("Dogs", searchResults);
         }
 
         [HttpGet]
-        public ActionResult DogsSorted(string sortBy)
+        public ActionResult DogsSorted()
         {
-            var searchViewModel = TempData["searchViewModel"];
-            return Dogs((SearchViewModel)searchViewModel, sortBy);
+            var searchViewModel = (SearchViewModel)Session[SessionStoreKeys.SearchViewModel];
+
+            searchViewModel.SortBy = Request.QueryString["sortBy"];
+
+            return RedirectToAction("Dogs", BuildRouteValuesForDogsSearchViewModel(searchViewModel));
+        }
+
+        private RouteValueDictionary BuildRouteValuesForDogsSearchViewModel(SearchViewModel searchViewModel)
+        {
+            return new RouteValueDictionary
+                {
+                    { "searchViewModel.SelectedBreed", searchViewModel.SelectedBreed },
+                    { "searchViewModel.BreedsSelectList", searchViewModel.BreedsSelectList },
+                    { "searchViewModel.Location", searchViewModel.Location },
+                    { "searchViewModel.SortBy", searchViewModel.SortBy },
+                    { "searchViewModel.PageNumber", searchViewModel.PageNumber },
+                    { "searchViewModel.IsNationalSearch", searchViewModel.IsNationalSearch },
+                };
         }
 
         private PageableResults<Dog> HandleNationalDogSearch(SearchViewModel viewModel)
         {
-            if (viewModel.pageNumber == 0) viewModel.pageNumber = _firstPage;
+            if (viewModel.PageNumber == 0) viewModel.PageNumber = _firstPage;
 
-            if (!IsSearchingForAnyBreed(viewModel.SelectedBreed))
-                return _searchRepository.GetDogs(viewModel.pageNumber, _defaultPageSize, viewModel.SelectedBreed);
-            return _searchRepository.GetDogs(viewModel.pageNumber, _defaultPageSize);
+            return !IsSearchingForAnyBreed(viewModel.SelectedBreed) 
+                ? _searchRepository.GetDogs(viewModel.PageNumber, _defaultPageSize, viewModel.SelectedBreed, viewModel.SortBy) 
+                : _searchRepository.GetDogs(viewModel.PageNumber, _defaultPageSize);
         }
 
         private static bool IsSearchingForAnyBreed(int selectedBreed)

@@ -7,9 +7,9 @@
     <tr>
         <td style="width: 30%">
             <div class="float-left">Sort By :</div>
-            @using (Html.BeginForm("DogsSorted", "Search", FormMethod.Get, new { sortBy = Request.QueryString["sortOrder"] }))
+            @using (Html.BeginForm("DogsSorted", "Search", FormMethod.Get))
             {
-                @Html.DropDownList("sortOrder", new SelectList(
+                @Html.DropDownList("sortBy", new SelectList(
                                                      new List<Object>
                                                          {
                                                              new {value = SearchSortOptions.DEFAULT, text = SearchSortOptions.DEFAULT},

@@ -4,14 +4,37 @@
 @model AnimalStore.Model.PageableResults<AnimalStore.Model.Dog>
 
 @if (Model.TotalPages > 1)
-{   
+{
+    int selectedBreed;
+    bool isNationalSearch;
+
+    if (Request[QuerystringKeys.SelectedBreed] != null)
+    {
+        selectedBreed = int.Parse(Request.QueryString[QuerystringKeys.SelectedBreed]);
+        Session[SessionStoreKeys.SelectedBreed] = selectedBreed;
+    }
+    else
+    {
+        selectedBreed = int.Parse(Session[SessionStoreKeys.SelectedBreed].ToString());
+    }
+
+    if (Request[QuerystringKeys.IsNationalSearch] != null)
+    {
+        isNationalSearch = bool.Parse(Request.QueryString[QuerystringKeys.IsNationalSearch]);
+        Session[SessionStoreKeys.IsNationalSearch] = isNationalSearch;
+    }
+    else
+    {
+        isNationalSearch = bool.Parse(Session[SessionStoreKeys.IsNationalSearch].ToString());
+    }
+
     for (var i = 1; i < Model.TotalPages + 1; i++)
-        {
-            @Html.ActionLink(i.ToString(CultureInfo.InvariantCulture), "Dogs", "Search", new SearchViewModel
-                {
-                    SelectedBreed = int.Parse(Request["SelectedBreed"]),
-                    IsNationalSearch = bool.Parse(Request["IsNationalSearch"]),
-                    pageNumber = i
-                })
-        }
+    {
+         @Html.ActionLink(i.ToString(CultureInfo.InvariantCulture), actionName: "Dogs", controllerName: "Search", routeValues: new SearchViewModel
+         {
+                SelectedBreed = selectedBreed,
+                IsNationalSearch = isNationalSearch,
+                PageNumber = i
+         }, htmlAttributes: null)
+    }
 }

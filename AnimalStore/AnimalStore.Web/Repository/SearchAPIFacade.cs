@@ -75,7 +75,6 @@ namespace AnimalStore.Web.Repository
             return GetDogsByResponse(response);
         }
 
-        // TODO: Unit test - SortBy
         public PageableResults<Dog> GetDogs(int page, int pageSize, int breedId, string sortBy = null)
         {
             var url = sortBy != null 
