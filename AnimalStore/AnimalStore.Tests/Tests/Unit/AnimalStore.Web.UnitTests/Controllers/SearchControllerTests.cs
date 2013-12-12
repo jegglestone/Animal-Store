@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.SessionState;
 using AnimalStore.Model;
 using AnimalStore.Web.Controllers;
 using AnimalStore.Web.Repository;
@@ -38,7 +42,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
             _searchViewModel.IsNationalSearch = true;
             _searchViewModel.SelectedBreed = 0;
 
-            var SearchController = new SearchController(searchRepository);
+            var SearchController = new SearchController(searchRepository, FakeHttpContext());
 
             // act
             SearchController.Dogs(_searchViewModel);
@@ -66,7 +70,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
             _searchViewModel.IsNationalSearch = true;
             _searchViewModel.SelectedBreed = 0;
 
-            var SearchController = new SearchController(searchRepository);
+            var SearchController = new SearchController(searchRepository, FakeHttpContext());
 
             // act
             var result = (ViewResult)SearchController.Dogs(_searchViewModel);
@@ -93,7 +97,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
             _searchViewModel.IsNationalSearch = true;
             _searchViewModel.SelectedBreed = 4;
 
-            var SearchController = new SearchController(searchRepository);
+            var SearchController = new SearchController(searchRepository, FakeHttpContext());
 
             // act
             SearchController.Dogs(_searchViewModel);
@@ -103,7 +107,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
         }
 
         [Test]
-        public void DogSearch_NationalSearch_Return_View_With_Full_List_Of_Dogs_Found_When_NationalSearch_For_Specific_Breed()
+        public void DogSearch_NationalSearch_Return_View_With_Full_List_Of_Dogs_Found_And_Maintains_Session_State_When_NationalSearch_For_Specific_Breed()
         {
             var dogs = new List<Dog>()
                     {
@@ -121,13 +125,39 @@ namespace AnimalStore.Web.UnitTests.Controllers
             _searchViewModel.IsNationalSearch = true;
             _searchViewModel.SelectedBreed = 3;
 
-            var SearchController = new SearchController(searchRepository);
+            var session = FakeHttpContext();
+            var SearchController = new SearchController(searchRepository, session);
 
             // act
             var result = (ViewResult)SearchController.Dogs(_searchViewModel);
+            var searchViewModelFromSession = (SearchViewModel) session["searchViewModel"];
 
             // assert
             Assert.That(result.Model, Is.EqualTo(pageableResults));
+            Assert.That(searchViewModelFromSession.SelectedBreed, Is.EqualTo(3));
+            Assert.That(searchViewModelFromSession.PageNumber, Is.EqualTo(1));
+        }
+
+        private static HttpSessionState FakeHttpContext()
+        {
+            var httpRequest = new HttpRequest("", "http://localhost/", "");
+            var stringWriter = new StringWriter();
+            var httpResponce = new HttpResponse(stringWriter);
+            var httpContext = new HttpContext(httpRequest, httpResponce);
+
+            var sessionContainer = new HttpSessionStateContainer("id", new SessionStateItemCollection(),
+                                                    new HttpStaticObjectsCollection(), 10, true,
+                                                    HttpCookieMode.AutoDetect,
+                                                    SessionStateMode.InProc, false);
+
+            httpContext.Items["AspSession"] = typeof(HttpSessionState).GetConstructor(
+                                        BindingFlags.NonPublic | BindingFlags.Instance,
+                                        null, CallingConventions.Standard,
+                                        new[] { typeof(HttpSessionStateContainer) },
+                                        null)
+                                .Invoke(new object[] { sessionContainer });
+
+            return httpContext.Session;
         }
     }
 }

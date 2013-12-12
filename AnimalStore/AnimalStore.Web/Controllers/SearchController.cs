@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.SessionState;
 using AnimalStore.Model;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;
@@ -11,10 +12,12 @@ namespace AnimalStore.Web.Controllers
         private readonly ISearchAPIFacade _searchRepository;
         private const int _firstPage = 1;
         private const int _defaultPageSize = 25;
+        private readonly HttpSessionState _session;
 
-        public SearchController(ISearchAPIFacade searchRepository)
+        public SearchController(ISearchAPIFacade searchRepository, HttpSessionState session)
         {
             _searchRepository = searchRepository;
+            _session = session;
         }
 
         //
@@ -28,7 +31,7 @@ namespace AnimalStore.Web.Controllers
             if (searchViewModel.IsNationalSearch)
                 searchResults = HandleNationalDogSearch(searchViewModel);
 
-            Session[SessionStoreKeys.SearchViewModel] = searchViewModel;
+            _session[SessionStoreKeys.SearchViewModel] = searchViewModel;
 
             return View("Dogs", searchResults);
         }
@@ -36,7 +39,7 @@ namespace AnimalStore.Web.Controllers
         [HttpGet]
         public ActionResult DogsSorted()
         {
-            var searchViewModel = (SearchViewModel)Session[SessionStoreKeys.SearchViewModel];
+            var searchViewModel = (SearchViewModel)_session[SessionStoreKeys.SearchViewModel];
 
             searchViewModel.SortBy = Request.QueryString["sortBy"];
 

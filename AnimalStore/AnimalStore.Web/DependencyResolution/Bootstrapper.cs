@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.SessionState;
 using AnimalStore.Common.Helpers;
 using AnimalStore.Model;
 using AnimalStore.Web.Wrappers;
@@ -81,6 +83,10 @@ namespace AnimalStore.Web.DependencyResolution
                                      new List<Breed>()
                     )
                 );
+
+            container.RegisterType<HttpSessionState>(
+                new InjectionFactory(x =>
+                    HttpContext.Current.Session));
         }
     }
 }
