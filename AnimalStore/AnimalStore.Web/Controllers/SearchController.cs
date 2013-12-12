@@ -22,7 +22,6 @@ namespace AnimalStore.Web.Controllers
 
         //
         // GET: /Search/Dogs
-
         [HttpGet]
         public ActionResult Dogs(SearchViewModel searchViewModel)
         {
@@ -36,6 +35,8 @@ namespace AnimalStore.Web.Controllers
             return View("Dogs", searchResults);
         }
 
+        //
+        // GET: /Search/DogsSorted
         [HttpGet]
         public ActionResult DogsSorted()
         {
@@ -46,7 +47,7 @@ namespace AnimalStore.Web.Controllers
             return RedirectToAction("Dogs", BuildRouteValuesForDogsSearchViewModel(searchViewModel));
         }
 
-        private RouteValueDictionary BuildRouteValuesForDogsSearchViewModel(SearchViewModel searchViewModel)
+        private static RouteValueDictionary BuildRouteValuesForDogsSearchViewModel(SearchViewModel searchViewModel)
         {
             return new RouteValueDictionary
                 {
