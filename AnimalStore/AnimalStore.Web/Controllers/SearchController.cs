@@ -40,7 +40,6 @@ namespace AnimalStore.Web.Controllers
 
         //
         // GET: /Search/DogsSorted
-
         [HttpGet]
         public ActionResult DogsSorted()
         {
@@ -57,12 +56,12 @@ namespace AnimalStore.Web.Controllers
         {
             return new RouteValueDictionary
                 {
-                    { "searchViewModel.SelectedBreed", searchViewModel.SelectedBreed },
-                    { "searchViewModel.BreedsSelectList", searchViewModel.BreedsSelectList },
-                    { "searchViewModel.Location", searchViewModel.Location },
-                    { "searchViewModel.SortBy", searchViewModel.SortBy },
-                    { "searchViewModel.PageNumber", searchViewModel.PageNumber },
-                    { "searchViewModel.IsNationalSearch", searchViewModel.IsNationalSearch },
+                    { "SelectedBreed", searchViewModel.SelectedBreed },
+                    { "BreedsSelectList", searchViewModel.BreedsSelectList },
+                    { "Location", searchViewModel.Location },
+                    { "SortBy", searchViewModel.SortBy },
+                    { "PageNumber", searchViewModel.PageNumber },
+                    { "IsNationalSearch", searchViewModel.IsNationalSearch },
                 };
         }
 

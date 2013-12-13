@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @using System.Web.Mvc.Html
+@using AnimalStore.Common.Constants
 @using AnimalStore.Web.ViewModels
 @model AnimalStore.Model.PageableResults<AnimalStore.Model.Dog>
 
@@ -7,6 +8,7 @@
 {
     int selectedBreed;
     bool isNationalSearch;
+    string sortBy;
 
     if (Request[QuerystringKeys.SelectedBreed] != null)
     {
@@ -15,7 +17,9 @@
     }
     else
     {
-        selectedBreed = int.Parse(Session[SessionStoreKeys.SelectedBreed].ToString());
+        selectedBreed = Session[SessionStoreKeys.SelectedBreed] != null
+                            ? int.Parse(Session[SessionStoreKeys.SelectedBreed].ToString())
+                            : 1;
     }
 
     if (Request[QuerystringKeys.IsNationalSearch] != null)
@@ -25,16 +29,29 @@
     }
     else
     {
-        isNationalSearch = bool.Parse(Session[SessionStoreKeys.IsNationalSearch].ToString());
+        isNationalSearch = Session == null || bool.Parse(Session[SessionStoreKeys.IsNationalSearch].ToString());
+    }
+    
+    if (Request[QuerystringKeys.SortBy] != null)
+    {
+        sortBy = Request.QueryString[QuerystringKeys.SortBy];
+        Session[SessionStoreKeys.SortBy] = sortBy;
+    }
+    else
+    {
+        sortBy = Session[SessionStoreKeys.SortBy] != null 
+            ? Session[SessionStoreKeys.SortBy].ToString() 
+            : SearchSortOptions.DEFAULT;
     }
 
     for (var i = 1; i < Model.TotalPages + 1; i++)
     {
-         @Html.ActionLink(i.ToString(CultureInfo.InvariantCulture), actionName: "Dogs", controllerName: "Search", routeValues: new SearchViewModel
+         @Html.ActionLink(i.ToString(CultureInfo.InvariantCulture), "Dogs", "Search", new SearchViewModel
          {
                 SelectedBreed = selectedBreed,
                 IsNationalSearch = isNationalSearch,
-                PageNumber = i
+                PageNumber = i,
+                SortBy = sortBy,
          }, htmlAttributes: null)
     }
 }
