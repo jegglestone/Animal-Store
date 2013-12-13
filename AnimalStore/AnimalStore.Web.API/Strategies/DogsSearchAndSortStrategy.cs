@@ -71,7 +71,7 @@ namespace AnimalStore.Web.API.Strategies
 
             var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
 
-            return dogsOrdered.AsEnumerable();
+            return dogsOrdered;
         }
     }
 
@@ -86,6 +86,7 @@ namespace AnimalStore.Web.API.Strategies
             _dogsRepository = dogsRepository;
         }
 
+        // TODO: BUG: This should not be retrieving dogs that are same breed as the dog we have just searched for!
         public override IEnumerable<Dog> Filter(int categoryId, string sortBy = null)
         {
             var dogsUnsorted = _dogsRepository.GetAll()
@@ -93,7 +94,7 @@ namespace AnimalStore.Web.API.Strategies
 
             var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
 
-            return dogsOrdered.AsEnumerable();
+            return dogsOrdered;
         }
     }
 }

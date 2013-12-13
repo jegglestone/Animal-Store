@@ -8,7 +8,6 @@ using AnimalStore.Model;
 using AnimalStore.Web.Controllers;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;
-using AnimalStore.Web.Wrappers;
 using AnimalStore.Web.Wrappers.Interfaces;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -206,7 +205,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
             }
 
             [Test]
-            public void Dogs_Sorted_Correctly_Retrieves_SearchViewModel_From_Session_And_Adds_SortBy()
+            public void Dogs_Sorted_Correctly_Retrieves_SearchViewModel_From_Session_And_Adds_SortBy_And_Resets_PageNumber_To_One()
             {
                 const string sortBy = "Date(CreatedOn)";
 
@@ -229,7 +228,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 // assert
                 var searchViewModelFromSession = (SearchViewModel)session["searchViewModel"];
                 Assert.That(searchViewModelFromSession.SelectedBreed, Is.EqualTo(_selectedBreed));
-                Assert.That(searchViewModelFromSession.PageNumber, Is.EqualTo(_pageNumber));
+                Assert.That(searchViewModelFromSession.PageNumber, Is.EqualTo(1));
                 Assert.That(searchViewModelFromSession.IsNationalSearch, Is.EqualTo(_isNationalSearch));
                 Assert.That(searchViewModelFromSession.SortBy, Is.EqualTo(sortBy));
             }

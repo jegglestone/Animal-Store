@@ -48,6 +48,7 @@ namespace AnimalStore.Web.Controllers
             if (searchViewModel == null) return RedirectToAction("Index", "Home");
 
             searchViewModel.SortBy = _httpRequestWrapper.GetQueryStringValueByKey(QuerystringKeys.SortBy);
+            searchViewModel.PageNumber = 1;
 
             return RedirectToAction("Dogs", BuildRouteValuesForDogsSearchViewModel(searchViewModel));
         }
