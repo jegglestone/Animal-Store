@@ -189,6 +189,8 @@
     <Compile Include="ViewModels\SessionStoreKeys.cs" />
     <Compile Include="Wrappers\Configuration.cs" />
     <Compile Include="Wrappers\DataContractJsonSerializerWrapper.cs" />
+    <Compile Include="Wrappers\CustomHttpRequestWrapper.cs" />
+    <Compile Include="Wrappers\Interfaces\ICustomHttpRequestWrapper.cs" />
     <Compile Include="Wrappers\Interfaces\IConfiguration.cs" />
     <Compile Include="Wrappers\Interfaces\IDataContractJsonSerializerWrapper.cs" />
     <Compile Include="Wrappers\Interfaces\IWebAPIRequestWrapper.cs" />

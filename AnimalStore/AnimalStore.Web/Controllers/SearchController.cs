@@ -4,6 +4,7 @@ using System.Web.SessionState;
 using AnimalStore.Model;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;
+using AnimalStore.Web.Wrappers.Interfaces;
 
 namespace AnimalStore.Web.Controllers
 {
@@ -13,11 +14,13 @@ namespace AnimalStore.Web.Controllers
         private const int _firstPage = 1;
         private const int _defaultPageSize = 25;
         private readonly HttpSessionState _session;
+        private readonly ICustomHttpRequestWrapper _httpRequestWrapper;
 
-        public SearchController(ISearchAPIFacade searchRepository, HttpSessionState session)
+        public SearchController(ISearchAPIFacade searchRepository, HttpSessionState session, ICustomHttpRequestWrapper httpRequestWrapper)
         {
             _searchRepository = searchRepository;
             _session = session;
+            _httpRequestWrapper = httpRequestWrapper;
         }
 
         //
@@ -37,12 +40,15 @@ namespace AnimalStore.Web.Controllers
 
         //
         // GET: /Search/DogsSorted
+
         [HttpGet]
         public ActionResult DogsSorted()
         {
             var searchViewModel = (SearchViewModel)_session[SessionStoreKeys.SearchViewModel];
 
-            searchViewModel.SortBy = Request.QueryString["sortBy"];
+            if (searchViewModel == null) return RedirectToAction("Index", "Home");
+
+            searchViewModel.SortBy = _httpRequestWrapper.GetQueryStringValueByKey(QuerystringKeys.SortBy);
 
             return RedirectToAction("Dogs", BuildRouteValuesForDogsSearchViewModel(searchViewModel));
         }

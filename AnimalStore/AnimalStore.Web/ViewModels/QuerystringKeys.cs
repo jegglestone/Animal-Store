@@ -4,5 +4,6 @@
     {
         public const string SelectedBreed = "SelectedBreed";
         public const string IsNationalSearch = "IsNationalSearch";
+        public const string SortBy = "sortBy";
     }
 }

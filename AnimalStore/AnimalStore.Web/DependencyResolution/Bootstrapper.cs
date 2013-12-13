@@ -45,23 +45,25 @@ namespace AnimalStore.Web.DependencyResolution
         private static void RegisterSimpleTypes(IUnityContainer container)
         {
             container.RegisterType<ISearchAPIFacade, SearchAPIFacade>(
-                new HierarchicalLifetimeManager());
+                new TransientLifetimeManager());
             container.RegisterType<SearchViewModel>(
-                new HierarchicalLifetimeManager());
+                new TransientLifetimeManager());
             container.RegisterType<LogManager>(
-                new HierarchicalLifetimeManager());
+                new TransientLifetimeManager());
             container.RegisterType<IExceptionHelper, ExceptionHelper>(
-                new HierarchicalLifetimeManager());
+                new TransientLifetimeManager());
             container.RegisterType<IConfiguration, Configuration>(
-                new HierarchicalLifetimeManager());
+                new TransientLifetimeManager());
             container.RegisterType<IDataContractJsonSerializerWrapper, DataContractJsonSerializerWrapper>(
                 new TransientLifetimeManager());
             container.RegisterType<ContactInformation>(
-                new HierarchicalLifetimeManager());
+                new TransientLifetimeManager());
             container.RegisterType<IWebAPIRequestWrapper, WebAPIRequestWrapper>(
                 new TransientLifetimeManager());
             container.RegisterType<IResponseStreamHelper, ResponseStreamHelper>(
                 new TransientLifetimeManager());
+            container.RegisterType<ICustomHttpRequestWrapper, CustomHttpRequestWrapper>(
+                );
         }
 
         /// <summary>
@@ -75,18 +77,20 @@ namespace AnimalStore.Web.DependencyResolution
             container.RegisterType<HttpClient>(
                 new InjectionFactory(x =>
                                      new HttpClient()
-                    )
-                );
+                    ));
 
             container.RegisterType<IList<Breed>, List<Breed>>(
                 new InjectionFactory(x =>
                                      new List<Breed>()
-                    )
-                );
+                    ));
 
             container.RegisterType<HttpSessionState>(
                 new InjectionFactory(x =>
                     HttpContext.Current.Session));
+
+            container.RegisterType<HttpRequest>(
+                new InjectionFactory(x =>
+                    HttpContext.Current.Request));
         }
     }
 }

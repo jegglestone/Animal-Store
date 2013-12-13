@@ -71,7 +71,7 @@ namespace AnimalStore.Web.API.Strategies
 
             var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
 
-            return dogsOrdered;
+            return dogsOrdered.AsEnumerable();
         }
     }
 
@@ -93,7 +93,7 @@ namespace AnimalStore.Web.API.Strategies
 
             var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
 
-            return dogsOrdered;
+            return dogsOrdered.AsEnumerable();
         }
     }
 }
