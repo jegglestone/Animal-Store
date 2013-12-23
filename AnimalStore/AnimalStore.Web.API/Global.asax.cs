@@ -6,6 +6,7 @@ using AnimalStore.Model;
 using AnimalStore.Web.API.App_Start;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Web.API.DependencyResolution;
+using AnimalStore.Web.API.Helpers;
 using AnimalStore.Web.API.Strategies;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
@@ -35,6 +36,8 @@ namespace AnimalStore.Web.API
             unity.RegisterType<IDogCategoryFilterStrategy, DogCategoryFilter>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IAnimalsDataContext, AnimalsDataContext>(
+                new HierarchicalLifetimeManager());
+            unity.RegisterType<IDogSearchHelper, DogSearchHelper>(
                 new HierarchicalLifetimeManager());
             config.DependencyResolver = new IoCContainer(unity);
         }

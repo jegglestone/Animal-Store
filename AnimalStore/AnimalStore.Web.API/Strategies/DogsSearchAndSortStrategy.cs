@@ -10,7 +10,7 @@ namespace AnimalStore.Web.API.Strategies
 {
     public interface IDogFilterStrategy
     {
-        IEnumerable<Dog> Filter(int breedId, string sortBy = null);
+        IQueryable<Dog> Filter(int breedId);
     }
 
     public abstract class DogsSearchAndSortStrategy :IDogFilterStrategy
@@ -50,7 +50,7 @@ namespace AnimalStore.Web.API.Strategies
             return orderedDogs;
         }
 
-        public abstract IEnumerable<Dog> Filter(int id, string sortBy = null);
+        public abstract IQueryable<Dog> Filter(int id);
     }
 
     public interface IDogBreedFilterStrategy : IDogFilterStrategy
@@ -64,20 +64,19 @@ namespace AnimalStore.Web.API.Strategies
             _dogsRepository = dogsRepository;
         }
 
-        public override IEnumerable<Dog> Filter(int breedId, string sortBy = null)
+        public override IQueryable<Dog> Filter(int breedId)
         {
             var dogsUnsorted = _dogsRepository.GetAll()
                 .Where(x => x.Breed.Id == breedId);
 
-            var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
-
-            return dogsOrdered;
+            return dogsUnsorted;
         }
     }
 
     public interface IDogCategoryFilterStrategy : IDogFilterStrategy
     {
-        IEnumerable<Dog> Filter(int categoryId, int breedId, string sortBy = null);
+        IQueryable<Dog> Filter(int categoryId, int breedId);
+        IEnumerable<Dog> Sort(IQueryable<Dog> dogsUnsorted, string sortBy);
     }
 
     public sealed class DogCategoryFilter : DogsSearchAndSortStrategy, IDogCategoryFilterStrategy
@@ -87,21 +86,24 @@ namespace AnimalStore.Web.API.Strategies
             _dogsRepository = dogsRepository;
         }
 
-        public override IEnumerable<Dog> Filter(int categoryId, string sortBy = null)
+        public override IQueryable<Dog> Filter(int categoryId)
         {
             var dogsUnsorted = _dogsRepository.GetAll()
                  .Where(x => x.Breed.Category.Id == categoryId);
 
-            var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
-
-            return dogsOrdered;
+            return dogsUnsorted;
         }
 
-        public IEnumerable<Dog> Filter(int categoryId, int breedToExcludeId, string sortBy = null)
+        public IQueryable<Dog> Filter(int categoryId, int breedToExcludeId)
         {
             var dogsUnsorted = _dogsRepository.GetAll()
                  .Where(x => x.Breed.Category.Id == categoryId && x.Breed.Id != breedToExcludeId);
 
+            return dogsUnsorted;
+        }
+
+        public IEnumerable<Dog> Sort(IQueryable<Dog> dogsUnsorted, string sortBy)
+        {
             var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
 
             return dogsOrdered;

@@ -395,7 +395,7 @@ namespace AnimalStore.Data.Configuration
             context.Breeds.Add(smoothFoxTerrier);
             context.Breeds.Add(softCoatedWheatenTerrier);
             context.Breeds.Add(sloughi);
-            context.Breeds.Add(spanishWaterDog);;
+            context.Breeds.Add(spanishWaterDog);
             context.Breeds.Add(spinoneItaliano);
             context.Breeds.Add(stBernard);
             context.Breeds.Add(staffordshireBullTerrier);
@@ -852,6 +852,7 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 isFemale = true,
+                Price = 400,
                 Breed = bulldog
             });
 
@@ -867,6 +868,7 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 isFemale = true,
+                Price = 300,
                 Breed = dalmatian
             });
             context.Dogs.Add(new Dog
@@ -877,6 +879,7 @@ namespace AnimalStore.Data.Configuration
                 Name = null,
                 isLitter = true,
                 isSold = false,
+                Price = 550,
                 Breed = dalmatian
             });
             context.Dogs.Add(new Dog
@@ -898,6 +901,7 @@ namespace AnimalStore.Data.Configuration
                 Name = null,
                 isLitter = true,
                 isSold = false,
+                Price = 800,
                 Breed = dalmatian
             });
             context.Dogs.Add(new Dog

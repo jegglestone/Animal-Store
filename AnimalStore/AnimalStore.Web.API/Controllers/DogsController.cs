@@ -5,25 +5,21 @@ using AnimalStore.Data.Repositories;
 using System.Linq;
 using System.Web.Http;
 using System;
-using AnimalStore.Web.API.Strategies;
+using AnimalStore.Web.API.Helpers;
 
 namespace AnimalStore.Web.API.Controllers
 {
     public class DogsController : ApiController, IPageableResults<Dog>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IDogBreedFilterStrategy _dogBreedFilterStrategy;
-        private readonly IDogCategoryFilterStrategy _dogCategoryFilterStrategy;
         private readonly IRepository<Dog> _dogsRepository;
-        private readonly IRepository<Breed> _breedsRepository;
+        private readonly IDogSearchHelper _dogSearchHelper;
 
-        public DogsController(IRepository<Dog> dogsRepository, IRepository<Breed> breedsRepository, IUnitOfWork unitOfWork, IDogBreedFilterStrategy dogBreedFilterStrategy, IDogCategoryFilterStrategy dogCategoryFilterStrategy)
+        public DogsController(IRepository<Dog> dogsRepository, IUnitOfWork unitOfWork, IDogSearchHelper dogSearchHelper)
         {
             _unitOfWork = unitOfWork;
-            _dogBreedFilterStrategy = dogBreedFilterStrategy;
             _dogsRepository = dogsRepository;
-            _breedsRepository = breedsRepository;
-            _dogCategoryFilterStrategy = dogCategoryFilterStrategy;
+            _dogSearchHelper = dogSearchHelper;
         }
 
         // GET api/dogs
@@ -43,30 +39,11 @@ namespace AnimalStore.Web.API.Controllers
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string breedName = null, string sortBy = null)
         {
-            IEnumerable<Dog> matchingDogs = _dogBreedFilterStrategy.Filter(breedId, sortBy);
-
-            int categoryId = _breedsRepository.GetById(breedId).Category.Id;
-
-            IEnumerable<Dog> dogsInSameCategory = _dogCategoryFilterStrategy.Filter(categoryId, breedId, sortBy);
+            var sortedDogsList = _dogSearchHelper.GetSortedDogsList(breedId, sortBy);
 
             var baseUrl = "http://localhost:49425/api/Dogs/Breed?breedId=" + breedId + "&page=";
 
-            IEnumerable<Dog> dogs = null;
-
-            if (dogsInSameCategory != null && matchingDogs != null)
-            {
-                dogs = matchingDogs.Concat(dogsInSameCategory);
-            }
-            else if (dogsInSameCategory == null && matchingDogs != null)
-            {
-                dogs = matchingDogs;
-            }
-            else if (dogsInSameCategory != null)
-            {
-                dogs = dogsInSameCategory;
-            }
-
-            return GetPageableDogResults(dogs, page, pageSize, baseUrl);
+            return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl);
         }
 
         private static PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl)
