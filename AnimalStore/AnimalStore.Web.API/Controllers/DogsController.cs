@@ -47,7 +47,7 @@ namespace AnimalStore.Web.API.Controllers
 
             int categoryId = _breedsRepository.GetById(breedId).Category.Id;
 
-            IEnumerable<Dog> dogsInSameCategory = _dogCategoryFilterStrategy.Filter(categoryId, sortBy);
+            IEnumerable<Dog> dogsInSameCategory = _dogCategoryFilterStrategy.Filter(categoryId, breedId, sortBy);
 
             var baseUrl = "http://localhost:49425/api/Dogs/Breed?breedId=" + breedId + "&page=";
 

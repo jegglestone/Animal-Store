@@ -77,6 +77,7 @@ namespace AnimalStore.Web.API.Strategies
 
     public interface IDogCategoryFilterStrategy : IDogFilterStrategy
     {
+        IEnumerable<Dog> Filter(int categoryId, int breedId, string sortBy = null);
     }
 
     public sealed class DogCategoryFilter : DogsSearchAndSortStrategy, IDogCategoryFilterStrategy
@@ -86,11 +87,20 @@ namespace AnimalStore.Web.API.Strategies
             _dogsRepository = dogsRepository;
         }
 
-        // TODO: BUG: This should not be retrieving dogs that are same breed as the dog we have just searched for!
         public override IEnumerable<Dog> Filter(int categoryId, string sortBy = null)
         {
             var dogsUnsorted = _dogsRepository.GetAll()
                  .Where(x => x.Breed.Category.Id == categoryId);
+
+            var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
+
+            return dogsOrdered;
+        }
+
+        public IEnumerable<Dog> Filter(int categoryId, int breedToExcludeId, string sortBy = null)
+        {
+            var dogsUnsorted = _dogsRepository.GetAll()
+                 .Where(x => x.Breed.Category.Id == categoryId && x.Breed.Id != breedToExcludeId);
 
             var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
 
