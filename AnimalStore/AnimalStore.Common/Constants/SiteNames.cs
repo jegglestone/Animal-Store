@@ -5,7 +5,7 @@
     /// </summary>
     public static class SiteNames
     {
-        public const string DOGSTORE_SITE_NAME = "Dogs Pal";
+        public const string DOGSTORE_SITE_NAME = "Dog's Pal";
 
         // www.dogspal.co.uk
 
@@ -15,5 +15,8 @@
         // DogConnected
         // dogsactivity
         // dogspal
+        // dogs4life
+        // dogsforlife
+        // dogforlife
     }
 }
