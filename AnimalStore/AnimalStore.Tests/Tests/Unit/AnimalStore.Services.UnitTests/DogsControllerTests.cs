@@ -19,8 +19,7 @@ namespace AnimalStore.Services.UnitTests
         private readonly IRepository<Dog> _dogsRepository;
         private readonly IDogSearchHelper _dogSearchhelper;
         private readonly IUnitOfWork _unitofWork;
-        private DogsController _dogsController;
-
+        private readonly DogsController _dogsController;
 
         public DogsControllerTests()
         {
@@ -87,7 +86,7 @@ namespace AnimalStore.Services.UnitTests
             //act
             var result = dogsController.GetPaged(3, 1, 20, "Beagel", SearchSortOptions.PRICE_HIGHEST);
 
-            Assert.That(result.Data, Is.Empty);
+            Assert.That(result, Is.Null);
         }
 
 

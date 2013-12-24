@@ -35,7 +35,7 @@ namespace AnimalStore.Web.API.Controllers
         }
 
         // GET api/Dogs/Breed/
-        //TODO: Test 
+        //TODO: Instead of returning null when empty - return 404 Not found
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string breedName = null, string sortBy = null)
         {
@@ -43,7 +43,7 @@ namespace AnimalStore.Web.API.Controllers
 
             var baseUrl = "http://localhost:49425/api/Dogs/Breed?breedId=" + breedId + "&page=";
 
-            return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName);
+            return sortedDogsList != null ? GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName) : null;
         }
 
         // one failing test - this needs to handle nulls
