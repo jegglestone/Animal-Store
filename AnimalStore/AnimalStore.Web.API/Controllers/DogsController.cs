@@ -46,6 +46,7 @@ namespace AnimalStore.Web.API.Controllers
             return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName);
         }
 
+        // one failing test - this needs to handle nulls
         private static PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl, string breedName = null)
         {
             IEnumerable<Dog> enumerable = dogs as IList<Dog> ?? dogs.ToList();

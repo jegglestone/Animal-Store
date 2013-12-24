@@ -54,6 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\AnimalStore.Common\AnimalStore.Common.csproj">
+      <Project>{02EBD9DE-36E8-4BDE-BFFE-180B7D7CD64A}</Project>
+      <Name>AnimalStore.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\AnimalStore.Data\AnimalStore.Data.csproj">
       <Project>{c42a037c-0680-4d08-9bc0-1f6c1bdbe87f}</Project>
       <Name>AnimalStore.Data</Name>

@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using AnimalStore.Common.Constants;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Data.Repositories;
-using AnimalStore.Web.API.Strategies;
+using AnimalStore.Web.API.Helpers;
 using NUnit.Framework;
 using Rhino.Mocks;
 using System;
@@ -16,20 +17,18 @@ namespace AnimalStore.Services.UnitTests
     public class DogsControllerTests
     {
         private readonly IRepository<Dog> _dogsRepository;
-        private readonly IRepository<Breed> _breedsRepository;
-        private readonly IDogBreedFilterStrategy _dogBreedFilterStrategy;
-        private readonly IDogCategoryFilterStrategy _dogCategoryFilterStrategy;
+        private readonly IDogSearchHelper _dogSearchhelper;
         private readonly IUnitOfWork _unitofWork;
+        private DogsController _dogsController;
 
 
         public DogsControllerTests()
         {
             _dogsRepository = MockRepository.GenerateMock<IRepository<Dog>>();
-            _breedsRepository = MockRepository.GenerateMock<IRepository<Breed>>();
             _unitofWork = MockRepository.GenerateMock<IUnitOfWork>();
+            _dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
 
-            _dogBreedFilterStrategy = MockRepository.GenerateMock<IDogBreedFilterStrategy>();
-            _dogCategoryFilterStrategy = MockRepository.GenerateMock<IDogCategoryFilterStrategy>();
+            _dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
 
             StubDogsRepository();
         }
@@ -77,255 +76,165 @@ namespace AnimalStore.Services.UnitTests
             _dogsRepository.Stub(x => x.GetAll()).Return(animalsListWith30Items.AsQueryable());
         }
 
-        //[Test]
-        //public void Get_Paged_With_Breed_ReturnsDogs_In_BreedCategory_When_There_Are_None_Matching_Exact_Breed()
-        //{
-        //    // arrange
-        //    var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };
-        //    var beagle = new Breed() { Name = "Beagel", Category = category, Id = 3, Species = null };
-        //    var bloodhound = new Breed() { Name = "Bloodhound", Category = category, Id = 3, Species = null };
-        //    var breeds = new List<Breed>() { beagle, bloodhound }.AsEnumerable();
+        [Test]
+        public void Get_Paged_With_Breed_ReturnsDogs_In_BreedCategory_When_There_Are_None_Matching_Exact_Breed()
+        {
+            // arrange
+            _dogSearchhelper.Stub(x => x.GetSortedDogsList(3, SearchSortOptions.PRICE_HIGHEST)).Return(null);
 
-        //    category.Breeds = (ICollection<Breed>)breeds;
+            var dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
 
-        //    var bloodhoundHuntingDog = new Dog() { Name = "Tip", Breed = bloodhound };
-        //    var sameCategoryDogs = new ObservableCollection<Dog>() { bloodhoundHuntingDog };
+            //act
+            var result = dogsController.GetPaged(3, 1, 20, "Beagel", SearchSortOptions.PRICE_HIGHEST);
 
-        //    _dogBreedFilterStrategy.Expect(action => action.Filter(3))
-        //        .IgnoreArguments().Return(null);
+            Assert.That(result.Data, Is.Empty);
+        }
 
-        //    _dogCategoryFilterStrategy.Expect(action => action.Filter(3))
-        //        .IgnoreArguments().Return(sameCategoryDogs);
 
-        //    _breedsRepository.Stub(x => x.GetById(Arg<int>.Is.Anything))
-        //                     .Return(beagle);
+        [Test]
+        public void Get_Paged_With_Breed_Returns_MatchingDogs_And_Dogs_In_The_Same_Category_Beneath()
+        {
+            // arrange
+            var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };
+            var beagle = new Breed() { Name = "Beagel", Category = category, Id = 3, Species = null };
+            var bloodhound = new Breed() { Name = "Bloodhound", Category = category, Id = 3, Species = null };
 
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
+            var beagleHuntingDog = new Dog() { Name = "Shep", Breed = beagle };
+            var bloodhoundHuntingDog = new Dog() { Name = "Tip", Breed = bloodhound };
+            var matchedDogs = new ObservableCollection<Dog>() { beagleHuntingDog, bloodhoundHuntingDog };
 
-        //    //act
-        //    var result = dogsController.GetPaged(3, 1, 20);
+            _dogSearchhelper.Stub(x => x.GetSortedDogsList(3, SearchSortOptions.PRICE_HIGHEST)).Return(matchedDogs);
 
-        //    Assert.That(result.Data.Contains(bloodhoundHuntingDog));
-        //}
+            var dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
 
-        //[Test]
-        //public void Get_Paged_With_Breed_Works_When_There_Are_No_Other_Dogs_In_The_Same_Category()
-        //{
-        //    // arrange
-        //    var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };
-        //    var beagle = new Breed() { Name = "Beagel", Category = category, Id = 3, Species = null };
-        //    var bloodhound = new Breed() { Name = "Bloodhound", Category = category, Id = 3, Species = null };
+            //act
+            var result = dogsController.GetPaged(3, 1, 20, "Beagel", SearchSortOptions.PRICE_HIGHEST);
 
-        //    var breeds = new List<Breed>() { beagle, bloodhound }.AsEnumerable();
-        //    category.Breeds = (ICollection<Breed>)breeds;
+            Assert.That(result.Data.First(), Is.EqualTo(beagleHuntingDog));
+            Assert.That(result.Data.Contains(bloodhoundHuntingDog));
+        }
 
-        //    var beagleHuntingDog = new Dog() { Name = "Shep", Breed = beagle };
-        //    var matchingDogs = new ObservableCollection<Dog>() { beagleHuntingDog };
+        [Test]
+        public void Get_CallRepositoryGetAllMethod()
+        {
+            // act
+            _dogsController.GetPaged();
 
-        //    var dogBreedFilterStrategy = MockRepository.GenerateMock<IDogBreedFilterStrategy>();
-        //    dogBreedFilterStrategy.Expect(action => action.Filter(3))
-        //        .IgnoreArguments().Return(matchingDogs);
+            // assert
+            _dogsRepository.AssertWasCalled(X => X.GetAll());
+        }
 
-        //    var dogCategoryFilterStrategy = MockRepository.GenerateMock<IDogCategoryFilterStrategy>();
-        //    dogCategoryFilterStrategy.Expect(action => action.Filter(3))
-        //        .IgnoreArguments().Return(null);
+        [Test]
+        public void Get_ReturnsUpTo25Items_WithNoPageLimitSpecified()
+        {
+            // act
+            var result = _dogsController.GetPaged();
 
-        //    _breedsRepository.Stub(x => x.GetById(Arg<int>.Is.Anything))
-        //                     .Return(beagle);
+            // assert
+            Assert.That(result.Data.Count(), Is.EqualTo(25));
+        }
 
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, dogBreedFilterStrategy, dogCategoryFilterStrategy);
+        [Test]
+        public void Get_ReturnsSpecifiedNumberOfResultSetWhenPaging()
+        {
+            // act
+            var result = _dogsController.GetPaged(1, 10);
 
-        //    //act
-        //    var result = dogsController.GetPaged(3, 1, 20);
+            // assert
+            Assert.That(result.Data.Count(), Is.EqualTo(10));
+        }
 
-        //    Assert.That(result.Data.First(), Is.EqualTo(beagleHuntingDog));
-        //}
+        [TestCase(1, 10, "Flossie", Description = "we expect the first page to have this dog")]
+        [TestCase(2, 10, "Rex", Description = "we expect the second page to have this dog")]
+        [TestCase(3, 10, "Tip", Description = "we expect the third page to have this dog")]
+        public void get_ReturnsTheSpecifiedPage(int pageNumber, int pageSize, string expectedDogName)
+        {
+            // act
+            var result = _dogsController.GetPaged(pageNumber, pageSize);
 
-        //[Test]
-        //public void Get_Paged_With_Breed_Returns_MatchingDogs_And_Dogs_In_The_Same_Category_Beneath()
-        //{
-        //    // arrange
-        //    var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };
-        //    var beagle = new Breed() { Name = "Beagel", Category = category, Id = 3, Species = null };
-        //    var bloodhound = new Breed() { Name = "Bloodhound", Category = category, Id = 3, Species = null };
-        //    var breeds = new List<Breed>() { beagle, bloodhound }.AsEnumerable();
+            // assert
+            Assert.That(result.Data.ToList().First(dog => dog.Name == expectedDogName), Is.Not.Null);
+        }
 
-        //    category.Breeds = (ICollection<Breed>)breeds;
+        [Test]
+        public void GetPaged_ReturnsTheCorrectTotalCount()
+        {
+            // act
+            var result = _dogsController.GetPaged(1, 10);
 
-        //    var beagleHuntingDog = new Dog() { Name = "Shep", Breed = beagle };
-        //    var matchedDogs = new ObservableCollection<Dog>() { beagleHuntingDog };
-        //    var bloodhoundHuntingDog = new Dog() { Name = "Tip", Breed = bloodhound };
-        //    var sameCategoryDogs = new ObservableCollection<Dog>() { bloodhoundHuntingDog };
+            // assert
+            Assert.That(result.TotalCount, Is.EqualTo(30));
+        }
 
-        //    var dogBreedFilterStrategy = MockRepository.GenerateMock<IDogBreedFilterStrategy>();
-        //    dogBreedFilterStrategy.Expect(action => action.Filter(3))
-        //        .IgnoreArguments().Return(matchedDogs);
+        [Test]
+        public void GetPaged_ReturnsTheCorrectPageCount()
+        {
+            // act
+            var result = _dogsController.GetPaged(1, 9);
 
-        //    var dogCategoryFilterStrategy = MockRepository.GenerateMock<IDogCategoryFilterStrategy>();
-        //    dogCategoryFilterStrategy.Expect(action => action.Filter(3))
-        //        .IgnoreArguments().Return(sameCategoryDogs);
+            // assert
+            Assert.That(result.TotalPages, Is.EqualTo(4));
+        }
 
-        //    var breedRepository = MockRepository.GenerateMock<IRepository<Breed>>();
-        //    breedRepository.Stub(x => x.GetById(Arg<int>.Is.Anything))
-        //                     .Return(beagle);
+        [Test]
+        public void GetPaged_ReturnsTheCurrentPage()
+        {
+            // arrange
+            var dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
+            const int page = 2;
 
-        //    var dogsController = new DogsController(_dogsRepository, breedRepository, _unitofWork, dogBreedFilterStrategy, dogCategoryFilterStrategy);
+            // act
+            var result = dogsController.GetPaged(page, 4);
 
-        //    //act
-        //    var result = dogsController.GetPaged(3, 1, 20);
+            // assert
+            Assert.That(result.CurrentPageNumber, Is.EqualTo(page));
+        }
 
-        //    Assert.That(result.Data.First(), Is.EqualTo(beagleHuntingDog));
-        //    Assert.That(result.Data.Contains(bloodhoundHuntingDog));
-        //}
+        [Test]
+        public void GetPaged_ReturnsTheCorrectNextPageUrl()
+        {
+            // act
+            var result = _dogsController.GetPaged(1, 10);
 
-        //[Test]
-        //public void Get_CallRepositoryGetAllMethod()
-        //{
-        //    // arrange
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
+            // assert
+            Assert.That(result.NextPage.Contains("?page=2"));
+        }
 
-        //    // act
-        //    dogsController.GetPaged();
+        [Test]
+        public void GetPaged_ReturnsTheCorrectPrevPageUrl()
+        {
+            // act
+            var result = _dogsController.GetPaged(2, 10);
 
-        //    // assert
-        //    _dogsRepository.AssertWasCalled(X => X.GetAll());
-        //}
+            // assert
+            Assert.That(result.PrevPage.Contains("?page=1"));
+        }
 
-        //[Test]
-        //public void Get_ReturnsUpTo25Items_WithNoPageLimitSpecified()
-        //{
-        //    // arrange
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
+        [Test]
+        public void GetPaged_ReturnsItemsOrderedByDateCreatedDescending()
+        {
+            // act
+            var result = _dogsController.GetPaged(0, 20);
 
-        //    // act
-        //    var result = dogsController.GetPaged();
+            // assert
+            Assert.That(result.Data.ToList()[0].CreatedOn, Is.EqualTo(DateTime.Today));
+        }
 
-        //    // assert
-        //    Assert.That(result.Data.Count(), Is.EqualTo(25));
-        //}
+        [Test]
+        public void Get_ById_ReturnsSingleItemWithMatchingIdAndCallsRepositoryGetById()
+        {
+            // arrange
+            var dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
 
-        //[Test]
-        //public void Get_ReturnsSpecifiedNumberOfResultSetWhenPaging()
-        //{
-        //    // arrange
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
+            _dogsRepository.Stub(x => x.GetById(4)).Return(new Dog() { Name = "dog", Id = 4 });
 
-        //    // act
-        //    var result = dogsController.GetPaged(1, 10);
+            // act
+            var result = dogsController.Get(4);
 
-        //    // assert
-        //    Assert.That(result.Data.Count(), Is.EqualTo(10));
-        //}
-
-        //[TestCase(1, 10, "Flossie", Description = "we expect the first page to have this dog")]
-        //[TestCase(2, 10, "Rex", Description = "we expect the second page to have this dog")]
-        //[TestCase(3, 10, "Tip", Description = "we expect the third page to have this dog")]
-        //public void get_ReturnsTheSpecifiedPage(int pageNumber, int pageSize, string expectedDogName)
-        //{
-        //    // arrange
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
-
-        //    // act
-        //    var result = dogsController.GetPaged(pageNumber, pageSize);
-
-        //    // assert
-        //    Assert.That(result.Data.ToList().First(dog => dog.Name == expectedDogName), Is.Not.Null);
-        //}
-
-        //[Test]
-        //public void Get_ReturnsTheCorrectTotalCount()
-        //{
-        //    // arrange
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
-
-        //    // act
-        //    var result = dogsController.GetPaged(1, 10);
-
-        //    // assert
-        //    Assert.That(result.TotalCount, Is.EqualTo(30));
-        //}
-
-        //[Test]
-        //public void Get_ReturnsTheCorrectPageCount()
-        //{
-        //    // arrange
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
-
-        //    // act
-        //    var result = dogsController.GetPaged(1, 9);
-
-        //    // assert
-        //    Assert.That(result.TotalPages, Is.EqualTo(4));
-        //}
-
-        //[Test]
-        //public void Get_ReturnsTheCurrentPage()
-        //{
-        //    // arrange
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
-        //    const int page = 2;
-
-        //    // act
-        //    var result = dogsController.GetPaged(page, 4);
-
-        //    // assert
-        //    Assert.That(result.CurrentPageNumber, Is.EqualTo(page));
-        //}
-
-        //[Test]
-        //public void Get_ReturnsTheCorrectNextPageUrl()
-        //{
-        //    // arrange
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
-
-        //    // act
-        //    var result = dogsController.GetPaged(1, 10);
-
-        //    // assert
-        //    Assert.That(result.NextPage.Contains("?page=2"));
-        //}
-
-        //[Test]
-        //public void Get_ReturnsTheCorrectPrevPageUrl()
-        //{
-        //    // arrange
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
-
-        //    // act
-        //    var result = dogsController.GetPaged(2, 10);
-
-        //    // assert
-        //    Assert.That(result.PrevPage.Contains("?page=1"));
-        //}
-
-        //[Test]
-        //public void Get_ReturnsItemsOrderedByDateCreatedDescending()
-        //{
-        //    // arrange
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
-
-        //    // act
-        //    var result = dogsController.GetPaged(0, 20);
-
-        //    // assert
-        //    Assert.That(result.Data.ToList()[0].CreatedOn, Is.EqualTo(DateTime.Today));
-        //}
-
-        //[Test]
-        //public void Get_ById_ReturnsSingleItemWithMatchingIdAndCallsRepositoryGetById()
-        //{
-        //    // arrange
-        //    var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogBreedFilterStrategy, _dogCategoryFilterStrategy);
-
-        //    _dogsRepository.Stub(x => x.GetById(4)).Return(new Dog() { Name = "dog", Id = 4 });
-
-        //    // act
-        //    var result = dogsController.Get(4);
-
-        //    // assert
-        //    _dogsRepository.AssertWasCalled(x => x.GetById(4));
-        //    Assert.That(result.Id, Is.EqualTo(4));
-        //}
+            // assert
+            _dogsRepository.AssertWasCalled(x => x.GetById(4));
+            Assert.That(result.Id, Is.EqualTo(4));
+        }
 
         [TearDown]
         public void TearDown()
