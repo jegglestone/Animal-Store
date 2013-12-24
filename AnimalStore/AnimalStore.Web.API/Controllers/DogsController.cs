@@ -35,7 +35,7 @@ namespace AnimalStore.Web.API.Controllers
         }
 
         // GET api/Dogs/Breed/
-        //TODO: Do something with breedName. Add url tests
+        //TODO: Test 
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string breedName = null, string sortBy = null)
         {
@@ -43,10 +43,10 @@ namespace AnimalStore.Web.API.Controllers
 
             var baseUrl = "http://localhost:49425/api/Dogs/Breed?breedId=" + breedId + "&page=";
 
-            return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl);
+            return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName);
         }
 
-        private static PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl)
+        private static PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl, string breedName = null)
         {
             IEnumerable<Dog> enumerable = dogs as IList<Dog> ?? dogs.ToList();
             var totalCount = enumerable.Count();
@@ -58,9 +58,12 @@ namespace AnimalStore.Web.API.Controllers
             var nextUrl = page < totalPages - 1 ? baseUrl + (page + 1) + "&pageSize=" + pageSize : "";
             var prevUrl = page > 1 ? baseUrl + (page - 1) + "&pageSize=" + pageSize : "";
 
+            var resultsDescription = breedName != null ? "Results for " + breedName : "Search results";
+
             return new PageableResults<Dog>
             {
                 Data = pagedResults,
+                Description = resultsDescription,
                 NextPage = nextUrl,
                 PrevPage = prevUrl,
                 CurrentPageNumber = page,

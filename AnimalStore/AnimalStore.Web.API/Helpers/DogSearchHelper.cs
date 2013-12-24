@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Model;
+using AnimalStore.Web.API.Models;
 using AnimalStore.Web.API.Strategies;
 
 namespace AnimalStore.Web.API.Helpers
@@ -11,6 +13,7 @@ namespace AnimalStore.Web.API.Helpers
         private readonly IDogBreedFilterStrategy _dogBreedFilterStrategy;
         private readonly IDogCategoryFilterStrategy _dogCategoryFilterStrategy;
         private readonly IRepository<Breed> _breedsRepository;
+        private readonly int _minimumResults = int.Parse(ConfigurationManager.AppSettings[AppSettingKeys.SearchResultsMinimumMatchingNumber]);
 
         public DogSearchHelper(IDogBreedFilterStrategy dogBreedFilterStrategy, IDogCategoryFilterStrategy dogCategoryFilterStrategy, IRepository<Breed> breedsRepository)
         {
@@ -19,17 +22,17 @@ namespace AnimalStore.Web.API.Helpers
             _breedsRepository = breedsRepository;
         }
 
-        //TODO: Helper class that can easily be mocked and stubbed
+        //TODO: Unit test
         public IEnumerable<Dog> GetSortedDogsList(int breedId, string sortBy)
         {
-            //TODO: Get this into helper class
             var matchingDogs = _dogBreedFilterStrategy.Filter(breedId);
-
-            var categoryId = _breedsRepository.GetById(breedId).Category.Id;
-
-            var dogsInSameCategory = _dogCategoryFilterStrategy.Filter(categoryId, breedId);
-
             IQueryable<Dog> dogs = null;
+            IQueryable<Dog> dogsInSameCategory = null;
+
+            if (matchingDogs.Count() < _minimumResults)
+            {
+                dogsInSameCategory = GetDogsInSameCategory(breedId);
+            }
 
             if (dogsInSameCategory != null && matchingDogs != null)
             {
@@ -47,6 +50,13 @@ namespace AnimalStore.Web.API.Helpers
             IEnumerable<Dog> dogsSorted = _dogCategoryFilterStrategy.Sort(dogs, sortBy);
 
             return dogsSorted;
+        }
+
+        private IQueryable<Dog> GetDogsInSameCategory(int breedId)
+        {
+            var categoryId = _breedsRepository.GetById(breedId).Category.Id;
+
+            return _dogCategoryFilterStrategy.Filter(categoryId, breedId);
         }
     }
 }
