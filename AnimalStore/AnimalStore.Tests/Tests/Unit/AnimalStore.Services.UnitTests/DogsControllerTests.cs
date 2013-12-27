@@ -76,21 +76,6 @@ namespace AnimalStore.Services.UnitTests
         }
 
         [Test]
-        public void Get_Paged_With_Breed_ReturnsDogs_In_BreedCategory_When_There_Are_None_Matching_Exact_Breed()
-        {
-            // arrange
-            _dogSearchhelper.Stub(x => x.GetSortedDogsList(3, SearchSortOptions.PRICE_HIGHEST)).Return(null);
-
-            var dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
-
-            //act
-            var result = dogsController.GetPaged(3, 1, 20, "Beagel", SearchSortOptions.PRICE_HIGHEST);
-
-            Assert.That(result, Is.Null);
-        }
-
-
-        [Test]
         public void Get_Paged_With_Breed_Returns_MatchingDogs_And_Dogs_In_The_Same_Category_Beneath()
         {
             // arrange

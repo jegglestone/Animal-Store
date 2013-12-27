@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using AnimalStore.Data.Repositories;
@@ -54,7 +55,15 @@ namespace AnimalStore.Web.API.Helpers
 
         private IQueryable<Dog> GetDogsInSameCategory(int breedId)
         {
-            var categoryId = _breedsRepository.GetById(breedId).Category.Id;
+            int categoryId;
+            try
+            {
+                categoryId = _breedsRepository.GetById(breedId).Category.Id;
+            }
+            catch (NullReferenceException)
+            {
+                return null;
+            }
 
             return _dogCategoryFilterStrategy.Filter(categoryId, breedId);
         }

@@ -5,10 +5,12 @@ using AnimalStore.Data.Repositories;
 using System.Linq;
 using System.Web.Http;
 using System;
+using AnimalStore.Web.API.Filters;
 using AnimalStore.Web.API.Helpers;
 
 namespace AnimalStore.Web.API.Controllers
 {
+    [NullFilter]
     public class DogsController : ApiController, IPageableResults<Dog>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -35,7 +37,6 @@ namespace AnimalStore.Web.API.Controllers
         }
 
         // GET api/Dogs/Breed/
-        //TODO: Instead of returning null when empty - return 404 Not found
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string breedName = null, string sortBy = null)
         {
@@ -43,7 +44,7 @@ namespace AnimalStore.Web.API.Controllers
 
             var baseUrl = "http://localhost:49425/api/Dogs/Breed?breedId=" + breedId + "&page=";
 
-            return sortedDogsList != null ? GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName) : null;
+            return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName);
         }
 
         // one failing test - this needs to handle nulls
@@ -51,6 +52,7 @@ namespace AnimalStore.Web.API.Controllers
         {
             IEnumerable<Dog> enumerable = dogs as IList<Dog> ?? dogs.ToList();
             var totalCount = enumerable.Count();
+
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
             var pagedResults = enumerable.Skip((page - 1) * pageSize)

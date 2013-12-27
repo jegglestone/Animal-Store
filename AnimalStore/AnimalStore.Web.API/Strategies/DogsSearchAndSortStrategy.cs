@@ -13,6 +13,10 @@ namespace AnimalStore.Web.API.Strategies
         IQueryable<Dog> Filter(int breedId);
     }
 
+    /// <summary>
+    /// Strategy pattern to allow concrete implementations of various
+    /// filtering patterns.
+    /// </summary>
     public abstract class DogsSearchAndSortStrategy :IDogFilterStrategy
     {
         protected IRepository<Dog> _dogsRepository;
