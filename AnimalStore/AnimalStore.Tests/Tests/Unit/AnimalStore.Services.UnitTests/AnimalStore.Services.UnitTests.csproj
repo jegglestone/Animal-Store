@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BreedsControllerTests.cs" />
     <Compile Include="DogsControllerTests.cs" />
+    <Compile Include="Helpers\ResultsCountHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

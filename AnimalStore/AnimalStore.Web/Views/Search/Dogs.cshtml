@@ -5,20 +5,23 @@
 
 <table>
     <tr>
+        <td>Showing </td>
+    </tr>
+    <tr>
         <td style="width: 30%">
             <div class="float-left">Sort By :</div>
             @using (Html.BeginForm("DogsSorted", "Search", FormMethod.Get))
             {
                 @Html.DropDownList("sortBy", new SelectList(
-                                                     new List<Object>
-                                                         {
-                                                             new {value = SearchSortOptions.DEFAULT, text = SearchSortOptions.DEFAULT},
-                                                             new {value = SearchSortOptions.PRICE_HIGHEST, text = SearchSortOptions.PRICE_HIGHEST},
-                                                             new {value = SearchSortOptions.PRICE_LOWEST, text = SearchSortOptions.PRICE_LOWEST},
-                                                         },
-                                                     "value",
-                                                     "text",
-                                                     1))
+                                                 new List<Object>
+                                                     {
+                                                         new {value = SearchSortOptions.DEFAULT, text = SearchSortOptions.DEFAULT},
+                                                         new {value = SearchSortOptions.PRICE_HIGHEST, text = SearchSortOptions.PRICE_HIGHEST},
+                                                         new {value = SearchSortOptions.PRICE_LOWEST, text = SearchSortOptions.PRICE_LOWEST},
+                                                     },
+                                                 "value",
+                                                 "text",
+                                                 1))
                 <input type="submit" name="submit" id="search" value="Go" />
             }
         </td>
@@ -41,8 +44,8 @@
                 }
                 <div style="float: left; width: 80px;">Age:</div> 
                 @(dog.AgeInYears > 1 
-                    ? Html.Label(@dog.AgeInYears.ToString(CultureInfo.InvariantCulture) + " years and " + @dog.AgeInMonths + " months") 
-                    : Html.Label(@dog.AgeInMonths + " months"))
+                      ? Html.Label(@dog.AgeInYears.ToString(CultureInfo.InvariantCulture) + " years and " + @dog.AgeInMonths + " months") 
+                      : Html.Label(@dog.AgeInMonths + " months"))
                 
                 @if (@dog.Breed != null)
                 {

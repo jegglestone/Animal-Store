@@ -10,11 +10,11 @@ namespace AnimalStore.Model
         [DataMember(Name = "data")]
         public IEnumerable<T> Data { get; set; }
 
-        [DataMember(Name = "id")]
+        [DataMember(Name = "total_pages")]
         public int TotalPages { get; set; }
 
-        [DataMember(Name = "description")]
-        public string Description { get; set; }
+        [DataMember(Name = "search_description")]
+        public string SearchDescription { get; set; }
 
         [DataMember(Name = "total_count")]
         public int TotalCount { get; set; }

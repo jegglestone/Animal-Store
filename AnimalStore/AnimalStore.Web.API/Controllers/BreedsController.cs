@@ -3,9 +3,11 @@ using System.Linq;
 using System.Web.Http;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Model;
+using AnimalStore.Web.API.Filters;
 
 namespace AnimalStore.Web.API.Controllers
 {
+    [NullFilter]
     public class BreedsController : ApiController, IController<Breed>
     {
         private readonly IRepository<Breed> _breedsRepository;

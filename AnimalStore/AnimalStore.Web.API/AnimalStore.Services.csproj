@@ -179,6 +179,7 @@
     </Compile>
     <Compile Include="Helpers\DogSearchHelper.cs" />
     <Compile Include="Helpers\IDogSearchHelper.cs" />
+    <Compile Include="Helpers\ResultsCountHelper.cs" />
     <Compile Include="Models\AppSettingKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strategies\DogsSearchAndSortStrategy.cs" />

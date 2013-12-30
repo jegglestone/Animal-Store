@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AnimalStore.Common.Constants;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
 using AnimalStore.Data.Repositories;
@@ -31,6 +32,7 @@ namespace AnimalStore.Web.API.Controllers
             var dogs = _dogsRepository.GetAll()
                 .OrderByDescending(a => a.CreatedOn);
 
+            //TODO: Configurable
             const string baseUrl = "http://localhost:49425/api/dogs?page=";
 
             return GetPageableDogResults(dogs, page, pageSize, baseUrl);
@@ -47,7 +49,6 @@ namespace AnimalStore.Web.API.Controllers
             return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName);
         }
 
-        // one failing test - this needs to handle nulls
         private static PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl, string breedName = null)
         {
             IEnumerable<Dog> enumerable = dogs as IList<Dog> ?? dogs.ToList();
@@ -58,15 +59,32 @@ namespace AnimalStore.Web.API.Controllers
             var pagedResults = enumerable.Skip((page - 1) * pageSize)
                 .Take(pageSize);
 
-            var nextUrl = page < totalPages - 1 ? baseUrl + (page + 1) + "&pageSize=" + pageSize : "";
+            //TODO: Use stringBuilder and refactor into helper method
+            var nextUrl = page < totalPages ? baseUrl + (page + 1) + "&pageSize=" + pageSize : "";
             var prevUrl = page > 1 ? baseUrl + (page - 1) + "&pageSize=" + pageSize : "";
 
-            var resultsDescription = breedName != null ? "Results for " + breedName : "Search results";
+            if (breedName != null)
+            {
+                var breedNameAppender = "&breedName=" + breedName + "&format=" + MediaTypeFormats.Values.JSON;
+                if (nextUrl != string.Empty) nextUrl += breedNameAppender;
+                if (prevUrl != string.Empty) prevUrl += breedNameAppender;
+            }
+
+            var resultsFrom = ResultsCountHelper.GetResultsFrom(page, pageSize);
+            var resultsTo = ResultsCountHelper.GetResultsTo(totalCount, totalPages, page, pageSize);
+
+            var resultsDescription = breedName != null
+                ? string.Format("Showing results {0} to {1} out of {2} results for {3} nationwide"
+                    , resultsFrom
+                    , resultsTo
+                    , totalCount
+                    , breedName) 
+                : "Search results";
 
             return new PageableResults<Dog>
             {
                 Data = pagedResults,
-                Description = resultsDescription,
+                SearchDescription = resultsDescription,
                 NextPage = nextUrl,
                 PrevPage = prevUrl,
                 CurrentPageNumber = page,

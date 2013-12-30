@@ -87,15 +87,57 @@ namespace AnimalStore.Services.UnitTests
             var bloodhoundHuntingDog = new Dog() { Name = "Tip", Breed = bloodhound };
             var matchedDogs = new ObservableCollection<Dog>() { beagleHuntingDog, bloodhoundHuntingDog };
 
-            _dogSearchhelper.Stub(x => x.GetSortedDogsList(3, SearchSortOptions.PRICE_HIGHEST)).Return(matchedDogs);
+            var dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
+            dogSearchhelper.Stub(x => x.GetSortedDogsList(3, SearchSortOptions.PRICE_HIGHEST)).Return(matchedDogs);
 
-            var dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
+            var dogsController = new DogsController(_dogsRepository, _unitofWork, dogSearchhelper);
 
             //act
             var result = dogsController.GetPaged(3, 1, 20, "Beagel", SearchSortOptions.PRICE_HIGHEST);
 
             Assert.That(result.Data.First(), Is.EqualTo(beagleHuntingDog));
             Assert.That(result.Data.Contains(bloodhoundHuntingDog));
+        }
+
+        [Test]
+        public void Get_Paged_With_Breed_Returns_Correct_Search_Description()
+        {
+            // arrange
+            const int breedId = 3;
+            const int page = 2;
+            const int pageSize = 5;
+
+            var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };
+            var beagle = new Breed() { Name = "Beagel", Category = category, Id = 3, Species = null };
+
+            var beagleHuntingDog = new Dog() { Name = "Shep", Breed = beagle };
+            var fourteenMatchedDogs = new ObservableCollection<Dog>() 
+            {   beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog
+                ,beagleHuntingDog            
+            };
+
+            _dogSearchhelper.Stub(x => x.GetSortedDogsList(breedId, SearchSortOptions.PRICE_HIGHEST)).Return(fourteenMatchedDogs);
+
+            var dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
+
+
+
+            //act
+            var result = dogsController.GetPaged(breedId, page, pageSize, "Beagel", SearchSortOptions.PRICE_HIGHEST);
+
+            Assert.That(result.SearchDescription, Is.EqualTo("Showing results 6 to 10 out of 14 results for Beagel nationwide"));
         }
 
         [Test]
