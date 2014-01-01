@@ -70,8 +70,8 @@ namespace AnimalStore.Web.Controllers
         {
             if (viewModel.PageNumber == 0) viewModel.PageNumber = _firstPage;
 
-            return !IsSearchingForAnyBreed(viewModel.SelectedBreed) 
-                ? _searchRepository.GetDogs(viewModel.PageNumber, _defaultPageSize, viewModel.SelectedBreed, viewModel.SortBy) 
+            return !IsSearchingForAnyBreed(viewModel.SelectedBreed)
+                ? _searchRepository.GetDogs(viewModel.PageNumber, _defaultPageSize, viewModel.SelectedBreed, "", viewModel.SortBy) 
                 : _searchRepository.GetDogs(viewModel.PageNumber, _defaultPageSize);
         }
 

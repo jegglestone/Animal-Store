@@ -25,20 +25,20 @@
                     <td colspan ="2"><p class="normal-Paragraph">Search through thousands of adverts for dogs and puppies for sale in the UK.</p></td>
                 </tr> 
                 <tr>
-                    <td>Breed: </td>
-                    <td>@Html.DropDownListFor(x => x.SelectedBreed,
-                                              Model.BreedsSelectList,
-                                              SearchViewModel.AnyBreed)
-                    </td>
-                </tr>
-                <tr>
                     <td colspan="2" style="padding: 0 0 0 0;">
                         <table>
                             <tr>
-                                <td rowspan="2">Within</td>
+                                <td colspan="3">Breed: </td>
+                                <td>@Html.DropDownListFor(x => x.SelectedBreed,
+                                                          Model.BreedsSelectList,
+                                                          SearchViewModel.AnyBreed)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Within: </td>
                                 <td>@Html.RadioButtonFor(x => x.IsNationalSearch, false, new {@class="radio"})</td>
-                                <td>A town or postcode</td>
-                                <td>@Html.TextBoxFor(x => x.Location)</td>
+                                <td>A Town or Postcode</td>
+                                <td>@Html.TextBoxFor(x => x.Location, new { value = "Town or Postcode"})</td>
                             </tr>
                             <tr>
                                 <td>@Html.RadioButtonFor(x => x.IsNationalSearch, true, new {@class="radio"})</td> 

@@ -112,7 +112,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 SearchController.Dogs(_searchViewModel);
 
                 // assert
-                searchRepository.AssertWasCalled(x => x.GetDogs(1, 25, 4));
+                searchRepository.AssertWasCalled(x => x.GetDogs(1, 25, 4, "Dalmatian"));
             }
 
             [Test]
@@ -129,7 +129,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                     };
 
                 var searchRepository = MockRepository.GenerateMock<ISearchAPIFacade>();
-                searchRepository.Stub(x => x.GetDogs(1, 25, 3)).Return(pageableResults);
+                searchRepository.Stub(x => x.GetDogs(1, 25, 3, "Rottweiler")).Return(pageableResults);
 
                 _searchViewModel.IsNationalSearch = true;
                 _searchViewModel.SelectedBreed = 3;
