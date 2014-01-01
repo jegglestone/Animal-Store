@@ -59,26 +59,14 @@ namespace AnimalStore.Web.API.Controllers
             var pagedResults = enumerable.Skip((page - 1) * pageSize)
                 .Take(pageSize);
 
-            //TODO: Use stringBuilder and refactor into helper method
-            var nextUrl = page < totalPages ? baseUrl + (page + 1) + "&pageSize=" + pageSize : "";
-            var prevUrl = page > 1 ? baseUrl + (page - 1) + "&pageSize=" + pageSize : "";
-
-            if (breedName != null)
-            {
-                var breedNameAppender = "&breedName=" + breedName + "&format=" + MediaTypeFormats.Values.JSON;
-                if (nextUrl != string.Empty) nextUrl += breedNameAppender;
-                if (prevUrl != string.Empty) prevUrl += breedNameAppender;
-            }
+            var nextUrl = PageableResultsNextPreviousUrlHelper.BuildNextPageUrl(baseUrl, page, totalPages, pageSize, breedName);
+            var prevUrl = PageableResultsNextPreviousUrlHelper.BuildPreviousPageUrl(baseUrl, page, totalPages, pageSize, breedName);
 
             var resultsFrom = ResultsCountHelper.GetResultsFrom(page, pageSize);
             var resultsTo = ResultsCountHelper.GetResultsTo(totalCount, totalPages, page, pageSize);
 
             var resultsDescription = breedName != null
-                ? string.Format("Showing results {0} to {1} out of {2} results for {3} nationwide"
-                    , resultsFrom
-                    , resultsTo
-                    , totalCount
-                    , breedName) 
+                ? string.Format("Showing results {0} to {1} out of {2} results for {3} nationwide", resultsFrom, resultsTo, totalCount, breedName) 
                 : "Search results";
 
             return new PageableResults<Dog>

@@ -59,6 +59,7 @@ namespace AnimalStore.Web.Repository
             }
             catch (Exception e)
             {
+                //TODO: Configurable
                 _exceptionHelper.HandleException("Response from Breeds service resulted in an error in GetBreeds()", e, (typeof (SearchAPIFacade)));
             }
             finally
@@ -78,8 +79,8 @@ namespace AnimalStore.Web.Repository
         public PageableResults<Dog> GetDogs(int page, int pageSize, int breedId, string sortBy = null)
         {
             var url = sortBy != null 
-                             ? string.Format("{0}?page={1}&pageSize={2}&breedid={3}&sortBy={4}&format=json", _dogs_Url + "/breed", page, pageSize, breedId, sortBy) 
-                             : string.Format("{0}?page={1}&pageSize={2}&breedid={3}&format=json", _dogs_Url + "/breed", page, pageSize, breedId);
+                             ? string.Format("{0}{1}?page={2}&pageSize={3}&breedid={4}&sortBy={5}&format=json", _dogs_Url, "/breed", page, pageSize, breedId, sortBy) 
+                             : string.Format("{0}{1}?page={2}&pageSize={3}&breedid={4}&format=json", _dogs_Url, "/breed", page, pageSize, breedId);
 
             var response = _webAPIRequestWrapper.GetResponse(url);
             return GetDogsByResponse(response);
@@ -100,6 +101,7 @@ namespace AnimalStore.Web.Repository
             }
             catch (Exception e)
             {
+                //TODO: Configurable
                 _exceptionHelper.HandleException("Response from Dogs service resulted in an error in GetDogs()", e, (typeof(SearchAPIFacade)));
             }
             finally
@@ -116,29 +118,5 @@ namespace AnimalStore.Web.Repository
             response.Close();
             response.Dispose();
         }
-
-        #region async stuff
-        //public IList<Breed> GetBreedsAsync()
-        //{
-        //    //// use httpClient to consume Api
-        //    //_httpClient.GetAsync(breeds_Url);
-
-
-        //    throw new System.NotImplementedException();
-        //}
-
-        //public async Task GetAsync(string uri)
-        //{
-        //    var content = await _httpClient.GetStringAsync(uri);
-        //    return await Task.Run(() => JsonObject.Parse(content));  //also see JsonObject
-        //}
-
-        //private async void ProcessUrlAsync()
-        //{
-        //    var requestMessage = new HttpRequestMessage() { RequestUri = _httpClient.BaseAddress };
-        //    Task<HttpResponseMessage> getTask = _httpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead);
-        //}
-        #endregion
-
     }
 }
