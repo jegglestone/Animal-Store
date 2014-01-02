@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using AnimalStore.Common.Constants;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
@@ -8,6 +9,7 @@ using System.Web.Http;
 using System;
 using AnimalStore.Web.API.Filters;
 using AnimalStore.Web.API.Helpers;
+using AnimalStore.Web.API.Models;
 
 namespace AnimalStore.Web.API.Controllers
 {
@@ -32,8 +34,7 @@ namespace AnimalStore.Web.API.Controllers
             var dogs = _dogsRepository.GetAll()
                 .OrderByDescending(a => a.CreatedOn);
 
-            //TODO: Configurable
-            const string baseUrl = "http://localhost:49425/api/dogs?page=";
+            var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogs];
 
             return GetPageableDogResults(dogs, page, pageSize, baseUrl);
         }
@@ -44,7 +45,7 @@ namespace AnimalStore.Web.API.Controllers
         {
             var sortedDogsList = _dogSearchHelper.GetSortedDogsList(breedId, sortBy);
 
-            var baseUrl = "http://localhost:49425/api/Dogs/Breed?breedId=" + breedId + "&page=";
+            var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogsByBreed] + breedId + "&page=";
 
             return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName);
         }
