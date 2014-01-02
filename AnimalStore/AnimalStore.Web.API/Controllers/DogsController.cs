@@ -34,7 +34,7 @@ namespace AnimalStore.Web.API.Controllers
             var dogs = _dogsRepository.GetAll()
                 .OrderByDescending(a => a.CreatedOn);
 
-            var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogs];
+            var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogs] + "?page=";
 
             return GetPageableDogResults(dogs, page, pageSize, baseUrl);
         }
@@ -45,7 +45,7 @@ namespace AnimalStore.Web.API.Controllers
         {
             var sortedDogsList = _dogSearchHelper.GetSortedDogsList(breedId, sortBy);
 
-            var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogsByBreed] + breedId + "&page=";
+            var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogsByBreed] + "?breedId=" + breedId + "&page=";
 
             return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName);
         }
