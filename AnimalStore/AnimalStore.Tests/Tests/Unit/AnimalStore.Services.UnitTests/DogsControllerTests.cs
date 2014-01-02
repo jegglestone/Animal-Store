@@ -132,8 +132,6 @@ namespace AnimalStore.Services.UnitTests
 
             var dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
 
-
-
             //act
             var result = dogsController.GetPaged(breedId, page, pageSize, "Beagel", SearchSortOptions.PRICE_HIGHEST);
 
