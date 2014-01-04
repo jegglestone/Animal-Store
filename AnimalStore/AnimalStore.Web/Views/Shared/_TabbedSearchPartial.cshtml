@@ -8,6 +8,7 @@
         $("#tabs").tabs();
     });
 </script>
+
 <div id="tabs">
     <ul>
         <li><a href="#fragment-1"><span>Dogs</span></a></li>
@@ -16,7 +17,7 @@
     </ul>
     <div id="fragment-1">
         @using (Html.BeginForm("Dogs", "Search", Model, FormMethod.Get))
-        {
+        {           
             <table style="clear: left">
                 <tr>
                     <td colspan ="2"><h5>Find dogs locally or nationally</h5></td>
@@ -31,7 +32,9 @@
                                 <td colspan="3">Breed: </td>
                                 <td>@Html.DropDownListFor(x => x.SelectedBreed,
                                                           Model.BreedsSelectList,
-                                                          SearchViewModel.AnyBreed)
+                                                          SearchViewModel.AnyBreed,
+                                                           new { @onChange="$('SelectedBreedText') = this.value; alert('hello world');" }
+                                                          )
                                 </td>
                             </tr>
                             <tr>
