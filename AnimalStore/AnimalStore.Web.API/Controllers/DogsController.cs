@@ -16,13 +16,15 @@ namespace AnimalStore.Web.API.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Dog> _dogsRepository;
+        private readonly IRepository<Breed> _breedsRepository;
         private readonly IDogSearchHelper _dogSearchHelper;
 
-        public DogsController(IRepository<Dog> dogsRepository, IUnitOfWork unitOfWork, IDogSearchHelper dogSearchHelper)
+        public DogsController(IRepository<Dog> dogsRepository, IRepository<Breed> breedsRepository, IUnitOfWork unitOfWork, IDogSearchHelper dogSearchHelper)
         {
             _unitOfWork = unitOfWork;
             _dogsRepository = dogsRepository;
             _dogSearchHelper = dogSearchHelper;
+            _breedsRepository = breedsRepository;
         }
 
         // GET api/dogs
@@ -40,11 +42,13 @@ namespace AnimalStore.Web.API.Controllers
 
         // GET api/Dogs/Breed/
         [HttpGet]
-        public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string breedName = null, string sortBy = null)
+        public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string sortBy = null)
         {
             var sortedDogsList = _dogSearchHelper.GetSortedDogsList(breedId, sortBy);
 
             var baseUrl = "http://localhost:49425/api/Dogs/Breed?breedId=" + breedId + "&page=";
+
+            var breedName = _breedsRepository.GetById(breedId).Name;
 
             return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName);
         }

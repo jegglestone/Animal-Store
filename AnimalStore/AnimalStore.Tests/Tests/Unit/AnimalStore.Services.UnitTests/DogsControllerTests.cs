@@ -10,69 +10,40 @@ using System.Collections.Generic;
 using System.Linq;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
+using AnimalStore.Services.UnitTests.SUT_Builder_Factories;
 
 namespace AnimalStore.Services.UnitTests
 {
     [TestFixture]
     public class DogsControllerTests
     {
-        private readonly IRepository<Dog> _dogsRepository;
-        private readonly IDogSearchHelper _dogSearchhelper;
-        private readonly IUnitOfWork _unitofWork;
-        private readonly DogsController _dogsController;
+        private IRepository<Dog> _dogsRepository;
+        private IRepository<Breed> _breedsRepository;
+        private IDogSearchHelper _dogSearchhelper;
+        private IUnitOfWork _unitofWork;
+        private DogsController _dogsController;
 
-        public DogsControllerTests()
+        [TestFixtureSetUp]
+        public void DogsControllerTestsSetup()
         {
             _dogsRepository = MockRepository.GenerateMock<IRepository<Dog>>();
+            _breedsRepository = MockRepository.GenerateMock<IRepository<Breed>>();
             _unitofWork = MockRepository.GenerateMock<IUnitOfWork>();
             _dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
 
-            _dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
+            _breedsRepository.Stub(x => x.GetById(Arg<int>.Is.Anything)).Return(
+                new Breed { Name="Beagel"});
+
+            _dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper);
 
             StubDogsRepository();
         }
 
         private void StubDogsRepository()
         {
-            var animalsListWith30Items = new List<Dog>()
-            {
-                new Dog() { Name = "dog1", CreatedOn = DateTime.Today.AddHours(-1) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
-                new Dog() { Name = "Flossie", CreatedOn = DateTime.Today.AddHours(-1) },
-
-                new Dog() { Name = "dog", CreatedOn = DateTime.Today },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
-
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
-
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-2) },
-                new Dog() { Name = "Rex", CreatedOn = DateTime.Today.AddHours(-2) },
-
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
-
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
-                new Dog() { Name = "Tip", CreatedOn = DateTime.Today.AddHours(-3) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
-            };
-            _dogsRepository.Stub(x => x.GetAll()).Return(animalsListWith30Items.AsQueryable());
+            _dogsRepository.Stub(x => x.GetById(4)).Return(new Dog() { Name = "dog", Id = 4 });
+            _dogsRepository.Stub(x => x.GetAll()).Return(
+                new DogSearchResultsListBuilder().ListWith30Dogs().Build().AsQueryable());
         }
 
         [Test]
@@ -80,20 +51,25 @@ namespace AnimalStore.Services.UnitTests
         {
             // arrange
             var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };
-            var beagle = new Breed() { Name = "Beagel", Category = category, Id = 3, Species = null };
-            var bloodhound = new Breed() { Name = "Bloodhound", Category = category, Id = 3, Species = null };
 
-            var beagleHuntingDog = new Dog() { Name = "Shep", Breed = beagle };
+            var bloodhound = new Breed() { Name = "Bloodhound", Category = category, Id = 3, Species = null };
+            var beagle = new Breed() { Name = "Beagel", Category = category, Id = 3, Species = null };
+
             var bloodhoundHuntingDog = new Dog() { Name = "Tip", Breed = bloodhound };
-            var matchedDogs = new ObservableCollection<Dog>() { beagleHuntingDog, bloodhoundHuntingDog };
+            var beagleHuntingDog = new Dog() { Name = "Shep", Breed = beagle };
+
+            var matchedDogs = new DogSearchResultsListBuilder()
+                .WithAnotherDog(beagleHuntingDog)
+                .WithAnotherDog(bloodhoundHuntingDog)
+                .Build();
 
             var dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
             dogSearchhelper.Stub(x => x.GetSortedDogsList(3, SearchSortOptions.PRICE_HIGHEST)).Return(matchedDogs);
 
-            var dogsController = new DogsController(_dogsRepository, _unitofWork, dogSearchhelper);
+            var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, dogSearchhelper);
 
             //act
-            var result = dogsController.GetPaged(3, 1, 20, "Beagel", SearchSortOptions.PRICE_HIGHEST);
+            var result = dogsController.GetPaged(3, 1, 20, SearchSortOptions.PRICE_HIGHEST);
 
             Assert.That(result.Data.First(), Is.EqualTo(beagleHuntingDog));
             Assert.That(result.Data.Contains(bloodhoundHuntingDog));
@@ -107,33 +83,12 @@ namespace AnimalStore.Services.UnitTests
             const int page = 2;
             const int pageSize = 5;
 
-            var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };
-            var beagle = new Breed() { Name = "Beagel", Category = category, Id = 3, Species = null };
+            _dogSearchhelper.Stub(x => x.GetSortedDogsList(breedId, SearchSortOptions.PRICE_HIGHEST)).Return(new DogSearchResultsListBuilder().ListOf14Beagels().Build());
 
-            var beagleHuntingDog = new Dog() { Name = "Shep", Breed = beagle };
-            var fourteenMatchedDogs = new ObservableCollection<Dog>() 
-            {   beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog
-                ,beagleHuntingDog            
-            };
-
-            _dogSearchhelper.Stub(x => x.GetSortedDogsList(breedId, SearchSortOptions.PRICE_HIGHEST)).Return(fourteenMatchedDogs);
-
-            var dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
+            var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper);
 
             //act
-            var result = dogsController.GetPaged(breedId, page, pageSize, "Beagel", SearchSortOptions.PRICE_HIGHEST);
+            var result = dogsController.GetPaged(breedId, page, pageSize, SearchSortOptions.PRICE_HIGHEST);
 
             Assert.That(result.SearchDescription, Is.EqualTo("Showing results 6 to 10 out of 14 results for Beagel nationwide"));
         }
@@ -204,11 +159,10 @@ namespace AnimalStore.Services.UnitTests
         public void GetPaged_ReturnsTheCurrentPage()
         {
             // arrange
-            var dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
             const int page = 2;
 
             // act
-            var result = dogsController.GetPaged(page, 4);
+            var result = _dogsController.GetPaged(page, 4);
 
             // assert
             Assert.That(result.CurrentPageNumber, Is.EqualTo(page));
@@ -247,13 +201,8 @@ namespace AnimalStore.Services.UnitTests
         [Test]
         public void Get_ById_ReturnsSingleItemWithMatchingIdAndCallsRepositoryGetById()
         {
-            // arrange
-            var dogsController = new DogsController(_dogsRepository, _unitofWork, _dogSearchhelper);
-
-            _dogsRepository.Stub(x => x.GetById(4)).Return(new Dog() { Name = "dog", Id = 4 });
-
             // act
-            var result = dogsController.Get(4);
+            var result = _dogsController.Get(4);
 
             // assert
             _dogsRepository.AssertWasCalled(x => x.GetById(4));

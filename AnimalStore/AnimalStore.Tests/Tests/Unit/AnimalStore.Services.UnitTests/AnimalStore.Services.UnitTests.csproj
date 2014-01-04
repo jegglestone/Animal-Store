@@ -51,8 +51,9 @@
   <ItemGroup>
     <Compile Include="BreedsControllerTests.cs" />
     <Compile Include="DogsControllerTests.cs" />
-    <Compile Include="Helpers\ResultsCountHelperTests.cs" />
+    <Compile Include="ResultsCountHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SUT Builder Factories\DogSearchResultsListBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\AnimalStore.Common\AnimalStore.Common.csproj">
