@@ -3,10 +3,9 @@
 @using AnimalStore.Common.Constants
 @model AnimalStore.Model.PageableResults<AnimalStore.Model.Dog>
 
+
+<div style="clear:both;">@Model.SearchDescription</div>
 <table>
-    <tr>
-        <td colspan="3">@Model.SearchDescription</td>
-    </tr>
     <tr>
         <td style="width: 30%">
             <div class="float-left">Sort By :</div>
