@@ -8,6 +8,7 @@ using AnimalStore.Web.Wrappers.Interfaces;
 
 namespace AnimalStore.Web.Controllers
 {
+    [OutputCache(CacheProfile = "ControllerOutputCacheProfile")]
     public class SearchController : Controller
     {
         private readonly ISearchAPIFacade _searchRepository;
