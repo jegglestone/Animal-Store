@@ -11,6 +11,7 @@ using AnimalStore.Web.ViewModels;
 using AnimalStore.Web.Wrappers.Interfaces;
 using NUnit.Framework;
 using Rhino.Mocks;
+using AnimalStore.Common.Constants;
 
 namespace AnimalStore.Web.UnitTests.Controllers
 {
@@ -103,6 +104,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
 
                 _searchViewModel.IsNationalSearch = true;
                 _searchViewModel.SelectedBreed = 4;
+                _searchViewModel.SortBy = SearchSortOptions.PRICE_LOWEST;
 
                 var httpRequestWrapper = MockRepository.GenerateMock<ICustomHttpRequestWrapper>();
 
@@ -112,7 +114,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 SearchController.Dogs(_searchViewModel);
 
                 // assert
-                searchRepository.AssertWasCalled(x => x.GetDogs(1, 25, 4, "Dalmatian"));
+                searchRepository.AssertWasCalled(x => x.GetDogs(1, 25, 4, SearchSortOptions.PRICE_LOWEST));
             }
 
             [Test]
@@ -129,7 +131,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                     };
 
                 var searchRepository = MockRepository.GenerateMock<ISearchAPIFacade>();
-                searchRepository.Stub(x => x.GetDogs(1, 25, 3, "Rottweiler")).Return(pageableResults);
+                searchRepository.Stub(x => x.GetDogs(1, 25, 3, SearchSortOptions.PRICE_LOWEST)).Return(pageableResults);
 
                 _searchViewModel.IsNationalSearch = true;
                 _searchViewModel.SelectedBreed = 3;

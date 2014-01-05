@@ -5,6 +5,7 @@ using AnimalStore.Model;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;
 using AnimalStore.Web.Wrappers.Interfaces;
+using System.Configuration;
 
 namespace AnimalStore.Web.Controllers
 {
@@ -13,7 +14,9 @@ namespace AnimalStore.Web.Controllers
     {
         private readonly ISearchAPIFacade _searchRepository;
         private const int _firstPage = 1;
-        private const int _defaultPageSize = 25;
+        private int _defaultPageSize {
+            get { return int.Parse(ConfigurationManager.AppSettings[AppSettingKeys.DefaultSearchResultPageSize]); }
+        }
         private readonly HttpSessionState _session;
         private readonly ICustomHttpRequestWrapper _httpRequestWrapper;
 
