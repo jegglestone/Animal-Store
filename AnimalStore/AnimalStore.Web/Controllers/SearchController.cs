@@ -5,7 +5,6 @@ using AnimalStore.Model;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;
 using AnimalStore.Web.Wrappers.Interfaces;
-using System.Configuration;
 
 namespace AnimalStore.Web.Controllers
 {
@@ -14,17 +13,16 @@ namespace AnimalStore.Web.Controllers
     {
         private readonly ISearchAPIFacade _searchRepository;
         private const int _firstPage = 1;
-        private int _defaultPageSize {
-            get { return int.Parse(ConfigurationManager.AppSettings[AppSettingKeys.DefaultSearchResultPageSize]); }
-        }
+        private readonly IConfiguration _configuration;
         private readonly HttpSessionState _session;
         private readonly ICustomHttpRequestWrapper _httpRequestWrapper;
 
-        public SearchController(ISearchAPIFacade searchRepository, HttpSessionState session, ICustomHttpRequestWrapper httpRequestWrapper)
+        public SearchController(ISearchAPIFacade searchRepository, HttpSessionState session, ICustomHttpRequestWrapper httpRequestWrapper, IConfiguration configuration)
         {
             _searchRepository = searchRepository;
             _session = session;
             _httpRequestWrapper = httpRequestWrapper;
+            _configuration = configuration;
         }
 
         //
@@ -74,9 +72,11 @@ namespace AnimalStore.Web.Controllers
         {
             if (viewModel.PageNumber == 0) viewModel.PageNumber = _firstPage;
 
+            var defaultPageSize = _configuration.GetDefaultSearchResultPageSize(); 
+
             return !IsSearchingForAnyBreed(viewModel.SelectedBreed)
-                ? _searchRepository.GetDogs(viewModel.PageNumber, _defaultPageSize, viewModel.SelectedBreed, viewModel.SortBy) 
-                : _searchRepository.GetDogs(viewModel.PageNumber, _defaultPageSize);
+                ? _searchRepository.GetDogs(viewModel.PageNumber, defaultPageSize, viewModel.SelectedBreed, viewModel.SortBy) 
+                : _searchRepository.GetDogs(viewModel.PageNumber, defaultPageSize);
         }
 
         private static bool IsSearchingForAnyBreed(int selectedBreed)
