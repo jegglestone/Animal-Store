@@ -10,7 +10,7 @@
     bool isNationalSearch;
     string sortBy;
 
-    if (Request[QuerystringKeys.SelectedBreed] != null)
+    if (!string.IsNullOrEmpty(Request[QuerystringKeys.SelectedBreed]))
     {
         selectedBreed = int.Parse(Request.QueryString[QuerystringKeys.SelectedBreed]);
         Session[SessionStoreKeys.SelectedBreed] = selectedBreed;
@@ -22,7 +22,7 @@
                             : 1;
     }
 
-    if (Request[QuerystringKeys.IsNationalSearch] != null)
+    if (!string.IsNullOrEmpty(Request[QuerystringKeys.IsNationalSearch]))
     {
         isNationalSearch = bool.Parse(Request.QueryString[QuerystringKeys.IsNationalSearch]);
         Session[SessionStoreKeys.IsNationalSearch] = isNationalSearch;
@@ -32,7 +32,7 @@
         isNationalSearch = Session == null || bool.Parse(Session[SessionStoreKeys.IsNationalSearch].ToString());
     }
     
-    if (Request[QuerystringKeys.SortBy] != null)
+    if (!string.IsNullOrEmpty(Request[QuerystringKeys.SortBy]))
     {
         sortBy = Request.QueryString[QuerystringKeys.SortBy];
         Session[SessionStoreKeys.SortBy] = sortBy;

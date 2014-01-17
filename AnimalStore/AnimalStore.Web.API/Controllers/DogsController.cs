@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
-using AnimalStore.Common.Constants;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
 using AnimalStore.Data.Repositories;
@@ -10,6 +9,7 @@ using System;
 using AnimalStore.Web.API.Filters;
 using AnimalStore.Web.API.Helpers;
 using AnimalStore.Web.API.Models;
+using AnimalStore.Web.API.Wrappers;
 
 namespace AnimalStore.Web.API.Controllers
 {
@@ -20,13 +20,15 @@ namespace AnimalStore.Web.API.Controllers
         private readonly IRepository<Dog> _dogsRepository;
         private readonly IRepository<Breed> _breedsRepository;
         private readonly IDogSearchHelper _dogSearchHelper;
+        private readonly IConfiguration _configuration;
 
-        public DogsController(IRepository<Dog> dogsRepository, IRepository<Breed> breedsRepository, IUnitOfWork unitOfWork, IDogSearchHelper dogSearchHelper)
+        public DogsController(IRepository<Dog> dogsRepository, IRepository<Breed> breedsRepository, IUnitOfWork unitOfWork, IDogSearchHelper dogSearchHelper, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
             _dogsRepository = dogsRepository;
             _dogSearchHelper = dogSearchHelper;
             _breedsRepository = breedsRepository;
+            _configuration = configuration;
         }
 
         // GET api/dogs
@@ -54,7 +56,7 @@ namespace AnimalStore.Web.API.Controllers
             return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName);
         }
 
-        private static PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl, string breedName = null)
+        private PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl, string breedName = null)
         {
             IEnumerable<Dog> enumerable = dogs as IList<Dog> ?? dogs.ToList();
             var totalCount = enumerable.Count();
@@ -71,8 +73,8 @@ namespace AnimalStore.Web.API.Controllers
             var resultsTo = ResultsCountHelper.GetResultsTo(totalCount, totalPages, page, pageSize);
 
             var resultsDescription = breedName != null
-                ? string.Format("Showing results {0} to {1} out of {2} results for {3} nationwide", resultsFrom, resultsTo, totalCount, breedName) 
-                : "Search results";
+                ? string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreed(), resultsFrom, resultsTo, totalCount, breedName)
+                : string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForAllBreeds(), resultsFrom, resultsTo, totalCount);
 
             return new PageableResults<Dog>
             {

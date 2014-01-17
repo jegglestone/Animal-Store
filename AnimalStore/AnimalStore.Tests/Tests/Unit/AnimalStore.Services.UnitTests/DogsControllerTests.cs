@@ -1,12 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using AnimalStore.Common.Constants;
+﻿using AnimalStore.Common.Constants;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Web.API.Helpers;
+using AnimalStore.Web.API.Wrappers;
 using NUnit.Framework;
 using Rhino.Mocks;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
@@ -22,6 +21,7 @@ namespace AnimalStore.Services.UnitTests
         private IDogSearchHelper _dogSearchhelper;
         private IUnitOfWork _unitofWork;
         private DogsController _dogsController;
+        private IConfiguration _configuration;
 
         [TestFixtureSetUp]
         public void DogsControllerTestsSetup()
@@ -30,11 +30,15 @@ namespace AnimalStore.Services.UnitTests
             _breedsRepository = MockRepository.GenerateMock<IRepository<Breed>>();
             _unitofWork = MockRepository.GenerateMock<IUnitOfWork>();
             _dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
+            _configuration = MockRepository.GenerateMock<IConfiguration>();
 
             _breedsRepository.Stub(x => x.GetById(Arg<int>.Is.Anything)).Return(
                 new Breed { Name="Beagel"});
 
-            _dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper);
+            _configuration.Stub(x => x.GetNationwideSearchResultsDescriptionMessageForAllBreeds()).Return("Search results {0} to {1} out of {2} results for all breeds nationwide.");
+            _configuration.Stub(x => x.GetNationwideSearchResultsDescriptionMessageForSpecificBreed()).Return("Showing results {0} to {1} out of {2} results for {3} nationwide");
+
+            _dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper, _configuration);
 
             StubDogsRepository();
         }
@@ -66,7 +70,7 @@ namespace AnimalStore.Services.UnitTests
             var dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
             dogSearchhelper.Stub(x => x.GetSortedDogsList(3, SearchSortOptions.PRICE_HIGHEST)).Return(matchedDogs);
 
-            var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, dogSearchhelper);
+            var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, dogSearchhelper, _configuration);
 
             //act
             var result = dogsController.GetPaged(3, 1, 20, SearchSortOptions.PRICE_HIGHEST);
@@ -85,7 +89,7 @@ namespace AnimalStore.Services.UnitTests
 
             _dogSearchhelper.Stub(x => x.GetSortedDogsList(breedId, SearchSortOptions.PRICE_HIGHEST)).Return(new DogSearchResultsListBuilder().ListOf14Beagels().Build());
 
-            var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper);
+            var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper, _configuration);
 
             //act
             var result = dogsController.GetPaged(breedId, page, pageSize, SearchSortOptions.PRICE_HIGHEST);
