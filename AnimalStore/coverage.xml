@@ -17,32 +17,32 @@
       <ModuleName>mscorlib</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="45-B4-86-0A-D1-97-C7-8E-68-BE-8E-7D-F4-FD-28-0F-CD-E3-40-92">
+    <Module skippedDueTo="MissingPdb" hash="45-B4-86-0A-D1-97-C7-8E-68-BE-8E-7D-F4-FD-28-0F-CD-E3-40-92">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\nunit.exe</FullName>
       <ModuleName>nunit</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="DA-36-7E-D1-C7-38-E8-22-9A-63-F2-5D-B4-B2-80-59-B0-46-1C-79">
+    <Module skippedDueTo="MissingPdb" hash="DA-36-7E-D1-C7-38-E8-22-9A-63-F2-5D-B4-B2-80-59-B0-46-1C-79">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\lib\nunit-gui-runner.dll</FullName>
       <ModuleName>nunit-gui-runner</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="23-35-8C-86-05-D5-AE-FE-3C-1F-09-A0-86-02-40-7C-4F-CA-59-41">
+    <Module skippedDueTo="MissingPdb" hash="23-35-8C-86-05-D5-AE-FE-3C-1F-09-A0-86-02-40-7C-4F-CA-59-41">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\lib\nunit.core.dll</FullName>
       <ModuleName>nunit.core</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="57-DD-20-42-DA-33-B3-EE-DA-8C-8E-25-C9-E5-07-B5-08-62-0F-88">
+    <Module skippedDueTo="MissingPdb" hash="57-DD-20-42-DA-33-B3-EE-DA-8C-8E-25-C9-E5-07-B5-08-62-0F-88">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\lib\nunit.util.dll</FullName>
       <ModuleName>nunit.util</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="AD-76-2F-3C-5E-F6-77-0D-C6-AD-AF-A3-90-85-28-07-2D-A0-59-50">
+    <Module skippedDueTo="MissingPdb" hash="AD-76-2F-3C-5E-F6-77-0D-C6-AD-AF-A3-90-85-28-07-2D-A0-59-50">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\lib\nunit.core.interfaces.dll</FullName>
       <ModuleName>nunit.core.interfaces</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="14-D1-E9-66-32-DD-24-EB-E7-71-ED-0F-8B-99-50-C6-0D-42-B0-89">
+    <Module skippedDueTo="MissingPdb" hash="14-D1-E9-66-32-DD-24-EB-E7-71-ED-0F-8B-99-50-C6-0D-42-B0-89">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\lib\nunit.uikit.dll</FullName>
       <ModuleName>nunit.uikit</ModuleName>
       <Classes />
@@ -77,12 +77,12 @@
       <ModuleName>System.Runtime.Remoting</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="88-A5-91-0C-B8-6B-A6-B4-7C-ED-78-09-E2-D3-55-E1-8E-D5-09-E5">
+    <Module skippedDueTo="MissingPdb" hash="88-A5-91-0C-B8-6B-A6-B4-7C-ED-78-09-E2-D3-55-E1-8E-D5-09-E5">
       <FullName>C:\Windows\assembly\GAC_MSIL\Accessibility\2.0.0.0__b03f5f7f11d50a3a\Accessibility.dll</FullName>
       <ModuleName>Accessibility</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="12-F6-3E-13-B4-59-40-68-63-46-A1-B5-BD-97-06-EE-9B-B7-C3-25">
+    <Module skippedDueTo="MissingPdb" hash="12-F6-3E-13-B4-59-40-68-63-46-A1-B5-BD-97-06-EE-9B-B7-C3-25">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\lib\nunit.uiexception.dll</FullName>
       <ModuleName>nunit.uiexception</ModuleName>
       <Classes />
@@ -92,22 +92,22 @@
       <ModuleName>mscorlib</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="FB-85-03-F6-E1-75-BB-8A-0F-44-79-E7-A8-B3-A4-E6-DF-72-B0-75">
+    <Module skippedDueTo="MissingPdb" hash="FB-85-03-F6-E1-75-BB-8A-0F-44-79-E7-A8-B3-A4-E6-DF-72-B0-75">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\nunit-agent.exe</FullName>
       <ModuleName>nunit-agent</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="23-35-8C-86-05-D5-AE-FE-3C-1F-09-A0-86-02-40-7C-4F-CA-59-41">
+    <Module skippedDueTo="MissingPdb" hash="23-35-8C-86-05-D5-AE-FE-3C-1F-09-A0-86-02-40-7C-4F-CA-59-41">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\lib\nunit.core.dll</FullName>
       <ModuleName>nunit.core</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="57-DD-20-42-DA-33-B3-EE-DA-8C-8E-25-C9-E5-07-B5-08-62-0F-88">
+    <Module skippedDueTo="MissingPdb" hash="57-DD-20-42-DA-33-B3-EE-DA-8C-8E-25-C9-E5-07-B5-08-62-0F-88">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\lib\nunit.util.dll</FullName>
       <ModuleName>nunit.util</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="AD-76-2F-3C-5E-F6-77-0D-C6-AD-AF-A3-90-85-28-07-2D-A0-59-50">
+    <Module skippedDueTo="MissingPdb" hash="AD-76-2F-3C-5E-F6-77-0D-C6-AD-AF-A3-90-85-28-07-2D-A0-59-50">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\lib\nunit.core.interfaces.dll</FullName>
       <ModuleName>nunit.core.interfaces</ModuleName>
       <Classes />
@@ -142,7 +142,7 @@
       <ModuleName>System.Web</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="23-35-8C-86-05-D5-AE-FE-3C-1F-09-A0-86-02-40-7C-4F-CA-59-41">
+    <Module skippedDueTo="MissingPdb" hash="23-35-8C-86-05-D5-AE-FE-3C-1F-09-A0-86-02-40-7C-4F-CA-59-41">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\lib\nunit.core.dll</FullName>
       <ModuleName>nunit.core</ModuleName>
       <Classes />
@@ -152,29 +152,34 @@
       <ModuleName>System</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="C8-69-A6-5A-0E-1E-E0-29-EB-EF-CA-C5-2C-E2-B7-EB-F6-D9-64-1A">
+    <Module skippedDueTo="MissingPdb" hash="C8-69-A6-5A-0E-1E-E0-29-EB-EF-CA-C5-2C-E2-B7-EB-F6-D9-64-1A">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\pnunit.framework.dll</FullName>
       <ModuleName>pnunit.framework</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="F9-30-3E-D0-DF-D4-B8-50-24-2D-CB-99-08-61-9C-77-28-1C-6D-29">
+    <Module skippedDueTo="MissingPdb" hash="F9-30-3E-D0-DF-D4-B8-50-24-2D-CB-99-08-61-9C-77-28-1C-6D-29">
       <FullName>C:\dev\AnimalStore\packages\NUnit.Runners.2.6.2\tools\pnunit-agent.exe</FullName>
       <ModuleName>pnunit-agent</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="AD-76-2F-3C-5E-F6-77-0D-C6-AD-AF-A3-90-85-28-07-2D-A0-59-50">
-      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\1000_635245307802880000\Tests_15801668\assembly\dl3\f7a252c1\a0a282a8_93a6ce01\nunit.core.interfaces.dll</FullName>
+    <Module skippedDueTo="MissingPdb" hash="AD-76-2F-3C-5E-F6-77-0D-C6-AD-AF-A3-90-85-28-07-2D-A0-59-50">
+      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\4052_635245386661780000\Tests_23687519\assembly\dl3\35242bd5\a0a282a8_93a6ce01\nunit.core.interfaces.dll</FullName>
       <ModuleName>nunit.core.interfaces</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="14-DD-54-04-F6-E9-64-03-FA-33-09-78-9F-EA-4B-E5-F8-6C-4C-77">
-      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\1000_635245307802880000\Tests_15801668\assembly\dl3\770d5f9c\a0a12151_250acf01\AnimalStore.Web.UnitTests.dll</FullName>
+    <Module skippedDueTo="MissingPdb" hash="D8-C1-DA-AF-31-CF-3E-24-F6-82-06-1B-AB-82-98-36-D6-40-45-1A">
+      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\4052_635245386661780000\Tests_23687519\assembly\dl3\979bcd1f\d0bf9e1f_2c0acf01\AnimalStore.Web.UnitTests.dll</FullName>
       <ModuleName>AnimalStore.Web.UnitTests</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="13-4C-94-D1-A1-A5-D9-8F-F1-E4-CE-A7-87-EF-CC-42-FC-6B-CA-BC">
-      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\1000_635245307802880000\Tests_15801668\assembly\dl3\1657bb9b\70adf7f6_81a6ce01\nunit.framework.dll</FullName>
+    <Module skippedDueTo="MissingPdb" hash="13-4C-94-D1-A1-A5-D9-8F-F1-E4-CE-A7-87-EF-CC-42-FC-6B-CA-BC">
+      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\4052_635245386661780000\Tests_23687519\assembly\dl3\543f7af5\70adf7f6_81a6ce01\nunit.framework.dll</FullName>
       <ModuleName>nunit.framework</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="">
+      <FullName />
+      <ModuleName>4ix_p-k8</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="Filter" hash="84-64-E1-D2-0A-E2-91-23-AD-BD-B9-7A-3C-89-7B-66-65-58-46-1C">
@@ -192,24 +197,14 @@
       <ModuleName>System.Xml</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="9F-86-B7-A7-FF-5D-34-CD-9B-2F-BF-5E-EE-DA-97-A8-33-20-E9-D0">
-      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\1000_635245307802880000\Tests_15801668\assembly\dl3\5b93a054\c08d2046_250acf01\AnimalStore.Model.dll</FullName>
-      <ModuleName>AnimalStore.Model</ModuleName>
-      <Classes />
-    </Module>
-    <Module skippedDueTo="Filter" hash="DB-44-23-D0-65-18-2F-E9-89-FC-E5-3C-33-BE-9D-B9-56-1B-F2-FC">
-      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\1000_635245307802880000\Tests_15801668\assembly\dl3\aa5dcb19\f0bf224b_250acf01\AnimalStore.Web.dll</FullName>
+    <Module skippedDueTo="MissingPdb" hash="FB-22-6A-84-40-7F-EC-C9-3B-5F-56-CF-2F-53-5F-CC-1D-AA-96-58">
+      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\4052_635245386661780000\Tests_23687519\assembly\dl3\0467cb26\c0a12397_2b0acf01\AnimalStore.Web.dll</FullName>
       <ModuleName>AnimalStore.Web</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="7E-26-06-1C-18-6F-39-1D-B7-4A-76-B1-03-FE-F5-66-25-02-53-84">
-      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\1000_635245307802880000\Tests_15801668\assembly\dl3\1c5ac765\5094d727_82a6ce01\Rhino.Mocks.dll</FullName>
+    <Module skippedDueTo="MissingPdb" hash="7E-26-06-1C-18-6F-39-1D-B7-4A-76-B1-03-FE-F5-66-25-02-53-84">
+      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\4052_635245386661780000\Tests_23687519\assembly\dl3\52c0a424\5094d727_82a6ce01\Rhino.Mocks.dll</FullName>
       <ModuleName>Rhino.Mocks</ModuleName>
-      <Classes />
-    </Module>
-    <Module skippedDueTo="Filter" hash="83-6E-C3-4E-3E-98-6E-A7-A1-43-6F-5E-C1-40-24-62-C8-DF-CF-7E">
-      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Web.Mvc\v4.0_4.0.0.0__31bf3856ad364e35\System.Web.Mvc.dll</FullName>
-      <ModuleName>System.Web.Mvc</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="Filter" hash="58-95-C1-AF-C4-E5-C6-BB-F3-54-7A-B0-3C-B7-C6-29-C9-42-CA-D4">
@@ -217,34 +212,19 @@
       <ModuleName>System.Core</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="">
+    <Module skippedDueTo="MissingPdb" hash="">
       <FullName>RefEmit_InMemoryManifestModule</FullName>
       <ModuleName>DynamicProxyGenAssembly2</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="">
-      <FullName>RefEmit_InMemoryManifestModule</FullName>
-      <ModuleName>DynamicProxyGenAssembly2</ModuleName>
+    <Module skippedDueTo="Filter" hash="83-6E-C3-4E-3E-98-6E-A7-A1-43-6F-5E-C1-40-24-62-C8-DF-CF-7E">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Web.Mvc\v4.0_4.0.0.0__31bf3856ad364e35\System.Web.Mvc.dll</FullName>
+      <ModuleName>System.Web.Mvc</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="">
-      <FullName>RefEmit_InMemoryManifestModule</FullName>
-      <ModuleName>DynamicProxyGenAssembly2</ModuleName>
-      <Classes />
-    </Module>
-    <Module skippedDueTo="Filter" hash="">
-      <FullName>RefEmit_InMemoryManifestModule</FullName>
-      <ModuleName>DynamicProxyGenAssembly2</ModuleName>
-      <Classes />
-    </Module>
-    <Module skippedDueTo="Filter" hash="64-2D-48-F0-E1-09-BC-71-56-71-2D-C6-49-07-91-F1-ED-CE-C2-E2">
-      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\Microsoft.CSharp\v4.0_4.0.0.0__b03f5f7f11d50a3a\Microsoft.CSharp.dll</FullName>
-      <ModuleName>Microsoft.CSharp</ModuleName>
-      <Classes />
-    </Module>
-    <Module skippedDueTo="Filter" hash="71-9C-84-F4-B1-96-8F-77-ED-76-C9-A0-BE-CE-47-62-13-97-77-35">
-      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Dynamic\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Dynamic.dll</FullName>
-      <ModuleName>System.Dynamic</ModuleName>
+    <Module skippedDueTo="MissingPdb" hash="9F-86-B7-A7-FF-5D-34-CD-9B-2F-BF-5E-EE-DA-97-A8-33-20-E9-D0">
+      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\4052_635245386661780000\Tests_23687519\assembly\dl3\9c73fa68\c08d2046_250acf01\AnimalStore.Model.dll</FullName>
+      <ModuleName>AnimalStore.Model</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="Filter" hash="F9-CB-49-B3-50-76-8B-0B-68-7C-6F-58-FD-0B-00-37-AE-48-9C-01">
@@ -252,12 +232,12 @@
       <ModuleName>System.Web</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="">
+    <Module skippedDueTo="MissingPdb" hash="">
       <FullName>RefEmit_InMemoryManifestModule</FullName>
-      <ModuleName>Anonymously Hosted DynamicMethods Assembly</ModuleName>
+      <ModuleName>DynamicProxyGenAssembly2</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="">
+    <Module skippedDueTo="MissingPdb" hash="">
       <FullName>RefEmit_InMemoryManifestModule</FullName>
       <ModuleName>DynamicProxyGenAssembly2</ModuleName>
       <Classes />
@@ -267,54 +247,34 @@
       <ModuleName>System.Runtime.Serialization</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="">
+    <Module skippedDueTo="MissingPdb" hash="">
       <FullName>RefEmit_InMemoryManifestModule</FullName>
       <ModuleName>DynamicProxyGenAssembly2</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="FB-85-31-12-84-FE-7B-79-5C-39-6C-6F-C7-D6-C2-EF-8D-B0-55-B7">
-      <FullName>C:\Users\Owner\AppData\Local\Temp\nunit20\ShadowCopyCache\1000_635245307802880000\Tests_15801668\assembly\dl3\5a6c175c\20cb2846_250acf01\AnimalStore.Common.dll</FullName>
-      <ModuleName>AnimalStore.Common</ModuleName>
-      <Classes />
-    </Module>
-    <Module skippedDueTo="Filter" hash="">
+    <Module skippedDueTo="MissingPdb" hash="">
       <FullName>RefEmit_InMemoryManifestModule</FullName>
       <ModuleName>DynamicProxyGenAssembly2</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="">
+    <Module skippedDueTo="MissingPdb" hash="">
       <FullName>RefEmit_InMemoryManifestModule</FullName>
       <ModuleName>DynamicProxyGenAssembly2</ModuleName>
       <Classes />
     </Module>
-    <Module skippedDueTo="Filter" hash="">
+    <Module skippedDueTo="MissingPdb" hash="64-2D-48-F0-E1-09-BC-71-56-71-2D-C6-49-07-91-F1-ED-CE-C2-E2">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\Microsoft.CSharp\v4.0_4.0.0.0__b03f5f7f11d50a3a\Microsoft.CSharp.dll</FullName>
+      <ModuleName>Microsoft.CSharp</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="71-9C-84-F4-B1-96-8F-77-ED-76-C9-A0-BE-CE-47-62-13-97-77-35">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Dynamic\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Dynamic.dll</FullName>
+      <ModuleName>System.Dynamic</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="">
       <FullName>RefEmit_InMemoryManifestModule</FullName>
-      <ModuleName>DynamicProxyGenAssembly2</ModuleName>
-      <Classes />
-    </Module>
-    <Module skippedDueTo="Filter" hash="">
-      <FullName>RefEmit_InMemoryManifestModule</FullName>
-      <ModuleName>DynamicProxyGenAssembly2</ModuleName>
-      <Classes />
-    </Module>
-    <Module skippedDueTo="Filter" hash="">
-      <FullName>RefEmit_InMemoryManifestModule</FullName>
-      <ModuleName>DynamicProxyGenAssembly2</ModuleName>
-      <Classes />
-    </Module>
-    <Module skippedDueTo="Filter" hash="">
-      <FullName>RefEmit_InMemoryManifestModule</FullName>
-      <ModuleName>DynamicProxyGenAssembly2</ModuleName>
-      <Classes />
-    </Module>
-    <Module skippedDueTo="Filter" hash="CA-0F-1C-02-CA-E6-B2-7D-D6-E2-D4-72-CB-0E-8C-55-3D-58-EF-98">
-      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\SMDiagnostics\v4.0_4.0.0.0__b77a5c561934e089\SMDiagnostics.dll</FullName>
-      <ModuleName>SMDiagnostics</ModuleName>
-      <Classes />
-    </Module>
-    <Module skippedDueTo="Filter" hash="">
-      <FullName />
-      <ModuleName>5gy5dabs</ModuleName>
+      <ModuleName>Anonymously Hosted DynamicMethods Assembly</ModuleName>
       <Classes />
     </Module>
   </Modules>
