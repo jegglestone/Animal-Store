@@ -1,0 +1,92 @@
+﻿@model AnimalStore.Model.Dog
+
+@{
+    ViewBag.Title = "Dog";
+}
+
+<h2>Dog</h2>
+
+<fieldset>
+    <legend>Dog</legend>
+    <br />
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Headline)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Headline)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FullDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FullDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AgeInYears)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AgeInYears)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AgeInMonths)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AgeInMonths)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isLitter)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isLitter)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isSold)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isSold)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isFemale)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isFemale)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedOn)
+    </div>
+</fieldset>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

@@ -32,7 +32,15 @@
     @foreach (var dog in Model.Data)
     {
         <tr><td colspan="3"><hr /></td></tr>
-        <tr><th colspan="3">@dog.Headline</th></tr>
+        <tr>
+            <th colspan="3">
+                @Html.ActionLink(dog.Headline, 
+                    actionName: "Details", 
+                    controllerName: "Dog", 
+                    routeValues: new { id = dog.Id }, 
+                    htmlAttributes: null)
+            </th>
+        </tr>
         <tr>
             <td rowspan="2">Photo here</td>
             <td>

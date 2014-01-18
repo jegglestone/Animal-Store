@@ -451,6 +451,20 @@ label.checkbox {
     display: inline;
 }
 
+/* display fields */
+.display-label {
+  float:left;
+  clear:left;
+  width:250px;
+  padding-bottom: 10px;
+}
+
+.display-field {
+  float:left;
+  clear:right;
+  padding-bottom: 10px;
+}
+
 input, textarea {
     border: 1px solid #e2e2e2;
     background: #fff;

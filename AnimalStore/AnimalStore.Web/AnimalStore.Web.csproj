@@ -183,6 +183,7 @@
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Controllers\DogController.cs" />
     <Compile Include="DependencyResolution\Bootstrapper.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -351,6 +352,7 @@
     <Content Include="Views\Shared\_TabbedSearchPartial.cshtml" />
     <Content Include="Views\Search\Dogs.cshtml" />
     <Content Include="Views\Shared\_PagingPartial.cshtml" />
+    <Content Include="Views\Dog\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

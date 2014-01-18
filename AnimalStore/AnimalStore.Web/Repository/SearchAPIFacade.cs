@@ -6,6 +6,7 @@ using AnimalStore.Model;
 using AnimalStore.Web.Wrappers.Interfaces;
 using AnimalStore.Web.Factories;
 using AnimalStore.Web.Helpers.Interfaces;
+using System.Web.Http;
 
 namespace AnimalStore.Web.Repository
 {
@@ -84,6 +85,38 @@ namespace AnimalStore.Web.Repository
 
             var response = _webAPIRequestWrapper.GetResponse(url);
             return GetDogsByResponse(response);
+        }
+
+        public Dog GetDogDetails(int id)
+        {
+            Dog dog = new Dog();
+            var response = _webAPIRequestWrapper.GetResponse(string.Format("{0}/{1}", _dogs_Url, id));
+            try
+            {
+                using (var stream = _responseStreamHelper.GetResponseStream(response))
+                {
+                    var apiResponseData = _dataContractJsonSerializerWrapper.ReadObject(stream, DataContractJsonSerializerFactory.GetDataContractJsonSerializer(typeof(Dog)));
+                    if (apiResponseData != null)
+                    {
+                        dog = (Dog)apiResponseData;
+                    }
+                }
+            }
+            catch (HttpResponseException)
+            {
+                // TODO: 404 not found - do something
+
+            }
+            catch (Exception e)
+            {
+                _exceptionHelper.HandleException("Response from Dogs service resulted in an error in GetDogs()", e, (typeof(SearchAPIFacade)));
+            }
+            finally
+            {
+                DisposeOfWebResponse(response);
+            }
+
+            return dog;
         }
 
         private PageableResults<Dog> GetDogsByResponse(WebResponse response)
