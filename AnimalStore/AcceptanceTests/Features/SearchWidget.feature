@@ -5,12 +5,12 @@
 Background: 
 	Given I am on the 'Home' page
 
-Scenario: Nationwide search for any kind of dog
+Scenario: Nationwide search for any kind of dog presents search results
 	When I have selected any breed of dog in the UK 
 	And I press the search button
 	Then I should be presented with a list of dog search results
 
-Scenario Outline: Nationwide search for specific kind of dog
+Scenario Outline: Nationwide search for specific kind of dog presents search results
 	When I have selected a <breed> anywhere in the UK 
 	And I press the search button
 	And there is less than five matching <breed>
