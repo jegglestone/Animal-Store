@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Globalization;
+using System.Runtime.Serialization;
 using AnimalStore.Model.Interfaces;
 using System;
 
@@ -40,10 +41,25 @@ namespace AnimalStore.Model
         [DataMember(Name = "breed")]
         public Breed Breed { get; set; }
 
-        [IgnoreDataMember]
-        public DateTime CreatedOn { get; set; }
+        // This can be private because it's only ever accessed by the serialiser.
+        [DataMember(Name = "formatted_created_on_date")]
+        private string FormattedCreatedOnDate { get; set; }
 
         [IgnoreDataMember]
-        public DateTime ModifiedOn { get; set; }        
+        public DateTime CreatedOn     
+        {
+            get { return DateTime.ParseExact(FormattedCreatedOnDate, "o", CultureInfo.InvariantCulture); }
+            set { FormattedCreatedOnDate = value.ToString("o"); }
+        }
+
+        [DataMember(Name = "formatted_modified_on_date")]
+        private string FormattedModifiedOnDate { get; set; }
+
+        [IgnoreDataMember]
+        public DateTime ModifiedOn
+        {
+            get { return DateTime.ParseExact(FormattedModifiedOnDate, "o", CultureInfo.InvariantCulture); }
+            set { FormattedModifiedOnDate = value.ToString("o"); }
+        }
     }
 }
