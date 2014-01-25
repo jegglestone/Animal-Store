@@ -10,6 +10,9 @@ namespace AnimalStore.Model
         [DataMember(Name="id")]
         public int Id { get; set; }
 
+        [DataMember(Name="created_by_user_id")]
+        public int CreatedByUsedId { get; set; }
+
         [DataMember(Name = "name")]
         public string Name { get; set; }
 

@@ -972,6 +972,19 @@ namespace AnimalStore.Data.Configuration
 
 #endregion
 
+#region assign sellers
+
+            foreach (var dog in context.Dogs)
+            {
+                if (dog.Id % 3 == 0)
+                    dog.CreatedByUsedId = 1;
+                else if (dog.Id % 2 == 0)
+                    dog.CreatedByUsedId = 2;
+                else dog.CreatedByUsedId = 3;
+            }
+
+#endregion
+
             base.Seed(context);
         }
     }
