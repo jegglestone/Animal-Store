@@ -4,86 +4,122 @@
     ViewBag.Title = "Dog";
 }
 
-<h2>Dog</h2>
-
 <fieldset>
-    <legend>Dog</legend>
-    <br />
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
+
+    <div class="float-left">
+        <div style="padding: 5px 5px 5px 5px;">
+            <img src="~/Images/stock-photo-20016198-beautiful-puppy.jpg" />
+        </div>
+        <div id="thumbs">
+            <img src="~/Images/paw_small.jpg" />
+            <img src="~/Images/paw_small.jpg" />
+            <img src="~/Images/paw_small.jpg" />
+            <img src="~/Images/paw_small.jpg" />
+        </div>
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
+        <ul class="float-right" style="list-style: none outside; direction: ltr;">
+            <li>
+                <img src="~/Images/icon-twitter.gif" />
+            </li>
+            <li>
+                <img src="~/Images/icon-facebook.gif" />
+            </li>
+        </ul>
+        <h2>@Html.DisplayFor(model => model.Headline)</h2>
+        <h3>£@Html.DisplayFor(model => model.Price)</h3>
+
+        @*TODO: Display only if isLitter = false*@
+        <div class="display-label">
+            <h4>@Html.DisplayNameFor(model => model.Name):</h4>
+        </div>
+        <div class="display-field">
+            <h4>@Html.DisplayFor(model => model.Name)</h4>
+        </div>
+
+        <div class="display-label">
+            Created on:
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CreatedOn)
+        </div>
+        <div class="display-label">
+            Last updated:
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ModifiedOn)
+        </div>
+        <div class="message-info" style="width: 400px">
+            <h3>Contact the seller</h3>
+            <b>Some place, some town</b>
+
+            <p><b>Notice: </b>Lorem ipsum dolor sit amet, vel et veri offendit philosophia, postea persecuti qui no. Impetus eripuit tacimates vim an, eos quodsi tamquam iuvaret in. An indoctum ocurreret inciderint duo. Et illum possim vel, cum simul principes te. Et ius augue assentior vituperata, sea in impetus graecis adversarium.</p>
+            <p>Telephone : <b>01234 567891</b></p>
+
+            <input type="button" value="Email" />
+        </div>
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Headline)
+        <h3>Full Details</h3>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Headline)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FullDescription)
-    </div>
-    <div class="display-field">
+    <p class="float-left" style="width: 710px; clear: both;">
         @Html.DisplayFor(model => model.FullDescription)
-    </div>
+    </p>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.AgeInYears)
+    <div style="float: left; width: 350px;">
+        <h3>Advice about @Html.DisplayFor(Model => Model.Breed.Name)</h3>
+        <p>
+            Lorem ipsum dolor sit amet, vel et veri offendit philosophia, postea persecuti qui no. Impetus eripuit tacimates vim an, eos quodsi tamquam iuvaret in. An indoctum ocurreret inciderint duo. Et illum possim vel, cum simul principes te. Et ius augue assentior vituperata, sea in impetus graecis adversarium.
+        </p>
+        <p>
+            Molestie consulatu eos at. Quo natum fabellas consequuntur at. His at vidit doming sanctus. Quas summo antiopam vix at, eos simul melius blandit no, affert vulputate in vel. Usu ex altera nostrum definiebas, vero ludus noster pro an, sea posse intellegam eu.
+        </p>
+        <p>
+            Ius an harum nobis ocurreret, his unum fierent honestatis ad, delectus invenire mandamus per ut. Diceret fastidii legendos at sea, soluta animal probatus mel no, soleat repudiare necessitatibus vim id. An pri eirmod deseruisse, vide clita expetenda eam et. Pro at amet reprimique. Ex veri corpora voluptua sed, nam decore bonorum id, nominati posidonium signiferumque est at. Veritus phaedrum appellantur ex vix, sint iudico inimicus qui ea, has denique accusata adipiscing at. At populo audire invidunt his, tantas graeco ex sit, sonet explicari ei eam.
+        </p>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AgeInYears)
-    </div>
+    <div style="float: left; width: 350px; padding-left: 10px;">
+        @*TODO: amend only if isLitter = true*@
+        <h3>Details about @Html.DisplayFor(model => model.Name)</h3>
+        <p>We asked that buyers details should verify all details shown for themselves before committing to purchasing any animal</p>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.AgeInYears)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.AgeInYears)
+        </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.AgeInMonths)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.AgeInMonths)
+        </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.isLitter)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.isLitter)
+        </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.isSold)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.isSold)
+        </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.isFemale)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.isFemale)
+        </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CreatedOn)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.AgeInMonths)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AgeInMonths)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.isLitter)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.isLitter)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.isSold)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.isSold)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.isFemale)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.isFemale)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Price)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Price)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CreatedOn)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CreatedOn)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ModifiedOn)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ModifiedOn)
     </div>
 </fieldset>
 @*<p>
