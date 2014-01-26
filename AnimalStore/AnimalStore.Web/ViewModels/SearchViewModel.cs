@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using AnimalStore.Web.Models;
+using System.Web.Mvc;
 
 namespace AnimalStore.Web.ViewModels
 {
@@ -12,5 +13,6 @@ namespace AnimalStore.Web.ViewModels
         public const string AnyBreed = "Breed (any)";
         public int PageNumber { get; set; }
         public string SortBy { get; set; }
+        public UserProfile UserProfile { get; set; }
     }
 }
