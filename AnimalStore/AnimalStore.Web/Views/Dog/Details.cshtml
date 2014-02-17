@@ -78,43 +78,87 @@
         <p>
             Ius an harum nobis ocurreret, his unum fierent honestatis ad, delectus invenire mandamus per ut. Diceret fastidii legendos at sea, soluta animal probatus mel no, soleat repudiare necessitatibus vim id. An pri eirmod deseruisse, vide clita expetenda eam et. Pro at amet reprimique. Ex veri corpora voluptua sed, nam decore bonorum id, nominati posidonium signiferumque est at. Veritus phaedrum appellantur ex vix, sint iudico inimicus qui ea, has denique accusata adipiscing at. At populo audire invidunt his, tantas graeco ex sit, sonet explicari ei eam.
         </p>
+
+        <h3>General Advice</h3>
+        <p>
+            IMPORTANT: Please read the following advice before buying a new pet. Whilst we do everything in our power to ensure that advertisers are of the highest standard, it's essential that you do your own checks. We advise that buyers always:
+        </p>
+        <ul>
+            <li>See the mother with the puppies.</li>
+            <li>Make sure that puppies are ready to leave their mother - this should not be until they are, at the very least, 8 weeks old.</li>
+            <li>Never send money or a check to someone in exchange for a pet.</li>
+            <li>Ensure the facilities are clean.</li>
+            <li>If you are told the puppy has been vaccinated, ask to see the vaccination card and make sure that the veterinary surgeon's contact details are visible and preferably has an address from within the UK. A written medical history of the animal should be available.</li>
+            <li>See the parents' hereditary screening certificates.</li>
+            <li>Visit between choosing and collecting the puppies if possible.</li>
+            <li>Request a written agreement that purchase is subject to a satisfactory examination by your vet.</li>
+            <li>Ensure all documents are in receipt before the transaction occurs.</li>
+            <li>See the puppies and breeder in person and never buy a dog or puppy without being able to visit it's home.</li>
+            <li>Get as much information as possible about where the puppy has come from, and beware if the breeder is from outside the UK.</li>
+            <li>Do not pay for a KC registered dog or pedigree cat without the certificates as you may never receive them.</li>
+            <li>If you visit a dog or litter and find anything you're not happy with or that the ad is misleading in any way then you MUST contact us.</li>
+            <li>Never buy a puppy just because you feel sorry for it. If you are concerned about the health or welfare of a puppy, please contact the RSPCA 24-hour cruelty and advice line: 0300 1234 999.</li>
+        </ul>
+        <p>
+            REMEMBER:  buying a dog is a lifetime decision - don't make the decision to buy a dog or puppy on a whim. Do some research on the pet you are interested in and that it fits with your lifestyle. Information on different breeds and categories of dog is available in our <*****> section. Insist on seeing the mother with the litter and judge the parents' health and temperament.
+        </p>
+        
     </div>
     <div style="float: left; width: 350px; padding-left: 10px;">
         @*TODO: amend only if isLitter = true*@
         <h3>Details about @Html.DisplayFor(model => model.Name)</h3>
         <p>We asked that buyers details should verify all details shown for themselves before committing to purchasing any animal</p>
         <div class="display-label">
-            @Html.DisplayNameFor(model => model.AgeInYears)
+            Age:
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.AgeInYears)
+            @Html.DisplayFor(model => model.AgeInYears) years and @Html.DisplayFor(model => model.AgeInMonths) months
         </div>
+
         <div class="display-label">
-            @Html.DisplayNameFor(model => model.AgeInMonths)
+            Breed:
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.AgeInMonths)
+            @Html.DisplayFor(model => model.Breed.Name)
         </div>
+
         <div class="display-label">
-            @Html.DisplayNameFor(model => model.isLitter)
+            Category:
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Breed.Category.Name)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.isLitter):
         </div>
         <div class="display-field">
             @Html.DisplayFor(model => model.isLitter)
         </div>
+
         <div class="display-label">
-            @Html.DisplayNameFor(model => model.isSold)
+            @Html.DisplayNameFor(model => model.isSold):
         </div>
         <div class="display-field">
             @Html.DisplayFor(model => model.isSold)
         </div>
+
         <div class="display-label">
-            @Html.DisplayNameFor(model => model.isFemale)
+            @Html.DisplayNameFor(model => model.isFemale):
         </div>
         <div class="display-field">
             @Html.DisplayFor(model => model.isFemale)
         </div>
+
         <div class="display-label">
-            @Html.DisplayNameFor(model => model.CreatedOn)
+            @Html.DisplayNameFor(model => model.CreatedOn):
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CreatedOn)
+        </div>
+
+        <div class="display-label">
+            Last Modified:
         </div>
         <div class="display-field">
             @Html.DisplayFor(model => model.CreatedOn)
@@ -122,7 +166,7 @@
 
     </div>
 </fieldset>
-@*<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = this.Model.Id }) |
+    @Html.ActionLink("Back to List", "Search")
+</p>
