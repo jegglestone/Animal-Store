@@ -4,7 +4,7 @@ using System.Data.Entity;
 namespace AnimalStore.Data.Configuration
 {
     public class CustomDatabaseInitialiser : 
-        DropCreateDatabaseIfModelChanges<DataContext.AnimalsDataContext>
+        DropCreateDatabaseAlways<DataContext.AnimalsDataContext>
     {
         protected override void Seed(DataContext.AnimalsDataContext context)
         {
