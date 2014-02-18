@@ -10,6 +10,9 @@ namespace AnimalStore.Model
         [DataMember(Name = "name")]
         public string Name { get; set; }
 
+        [DataMember(Name = "species_id")]
+        public int SpeciesId { get; set; }
+
         [DataMember(Name = "species")]
         public Species Species { get; set; }
 

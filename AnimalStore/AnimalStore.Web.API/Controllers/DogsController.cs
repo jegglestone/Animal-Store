@@ -92,7 +92,13 @@ namespace AnimalStore.Web.API.Controllers
         [HttpGet]
         public Dog Get(int id)
         {
-            return _dogsRepository.GetById(id);
+            var dog = _dogsRepository.GetById(id);
+            dog.Breed = _breedsRepository.GetById(dog.BreedId);
+
+            //TODO: Add species to the object graph
+            //dog.Breed.Species = _speciesRepository.GetById(dog.Breed.SpeciesId);
+
+            return dog;
         }
 
         // POST api/dogs

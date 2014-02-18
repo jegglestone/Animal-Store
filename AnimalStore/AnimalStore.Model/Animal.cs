@@ -41,6 +41,9 @@ namespace AnimalStore.Model
         [DataMember(Name = "price")]
         public int Price { get; set; }
 
+        [DataMember(Name = "breed_id")]
+        public int BreedId { get; set; }
+
         [DataMember(Name = "breed")]
         public Breed Breed { get; set; }
 
