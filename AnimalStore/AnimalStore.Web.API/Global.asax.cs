@@ -62,8 +62,12 @@ namespace AnimalStore.Web.API
 
             try
             {
+                //TODO: move time values to constants
+
                 var dataContext = new AnimalsDataContext();
+                dataContext.Database.CommandTimeout = 100; //temporarily set to 100 for data-seeding
                 dataContext.Database.Initialize(true);
+                dataContext.Database.CommandTimeout = 20; //set back to 20
             }
             catch (SqlException e)
             {

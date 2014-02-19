@@ -47,6 +47,9 @@ namespace AnimalStore.Model
         [DataMember(Name = "breed")]
         public Breed Breed { get; set; }
 
+        [DataMember(Name = "place_id")]
+        public int PlaceId { get; set; }
+
         // This can be private because it's only ever accessed by the serialiser.
         [DataMember(Name = "formatted_created_on_date")]
         private string FormattedCreatedOnDate { get; set; }

@@ -11,6 +11,7 @@ namespace AnimalStore.Data.DataContext
 {
     public class AnimalsDataContext : DbContext, IAnimalsDataContext
     {
+        public IDbSet<Place> Places { get; set; }
         public IDbSet<Animal> Animals { get; set; }
         public IDbSet<Dog> Dogs { get; set; }
         public IDbSet<Species> Species { get; set; }
@@ -44,6 +45,7 @@ namespace AnimalStore.Data.DataContext
             modelBuilder.Configurations.Add(new BreedConfiguration());
             modelBuilder.Configurations.Add(new SpeciesConfiguration());
             modelBuilder.Configurations.Add(new CategoryConfiguration());
+            modelBuilder.Configurations.Add(new PlaceConfiguration());
         }
 
         public override int SaveChanges()

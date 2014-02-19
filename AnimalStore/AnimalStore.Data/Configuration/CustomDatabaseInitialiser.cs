@@ -1,5 +1,7 @@
 ﻿using AnimalStore.Model;
 using System.Data.Entity;
+using System.IO;
+using System.Text;
 
 namespace AnimalStore.Data.Configuration
 {
@@ -8,6 +10,21 @@ namespace AnimalStore.Data.Configuration
     {
         protected override void Seed(DataContext.AnimalsDataContext context)
         {
+
+#region places
+
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL0To3k);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL3To5k);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL5To7k);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL7To10k);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL10To13k);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL13To16k);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL16To19k);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL19To22k);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL22To25kAndRebuildIndex);
+
+#endregion
+
 #region species
 
             var dogSpecies = new Species { Name = "Dog" };
@@ -433,7 +450,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 250,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -444,7 +463,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 125,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -455,7 +476,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 250,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -466,7 +489,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 190,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -477,7 +502,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 250,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -488,7 +515,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = true,
                 isSold = false,
                 Price = 1200,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -499,7 +528,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 600,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -510,7 +541,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 400,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -521,7 +554,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 350,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -532,7 +567,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 500,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -543,7 +580,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 600,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -554,7 +593,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 980,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -565,7 +606,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 80,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -576,7 +619,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 700,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -587,7 +632,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = true,
                 isSold = false,
                 Price = 600,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -598,7 +645,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 400,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -609,7 +658,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 300,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -620,7 +671,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = true,
                 isSold = false,
                 Price = 300,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -631,7 +684,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 600,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -642,7 +697,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 700,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -653,7 +710,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 300,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -664,7 +723,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 400,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -675,7 +736,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 100,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -686,7 +749,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 300,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -697,7 +762,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = true,
                 isSold = false,
                 Price = 300,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -708,7 +775,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 600,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -719,7 +788,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 700,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -730,7 +801,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 80,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -741,7 +814,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 700,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -752,7 +827,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = true,
                 isSold = false,
                 Price = 600,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -763,7 +840,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 400,
-                Breed = affenpinscher
+                Breed = affenpinscher,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
 #endregion
 
@@ -776,7 +855,9 @@ namespace AnimalStore.Data.Configuration
                 Name = "",
                 isLitter = true,
                 isSold = false,
-                Breed = akita
+                Breed = akita,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -788,7 +869,9 @@ namespace AnimalStore.Data.Configuration
                 Name = "",
                 isLitter = false,
                 isSold = false,
-                Breed = akita
+                Breed = akita,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -799,7 +882,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 isFemale = true,
-                Breed = akita
+                Breed = akita,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -811,7 +896,9 @@ namespace AnimalStore.Data.Configuration
                 isSold = false,
                 isFemale = true,
                 Price = 300,
-                Breed = akita
+                Breed = akita,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -821,7 +908,9 @@ namespace AnimalStore.Data.Configuration
                 Name = null,
                 isLitter = false,
                 isSold = false,
-                Breed = akita
+                Breed = akita,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
 #endregion
 
@@ -836,7 +925,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 500,
-                Breed = bloodhound
+                Breed = bloodhound,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
 
 #endregion
@@ -853,7 +944,9 @@ namespace AnimalStore.Data.Configuration
                 isSold = false,
                 isFemale = true,
                 Price = 400,
-                Breed = bulldog
+                Breed = bulldog,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
 
 #endregion
@@ -869,7 +962,9 @@ namespace AnimalStore.Data.Configuration
                 isSold = false,
                 isFemale = true,
                 Price = 300,
-                Breed = dalmatian
+                Breed = dalmatian,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -880,7 +975,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = true,
                 isSold = false,
                 Price = 550,
-                Breed = dalmatian
+                Breed = dalmatian,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -891,7 +988,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 isFemale = true,
-                Breed = dalmatian
+                Breed = dalmatian,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -902,7 +1001,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = true,
                 isSold = false,
                 Price = 800,
-                Breed = dalmatian
+                Breed = dalmatian,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -913,7 +1014,9 @@ namespace AnimalStore.Data.Configuration
                 Name = null,
                 isLitter = true,
                 isSold = true,
-                Breed = dalmatian
+                Breed = dalmatian,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
             context.Dogs.Add(new Dog
             {
@@ -923,7 +1026,9 @@ namespace AnimalStore.Data.Configuration
                 Name = null,
                 isLitter = true,
                 isSold = true,
-                Breed = dalmatian
+                Breed = dalmatian,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
 #endregion
 
@@ -937,7 +1042,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 Price = 325,
-                Breed = goldenRetriever
+                Breed = goldenRetriever,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
 #endregion
 
@@ -951,7 +1058,9 @@ namespace AnimalStore.Data.Configuration
                 isLitter = false,
                 isSold = false,
                 isFemale = true,
-                Breed = germanShepherd
+                Breed = germanShepherd,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
 
 #endregion
@@ -966,22 +1075,11 @@ namespace AnimalStore.Data.Configuration
                 Name = "Spud",
                 isLitter = true,
                 isSold = false,
-                Breed = mixedBreedDog
+                Breed = mixedBreedDog,
+                CreatedByUsedId = 1,
+                PlaceId = 12472
             });
 #endregion
-
-#endregion
-
-#region assign sellers
-
-            foreach (var dog in context.Dogs)
-            {
-                if (dog.Id % 3 == 0)
-                    dog.CreatedByUsedId = 1;
-                else if (dog.Id % 2 == 0)
-                    dog.CreatedByUsedId = 2;
-                else dog.CreatedByUsedId = 3;
-            }
 
 #endregion
 
