@@ -33,8 +33,8 @@ namespace AnimalStore.Services.UnitTests
                 Assert.That(result, Is.EqualTo(11));
             }
 
-            [TestCase(3, 10, 21, Description = "Third page of 4 with page size 0f 10 returns 21")]
-            [TestCase(4, 10, 31, Description = "Final page of 4 with page size 0f 10 returns 31")]
+            [TestCase(3, 10, 21, TestName = "Third page of 4 with page size 0f 10 returns 21")]
+            [TestCase(4, 10, 31, TestName = "Final page of 4 with page size 0f 10 returns 31")]
             public void GetResultsFrom_Returns_The_Ordinal_Position_Of_The_First_Record_In_The_nth_Page(int currentPage, int pageSizeLimit, int expected)
             {
                 //act
@@ -43,9 +43,9 @@ namespace AnimalStore.Services.UnitTests
                 Assert.That(result, Is.EqualTo(expected));
             }
 
-            [TestCase(3, 10, 21, Description = "Third page of 4 with page size 0f 10 returns 21")]
-            [TestCase(3, 10, 21, Description = "Third page of 4 with page size 0f 10 returns 21")]
-            [TestCase(4, 10, 31, Description = "Final page of 4 with page size 0f 10 returns 31")]
+            [TestCase(3, 10, 21, TestName = "Third page of 4 with page size 0f 10 returns 21")]
+            [TestCase(3, 10, 21, TestName = "Third page of 4 with page size 0f 10 returns 21")]
+            [TestCase(4, 10, 31, TestName = "Final page of 4 with page size 0f 10 returns 31")]
             public void GetResultsFrom_Returns_The_Ordinal_Position_Of_The_First_Record_In_The_nth_Page_With_Odd_Number_Of_Records(int currentPage, int pageSizeLimit, int expected)
             {
                 //act
@@ -86,8 +86,8 @@ namespace AnimalStore.Services.UnitTests
                 Assert.That(result, Is.EqualTo(8));
             }
 
-            [TestCase(38, 4, 2, 10, 20, Description = "Gets the position of the final record on page 2 of 4")]
-            [TestCase(38, 4, 3, 10, 30, Description = "Gets the position of the final record on page 3 of 4")]
+            [TestCase(38, 4, 2, 10, 20, TestName = "Gets the position of the final record on page 2 of 4")]
+            [TestCase(38, 4, 3, 10, 30, TestName = "Gets the position of the final record on page 3 of 4")]
             public void GetResultsTo_Returns_The_Ordinal_Position_Of_The_Last_Record_In_The_Nth_Page(int totalRecords, int numberOfPages, int currentPage, int pageSizeLimit, int expected)
             {
                 //act

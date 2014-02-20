@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using AnimalStore.Model.Interfaces;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AnimalStore.Model
 {
@@ -41,8 +42,14 @@ namespace AnimalStore.Model
         [DataMember(Name = "price")]
         public int Price { get; set; }
 
+        [DataMember(Name = "breed_id")]
+        public int BreedId { get; set; }
+
         [DataMember(Name = "breed")]
         public Breed Breed { get; set; }
+
+        [DataMember(Name = "place_id")]
+        public int PlaceId { get; set; }
 
         // This can be private because it's only ever accessed by the serialiser.
         [DataMember(Name = "formatted_created_on_date")]
@@ -64,5 +71,8 @@ namespace AnimalStore.Model
             get { return DateTime.ParseExact(FormattedModifiedOnDate, "o", CultureInfo.InvariantCulture); }
             set { FormattedModifiedOnDate = value.ToString("o"); }
         }
+
+        [NotMapped]
+        public double Distance { get; set; }
     }
 }

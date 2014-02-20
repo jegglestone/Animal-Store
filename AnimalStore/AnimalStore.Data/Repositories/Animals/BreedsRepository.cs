@@ -3,12 +3,11 @@ using AnimalStore.Model;
 
 namespace AnimalStore.Data.Repositories
 {
-    public class DogsRepository : GenericRepository<Dog>
+    public class BreedsRepository : GenericRepository<Breed>
     {
-        public DogsRepository(IUnitOfWork unitOfWork) :
+        public BreedsRepository(IUnitOfWork unitOfWork) : 
             base(unitOfWork)
         {
         }
     }
 }
-

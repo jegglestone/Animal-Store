@@ -45,9 +45,9 @@ namespace AnimalStore.Web.API.Controllers
 
         // GET api/Dogs/Breed/
         [HttpGet]
-        public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string sortBy = null)
+        public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string sortBy = null, int placeId = 0)
         {
-            var sortedDogsList = _dogSearchHelper.GetSortedDogsList(breedId, sortBy);
+            var sortedDogsList = _dogSearchHelper.GetSortedDogsList(breedId, sortBy, placeId);
 
             var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogsByBreed] + "?breedId=" + breedId + "&page=";
 
@@ -92,7 +92,10 @@ namespace AnimalStore.Web.API.Controllers
         [HttpGet]
         public Dog Get(int id)
         {
-            return _dogsRepository.GetById(id);
+            var dog = _dogsRepository.GetById(id);
+            dog.Breed = _breedsRepository.GetById(dog.BreedId);
+
+            return dog;
         }
 
         // POST api/dogs

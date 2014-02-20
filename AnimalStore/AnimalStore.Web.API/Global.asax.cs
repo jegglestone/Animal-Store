@@ -19,6 +19,9 @@ namespace AnimalStore.Web.API
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
+        private const int _defaultConnectionTimeout = 20;
+        private const int _extendedConnectionTimeoutForBulkDataSeeding = 100;
+
         static void ConfigureApi(HttpConfiguration config)
         {
             var unity = new UnityContainer();
@@ -32,9 +35,13 @@ namespace AnimalStore.Web.API
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IRepository<Breed>, BreedsRepository>(
                 new HierarchicalLifetimeManager());
+            unity.RegisterType<IPlacesRepository, PlacesRepository>(
+                new HierarchicalLifetimeManager());
             unity.RegisterType<IDogBreedFilterStrategy, DogBreedFilter>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IDogCategoryFilterStrategy, DogCategoryFilter>(
+                new HierarchicalLifetimeManager());
+            unity.RegisterType<IDoglocationFilterStrategy, DogLocationFilter>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IAnimalsDataContext, AnimalsDataContext>(
                 new HierarchicalLifetimeManager());
@@ -62,8 +69,14 @@ namespace AnimalStore.Web.API
 
             try
             {
+                //TODO: move time values to constants
                 var dataContext = new AnimalsDataContext();
                 dataContext.Database.Initialize(true);
+
+                var placesContext = new PlacesDataContext();
+                placesContext.Database.CommandTimeout = _extendedConnectionTimeoutForBulkDataSeeding;
+                placesContext.Database.Initialize(true);
+                placesContext.Database.CommandTimeout = _defaultConnectionTimeout;
             }
             catch (SqlException e)
             {

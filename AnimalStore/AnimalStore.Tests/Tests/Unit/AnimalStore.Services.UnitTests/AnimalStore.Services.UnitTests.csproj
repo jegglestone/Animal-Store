@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BreedsControllerTests.cs" />
     <Compile Include="DogsControllerTests.cs" />
+    <Compile Include="DogSearchHelperTests.cs" />
     <Compile Include="ResultsCountHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SUT Builder Factories\DogSearchResultsListBuilder.cs" />

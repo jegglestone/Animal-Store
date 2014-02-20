@@ -22,7 +22,7 @@ namespace AnimalStore.Data.DataContext
 
         static AnimalsDataContext()
         {
-            Database.SetInitializer(new CustomDatabaseInitialiser());
+            Database.SetInitializer(new AnimalsCustomDatabaseInitialiser());
         }
 
         private static string ConnectionStringName
