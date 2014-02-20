@@ -19,6 +19,9 @@ namespace AnimalStore.Web.API
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
+        private const int _defaultConnectionTimeout = 20;
+        private const int _extendedConnectionTimeoutForBulkDataSeeding = 100;
+
         static void ConfigureApi(HttpConfiguration config)
         {
             var unity = new UnityContainer();
@@ -63,11 +66,13 @@ namespace AnimalStore.Web.API
             try
             {
                 //TODO: move time values to constants
-
                 var dataContext = new AnimalsDataContext();
-                dataContext.Database.CommandTimeout = 100; //temporarily set to 100 for data-seeding
                 dataContext.Database.Initialize(true);
-                dataContext.Database.CommandTimeout = 20; //set back to 20
+
+                var placesContext = new PlacesDataContext();
+                placesContext.Database.CommandTimeout = _extendedConnectionTimeoutForBulkDataSeeding;
+                placesContext.Database.Initialize(true);
+                placesContext.Database.CommandTimeout = _defaultConnectionTimeout;
             }
             catch (SqlException e)
             {
