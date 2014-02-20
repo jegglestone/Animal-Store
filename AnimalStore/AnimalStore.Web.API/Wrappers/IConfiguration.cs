@@ -4,5 +4,6 @@
     {
         string GetNationwideSearchResultsDescriptionMessageForAllBreeds();
         string GetNationwideSearchResultsDescriptionMessageForSpecificBreed();
+        int GetSearchResultsMinimumMatchingNumber();
     }
 }

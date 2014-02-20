@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using AnimalStore.Web.API.Models;
+using System.Configuration;
 
 namespace AnimalStore.Web.API.Wrappers
 {
@@ -14,6 +15,12 @@ namespace AnimalStore.Web.API.Wrappers
             get { return ConfigurationManager.AppSettings[Models.AppSettingKeys.NationwideSearchResultsDescriptionMessageForSpecificBreed]; }
         }
 
+        private static int searchResultsMinimumMatchingNumber
+        {
+            get { return int.Parse(ConfigurationManager.AppSettings[AppSettingKeys.SearchResultsMinimumMatchingNumber]); }
+        }
+
+
         public string GetNationwideSearchResultsDescriptionMessageForAllBreeds()
         {
             return nationwideSearchResultsDescriptionMessageForAllBreeds;
@@ -22,6 +29,11 @@ namespace AnimalStore.Web.API.Wrappers
         public string GetNationwideSearchResultsDescriptionMessageForSpecificBreed()
         {
             return nationwideSearchResultsDescriptionMessageForSpecificBreed;
+        }
+
+        public int GetSearchResultsMinimumMatchingNumber()
+        {
+            return searchResultsMinimumMatchingNumber;
         }
     }
 }

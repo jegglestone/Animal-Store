@@ -35,9 +35,13 @@ namespace AnimalStore.Web.API
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IRepository<Breed>, BreedsRepository>(
                 new HierarchicalLifetimeManager());
+            unity.RegisterType<IPlacesRepository, PlacesRepository>(
+                new HierarchicalLifetimeManager());
             unity.RegisterType<IDogBreedFilterStrategy, DogBreedFilter>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IDogCategoryFilterStrategy, DogCategoryFilter>(
+                new HierarchicalLifetimeManager());
+            unity.RegisterType<IDoglocationFilterStrategy, DogLocationFilter>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IAnimalsDataContext, AnimalsDataContext>(
                 new HierarchicalLifetimeManager());

@@ -5,6 +5,6 @@ namespace AnimalStore.Web.API.Helpers
 {
     public interface IDogSearchHelper
     {
-        IEnumerable<Dog> GetSortedDogsList(int breedId, string sortBy);
+        IEnumerable<Dog> GetSortedDogsList(int breedId, string sortBy, int placeId=0);
     }
 }

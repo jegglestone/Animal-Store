@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Model;
 using AnimalStore.Common.Constants;
+using System.Device.Location;
 
 namespace AnimalStore.Web.API.Strategies
 {
@@ -111,6 +112,54 @@ namespace AnimalStore.Web.API.Strategies
             var dogsOrdered = SortDogs(dogsUnsorted, sortBy);
 
             return dogsOrdered;
+        }
+    }
+
+    public interface IDoglocationFilterStrategy
+    {
+        IEnumerable<Dog> Filter(IQueryable<Dog> dogs, int placeId);
+        IEnumerable<Dog> Sort(IEnumerable<Dog> dogsUnsorted);
+    }
+
+    public sealed class DogLocationFilter : IDoglocationFilterStrategy
+    {
+        IRepository<Dog> _dogsRepository;
+        IPlacesRepository _placesRepository;
+
+        public DogLocationFilter(IRepository<Dog> dogsRepository, IPlacesRepository placesRepository)
+        {
+            _dogsRepository = dogsRepository;
+            _placesRepository = placesRepository;
+        }
+
+        //TODO: hefty unit testing
+        public IEnumerable<Dog> Filter(IQueryable<Dog> dogs, int placeId)
+        {
+            var originalPlace = _placesRepository.GetById(placeId);
+            var originalPlaceGeoCode = new GeoCoordinate(originalPlace.Latitude, originalPlace.longitude);
+
+            var allPlaces = _placesRepository.GetAll().ToList();  // Enumerate so we dont query multiple times later
+            var dogsList = dogs.ToList<Dog>();
+            List<Dog> dogsWithinRadius = new List<Dog>();
+
+            foreach (var dog in dogsList)
+            {
+                var place = allPlaces.Where(x => x.Id == dog.PlaceId).Single(); // make sure queries collection not db
+                var currentDogGeoCode = new GeoCoordinate(place.Latitude, place.longitude);
+                var distance = originalPlaceGeoCode.GetDistanceTo(currentDogGeoCode);
+                if (distance < 50000)   //TODO: Configurable number of metres
+                {
+                    dog.Distance = distance;
+                    dogsWithinRadius.Add(dog);
+                }
+            }
+
+            return dogsWithinRadius; 
+        }
+
+        public IEnumerable<Dog> Sort(IEnumerable<Dog> dogsUnsorted)
+        {
+            return dogsUnsorted.OrderBy(dog => dog.Distance);
         }
     }
 }

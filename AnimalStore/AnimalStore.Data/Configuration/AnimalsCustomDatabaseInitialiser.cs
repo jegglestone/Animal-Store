@@ -7,7 +7,7 @@ using System.Text;
 namespace AnimalStore.Data.Configuration
 {
     public class AnimalsCustomDatabaseInitialiser : 
-        DropCreateDatabaseIfModelChanges<DataContext.AnimalsDataContext>
+        DropCreateDatabaseAlways<DataContext.AnimalsDataContext>
     {
         protected override void Seed(DataContext.AnimalsDataContext context)
         {
@@ -440,7 +440,7 @@ namespace AnimalStore.Data.Configuration
                     Price = 250,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
-                    PlaceId = 12472
+                    PlaceId = 1
                 });
                 context.Dogs.Add(new Dog
                 {
@@ -453,7 +453,7 @@ namespace AnimalStore.Data.Configuration
                     Price = 125,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
-                    PlaceId = 12472
+                    PlaceId = 8297
                 });
                 context.Dogs.Add(new Dog
                 {
@@ -466,7 +466,7 @@ namespace AnimalStore.Data.Configuration
                     Price = 250,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
-                    PlaceId = 12472
+                    PlaceId = 1
                 });
                 context.Dogs.Add(new Dog
                 {

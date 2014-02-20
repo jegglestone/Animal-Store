@@ -23,6 +23,10 @@ namespace AnimalStore.Services.UnitTests
         private DogsController _dogsController;
         private IConfiguration _configuration;
 
+        private Category _category;
+        private Breed _bloodhound;
+        private Breed _beagle;
+
         [TestFixtureSetUp]
         public void DogsControllerTestsSetup()
         {
@@ -40,6 +44,11 @@ namespace AnimalStore.Services.UnitTests
 
             _dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper, _configuration);
 
+            _category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };
+
+            _bloodhound = new Breed() { Name = "Bloodhound", Category = _category, Id = 3, Species = null };
+            _beagle = new Breed() { Name = "Beagel", Category = _category, Id = 3, Species = null };
+
             StubDogsRepository();
         }
 
@@ -53,14 +62,8 @@ namespace AnimalStore.Services.UnitTests
         [Test]
         public void Get_Paged_With_Breed_Returns_MatchingDogs_And_Dogs_In_The_Same_Category_Beneath()
         {
-            // arrange
-            var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };
-
-            var bloodhound = new Breed() { Name = "Bloodhound", Category = category, Id = 3, Species = null };
-            var beagle = new Breed() { Name = "Beagel", Category = category, Id = 3, Species = null };
-
-            var bloodhoundHuntingDog = new Dog() { Name = "Tip", Breed = bloodhound };
-            var beagleHuntingDog = new Dog() { Name = "Shep", Breed = beagle };
+            var bloodhoundHuntingDog = new Dog() { Name = "Tip", Breed = _bloodhound };
+            var beagleHuntingDog = new Dog() { Name = "Shep", Breed = _beagle };
 
             var matchedDogs = new DogSearchResultsListBuilder()
                 .WithAnotherDog(beagleHuntingDog)

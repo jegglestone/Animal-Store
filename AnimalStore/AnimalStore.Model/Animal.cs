@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using AnimalStore.Model.Interfaces;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AnimalStore.Model
 {
@@ -70,5 +71,8 @@ namespace AnimalStore.Model
             get { return DateTime.ParseExact(FormattedModifiedOnDate, "o", CultureInfo.InvariantCulture); }
             set { FormattedModifiedOnDate = value.ToString("o"); }
         }
+
+        [NotMapped]
+        public double Distance { get; set; }
     }
 }
