@@ -15,11 +15,15 @@ namespace AnimalStore.Web.API.Wrappers
             get { return ConfigurationManager.AppSettings[Models.AppSettingKeys.NationwideSearchResultsDescriptionMessageForSpecificBreed]; }
         }
 
+        private static string nationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace
+        {
+            get { return ConfigurationManager.AppSettings[Models.AppSettingKeys.NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace]; }
+        }
+
         private static int searchResultsMinimumMatchingNumber
         {
             get { return int.Parse(ConfigurationManager.AppSettings[AppSettingKeys.SearchResultsMinimumMatchingNumber]); }
         }
-
 
         public string GetNationwideSearchResultsDescriptionMessageForAllBreeds()
         {
@@ -29,6 +33,11 @@ namespace AnimalStore.Web.API.Wrappers
         public string GetNationwideSearchResultsDescriptionMessageForSpecificBreed()
         {
             return nationwideSearchResultsDescriptionMessageForSpecificBreed;
+        }
+
+        public string GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace()
+        {
+            return nationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace;
         }
 
         public int GetSearchResultsMinimumMatchingNumber()
