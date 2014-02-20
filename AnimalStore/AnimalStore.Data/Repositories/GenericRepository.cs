@@ -31,7 +31,7 @@ namespace AnimalStore.Data.Repositories
 
         public T GetById(int id)
         {
-            return DBSet.Find(id);
+           return DBSet.Find(id);
         }
 
         public void Add(T entity)
