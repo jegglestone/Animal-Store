@@ -8,5 +8,6 @@
         public const string NationwideSearchResultsDescriptionMessageForSpecificBreed = "NationwideSearchResultsDescriptionMessageForSpecificBreed";
         public const string NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace = "NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace";
         public const string NationwideSearchResultsDescriptionMessageForAllBreeds = "NationwideSearchResultsDescriptionMessageForAllBreeds";
+        public const string SearchRadiusDefaultDistanceInMetres = "SearchRadiusDefaultDistanceInMetres";
     }
 }

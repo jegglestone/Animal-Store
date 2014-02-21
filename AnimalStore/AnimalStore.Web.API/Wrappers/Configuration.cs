@@ -25,6 +25,11 @@ namespace AnimalStore.Web.API.Wrappers
             get { return int.Parse(ConfigurationManager.AppSettings[AppSettingKeys.SearchResultsMinimumMatchingNumber]); }
         }
 
+        private static int searchRadiusDefaultDistanceInMetres
+        {
+            get { return int.Parse(ConfigurationManager.AppSettings[AppSettingKeys.SearchRadiusDefaultDistanceInMetres]); }
+        }
+
         public string GetNationwideSearchResultsDescriptionMessageForAllBreeds()
         {
             return nationwideSearchResultsDescriptionMessageForAllBreeds;
@@ -43,6 +48,11 @@ namespace AnimalStore.Web.API.Wrappers
         public int GetSearchResultsMinimumMatchingNumber()
         {
             return searchResultsMinimumMatchingNumber;
+        }
+
+        public int GetSearchRadiusDefaultDistanceInMetres()
+        {
+            return searchRadiusDefaultDistanceInMetres;
         }
     }
 }

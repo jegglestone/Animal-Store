@@ -6,5 +6,6 @@
         string GetNationwideSearchResultsDescriptionMessageForSpecificBreed();
         string GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace();
         int GetSearchResultsMinimumMatchingNumber();
+        int GetSearchRadiusDefaultDistanceInMetres();
     }
 }

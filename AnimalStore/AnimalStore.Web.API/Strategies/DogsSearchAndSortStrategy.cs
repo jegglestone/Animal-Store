@@ -6,6 +6,7 @@ using AnimalStore.Data.Repositories;
 using AnimalStore.Model;
 using AnimalStore.Common.Constants;
 using System.Device.Location;
+using AnimalStore.Web.API.Wrappers;
 
 namespace AnimalStore.Web.API.Strategies
 {
@@ -125,11 +126,14 @@ namespace AnimalStore.Web.API.Strategies
     {
         IRepository<Dog> _dogsRepository;
         IPlacesRepository _placesRepository;
+        IConfiguration _configuration;
 
-        public DogLocationFilter(IRepository<Dog> dogsRepository, IPlacesRepository placesRepository)
+
+        public DogLocationFilter(IRepository<Dog> dogsRepository, IPlacesRepository placesRepository, IConfiguration configuration)
         {
             _dogsRepository = dogsRepository;
             _placesRepository = placesRepository;
+            _configuration = configuration;
         }
 
         //TODO: hefty unit testing
@@ -147,7 +151,7 @@ namespace AnimalStore.Web.API.Strategies
                 var place = allPlaces.Where(x => x.Id == dog.PlaceId).Single(); // make sure queries collection not db
                 var currentDogGeoCode = new GeoCoordinate(place.Latitude, place.longitude);
                 var distance = originalPlaceGeoCode.GetDistanceTo(currentDogGeoCode);
-                if (distance < 50000)   //TODO: Configurable number of metres
+                if (distance < _configuration.GetSearchRadiusDefaultDistanceInMetres())
                 {
                     dog.Distance = distance;
                     dogsWithinRadius.Add(dog);
