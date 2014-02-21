@@ -27,10 +27,15 @@ namespace AnimalStore.Web.API.Helpers
             _configuration = configuration;
         }
 
-        public IEnumerable<Dog> GetSortedDogsList(int breedId, string sortBy, int placeId=0)
+        public IEnumerable<Dog> GetDogsList(int breedId, string sortBy, int placeId = 0)
         {
             var matchingDogs = _dogBreedFilterStrategy.Filter(breedId);
+            return matchingDogs;
 
+        }
+
+        public IQueryable<Dog> AddDogsInSameCategoryToDogsCollection(IQueryable<Dog> matchingDogs, int breedId)
+        {
             IQueryable<Dog> dogs = null;
             IQueryable<Dog> dogsInSameCategory = null;
 
@@ -41,7 +46,7 @@ namespace AnimalStore.Web.API.Helpers
 
             if (dogsInSameCategory != null && matchingDogs != null)
             {
-                dogs = matchingDogs.Concat(dogsInSameCategory);
+                dogs = matchingDogs.Union(dogsInSameCategory);
             }
             else if (dogsInSameCategory == null && matchingDogs != null)
             {
@@ -51,6 +56,13 @@ namespace AnimalStore.Web.API.Helpers
             {
                 dogs = dogsInSameCategory;
             }
+
+            return dogs;
+        }
+
+        public IEnumerable<Dog> ApplyDogLocationAndSortFiltering(IQueryable<Dog> matchingDogs, int breedId, string sortBy, int placeId = 0)
+        {
+            IQueryable<Dog> dogs = AddDogsInSameCategoryToDogsCollection(matchingDogs, breedId);
 
             // TODO: move to an apply sorting private method?
             IEnumerable<Dog> dogsSorted;
@@ -71,16 +83,16 @@ namespace AnimalStore.Web.API.Helpers
         private IEnumerable<Dog> ApplyLocationFilter(int placeId, int breedId, IQueryable<Dog> dogs)
         {
             var dogsInSameRegion = GetDogsInSameRegion(placeId, breedId, dogs);
-            return dogsInSameRegion.ToList();
+            return dogsInSameRegion;
         }
 
         private IEnumerable<Dog> GetDogsInSameRegion(int placeId, int breedId, IQueryable<Dog> dogs)
         {
             // TODO: see if we have enough matching breeds to just return relevant ones
-            var dogsResults = _dogLocationFilterStrategy.Filter(dogs, placeId).ToList<Dog>();
+            var dogsResults = _dogLocationFilterStrategy.Filter(dogs, placeId);
 
             if (dogsResults.Where(x => x.BreedId == breedId).Count() >= _configuration.GetSearchResultsMinimumMatchingNumber())
-                return dogsResults.Where(x => x.BreedId == breedId).ToList<Dog>();
+                return dogsResults.Where(x => x.BreedId == breedId);
 
             return dogsResults;
         }

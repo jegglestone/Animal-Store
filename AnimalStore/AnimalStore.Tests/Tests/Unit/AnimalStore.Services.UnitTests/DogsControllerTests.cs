@@ -73,7 +73,14 @@ namespace AnimalStore.Services.UnitTests
                 .Build();
 
             var dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
-            dogSearchhelper.Stub(x => x.GetSortedDogsList(3, SearchSortOptions.PRICE_HIGHEST)).Return(matchedDogs);
+
+            dogSearchhelper.Stub(x => x.GetDogsList(3, SearchSortOptions.PRICE_HIGHEST)).Return(matchedDogs);
+
+            dogSearchhelper.Stub(x => x.AddDogsInSameCategoryToDogsCollection(Arg<IQueryable<Dog>>.Is.Anything, Arg<int>.Is.Anything))
+                .Return(matchedDogs.AsQueryable<Dog>());
+
+            dogSearchhelper.Stub(x => x.ApplyDogLocationAndSortFiltering(Arg<IQueryable<Dog>>.Is.Anything, Arg<int>.Is.Anything,
+                Arg<string>.Is.Anything, Arg<int>.Is.Anything)).Return(matchedDogs);
 
             var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, dogSearchhelper, _configuration, _placesRepository);
 
@@ -92,7 +99,13 @@ namespace AnimalStore.Services.UnitTests
             const int page = 2;
             const int pageSize = 5;
 
-            _dogSearchhelper.Stub(x => x.GetSortedDogsList(breedId, SearchSortOptions.PRICE_HIGHEST)).Return(new DogSearchResultsListBuilder().ListOf14Beagels().Build());
+            var dogsList = new DogSearchResultsListBuilder().ListOf14Beagels().Build();
+
+            _dogSearchhelper.Stub(x => x.GetDogsList(breedId, SearchSortOptions.PRICE_HIGHEST)).Return(dogsList);
+            _dogSearchhelper.Stub(x => x.AddDogsInSameCategoryToDogsCollection(Arg<IQueryable<Dog>>.Is.Anything, Arg<int>.Is.Anything))
+                .Return(dogsList.AsQueryable<Dog>());
+            _dogSearchhelper.Stub(x => x.ApplyDogLocationAndSortFiltering(Arg<IQueryable<Dog>>.Is.Anything, Arg<int>.Is.Anything, 
+                Arg<string>.Is.Anything, Arg<int>.Is.Anything)).Return(dogsList);
 
             var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper, _configuration, _placesRepository);
 

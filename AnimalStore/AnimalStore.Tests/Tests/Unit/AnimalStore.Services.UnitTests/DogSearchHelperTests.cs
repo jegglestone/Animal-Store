@@ -23,6 +23,8 @@ namespace AnimalStore.Services.UnitTests
         IRepository<Breed> _breedsRepository;
         IConfiguration _configuration;
 
+        const string sortColumn = "MyColumn";
+
         public DogSearchHelperTests ()
 	    {
             _dogBreedFilterStrategy = MockRepository.GenerateMock<IDogBreedFilterStrategy>();
@@ -50,59 +52,79 @@ namespace AnimalStore.Services.UnitTests
 	    }
 
         [Test]        
-        public void GetSortedDogsList_filters_dogs_by_breed()
+        public void GetDogsList_filters_dogs_by_breed()
         {
             // act
-            _dogSearchHelper.GetSortedDogsList(1, null);
+            _dogSearchHelper.GetDogsList(1, null);
 
             // assert
             _dogBreedFilterStrategy.AssertWasCalled(x => x.Filter(1));
         }
 
+
         [Test]
-        public void GetSortedDogsList_calls_sorting_strategy()
+        public void AddDogsInSameCategoryToDogsCollection_appends_dogs_in_same_category_where_there_are_too_few_breed_results()
         {
-            const string sortColumn = "MyColumn";
+            // arrange
+            var dog = new Dog() { Id = 1, BreedId = 1 };
+
+            var dogs = new List<Dog>() { dog }.AsQueryable<Dog>();
 
             // act
-            _dogSearchHelper.GetSortedDogsList(1, sortColumn);
+            _dogSearchHelper.AddDogsInSameCategoryToDogsCollection(dogs, 1);
 
             // assert
-            _dogCategoryFilterStrategy.Sort(Arg<IQueryable<Dog>>.Is.Anything, sortColumn);
+            _breedsRepository.AssertWasCalled(x => x.GetById(1));
         }
 
         [Test]
-        public void GetSortedDogsList_appends_dogs_in_same_category_where_there_are_too_few_breed_results()
+        public void AddDogsInSameCategoryToDogsCollection_when_appending_dogs_in_same_category_then_there_are_no_duplicates_returned()
+        {
+            // arrange
+            var dog = new Dog() { Id = 1, BreedId = 1 };
+
+            var dogs = new List<Dog>() { dog }.AsQueryable<Dog>();
+            var dogsInSameCategory = new List<Dog>() { dog }.AsQueryable<Dog>();
+
+            var dogCategoryFilterStrategy = MockRepository.GenerateMock<IDogCategoryFilterStrategy>();
+            var dogBreedFilterStrategy = MockRepository.GenerateMock<IDogBreedFilterStrategy>();
+
+            dogCategoryFilterStrategy.Stub(x => x.Filter(Arg<int>.Is.Anything, Arg<int>.Is.Anything)).Return(dogs);
+
+            // act
+            var dogSearchHelper = new DogSearchHelper(dogBreedFilterStrategy, dogCategoryFilterStrategy, _dogLocationFilterStrategy, _breedsRepository, _configuration);
+            var result = dogSearchHelper.AddDogsInSameCategoryToDogsCollection(dogs, 1);
+
+            Assert.That(result.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ApplyDogLocationAndSortFiltering_filters_dogs_by_place()
         {
 
         }
 
         [Test]
-        public void GetSortedDogsList_when_appending_dogs_in_same_category_then_there_are_no_duplicates_returned()
+        public void ApplyDogLocationAndSortFiltering_calls_sorting_strategy_when_not_filtering_on_place()
+        {
+            var dog = new Dog() { Id = 1, BreedId = 1 };
+            var dogs = new List<Dog>() { dog }.AsQueryable<Dog>();
+
+            // act
+            _dogSearchHelper.ApplyDogLocationAndSortFiltering(dogs, 1, sortColumn, 0);
+
+            // assert
+            _dogCategoryFilterStrategy.AssertWasCalled(x => x.Sort(dogs, sortColumn));
+        }
+
+        [Test]
+        public void ApplyDogLocationAndSortFiltering_appends_dogs_in_same_region_where_there_are_too_few_Place_results()
         {
 
         }
 
         [Test]
-        public void GetSortedDogsList_filters_dogs_by_place()
-        {
-
-        }
-
-        [Test]
-        public void GetSortedDogsList_calls_sorting_strategy_when_filtering_on_place()
-        {
-
-        }
-
-        [Test]
-        public void GetSortedDogsList_appends_dogs_in_same_region_where_there_are_too_few_Place_results()
-        {
-
-        }
-
-        [Test]
-        public void GetSortedDogsList_when_appending_dogs_in_same_region_then_there_are_no_duplicates_returned()
+        public void ApplyDogLocationAndSortFiltering_when_appending_dogs_in_same_region_then_there_are_no_duplicates_returned()
         {
 
         }

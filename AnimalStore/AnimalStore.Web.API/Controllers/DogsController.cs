@@ -49,7 +49,9 @@ namespace AnimalStore.Web.API.Controllers
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string sortBy = null, int placeId = 0)
         {
-            var sortedDogsList = _dogSearchHelper.GetSortedDogsList(breedId, sortBy, placeId);
+            var sortedDogsList = _dogSearchHelper.GetDogsList(breedId, sortBy, placeId);
+
+            sortedDogsList = _dogSearchHelper.ApplyDogLocationAndSortFiltering(sortedDogsList.AsQueryable<Dog>(), breedId, sortBy, placeId);
 
             var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogsByBreed] + "?breedId=" + breedId + "&page=";
 
@@ -78,7 +80,6 @@ namespace AnimalStore.Web.API.Controllers
                 ? GetBreedSpecificSearchResultDescription(resultsFrom, resultsTo, totalCount, breedName, placeId)
                 : GetAllBreedsSearchResultDescription(resultsFrom, resultsTo, totalCount, placeId);
                 
-
             return new PageableResults<Dog>
             {
                 Data = pagedResults,
