@@ -115,13 +115,13 @@ namespace AnimalStore.Web.API.Strategies
         }
     }
 
-    public interface IDoglocationFilterStrategy
+    public interface IDogLocationFilterStrategy
     {
         IEnumerable<Dog> Filter(IQueryable<Dog> dogs, int placeId);
         IEnumerable<Dog> Sort(IEnumerable<Dog> dogsUnsorted);
     }
 
-    public sealed class DogLocationFilter : IDoglocationFilterStrategy
+    public sealed class DogLocationFilter : IDogLocationFilterStrategy
     {
         IRepository<Dog> _dogsRepository;
         IPlacesRepository _placesRepository;

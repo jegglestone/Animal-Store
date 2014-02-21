@@ -14,11 +14,11 @@ namespace AnimalStore.Web.API.Helpers
     {
         private readonly IDogBreedFilterStrategy _dogBreedFilterStrategy;
         private readonly IDogCategoryFilterStrategy _dogCategoryFilterStrategy;
-        private readonly IDoglocationFilterStrategy _dogLocationFilterStrategy;
+        private readonly IDogLocationFilterStrategy _dogLocationFilterStrategy;
         private readonly IRepository<Breed> _breedsRepository;
         private readonly IConfiguration _configuration;
 
-        public DogSearchHelper(IDogBreedFilterStrategy dogBreedFilterStrategy, IDogCategoryFilterStrategy dogCategoryFilterStrategy, IDoglocationFilterStrategy dogLocationFilterStrategy, IRepository<Breed> breedsRepository, IConfiguration configuration)
+        public DogSearchHelper(IDogBreedFilterStrategy dogBreedFilterStrategy, IDogCategoryFilterStrategy dogCategoryFilterStrategy, IDogLocationFilterStrategy dogLocationFilterStrategy, IRepository<Breed> breedsRepository, IConfiguration configuration)
         {
             _dogBreedFilterStrategy = dogBreedFilterStrategy;
             _dogCategoryFilterStrategy = dogCategoryFilterStrategy;
@@ -64,12 +64,10 @@ namespace AnimalStore.Web.API.Helpers
         {
             IQueryable<Dog> dogs = AddDogsInSameCategoryToDogsCollection(matchingDogs, breedId);
 
-            // TODO: move to an apply sorting private method?
             IEnumerable<Dog> dogsSorted;
-
             if (isLocationSearch(placeId))
             {
-                dogsSorted = ApplyLocationFilter(placeId, breedId, dogs);
+                dogsSorted = GetDogsInSameRegion(placeId, breedId, dogs);
                 dogsSorted = _dogLocationFilterStrategy.Sort(dogsSorted);
             }
             else
@@ -78,12 +76,6 @@ namespace AnimalStore.Web.API.Helpers
             }
 
             return dogsSorted;
-        }
-
-        private IEnumerable<Dog> ApplyLocationFilter(int placeId, int breedId, IQueryable<Dog> dogs)
-        {
-            var dogsInSameRegion = GetDogsInSameRegion(placeId, breedId, dogs);
-            return dogsInSameRegion;
         }
 
         private IEnumerable<Dog> GetDogsInSameRegion(int placeId, int breedId, IQueryable<Dog> dogs)

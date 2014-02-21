@@ -41,7 +41,7 @@ namespace AnimalStore.Web.API
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IDogCategoryFilterStrategy, DogCategoryFilter>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IDoglocationFilterStrategy, DogLocationFilter>(
+            unity.RegisterType<IDogLocationFilterStrategy, DogLocationFilter>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IAnimalsDataContext, AnimalsDataContext>(
                 new HierarchicalLifetimeManager());
