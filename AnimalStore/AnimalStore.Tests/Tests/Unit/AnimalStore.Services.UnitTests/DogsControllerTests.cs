@@ -18,6 +18,7 @@ namespace AnimalStore.Services.UnitTests
     {
         private IRepository<Dog> _dogsRepository;
         private IRepository<Breed> _breedsRepository;
+        private IPlacesRepository _placesRepository;
         private IDogSearchHelper _dogSearchhelper;
         private IUnitOfWork _unitofWork;
         private DogsController _dogsController;
@@ -32,6 +33,7 @@ namespace AnimalStore.Services.UnitTests
         {
             _dogsRepository = MockRepository.GenerateMock<IRepository<Dog>>();
             _breedsRepository = MockRepository.GenerateMock<IRepository<Breed>>();
+            _placesRepository = MockRepository.GenerateMock<PlacesRepository>();
             _unitofWork = MockRepository.GenerateMock<IUnitOfWork>();
             _dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
             _configuration = MockRepository.GenerateMock<IConfiguration>();
@@ -42,7 +44,7 @@ namespace AnimalStore.Services.UnitTests
             _configuration.Stub(x => x.GetNationwideSearchResultsDescriptionMessageForAllBreeds()).Return("Search results {0} to {1} out of {2} results for all breeds nationwide.");
             _configuration.Stub(x => x.GetNationwideSearchResultsDescriptionMessageForSpecificBreed()).Return("Showing results {0} to {1} out of {2} results for {3} nationwide");
 
-            _dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper, _configuration);
+            _dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper, _configuration, _placesRepository);
 
             _category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };
 
@@ -73,7 +75,7 @@ namespace AnimalStore.Services.UnitTests
             var dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
             dogSearchhelper.Stub(x => x.GetSortedDogsList(3, SearchSortOptions.PRICE_HIGHEST)).Return(matchedDogs);
 
-            var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, dogSearchhelper, _configuration);
+            var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, dogSearchhelper, _configuration, _placesRepository);
 
             //act
             var result = dogsController.GetPaged(3, 1, 20, SearchSortOptions.PRICE_HIGHEST);
@@ -92,7 +94,7 @@ namespace AnimalStore.Services.UnitTests
 
             _dogSearchhelper.Stub(x => x.GetSortedDogsList(breedId, SearchSortOptions.PRICE_HIGHEST)).Return(new DogSearchResultsListBuilder().ListOf14Beagels().Build());
 
-            var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper, _configuration);
+            var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper, _configuration, _placesRepository);
 
             //act
             var result = dogsController.GetPaged(breedId, page, pageSize, SearchSortOptions.PRICE_HIGHEST);

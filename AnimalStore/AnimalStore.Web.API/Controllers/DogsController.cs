@@ -19,15 +19,17 @@ namespace AnimalStore.Web.API.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Dog> _dogsRepository;
         private readonly IRepository<Breed> _breedsRepository;
+        private readonly IPlacesRepository _placesRepository;
         private readonly IDogSearchHelper _dogSearchHelper;
         private readonly IConfiguration _configuration;
 
-        public DogsController(IRepository<Dog> dogsRepository, IRepository<Breed> breedsRepository, IUnitOfWork unitOfWork, IDogSearchHelper dogSearchHelper, IConfiguration configuration)
+        public DogsController(IRepository<Dog> dogsRepository, IRepository<Breed> breedsRepository, IUnitOfWork unitOfWork, IDogSearchHelper dogSearchHelper, IConfiguration configuration, IPlacesRepository placesRepository)
         {
             _unitOfWork = unitOfWork;
             _dogsRepository = dogsRepository;
             _dogSearchHelper = dogSearchHelper;
             _breedsRepository = breedsRepository;
+            _placesRepository = placesRepository;
             _configuration = configuration;
         }
 
@@ -53,10 +55,10 @@ namespace AnimalStore.Web.API.Controllers
 
             var breedName = _breedsRepository.GetById(breedId).Name;
 
-            return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName);
+            return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName, placeId);
         }
 
-        private PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl, string breedName = null)
+        private PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl, string breedName = null, int placeId = 0)
         {
             IEnumerable<Dog> enumerable = dogs as IList<Dog> ?? dogs.ToList();
             var totalCount = enumerable.Count();
@@ -73,8 +75,9 @@ namespace AnimalStore.Web.API.Controllers
             var resultsTo = ResultsCountHelper.GetResultsTo(totalCount, totalPages, page, pageSize);
 
             var resultsDescription = breedName != null
-                ? string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreed(), resultsFrom, resultsTo, totalCount, breedName)
-                : string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForAllBreeds(), resultsFrom, resultsTo, totalCount);
+                ? GetBreedSpecificSearchResultDescription(resultsFrom, resultsTo, totalCount, breedName, placeId)
+                : GetAllBreedsSearchResultDescription(resultsFrom, resultsTo, totalCount, placeId);
+                
 
             return new PageableResults<Dog>
             {
@@ -86,6 +89,35 @@ namespace AnimalStore.Web.API.Controllers
                 TotalCount = totalCount,
                 TotalPages = totalPages
             };
+        }
+
+        private string GetAllBreedsSearchResultDescription(int resultsFrom, int resultsTo, int totalCount, int placeId)
+        {
+            return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForAllBreeds(), resultsFrom, resultsTo, totalCount);
+        }
+
+        private bool isLocationSearch(int placeId)
+        {
+            if (placeId != 0)
+                return true;
+            return false;
+        }
+
+        // TODO: unit test
+        private string GetBreedSpecificSearchResultDescription(int resultsFrom, int resultsTo, int totalCount, string breedName, int placeId)
+        {
+            if (placeId != 0)
+            {
+                string placeName = GetPlaceName(placeId);
+                return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace(), resultsFrom, resultsTo, totalCount, breedName, placeName);
+            }
+            else
+                return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreed(), resultsFrom, resultsTo, totalCount, breedName);
+        }
+
+        private string GetPlaceName(int placeId)
+        {
+            return _placesRepository.GetById(placeId).Name;
         }
 
         // GET api/dogs/5

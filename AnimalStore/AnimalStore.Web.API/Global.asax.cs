@@ -20,7 +20,7 @@ namespace AnimalStore.Web.API
     public class WebApiApplication : System.Web.HttpApplication
     {
         private const int _defaultConnectionTimeout = 20;
-        private const int _extendedConnectionTimeoutForBulkDataSeeding = 100;
+        private const int _extendedConnectionTimeoutForBulkDataSeeding = 1000;
 
         static void ConfigureApi(HttpConfiguration config)
         {

@@ -6,6 +6,7 @@
         public const string BaseUrlPagedDogs = "BaseUrlPagedDogs";
         public const string BaseUrlPagedDogsByBreed = "BaseUrlPagedDogsByBreed";
         public const string NationwideSearchResultsDescriptionMessageForSpecificBreed = "NationwideSearchResultsDescriptionMessageForSpecificBreed";
+        public const string NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace = "NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace";
         public const string NationwideSearchResultsDescriptionMessageForAllBreeds = "NationwideSearchResultsDescriptionMessageForAllBreeds";
     }
 }
