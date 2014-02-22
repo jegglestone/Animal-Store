@@ -1,14 +1,9 @@
-﻿using AnimalStore.Data.DataContext;
-using AnimalStore.Data.UnitsOfWork;
-using AnimalStore.Model;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AnimalStore.Data.DataContext;
+using AnimalStore.Model;
 
-namespace AnimalStore.Data.Repositories
+namespace AnimalStore.Data.Repositories.Places
 {
     public interface IPlacesRepository
     {
@@ -18,22 +13,22 @@ namespace AnimalStore.Data.Repositories
     }
     public class PlacesRepository: IPlacesRepository
     {
-        private IDbSet<Place> DBSet { get; set; }
+        private IDbSet<Place> DbSet { get; set; }
         public DbContext Context { get; set; }
 
         public PlacesRepository()
         {
             Context = new PlacesDataContext();
-            DBSet = Context.Set<Place>();
+            DbSet = Context.Set<Place>();
         }
         public IQueryable<Place> GetAll()
         {
-            return DBSet;
+            return DbSet;
         }
 
         public Place GetById(int id)
         {
-            return DBSet.Find(id);
+            return DbSet.Find(id);
         }
     }
 }

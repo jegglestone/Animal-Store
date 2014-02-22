@@ -5,54 +5,54 @@ namespace AnimalStore.Web.API.Wrappers
 {
     public class Configuration : IConfiguration
     {
-        private static string nationwideSearchResultsDescriptionMessageForAllBreeds
+        private static string _nationwideSearchResultsDescriptionMessageForAllBreeds
         {
-            get { return ConfigurationManager.AppSettings[Models.AppSettingKeys.NationwideSearchResultsDescriptionMessageForAllBreeds]; }
+            get { return ConfigurationManager.AppSettings[AppSettingKeys.NationwideSearchResultsDescriptionMessageForAllBreeds]; }
         }
 
-        private static string nationwideSearchResultsDescriptionMessageForSpecificBreed
+        private static string _nationwideSearchResultsDescriptionMessageForSpecificBreed
         {
-            get { return ConfigurationManager.AppSettings[Models.AppSettingKeys.NationwideSearchResultsDescriptionMessageForSpecificBreed]; }
+            get { return ConfigurationManager.AppSettings[AppSettingKeys.NationwideSearchResultsDescriptionMessageForSpecificBreed]; }
         }
 
-        private static string nationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace
+        private static string _nationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace
         {
-            get { return ConfigurationManager.AppSettings[Models.AppSettingKeys.NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace]; }
+            get { return ConfigurationManager.AppSettings[AppSettingKeys.NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace]; }
         }
 
-        private static int searchResultsMinimumMatchingNumber
+        private static int _searchResultsMinimumMatchingNumber
         {
             get { return int.Parse(ConfigurationManager.AppSettings[AppSettingKeys.SearchResultsMinimumMatchingNumber]); }
         }
 
-        private static int searchRadiusDefaultDistanceInMetres
+        private static int _searchRadiusDefaultDistanceInMetres
         {
             get { return int.Parse(ConfigurationManager.AppSettings[AppSettingKeys.SearchRadiusDefaultDistanceInMetres]); }
         }
 
         public string GetNationwideSearchResultsDescriptionMessageForAllBreeds()
         {
-            return nationwideSearchResultsDescriptionMessageForAllBreeds;
+            return _nationwideSearchResultsDescriptionMessageForAllBreeds;
         }
 
         public string GetNationwideSearchResultsDescriptionMessageForSpecificBreed()
         {
-            return nationwideSearchResultsDescriptionMessageForSpecificBreed;
+            return _nationwideSearchResultsDescriptionMessageForSpecificBreed;
         }
 
         public string GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace()
         {
-            return nationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace;
+            return _nationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace;
         }
 
         public int GetSearchResultsMinimumMatchingNumber()
         {
-            return searchResultsMinimumMatchingNumber;
+            return _searchResultsMinimumMatchingNumber;
         }
 
         public int GetSearchRadiusDefaultDistanceInMetres()
         {
-            return searchRadiusDefaultDistanceInMetres;
+            return _searchRadiusDefaultDistanceInMetres;
         }
     }
 }

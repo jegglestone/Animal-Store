@@ -41,8 +41,8 @@ namespace AnimalStore.Web.UnitTests.Controllers
                         {
                             Data = new List<Dog>()
                                 {
-                                    new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, isFemale = false, isSold = false},
-                                    new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, isFemale = true, isSold = false},
+                                    new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, IsFemale = false, IsSold = false},
+                                    new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, IsFemale = true, IsSold = false},
                                 }
                         });
 
@@ -51,10 +51,10 @@ namespace AnimalStore.Web.UnitTests.Controllers
 
                 var customHttpRequestWrapper = MockRepository.GenerateMock<ICustomHttpRequestWrapper>();
 
-                var SearchController = new SearchController(searchRepository, SessionStateHelper.FakeHttpContext("http://localhost/example"), customHttpRequestWrapper, _configMgr);
+                var searchController = new SearchController(searchRepository, SessionStateHelper.FakeHttpContext("http://localhost/example"), customHttpRequestWrapper, _configMgr);
 
                 // act
-                SearchController.Dogs(_searchViewModel);
+                searchController.Dogs(_searchViewModel);
 
                 // assert
                 searchRepository.AssertWasCalled(x => x.GetDogs(1, 25));
@@ -65,8 +65,8 @@ namespace AnimalStore.Web.UnitTests.Controllers
             {
                 var dogs = new List<Dog>()
                     {
-                        new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, isFemale = false, isSold = false},
-                        new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, isFemale = true, isSold = false},
+                        new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, IsFemale = false, IsSold = false},
+                        new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, IsFemale = true, IsSold = false},
                     };
                 var pageableResults = new PageableResults<Dog>()
                     {
@@ -81,10 +81,10 @@ namespace AnimalStore.Web.UnitTests.Controllers
 
                 var httpRequestWrapper = MockRepository.GenerateMock<ICustomHttpRequestWrapper>();
 
-                var SearchController = new SearchController(searchRepository, SessionStateHelper.FakeHttpContext("http://localhost/example"), httpRequestWrapper, _configMgr);
+                var searchController = new SearchController(searchRepository, SessionStateHelper.FakeHttpContext("http://localhost/example"), httpRequestWrapper, _configMgr);
 
                 // act
-                var result = (ViewResult) SearchController.Dogs(_searchViewModel);
+                var result = (ViewResult) searchController.Dogs(_searchViewModel);
 
                 // assert
                 Assert.That(result.Model, Is.EqualTo(pageableResults));
@@ -100,8 +100,8 @@ namespace AnimalStore.Web.UnitTests.Controllers
                         {
                             Data = new List<Dog>()
                                 {
-                                    new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, isFemale = false, isSold = false},
-                                    new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, isFemale = true, isSold = false},
+                                    new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, IsFemale = false, IsSold = false},
+                                    new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, IsFemale = true, IsSold = false},
                                 }
                         });
 
@@ -111,10 +111,10 @@ namespace AnimalStore.Web.UnitTests.Controllers
 
                 var httpRequestWrapper = MockRepository.GenerateMock<ICustomHttpRequestWrapper>();
 
-                var SearchController = new SearchController(searchRepository, SessionStateHelper.FakeHttpContext("http://localhost/example"), httpRequestWrapper, _configMgr);
+                var searchController = new SearchController(searchRepository, SessionStateHelper.FakeHttpContext("http://localhost/example"), httpRequestWrapper, _configMgr);
 
                 // act
-                SearchController.Dogs(_searchViewModel);
+                searchController.Dogs(_searchViewModel);
 
                 // assert
                 searchRepository.AssertWasCalled(x => x.GetDogs(1, 25, 4, SearchSortOptions.PRICE_LOWEST));
@@ -125,8 +125,8 @@ namespace AnimalStore.Web.UnitTests.Controllers
             {
                 var dogs = new List<Dog>()
                     {
-                        new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, isFemale = false, isSold = false},
-                        new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, isFemale = true, isSold = false},
+                        new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, IsFemale = false, IsSold = false},
+                        new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, IsFemale = true, IsSold = false},
                     };
                 var pageableResults = new PageableResults<Dog>()
                     {
@@ -142,10 +142,10 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 var httpRequestWrapper = MockRepository.GenerateMock<ICustomHttpRequestWrapper>();
 
                 var session = SessionStateHelper.FakeHttpContext("http://localhost/example");
-                var SearchController = new SearchController(searchRepository, session, httpRequestWrapper, _configMgr);
+                var searchController = new SearchController(searchRepository, session, httpRequestWrapper, _configMgr);
 
                 // act
-                var result = (ViewResult) SearchController.Dogs(_searchViewModel);
+                var result = (ViewResult) searchController.Dogs(_searchViewModel);
                 var searchViewModelFromSession = (SearchViewModel) session["searchViewModel"];
 
                 // assert
@@ -161,7 +161,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
             const bool _isNationalSearch = true;
             const int _selectedBreed = 3;
             const int _pageNumber = 2;
-            private SearchViewModel searchViewModel;
+            private SearchViewModel _searchViewModel;
             private List<Dog> _dogs;
             private IConfiguration _configMgr;
 
@@ -171,15 +171,15 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 _configMgr = MockRepository.GenerateMock<IConfiguration>();
                 _configMgr.Stub(x => x.GetDefaultSearchResultPageSize()).Return(25);
 
-                searchViewModel = MockRepository.GenerateMock<SearchViewModel>();
-                searchViewModel.IsNationalSearch = _isNationalSearch;
-                searchViewModel.SelectedBreed = _selectedBreed;
-                searchViewModel.PageNumber = _pageNumber;
+                _searchViewModel = MockRepository.GenerateMock<SearchViewModel>();
+                _searchViewModel.IsNationalSearch = _isNationalSearch;
+                _searchViewModel.SelectedBreed = _selectedBreed;
+                _searchViewModel.PageNumber = _pageNumber;
 
                 _dogs = new List<Dog>()
                     {
-                        new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, isFemale = false, isSold = false},
-                        new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, isFemale = true, isSold = false},
+                        new Dog() {AgeInMonths = 3, AgeInYears = 0, Id = 1, IsFemale = false, IsSold = false},
+                        new Dog() {AgeInMonths = 15, AgeInYears = 1, Id = 3, IsFemale = true, IsSold = false},
                     };
             }
 
@@ -187,7 +187,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
             public void Dogs_Search_Correctly_Adds_SearchViewModel_To_the_Session ()
             {
                 const string sortBy = "price";
-                searchViewModel.SortBy = sortBy;
+                _searchViewModel.SortBy = sortBy;
 
                 var pageableResults = new PageableResults<Dog>(){ Data = _dogs };
 
@@ -199,10 +199,10 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 var httpRequestWrapper = MockRepository.GenerateMock<ICustomHttpRequestWrapper>();
                 httpRequestWrapper.Stub(x => x.GetQueryStringValueByKey(QuerystringKeys.SortBy)).Return(sortBy);
 
-                var SearchController = new SearchController(searchRepository, session, httpRequestWrapper, _configMgr);
+                var searchController = new SearchController(searchRepository, session, httpRequestWrapper, _configMgr);
 
                 // act
-                var result = (ViewResult) SearchController.Dogs(searchViewModel);
+                var result = (ViewResult) searchController.Dogs(_searchViewModel);
                 var searchViewModelFromSession = (SearchViewModel) session["searchViewModel"];
 
                 // assert
@@ -224,15 +224,15 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 searchRepository.Stub(x => x.GetDogs(_pageNumber, 25, _selectedBreed, sortBy)).Return(pageableResults);
 
                 var session = SessionStateHelper.FakeHttpContext("http://localhost/test?sortBy=" + sortBy);
-                session["SearchViewModel"] = searchViewModel;
+                session["SearchViewModel"] = _searchViewModel;
 
                 var httpRequestWrapper = MockRepository.GenerateMock<ICustomHttpRequestWrapper>();
                 httpRequestWrapper.Stub(x => x.GetQueryStringValueByKey(QuerystringKeys.SortBy)).Return(sortBy);
 
-                var SearchController = new SearchController(searchRepository, session, httpRequestWrapper, _configMgr);
+                var searchController = new SearchController(searchRepository, session, httpRequestWrapper, _configMgr);
 
                 // act
-                SearchController.DogsSorted();
+                searchController.DogsSorted();
 
                 // assert
                 var searchViewModelFromSession = (SearchViewModel)session["searchViewModel"];
@@ -258,10 +258,10 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 var httpRequestWrapper = MockRepository.GenerateMock<ICustomHttpRequestWrapper>();
                 httpRequestWrapper.Stub(x => x.GetQueryStringValueByKey(QuerystringKeys.SortBy)).Return(sortBy);
 
-                var SearchController = new SearchController(searchRepository, session, httpRequestWrapper, _configMgr);
+                var searchController = new SearchController(searchRepository, session, httpRequestWrapper, _configMgr);
 
                 // act
-                var result = (RedirectToRouteResult)SearchController.DogsSorted();
+                var result = (RedirectToRouteResult)searchController.DogsSorted();
 
                 // assert
                 Assert.That(result.RouteValues["Controller"].Equals("Home"));

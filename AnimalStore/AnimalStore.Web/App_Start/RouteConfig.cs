@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace AnimalStore.Web.App_Start
+namespace AnimalStore.Web
 {
     public class RouteConfig
     {

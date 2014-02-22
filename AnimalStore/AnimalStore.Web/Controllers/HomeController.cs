@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using AnimalStore.Common.Constants;
 using AnimalStore.Web.Repository;
 using AnimalStore.Web.ViewModels;
-using AnimalStore.Web.Helpers;
 
 namespace AnimalStore.Web.Controllers
 {

@@ -44,7 +44,7 @@
         <tr>
             <td rowspan="2">Photo here</td>
             <td>
-                @if (!dog.isLitter && !string.IsNullOrEmpty(dog.Name))
+                @if (!dog.IsLitter && !string.IsNullOrEmpty(dog.Name))
                 {
                     <div style="float: left; width: 80px;">Name:</div>
                     @Html.Label(@dog.Name)           

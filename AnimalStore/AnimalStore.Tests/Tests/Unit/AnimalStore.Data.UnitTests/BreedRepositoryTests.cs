@@ -1,5 +1,5 @@
 ﻿using AnimalStore.Data.DataContext;
-using AnimalStore.Data.Repositories;
+using AnimalStore.Data.Repositories.Animals;
 using AnimalStore.Data.UnitTests.Fakes;
 using AnimalStore.Model;
 using NUnit.Framework;
@@ -21,17 +21,17 @@ namespace AnimalStore.Data.UnitTests
         public void GetById_ExecutesTheQuery()
         {
             var dogSpecies = new Species { Id = 1, Name = "Dog" };
-            var YorkieTerrier = new Breed { Id = 1, Name = "Yorkshire Terrier", Species = dogSpecies };
+            var yorkieTerrier = new Breed { Id = 1, Name = "Yorkshire Terrier", Species = dogSpecies };
 
             using (var uow = new UnitsOfWork.UnitOfWork<FakeAnimalsDbContext>(_fakeDbContext))
             {
                 using (var repo = new BreedsRepository(uow))
                 {
                     //act
-                    repo.Add(YorkieTerrier);
+                    repo.Add(yorkieTerrier);
 
                     //assert
-                    Assert.That(repo.GetById(1), Is.EqualTo(YorkieTerrier));
+                    Assert.That(repo.GetById(1), Is.EqualTo(yorkieTerrier));
                 }
             }
         }

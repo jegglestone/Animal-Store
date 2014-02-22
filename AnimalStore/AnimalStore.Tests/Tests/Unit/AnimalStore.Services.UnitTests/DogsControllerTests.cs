@@ -1,4 +1,5 @@
 ﻿using AnimalStore.Common.Constants;
+using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Web.API.Helpers;
@@ -9,7 +10,6 @@ using System;
 using System.Linq;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
-using AnimalStore.Services.UnitTests.SUT_Builder_Factories;
 
 namespace AnimalStore.Services.UnitTests
 {

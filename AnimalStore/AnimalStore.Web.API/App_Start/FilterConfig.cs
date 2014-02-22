@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace AnimalStore.Web.API.App_Start
+namespace AnimalStore.Web.API
 {
     public class FilterConfig
     {

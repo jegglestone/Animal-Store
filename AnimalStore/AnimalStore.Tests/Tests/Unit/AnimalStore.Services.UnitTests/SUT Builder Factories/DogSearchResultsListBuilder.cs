@@ -1,20 +1,17 @@
-﻿using AnimalStore.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AnimalStore.Model;
 
-namespace AnimalStore.Services.UnitTests.SUT_Builder_Factories
+namespace AnimalStore.Services.UnitTests
 {
     public class DogSearchResultsListBuilder
     {
-        private List<Dog> dogs;
+        private readonly List<Dog> _dogs;
 
         internal DogSearchResultsListBuilder()
         {
-            dogs = new List<Dog>();
+            _dogs = new List<Dog>();
         }
 
         internal DogSearchResultsListBuilder ListWith30Dogs()
@@ -57,7 +54,7 @@ namespace AnimalStore.Services.UnitTests.SUT_Builder_Factories
                 new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
                 new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-3) },
             };
-            dogs.AddRange(animalsListWith30Items);
+            _dogs.AddRange(animalsListWith30Items);
             return this;
         }
 
@@ -83,19 +80,19 @@ namespace AnimalStore.Services.UnitTests.SUT_Builder_Factories
                 ,beagleHuntingDog
                 ,beagleHuntingDog            
             };
-            dogs.AddRange(fourteenMatchedDogs);
+            _dogs.AddRange(fourteenMatchedDogs);
             return this;
         }
 
         internal DogSearchResultsListBuilder WithAnotherDog(Dog dog)
         {
-            dogs.Add(dog);
+            _dogs.Add(dog);
             return this;
         }
 
         internal List<Dog> Build()
         {
-            return dogs;
+            return _dogs;
         }
     }
 }

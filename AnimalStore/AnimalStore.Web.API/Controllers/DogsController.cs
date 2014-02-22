@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
+using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
 using AnimalStore.Data.Repositories;
@@ -51,7 +52,7 @@ namespace AnimalStore.Web.API.Controllers
         {
             var sortedDogsList = _dogSearchHelper.GetDogsList(breedId, sortBy, placeId);
 
-            sortedDogsList = _dogSearchHelper.ApplyDogLocationAndSortFiltering(sortedDogsList.AsQueryable<Dog>(), breedId, sortBy, placeId);
+            sortedDogsList = _dogSearchHelper.ApplyDogLocationAndSortFiltering(sortedDogsList.AsQueryable(), breedId, sortBy, placeId);
 
             var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogsByBreed] + "?breedId=" + breedId + "&page=";
 

@@ -31,13 +31,13 @@ namespace AnimalStore.Model
         public int AgeInMonths { get; set; }
 
         [DataMember(Name = "is_litter")]
-        public bool isLitter { get; set; }
+        public bool IsLitter { get; set; }
 
         [DataMember(Name = "is_sold")]
-        public bool isSold { get; set; }
+        public bool IsSold { get; set; }
 
         [DataMember(Name = "is_female")]
-        public bool isFemale { get; set; }
+        public bool IsFemale { get; set; }
 
         [DataMember(Name = "price")]
         public int Price { get; set; }

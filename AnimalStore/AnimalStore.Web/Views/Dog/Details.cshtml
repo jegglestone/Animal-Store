@@ -72,11 +72,11 @@
     </p>
 
     <div style="float: left; width: 350px;">
-        <h3>Advice about @Html.DisplayFor(Model => Model.Breed.Name)</h3>
+        <h3>Advice about @Html.DisplayFor(dog => dog.Breed.Name)</h3>
         <p>
-            The @Html.DisplayFor(Model => Model.Breed.Name) belongs to the 
-            @Html.DisplayFor(Model => Model.Breed.Category.Name) family of dogs.
-            @Html.DisplayFor(Model => Model.Breed.Category.Description)
+            The @Html.DisplayFor(dog => dog.Breed.Name) belongs to the 
+            @Html.DisplayFor(dog => dog.Breed.Category.Name) family of dogs.
+            @Html.DisplayFor(dog => dog.Breed.Category.Description)
         </p>
 
         <h3>General Advice</h3>
@@ -100,7 +100,7 @@
             <li>Never buy a puppy just because you feel sorry for it. If you are concerned about the health or welfare of a puppy, please contact the RSPCA 24-hour cruelty and advice line: 0300 1234 999.</li>
         </ul>
         <p>
-            REMEMBER:  buying a dog is a lifetime decision - don't make the decision to buy a dog or puppy on a whim. Do some research on the pet you are interested in and that it fits with your lifestyle. Information on different breeds and categories of dog is available in our <*****> section. Insist on seeing the mother with the litter and judge the parents' health and temperament.
+            REMEMBER:  buying a dog is a lifetime decision - don't make the decision to buy a dog or puppy on a whim. Do some research on the pet you are interested in and that it fits with your lifestyle. Information on different breeds and categories of dog is available in our ******* section. Insist on seeing the mother with the litter and judge the parents' health and temperament.
         </p>
         
     </div>
@@ -133,21 +133,21 @@
             Litter:
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.isLitter)
+            @Html.DisplayFor(model => model.IsLitter)
         </div>
 
         <div class="display-label">
             Sold:
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.isSold)
+            @Html.DisplayFor(model => model.IsSold)
         </div>
 
         <div class="display-label">
-            @Html.DisplayNameFor(model => model.isFemale):
+            @Html.DisplayNameFor(model => model.IsFemale):
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.isFemale)
+            @Html.DisplayFor(model => model.IsFemale)
         </div>
 
         <div class="display-label">

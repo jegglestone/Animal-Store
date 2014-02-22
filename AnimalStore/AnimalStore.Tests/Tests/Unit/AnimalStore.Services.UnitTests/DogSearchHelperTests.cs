@@ -5,26 +5,23 @@ using AnimalStore.Web.API.Strategies;
 using AnimalStore.Web.API.Wrappers;
 using NUnit.Framework;
 using Rhino.Mocks;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnimalStore.Services.UnitTests
 {
     [TestFixture]
     public class DogSearchHelperTests
     {
-        DogSearchHelper _dogSearchHelper;
-        IDogBreedFilterStrategy _dogBreedFilterStrategy;
-        IDogCategoryFilterStrategy _dogCategoryFilterStrategy;
-        IDogLocationFilterStrategy _dogLocationFilterStrategy;
-        IRepository<Breed> _breedsRepository;
-        IConfiguration _configuration;
-        IQueryable<Dog> _dogs;
+        readonly DogSearchHelper _dogSearchHelper;
+        readonly IDogBreedFilterStrategy _dogBreedFilterStrategy;
+        readonly IDogCategoryFilterStrategy _dogCategoryFilterStrategy;
+        readonly IDogLocationFilterStrategy _dogLocationFilterStrategy;
+        readonly IRepository<Breed> _breedsRepository;
+        readonly IConfiguration _configuration;
+        readonly IQueryable<Dog> _dogs;
 
-        const string sortColumn = "MyColumn";
+        const string _sortColumn = "MyColumn";
 
         public DogSearchHelperTests ()
 	    {
@@ -100,7 +97,7 @@ namespace AnimalStore.Services.UnitTests
         public void ApplyDogLocationAndSortFiltering_filters_dogs_by_place()
         {
             // act
-            _dogSearchHelper.ApplyDogLocationAndSortFiltering(_dogs, 1, sortColumn, 1);
+            _dogSearchHelper.ApplyDogLocationAndSortFiltering(_dogs, 1, _sortColumn, 1);
 
             // assert
             _dogLocationFilterStrategy.AssertWasCalled(x => x.Filter(_dogs, 1));
@@ -110,17 +107,17 @@ namespace AnimalStore.Services.UnitTests
         public void ApplyDogLocationAndSortFiltering_calls_sorting_strategy_when_not_filtering_on_place()
         {
             // act
-            _dogSearchHelper.ApplyDogLocationAndSortFiltering(_dogs, 1, sortColumn, 0);
+            _dogSearchHelper.ApplyDogLocationAndSortFiltering(_dogs, 1, _sortColumn, 0);
 
             // assert
-            _dogCategoryFilterStrategy.AssertWasCalled(x => x.Sort(_dogs, sortColumn));
+            _dogCategoryFilterStrategy.AssertWasCalled(x => x.Sort(_dogs, _sortColumn));
         }
 
         [Test]
         public void ApplyDogLocationAndSortFiltering_calls_sorting_strategy_when_filtering_on_place()
         {
             // act
-            _dogSearchHelper.ApplyDogLocationAndSortFiltering(_dogs, 1, sortColumn, 1);
+            _dogSearchHelper.ApplyDogLocationAndSortFiltering(_dogs, 1, _sortColumn, 1);
 
             // assert
             _dogLocationFilterStrategy.AssertWasCalled(x => x.Sort(Arg<IEnumerable<Dog>>.Is.Anything));

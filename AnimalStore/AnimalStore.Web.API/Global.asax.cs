@@ -1,9 +1,10 @@
 ﻿using System.Data.SqlClient;
 using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
+using AnimalStore.Data.Repositories.Animals;
+using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
-using AnimalStore.Web.API.App_Start;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Web.API.DependencyResolution;
 using AnimalStore.Web.API.Helpers;

@@ -1,9 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnimalStore.Model.UnitTests
 {
@@ -14,8 +9,8 @@ namespace AnimalStore.Model.UnitTests
         public void PropertyTests()
         {
             // arrange
-            var id = 5;
-            var name = "Dalmatian";
+            const int id = 5;
+            const string name = "Dalmatian";
             var species = new Species() { Id = 1, Name = "Dog" };
             var category = new Category() { Id = 5, Name = "Guard dog" };
 

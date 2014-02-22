@@ -89,7 +89,7 @@ namespace AnimalStore.Web.Repository
 
         public Dog GetDogDetails(int id)
         {
-            Dog dog = new Dog();
+            var dog = new Dog();
             var response = _webAPIRequestWrapper.GetResponse(string.Format("{0}/{1}", _dogs_Url, id));
             try
             {

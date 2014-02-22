@@ -31,8 +31,8 @@ namespace AnimalStore.Web.UnitTests.Repositories
 
         private readonly List<Dog> _dogsList = new List<Dog>()
         {
-            new Dog() { Id = 1, AgeInYears = 2, isSold = false},
-            new Dog() { Id = 2, AgeInYears = 5, isSold = false},
+            new Dog() { Id = 1, AgeInYears = 2, IsSold = false},
+            new Dog() { Id = 2, AgeInYears = 5, IsSold = false},
         };
 
         [TestFixtureSetUp]

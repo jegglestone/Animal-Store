@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace AnimalStore.Web.App_Start
+namespace AnimalStore.Web
 {
     public static class WebApiConfig
     {

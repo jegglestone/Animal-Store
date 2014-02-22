@@ -251,8 +251,8 @@ namespace AnimalStore.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
         {
-            string provider = null;
-            string providerUserId = null;
+            string provider;
+            string providerUserId;
 
             if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
             {
@@ -262,7 +262,7 @@ namespace AnimalStore.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
+                using (var db = new UsersContext())
                 {
                     UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
@@ -310,7 +310,7 @@ namespace AnimalStore.Web.Controllers
         public ActionResult RemoveExternalLogins()
         {
             ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
-            List<ExternalLogin> externalLogins = new List<ExternalLogin>();
+            var externalLogins = new List<ExternalLogin>();
             foreach (OAuthAccount account in accounts)
             {
                 AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);

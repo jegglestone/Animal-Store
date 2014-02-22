@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
-using System.Data;
 using System.Data.Entity;
 using AnimalStore.Model;
 using AnimalStore.Data.Configuration;
@@ -60,7 +59,7 @@ namespace AnimalStore.Data.DataContext
                     var logManager = new Common.Logging.LogManager();
                     var log = logManager.GetLogger((typeof(AnimalsDataContext)));
 
-                    log.Error("Entity Validation Error in configuring test data " + entityValidationError.Entry + ", " + entityValidationError.ValidationErrors.ToString(), e);
+                    log.Error("Entity Validation Error in configuring test data " + entityValidationError.Entry + ", " + entityValidationError.ValidationErrors, e);
                 }
 
                 throw e;

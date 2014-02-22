@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 
 namespace AnimalStore.Data.Configuration
 {
@@ -12,15 +7,15 @@ namespace AnimalStore.Data.Configuration
     {
         protected override void Seed(DataContext.PlacesDataContext context)
         {
-            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL0To3k);
-            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL3To5k);
-            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL5To7k);
-            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL7To10k);
-            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL10To13k);
-            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL13To16k);
-            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL16To19k);
-            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL19To22k);
-            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSQL22To25kAndRebuildIndex);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSql0To3K);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSql3To5K);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSql5To7K);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSql7To10K);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSql10To13K);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSql13To16K);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSql16To19K);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSql19To22K);
+            context.Database.ExecuteSqlCommand(PlacesSqlCommands.PlacesInsertSql22To25KAndRebuildIndex);
 
             base.Seed(context);
         }

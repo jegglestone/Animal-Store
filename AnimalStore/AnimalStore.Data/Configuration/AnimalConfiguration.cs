@@ -7,8 +7,8 @@ namespace AnimalStore.Data.Configuration
     {
         public AnimalConfiguration()
         {
-            Property(p => p.isLitter).IsRequired();
-            Property(p => p.isSold).IsRequired();
+            Property(p => p.IsLitter).IsRequired();
+            Property(p => p.IsSold).IsRequired();
             Property(p => p.AgeInYears).IsRequired();
             Property(p => p.AgeInMonths).IsOptional();
             Property(p => p.Name).HasMaxLength(30);

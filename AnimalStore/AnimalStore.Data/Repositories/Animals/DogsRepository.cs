@@ -1,7 +1,7 @@
 ﻿using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
 
-namespace AnimalStore.Data.Repositories
+namespace AnimalStore.Data.Repositories.Animals
 {
     public class DogsRepository : GenericRepository<Dog>
     {

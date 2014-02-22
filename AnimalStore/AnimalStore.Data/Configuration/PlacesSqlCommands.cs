@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AnimalStore.Data.Configuration
+﻿namespace AnimalStore.Data.Configuration
 {
     public static class PlacesSqlCommands
     {
         #region Places Insert SQL 0 To 3k
 
-        public const string PlacesInsertSQL0To3k = @"
+        public const string PlacesInsertSql0To3K = @"
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[Places]') AND name = N'PK_dbo.Places')
 ALTER TABLE [dbo].[Places] DROP CONSTRAINT [PK_dbo.Places];
 
@@ -3035,7 +3029,7 @@ INSERT INTO dbo.[Places]
 
         #region Places Insert SQL 3k To 5k
 
-        public const string PlacesInsertSQL3To5k = @"SET IDENTITY_INSERT dbo.[Places] ON; 
+        public const string PlacesInsertSql3To5K = @"SET IDENTITY_INSERT dbo.[Places] ON; 
 INSERT INTO dbo.[Places]
            ([ID]
            ,[Name]
@@ -5053,7 +5047,7 @@ INSERT INTO dbo.[Places]
 
         #region Places Insert SQL 5k To 7k
 
-        public const string PlacesInsertSQL5To7k = @" SET IDENTITY_INSERT dbo.[Places] ON;
+        public const string PlacesInsertSql5To7K = @" SET IDENTITY_INSERT dbo.[Places] ON;
  INSERT INTO dbo.[Places]
            ([ID]
            ,[Name]
@@ -7072,7 +7066,7 @@ INSERT INTO dbo.[Places]
 
         #region Places Insert SQL 7k To 10k
 
-        public const string PlacesInsertSQL7To10k = @" SET IDENTITY_INSERT dbo.[Places] ON;
+        public const string PlacesInsertSql7To10K = @" SET IDENTITY_INSERT dbo.[Places] ON;
  INSERT INTO dbo.[Places]
            ([ID]
            ,[Name]
@@ -10091,7 +10085,7 @@ INSERT INTO dbo.[Places]
 
         #region Places Insert SQL 10k To 13k
 
-        public const string PlacesInsertSQL10To13k = @" SET IDENTITY_INSERT dbo.[Places] ON;
+        public const string PlacesInsertSql10To13K = @" SET IDENTITY_INSERT dbo.[Places] ON;
  INSERT INTO dbo.[Places]
            ([ID]
            ,[Name]
@@ -13108,7 +13102,7 @@ SELECT	13000, 'Little Thorpe',	NULL,	'HAMLET',  'Durham', 'England', 'SR8 3',	-1
 
         #region Places Insert SQL 13k To 16k
 
-        public const string PlacesInsertSQL13To16k = @" SET IDENTITY_INSERT dbo.[Places] ON;
+        public const string PlacesInsertSql13To16K = @" SET IDENTITY_INSERT dbo.[Places] ON;
  INSERT INTO dbo.[Places]
            ([ID]
            ,[Name]
@@ -16125,7 +16119,7 @@ SELECT	16000, 'Oak Hill',	NULL,	'SUBURB',  'Stoke-on-Trent', 'England', 'ST4 5',
 
         #region Places Insert SQL 16kTo 19k
 
-        public const string PlacesInsertSQL16To19k = @" SET IDENTITY_INSERT dbo.[Places] ON;
+        public const string PlacesInsertSql16To19K = @" SET IDENTITY_INSERT dbo.[Places] ON;
  SET IDENTITY_INSERT dbo.[Places] ON;
  INSERT INTO dbo.[Places]
            ([ID]
@@ -19143,7 +19137,7 @@ SELECT	19000, 'Shotton',	NULL,	'SUBURB',  'Durham', 'England', 'SR8 1',	-1.354, 
 
         #region Places Insert SQL 19k To 22k
 
-        public const string PlacesInsertSQL19To22k = @" SET IDENTITY_INSERT dbo.[Places] ON;
+        public const string PlacesInsertSql19To22K = @" SET IDENTITY_INSERT dbo.[Places] ON;
  INSERT INTO dbo.[Places]
            ([ID]
            ,[Name]
@@ -22159,7 +22153,7 @@ SELECT	22000, 'Twizell House',	NULL,	'SETTLEMENT',  'Northumberland', 'England',
 
         #region Places Insert SQL 22k To 25k And Rebuild Index
 
-        public const string PlacesInsertSQL22To25kAndRebuildIndex = @" SET IDENTITY_INSERT dbo.[Places] ON;
+        public const string PlacesInsertSql22To25KAndRebuildIndex = @" SET IDENTITY_INSERT dbo.[Places] ON;
  INSERT INTO dbo.[Places]
            ([ID]
            ,[Name]

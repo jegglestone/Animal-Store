@@ -1,12 +1,7 @@
 ﻿using AnimalStore.Data.Configuration;
 using AnimalStore.Model;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnimalStore.Data.DataContext
 {

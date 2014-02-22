@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace AnimalStore.Web.API.App_Start
+namespace AnimalStore.Web.API
 {
     public class BundleConfig
     {

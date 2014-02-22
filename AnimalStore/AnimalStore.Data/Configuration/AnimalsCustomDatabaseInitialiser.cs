@@ -1,8 +1,6 @@
 ﻿using AnimalStore.Model;
 using System.Configuration;
 using System.Data.Entity;
-using System.IO;
-using System.Text;
 
 namespace AnimalStore.Data.Configuration
 {
@@ -11,7 +9,7 @@ namespace AnimalStore.Data.Configuration
     {
         protected override void Seed(DataContext.AnimalsDataContext context)
         {
-            if (isDevelopmentEnvironment())
+            if (IsDevelopmentEnvironment())
             {
                 #region species
 
@@ -47,13 +45,13 @@ namespace AnimalStore.Data.Configuration
                 var americanStaffordshireTerrier = new Breed { Species = dogSpecies, Name = "American Staffordshire Terrier", Category = terrier };
                 var americanWaterSpaniel = new Breed { Species = dogSpecies, Name = "American Water Spaniel", Category = sporting };
                 var anatolianShepherdDog = new Breed { Species = dogSpecies, Name = "Anatolian Shepherd Dog", Category = working };
-                var AustralianCattleDog = new Breed { Species = dogSpecies, Name = "Australian Cattle Dog", Category = herding };
-                var AustralianShepherd = new Breed { Species = dogSpecies, Name = "Australian Shepherd", Category = herding };
-                var AustralianTerrier = new Breed { Species = dogSpecies, Name = "Australian Terrier", Category = terrier };
+                var australianCattleDog = new Breed { Species = dogSpecies, Name = "Australian Cattle Dog", Category = herding };
+                var australianShepherd = new Breed { Species = dogSpecies, Name = "Australian Shepherd", Category = herding };
+                var australianTerrier = new Breed { Species = dogSpecies, Name = "Australian Terrier", Category = terrier };
                 var azawakh = new Breed { Species = dogSpecies, Name = "Azawakh", Category = miscellaneous };
-                var Basenji = new Breed { Species = dogSpecies, Name = "Basenji", Category = hound };
-                var BassetHound = new Breed { Species = dogSpecies, Name = "Basset Hound", Category = hound };
-                var Beagle = new Breed { Species = dogSpecies, Name = "Beagle", Category = hound };
+                var basenji = new Breed { Species = dogSpecies, Name = "Basenji", Category = hound };
+                var bassetHound = new Breed { Species = dogSpecies, Name = "Basset Hound", Category = hound };
+                var beagle = new Breed { Species = dogSpecies, Name = "Beagle", Category = hound };
                 var beardedCollie = new Breed { Species = dogSpecies, Name = "Bearded Collie", Category = herding };
                 var beauceron = new Breed { Species = dogSpecies, Name = "Beauceron", Category = herding };
                 var bedlingtonTerrier = new Breed { Species = dogSpecies, Name = "Bedlington Terrier", Category = terrier };
@@ -241,13 +239,13 @@ namespace AnimalStore.Data.Configuration
                 context.Breeds.Add(americanStaffordshireTerrier);
                 context.Breeds.Add(americanWaterSpaniel);
                 context.Breeds.Add(anatolianShepherdDog);
-                context.Breeds.Add(AustralianCattleDog);
-                context.Breeds.Add(AustralianShepherd);
-                context.Breeds.Add(AustralianTerrier);
+                context.Breeds.Add(australianCattleDog);
+                context.Breeds.Add(australianShepherd);
+                context.Breeds.Add(australianTerrier);
                 context.Breeds.Add(azawakh);
-                context.Breeds.Add(Basenji);
-                context.Breeds.Add(BassetHound);
-                context.Breeds.Add(Beagle);
+                context.Breeds.Add(basenji);
+                context.Breeds.Add(bassetHound);
+                context.Breeds.Add(beagle);
                 context.Breeds.Add(beardedCollie);
                 context.Breeds.Add(beauceron);
                 context.Breeds.Add(bedlingtonTerrier);
@@ -435,8 +433,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "2 yr old Affen Pinscher. Well-behaved, likes children",
                     FullDescription = "2 yr old. Well-behaved, likes children, no health problems and properly toilet trained. See for yourself",
                     Name = "Spud",
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 250,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -448,8 +446,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "im selling my little affenpincher girl",
                     FullDescription = "im having to sell my scuffy little friend she is perfect in everyway she is house trained can be left a sensible lenth of time gets on with all different animals not nasty in any way adores children and is a perfect lapdog will sit on your kn....",
                     Name = "Scuffy",
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 125,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -461,8 +459,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "2 yr old Affen Pinscher. Needs home",
                     FullDescription = "2 yr old. Well-behaved, good guard dog",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 250,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -474,8 +472,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "3yr old Affen Pinscher. good home needed",
                     FullDescription = "3 yr old. Well-behaved, good guard dog good home needed",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 190,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -487,8 +485,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "0 yr old Affen Pinscher. Needs home",
                     FullDescription = "puppy dog - really well behaved",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 250,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -500,8 +498,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "Litter of affenpinschers great",
                     FullDescription = "Brand new litter from award winning stud and bitch. Perfect lineage, real crufts quality",
                     Name = null,
-                    isLitter = true,
-                    isSold = false,
+                    IsLitter = true,
+                    IsSold = false,
                     Price = 1200,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -513,8 +511,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "2 yr old Affen Pinscher. Needs home",
                     FullDescription = "2 yr old. Well-behaved, good guard dog",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 600,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -526,8 +524,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "Litter of affenpinschers great",
                     FullDescription = "litter of Well-behaved, good guard dogs",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 400,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -539,8 +537,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "2 yr old Affen Pinscher. Needs home",
                     FullDescription = "2 yr old. Well-behaved, good guard dog",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 350,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -552,8 +550,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "2 yr old Affen Pinscher. Well-behaved, likes children",
                     FullDescription = "2 yr old. Well-behaved, likes children, no health problems and properly toilet trained. See for yourself",
                     Name = "Spud",
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 500,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -565,8 +563,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "im selling my little affenpincher girl",
                     FullDescription = "im having to sell my scuffy little friend she is perfect in everyway she is house trained can be left a sensible lenth of time gets on with all different animals not nasty in any way adores children and is a perfect lapdog will sit on your kn....",
                     Name = "Scuffy",
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 600,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -578,8 +576,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "2 yr old Affen Pinscher. Needs home",
                     FullDescription = "2 yr old. Well-behaved, good guard dog",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 980,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -591,8 +589,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "3yr old Affen Pinscher. good home needed",
                     FullDescription = "3 yr old. Well-behaved, good guard dog good home needed",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 80,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -604,8 +602,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "0 yr old Affen Pinscher. Needs home",
                     FullDescription = "puppy dog - really well behaved",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 700,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -617,8 +615,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "Litter of affenpinschers great",
                     FullDescription = "Brand new litter from award winning stud and bitch. Perfect lineage, real crufts quality",
                     Name = null,
-                    isLitter = true,
-                    isSold = false,
+                    IsLitter = true,
+                    IsSold = false,
                     Price = 600,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -630,8 +628,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "3yr old Affen Pinscher. good home needed",
                     FullDescription = "3 yr old. Well-behaved, good guard dog good home needed",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 400,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -643,8 +641,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "0 yr old Affen Pinscher. Needs home",
                     FullDescription = "puppy dog - really well behaved",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 300,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -656,8 +654,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "Litter of affenpinschers great",
                     FullDescription = "Brand new litter from award winning stud and bitch. Perfect lineage, real crufts quality",
                     Name = null,
-                    isLitter = true,
-                    isSold = false,
+                    IsLitter = true,
+                    IsSold = false,
                     Price = 300,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -669,8 +667,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "2 yr old Affen Pinscher. Needs home",
                     FullDescription = "2 yr old. Well-behaved, good guard dog",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 600,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -682,8 +680,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "Litter of affenpinschers great",
                     FullDescription = "litter of Well-behaved, good guard dogs",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 700,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -695,8 +693,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "2 yr old Affen Pinscher. Needs home",
                     FullDescription = "2 yr old. Well-behaved, good guard dog",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 300,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -708,8 +706,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "2 yr old Affen Pinscher. Well-behaved, likes children",
                     FullDescription = "2 yr old. Well-behaved, likes children, no health problems and properly toilet trained. See for yourself",
                     Name = "Spud",
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 400,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -721,8 +719,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "im selling my little affenpincher girl",
                     FullDescription = "im having to sell my scuffy little friend she is perfect in everyway she is house trained can be left a sensible lenth of time gets on with all different animals not nasty in any way adores children and is a perfect lapdog will sit on your kn....",
                     Name = "Scuffy",
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 100,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -734,8 +732,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "0 yr old Affen Pinscher. Needs home",
                     FullDescription = "puppy dog - really well behaved",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 300,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -747,8 +745,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "Litter of affenpinschers great",
                     FullDescription = "Brand new litter from award winning stud and bitch. Perfect lineage, real crufts quality",
                     Name = null,
-                    isLitter = true,
-                    isSold = false,
+                    IsLitter = true,
+                    IsSold = false,
                     Price = 300,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -760,8 +758,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "2 yr old Affen Pinscher. Needs home",
                     FullDescription = "2 yr old. Well-behaved, good guard dog",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 600,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -773,8 +771,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "Litter of affenpinschers great",
                     FullDescription = "litter of Well-behaved, good guard dogs",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 700,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -786,8 +784,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "3yr old Affen Pinscher. good home needed",
                     FullDescription = "3 yr old. Well-behaved, good guard dog good home needed",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 80,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -799,8 +797,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "0 yr old Affen Pinscher. Needs home",
                     FullDescription = "puppy dog - really well behaved",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 700,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -812,8 +810,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "Litter of affenpinschers great",
                     FullDescription = "Brand new litter from award winning stud and bitch. Perfect lineage, real crufts quality",
                     Name = null,
-                    isLitter = true,
-                    isSold = false,
+                    IsLitter = true,
+                    IsSold = false,
                     Price = 600,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -825,8 +823,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "3yr old Affen Pinscher. good home needed",
                     FullDescription = "3 yr old. Well-behaved, good guard dog good home needed",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 400,
                     Breed = affenpinscher,
                     CreatedByUsedId = 1,
@@ -841,8 +839,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "4 female akita puppies!",
                     FullDescription = "4 female akita puppies, Ready to go NOW!! 10 weeks old 300 Ono call or email . ",
                     Name = "",
-                    isLitter = true,
-                    isSold = false,
+                    IsLitter = true,
+                    IsSold = false,
                     Breed = akita,
                     CreatedByUsedId = 1,
                     PlaceId = 12472
@@ -855,8 +853,8 @@ namespace AnimalStore.Data.Configuration
                     FullDescription = "We have adorable bear headed black and white girls available. The puppies will be fleaed, wormed and vaccinated as well as vet checked. Your puppy will also have 4 weeks free insurance. They will be ready to leave us on 8th December, however....",
                     Price = 700,
                     Name = "",
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Breed = akita,
                     CreatedByUsedId = 1,
                     PlaceId = 12472
@@ -867,9 +865,9 @@ namespace AnimalStore.Data.Configuration
                     Headline = "beautiful Akita pup",
                     FullDescription = "beautiful Akita pup She born on 16/09/2013 she was warm And fleat she is full pedigree akita but she don't come with the KC registrert. reason for sale landlord don't accept dog. Please any more information call on 07587916471",
                     Name = "lynn",
-                    isLitter = false,
-                    isSold = false,
-                    isFemale = true,
+                    IsLitter = false,
+                    IsSold = false,
+                    IsFemale = true,
                     Breed = akita,
                     CreatedByUsedId = 1,
                     PlaceId = 12472
@@ -880,9 +878,9 @@ namespace AnimalStore.Data.Configuration
                     Headline = "Japanese Akita Pups Ready To Go",
                     FullDescription = "I have a lovely litter of 7 there is 6 left 3 girls 3boys looking for forever homes handled all the time be myself and my young children very playful ready to go they are eight week I also have mum and dad as there my pets more than welcome t....",
                     Name = "Spud",
-                    isLitter = false,
-                    isSold = false,
-                    isFemale = true,
+                    IsLitter = false,
+                    IsSold = false,
+                    IsFemale = true,
                     Price = 300,
                     Breed = akita,
                     CreatedByUsedId = 1,
@@ -894,8 +892,8 @@ namespace AnimalStore.Data.Configuration
                     FullDescription = "WE ARE PROUD TO OFFER TWO EXCEPTIONAL MALE, AMERICAN AKITA PUPPIES. PUPPIES ARE KC REGISTERED AND HAVE BEEN FLEAD AND WORMED UP TO DATE.PUPPIES HAVE OUTSTANDING BONE STRUCTURE AND SUBSTANCE,COMPLIMENTED WITH A HEALTHY COAT.PUPPIES ARE 5 WEEKS...",
                     Headline = " AMERICAN AKITA PUPPIES  .",
                     Name = null,
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Breed = akita,
                     CreatedByUsedId = 1,
                     PlaceId = 12472
@@ -910,8 +908,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "2 yr old Blood-hound. Well-behaved, likes children",
                     FullDescription = "2 yr old Blood-hound. Well-behaved, likes children, no health problems and properly toilet trained. See for yourself",
                     Name = "Spud",
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 500,
                     Breed = bloodhound,
                     CreatedByUsedId = 1,
@@ -928,9 +926,9 @@ namespace AnimalStore.Data.Configuration
                     Headline = "A dangerously behaved Bulldog.",
                     FullDescription = "A tough stocky bulldog",
                     Name = "Stocky",
-                    isLitter = false,
-                    isSold = false,
-                    isFemale = true,
+                    IsLitter = false,
+                    IsSold = false,
+                    IsFemale = true,
                     Price = 400,
                     Breed = bulldog,
                     CreatedByUsedId = 1,
@@ -946,9 +944,9 @@ namespace AnimalStore.Data.Configuration
                     Headline = "A well behaved Dalmatian.",
                     FullDescription = "cocco is a pure toy Dalmatian bitch ,she is four half months old,is pedigree with 3 generation certificate.has been fully vet checked and had both vaccinations.flea treated and wormed on pancur.is use to other dogs and household noises.likes to go in the car and loves her walks.is part trainned and doing well on going outside.loves children and likes to be cuddled and played with.mum is a black toy poodle and can be seen .dad is a chocolate toy poodle with clear eye certificat a copy of eye certificate will go with cocco.i was keeping cocco but she isnt getting the attention she should be.so looking for loving caring home where she will get lots of love and attention.please ring for futher information,will only go to the right home thanks",
                     Name = "Cocco",
-                    isLitter = false,
-                    isSold = false,
-                    isFemale = true,
+                    IsLitter = false,
+                    IsSold = false,
+                    IsFemale = true,
                     Price = 300,
                     Breed = dalmatian,
                     CreatedByUsedId = 1,
@@ -960,8 +958,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "6 brand new dalmations. Pedigree standard, all healthy and fit.",
                     FullDescription = "6 brand new dalmations. Pedigree standard, all healthy and fit. Ready in 5 weeks after wheaning",
                     Name = null,
-                    isLitter = true,
-                    isSold = false,
+                    IsLitter = true,
+                    IsSold = false,
                     Price = 550,
                     Breed = dalmatian,
                     CreatedByUsedId = 1,
@@ -973,9 +971,9 @@ namespace AnimalStore.Data.Configuration
                     Headline = "A well behaved dalmatian.",
                     FullDescription = "Rocky is a pure toy dlamatian bitch ,she is four half months old,is pedigree with 3 generation certificate.has been fully vet checked and had both vaccinations.flea treated and wormed on pancur.is use to other dogs and household noises.likes to go in the car and loves her walks.is part trainned and doing well on going outside.loves children and likes to be cuddled and played with.mum is a black toy poodle and can be seen .dad is a chocolate toy poodle with clear eye certificat a copy of eye certificate will go with cocco.i was keeping cocco but she isnt getting the attention she should be.so looking for loving caring home where she will get lots of love and attention.please ring for futher information,will only go to the right home thanks",
                     Name = "Rocky",
-                    isLitter = false,
-                    isSold = false,
-                    isFemale = true,
+                    IsLitter = false,
+                    IsSold = false,
+                    IsFemale = true,
                     Breed = dalmatian,
                     CreatedByUsedId = 1,
                     PlaceId = 12472
@@ -986,8 +984,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "6 brand new dalmations. Pedigree standard, all healthy and fit.",
                     FullDescription = "6 brand new dalmations. Pedigree standard, all healthy and fit. Ready in 3 weeks after wheaning",
                     Name = null,
-                    isLitter = true,
-                    isSold = false,
+                    IsLitter = true,
+                    IsSold = false,
                     Price = 800,
                     Breed = dalmatian,
                     CreatedByUsedId = 1,
@@ -1000,8 +998,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "6 brand new dalmations. Pedigree standard, all healthy and fit.",
                     FullDescription = "6 brand new dalmations. Pedigree standard, all healthy and fit. Ready in 3 weeks after wheaning",
                     Name = null,
-                    isLitter = true,
-                    isSold = true,
+                    IsLitter = true,
+                    IsSold = true,
                     Breed = dalmatian,
                     CreatedByUsedId = 1,
                     PlaceId = 12472
@@ -1012,8 +1010,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "6 brand new dalmations. Pedigree standard, all healthy and fit.",
                     FullDescription = "6 brand new dalmations. Pedigree standard, all healthy and fit. Ready in 3 weeks after wheaning",
                     Name = null,
-                    isLitter = true,
-                    isSold = true,
+                    IsLitter = true,
+                    IsSold = true,
                     Breed = dalmatian,
                     CreatedByUsedId = 1,
                     PlaceId = 12472
@@ -1027,8 +1025,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "A young Golden Retriever. Well behaved and trained.",
                     FullDescription = "XXXX STUNNING ENGLISH BULLDOG PUPPIES XXXXXXXXXX. 29 CHAMPIONS INCLUDING OCOBO & MY STYLE XXXX XXXX DONT MISSS OUT ON THESE GORGEOUS BABIES XXXXX XXXXX ONLY OUR PICK OF LITTER AVAILABLE XXXXX We have a litter of kc registered english bulldogs for sale 1 boy remaing stunning examples of this breed many champions in there pedigree large heads straight tails rose ears heavy boned lot of wrinkle come with 4 weeks free insurance 1st injections kc papers mum and dad can both be seen! They are our family pets well handled use to all household noises brought up with our children no breathing problems or health issues ready to go to there new homes for more information please call us ( reduced to £1650 with kc registration papers)",
                     Name = "Goldie",
-                    isLitter = false,
-                    isSold = false,
+                    IsLitter = false,
+                    IsSold = false,
                     Price = 325,
                     Breed = goldenRetriever,
                     CreatedByUsedId = 1,
@@ -1043,9 +1041,9 @@ namespace AnimalStore.Data.Configuration
                     Headline = "Middle aged female Germen Sheperds - loves kids!",
                     FullDescription = "A fairly old Alsatian requires a new home as we can't look after her anymore. Please get in touch. She likes walks and bones but other than that she's not high maintenance at all!",
                     Name = "Spud",
-                    isLitter = false,
-                    isSold = false,
-                    isFemale = true,
+                    IsLitter = false,
+                    IsSold = false,
+                    IsFemale = true,
                     Breed = germanShepherd,
                     CreatedByUsedId = 1,
                     PlaceId = 12472
@@ -1061,8 +1059,8 @@ namespace AnimalStore.Data.Configuration
                     Headline = "A litter of healthy pups - 2 males, 3 bitches!",
                     FullDescription = "A litter of healthy pups - 2 males, 3 bitches! Dad is an Alsatian, mum is a Chihuhua so bit off there",
                     Name = "Spud",
-                    isLitter = true,
-                    isSold = false,
+                    IsLitter = true,
+                    IsSold = false,
                     Breed = mixedBreedDog,
                     CreatedByUsedId = 1,
                     PlaceId = 12472
@@ -1077,7 +1075,7 @@ namespace AnimalStore.Data.Configuration
         }
 
         // TODO: Is this the responsibility of this class? No - sort it out Joe
-        private bool isDevelopmentEnvironment()
+        private static bool IsDevelopmentEnvironment()
         {
             if (ConfigurationManager.AppSettings["Environment"] == "Development")
                 return true;

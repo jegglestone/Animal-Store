@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using AnimalStore.Data.Repositories;
+using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Model;
 using AnimalStore.Common.Constants;
 using System.Device.Location;
@@ -138,16 +139,16 @@ namespace AnimalStore.Web.API.Strategies
         public IEnumerable<Dog> Filter(IQueryable<Dog> dogs, int placeId)
         {
             var originalPlace = _placesRepository.GetById(placeId);
-            var originalPlaceGeoCode = new GeoCoordinate(originalPlace.Latitude, originalPlace.longitude);
+            var originalPlaceGeoCode = new GeoCoordinate(originalPlace.Latitude, originalPlace.Longitude);
 
-            var allPlaces = _placesRepository.GetAll().ToList();  // Enumerate so we dont query multiple times later
+            var allPlaces = _placesRepository.GetAll().ToList();
             var dogsList = dogs.ToList();
             var dogsWithinRadius = new List<Dog>();
 
             foreach (var dog in dogsList)
             {
                 var place = allPlaces.Single(x => x.Id == dog.PlaceId); // make sure queries collection not db
-                var currentDogGeoCode = new GeoCoordinate(place.Latitude, place.longitude);
+                var currentDogGeoCode = new GeoCoordinate(place.Latitude, place.Longitude);
                 var distance = originalPlaceGeoCode.GetDistanceTo(currentDogGeoCode);
                 if (distance < _configuration.GetSearchRadiusDefaultDistanceInMetres())
                 {

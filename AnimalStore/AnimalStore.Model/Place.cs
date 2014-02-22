@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AnimalStore.Model
+﻿namespace AnimalStore.Model
 {
     public class Place
     {
@@ -22,10 +16,10 @@ namespace AnimalStore.Model
 
         public string Postcode { get; set; }
 
-        public double longitude { get; set; }
+        public double Longitude { get; set; }
 
         public double Latitude { get; set; }
 
-        public int CountryID { get; set; }
+        public int CountryId { get; set; }
     }
 }

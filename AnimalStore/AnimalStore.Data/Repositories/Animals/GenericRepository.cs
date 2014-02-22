@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using AnimalStore.Data.DataContext;
 using AnimalStore.Data.UnitsOfWork;
 
-namespace AnimalStore.Data.Repositories
+namespace AnimalStore.Data.Repositories.Animals
 {
     public abstract class GenericRepository<T> : IRepository<T> 
         where T : class
     {
-        private IDbSet<T> DBSet {get; set;}
+        private IDbSet<T> DbSet {get; set;}
         public IContext Context { get; set; }
 
         protected GenericRepository(IUnitOfWork unitOfWork)
@@ -21,17 +20,17 @@ namespace AnimalStore.Data.Repositories
                     "unitOfWork", "An instance of UnitOfWork with a DbContext is required to use this generic repository");
 
             Context = unitOfWork.Context;
-            DBSet = Context.Set<T>();
+            DbSet = Context.Set<T>();
         }
 
         public IQueryable<T> GetAll()
         {
-            return DBSet;
+            return DbSet;
         }
 
         public T GetById(int id)
         {
-            return DBSet.Find(id);
+            return DbSet.Find(id);
         }
 
         public void Add(T entity)
@@ -40,14 +39,14 @@ namespace AnimalStore.Data.Repositories
             if (entry.State != EntityState.Detached)
                 entry.State = EntityState.Added;
             else
-                DBSet.Add(entity);
+                DbSet.Add(entity);
         }
 
         public void Update(T entity)
         {
             DbEntityEntry entry = Context.Entry(entity);
             if (entry.State == EntityState.Detached)
-                DBSet.Attach(entity);
+                DbSet.Attach(entity);
             entry.State = EntityState.Modified;
         }
 
@@ -58,14 +57,14 @@ namespace AnimalStore.Data.Repositories
                 entry.State = EntityState.Deleted;
             else
             {
-                DBSet.Attach(entity);
-                DBSet.Remove(entity);
+                DbSet.Attach(entity);
+                DbSet.Remove(entity);
             }
         }
 
         public void Delete(int id)
         {
-            var entity = DBSet.Find(id);
+            var entity = DbSet.Find(id);
 
             if (entity != null)
                 Delete(entity);

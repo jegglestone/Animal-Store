@@ -7,7 +7,7 @@ namespace AnimalStore.Web.API.DependencyResolution
 {
     public class ScopeContainer : IDependencyScope
     {
-        protected readonly IUnityContainer _container;
+        protected readonly IUnityContainer Container;
 
         internal ScopeContainer(IUnityContainer container)
         {
@@ -15,24 +15,24 @@ namespace AnimalStore.Web.API.DependencyResolution
             {
                 throw new ArgumentNullException("container");
             }
-            _container = container;
+            Container = container;
         }
 
         public object GetService(Type serviceType)
         {
-            return _container.IsRegistered(serviceType) ? 
-                _container.Resolve(serviceType) : null;
+            return Container.IsRegistered(serviceType) ? 
+                Container.Resolve(serviceType) : null;
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            return _container.IsRegistered(serviceType) ? 
-                _container.ResolveAll(serviceType) : new List<object>();
+            return Container.IsRegistered(serviceType) ? 
+                Container.ResolveAll(serviceType) : new List<object>();
         }
 
         public void Dispose()
         {
-            _container.Dispose();
+            Container.Dispose();
         }
     }
 
@@ -45,7 +45,7 @@ namespace AnimalStore.Web.API.DependencyResolution
 
         public IDependencyScope BeginScope()
         {
-            var child = _container.CreateChildContainer();
+            var child = Container.CreateChildContainer();
             return new ScopeContainer(child);
         }
     }
