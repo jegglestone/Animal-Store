@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Model;
-using AnimalStore.Web.API.Models;
 using AnimalStore.Web.API.Strategies;
 using AnimalStore.Web.API.Wrappers;
 
@@ -31,7 +29,6 @@ namespace AnimalStore.Web.API.Helpers
         {
             var matchingDogs = _dogBreedFilterStrategy.Filter(breedId);
             return matchingDogs;
-
         }
 
         public IQueryable<Dog> AddDogsInSameCategoryToDogsCollection(IQueryable<Dog> matchingDogs, int breedId)
@@ -83,10 +80,10 @@ namespace AnimalStore.Web.API.Helpers
             // TODO: see if we have enough matching breeds to just return relevant ones
             var dogsResults = _dogLocationFilterStrategy.Filter(dogs, placeId);
 
-            if (dogsResults.Where(x => x.BreedId == breedId).Count() >= _configuration.GetSearchResultsMinimumMatchingNumber())
-                return dogsResults.Where(x => x.BreedId == breedId);
-
-            return dogsResults;
+            var dogsInSameRegion = dogsResults as IList<Dog> ?? dogsResults.ToList();
+            return dogsInSameRegion.Count(x => x.BreedId == breedId) >= _configuration.GetSearchResultsMinimumMatchingNumber() 
+                ? dogsInSameRegion.Where(x => x.BreedId == breedId) 
+                : dogsInSameRegion;
         }
 
         private IQueryable<Dog> GetDogsInSameCategory(int breedId)

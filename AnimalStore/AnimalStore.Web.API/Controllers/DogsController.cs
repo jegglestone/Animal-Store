@@ -97,7 +97,7 @@ namespace AnimalStore.Web.API.Controllers
             return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForAllBreeds(), resultsFrom, resultsTo, totalCount);
         }
 
-        private bool isLocationSearch(int placeId)
+        private bool IsLocationSearch(int placeId)
         {
             if (placeId != 0)
                 return true;
@@ -109,11 +109,10 @@ namespace AnimalStore.Web.API.Controllers
         {
             if (placeId != 0)
             {
-                string placeName = GetPlaceName(placeId);
+                var placeName = GetPlaceName(placeId);
                 return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace(), resultsFrom, resultsTo, totalCount, breedName, placeName);
             }
-            else
-                return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreed(), resultsFrom, resultsTo, totalCount, breedName);
+            return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreed(), resultsFrom, resultsTo, totalCount, breedName);
         }
 
         private string GetPlaceName(int placeId)
