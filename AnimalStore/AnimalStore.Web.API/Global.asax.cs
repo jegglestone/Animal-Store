@@ -70,7 +70,6 @@ namespace AnimalStore.Web.API
 
             try
             {
-                //TODO: move time values to constants
                 var dataContext = new AnimalsDataContext();
                 dataContext.Database.Initialize(true);
 

@@ -9,11 +9,9 @@ namespace AnimalStore.Data.DataContext
     {
         public IDbSet<Place> Places { get; set; }
 
-        //public PlacesDataContext()
-        //    :base(ConnectionStringName) {}
-
         public PlacesDataContext()
-            : base("Data Source=.\\SQLEXPRESS;Initial Catalog=Places;Integrated Security=True") { }  // TODO: Why can't it pull this from the web.config?
+            :base(ConnectionStringName) {}
+
 
         static PlacesDataContext()
         {
@@ -29,7 +27,7 @@ namespace AnimalStore.Data.DataContext
         {
             get
             {
-                return ConfigurationManager.AppSettings["PlacesContextConnectionString"];
+                return ConfigurationManager.AppSettings["AnimalsContextConnectionString"];
             }
         }
     }
