@@ -46,7 +46,7 @@ namespace AnimalStore.Web.API.Controllers
             return GetPageableDogResults(dogs, page, pageSize, baseUrl);
         }
 
-        // GET api/Dogs/Breed/
+        // GET api/dogs?breedid=1&page=1&pagesize=100&placeId=1&format=json
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string sortBy = null, int placeId = 0)
         {
