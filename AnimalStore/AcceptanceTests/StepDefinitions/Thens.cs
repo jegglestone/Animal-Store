@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AcceptanceTests.Utils;
 using AnimalStore.Model;
 using NUnit.Framework;
@@ -52,6 +53,10 @@ namespace AcceptanceTests.StepDefinitions
         public void ThenIShouldBePresentedWithJSONResultsRelevantToTheBreedAndFilteredByPlace()
         {
             var response = ResponseHelper.GetResponseAs<PageableResults<Dog>>();
+
+            Assert.That(response.Data.First().Breed.Name == "Affenpinscher");
+            Assert.That(response.Data.First().Breed.Category.Name == "Toy");
+            Assert.That(response.Data.First().PlaceId == 1);
         }
 
         private static IWebElement GetResultsTable()
