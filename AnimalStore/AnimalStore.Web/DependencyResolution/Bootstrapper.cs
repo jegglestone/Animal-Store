@@ -9,7 +9,6 @@ using AnimalStore.Model;
 using AnimalStore.Web.Wrappers;
 using AnimalStore.Web.Wrappers.Interfaces;
 using AnimalStore.Web.Helpers;
-using AnimalStore.Web.Helpers.Interfaces;
 using Microsoft.Practices.Unity;
 using Unity.Mvc4;
 using AnimalStore.Web.Repository;

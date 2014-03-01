@@ -67,11 +67,11 @@ namespace AcceptanceTests.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("The dog profile advertisement page show full advert details")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.IgnoreAttribute()]
         public virtual void TheDogProfileAdvertisementPageShowFullAdvertDetails()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The dog profile advertisement page show full advert details", new string[] {
-                        "mytag"});
+                        "ignore"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
@@ -88,16 +88,18 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("The API allows searching for dogs of a specific breed")]
+        [NUnit.Framework.CategoryAttribute("wip")]
         public virtual void TheAPIAllowsSearchingForDogsOfASpecificBreed()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The API allows searching for dogs of a specific breed", ((string[])(null)));
-#line 13
-this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The API allows searching for dogs of a specific breed", new string[] {
+                        "wip"});
 #line 14
- testRunner.When("I make a GET request to the dogs API with the breedID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 15
- testRunner.Then("I should be presented with JSON results relevant to the breed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I make a GET request to the dogs API with the breedID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 16
+ testRunner.Then("I should be presented with JSON results relevant to the breed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 17
  testRunner.And("there should be other dogs in the same category in the results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -105,16 +107,18 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("The API allows searching for dogs of a specific breed within a specific place")]
+        [NUnit.Framework.CategoryAttribute("wip")]
         public virtual void TheAPIAllowsSearchingForDogsOfASpecificBreedWithinASpecificPlace()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The API allows searching for dogs of a specific breed within a specific place", ((string[])(null)));
-#line 18
-this.ScenarioSetup(scenarioInfo);
-#line 19
- testRunner.When("I make a GET request to the dogs API with a breedID and a placeId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The API allows searching for dogs of a specific breed within a specific place", new string[] {
+                        "wip"});
 #line 20
- testRunner.Then("I should be presented with JSON results relevant to the breed and filtered by pla" +
-                    "ce", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
+#line 21
+ testRunner.When("I make a GET request to the dogs API with a breedID and a placeId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 22
+ testRunner.Then("I should be presented with a JSON response relevant to the breed and filtered by " +
+                    "place", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

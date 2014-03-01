@@ -23,19 +23,19 @@ namespace AcceptanceTests.StepDefinitions
         }
 
         [When(@"I have selected any breed of dog in the UK")]
-        public void WhenIHaveSelectedAnyBreedOfDogInTheUK()
+        public void WhenIveSelectedAnyBreedOfDogInTheUk()
         {
-            selectBreedByText("Breed (any)");
+            SelectBreedByText("Breed (any)");
 
-            selectNationalSearchCheckBox();
+            SelectNationalSearchCheckBox();
         }
 
         [When(@"I have selected a (.*) anywhere in the UK")]
-        public void WhenIHaveSelectedADalmatianAnywhereInTheUK(string breed)
+        public void WhenIveSelectedaDogAnywhereInTheUk(string breed)
         {
-            selectBreedByText(breed);
+            SelectBreedByText(breed);
 
-            selectNationalSearchCheckBox();
+            SelectNationalSearchCheckBox();
         }
 
         [When(@"I press the search button")]
@@ -50,7 +50,23 @@ namespace AcceptanceTests.StepDefinitions
             Assert.IsTrue(breed == "Bulldog");
         }
 
-        private static void selectNationalSearchCheckBox()
+        [When(@"I make a GET request to the dogs API with the breedID")]
+        public void WhenIMakeGETRequestToTheDogsAPIWithTheBreedId()
+        {
+            var resourceUrl = NavigationHelper.GetAPIUrl("Dogs");
+            resourceUrl += "?breedid=1&page=1&pagesize=100&format=json"; //TODO: constant
+            Navigate(resourceUrl);
+        }
+
+        [When(@"I make a GET request to the dogs API with a breedID and a placeId")]
+        public void WhenIMakeaGETRequestToTheDogsAPIWithABreedIdAndAPlaceId()
+        {
+            var resourceUrl = NavigationHelper.GetAPIUrl("Dogs");
+            resourceUrl += "?breedid=1&page=1&pagesize=100&placeId=1&format=json"; //TODO: constant
+            Navigate(resourceUrl);
+        }
+
+        private static void SelectNationalSearchCheckBox()
         {
             var checkBoxForNationalSearch = WebDriverAdapter.WebDriver.FindElement
                 (By.CssSelector(
@@ -58,10 +74,16 @@ namespace AcceptanceTests.StepDefinitions
             checkBoxForNationalSearch.Click();
         }
 
-        private static void selectBreedByText(string text)
+        private static void SelectBreedByText(string text)
         {
             var dropdown = new SelectElement(WebDriverAdapter.WebDriver.FindElement(By.Id("SelectedBreed")));
             dropdown.SelectByText(text);
+        }
+
+        private static void Navigate(string url)
+        {
+            WebDriverAdapter.WebDriver.Url = url;
+            WebDriverAdapter.WebDriver.Navigate(); 
         }
     }
 }

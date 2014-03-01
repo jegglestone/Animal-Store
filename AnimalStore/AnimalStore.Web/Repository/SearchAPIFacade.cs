@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Net;
 using AnimalStore.Common.Helpers;
 using AnimalStore.Model;
+using AnimalStore.Web.Helpers;
 using AnimalStore.Web.Wrappers.Interfaces;
 using AnimalStore.Web.Factories;
-using AnimalStore.Web.Helpers.Interfaces;
 using System.Web.Http;
 
 namespace AnimalStore.Web.Repository

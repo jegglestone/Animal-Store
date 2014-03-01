@@ -1,4 +1,6 @@
-﻿using AcceptanceTests.Utils;
+﻿using System.Collections.Generic;
+using AcceptanceTests.Utils;
+using AnimalStore.Model;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
@@ -46,10 +48,17 @@ namespace AcceptanceTests.StepDefinitions
             ThenIShouldBePresentedWithSearchResultsForTheBreed(breed);
         }
 
+        [Then(@"I should be presented with a JSON response relevant to the breed and filtered by place")]
+        public void ThenIShouldBePresentedWithJSONResultsRelevantToTheBreedAndFilteredByPlace()
+        {
+            var response = ResponseHelper.GetResponseAs<PageableResults<Dog>>();
+        }
 
         private static IWebElement GetResultsTable()
         {
             return WebDriverAdapter.WebDriver.FindElement(By.XPath("/html/body/div/section/table"));
         }
+
+
     }
 }
