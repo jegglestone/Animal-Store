@@ -66,6 +66,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ContactPage.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\DogAdvertInformationPage.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DogAdvertInformationPage.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\HomePage.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -101,6 +106,10 @@
     <None Include="Features\ContactPage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ContactPage.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\DogAdvertInformationPage.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DogAdvertInformationPage.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\HomePage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
