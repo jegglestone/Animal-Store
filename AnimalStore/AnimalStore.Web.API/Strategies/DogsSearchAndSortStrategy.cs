@@ -141,7 +141,9 @@ namespace AnimalStore.Web.API.Strategies
             var originalPlace = _placesRepository.GetById(placeId);
             var originalPlaceGeoCode = new GeoCoordinate(originalPlace.Latitude, originalPlace.Longitude);
 
-            var allPlaces = _placesRepository.GetAll().ToList();
+            var allPlaces = _placesRepository.GetAll().ToList(); //TODO: if less than 10 records it'd be more efficient to simply query the db 10 times
+                                                                 // if more than 10 we will load all 24000 places to memory (with ToList()) to reduce number of queries
+                                                                 // this will involve splitting this method in two
             var dogsList = dogs.ToList();
             var dogsWithinRadius = new List<Dog>();
 
