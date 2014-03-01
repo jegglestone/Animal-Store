@@ -20,7 +20,7 @@ Advertising : local press, forums, Google? Pet magazines.
 
 ###Web-API
 
-Used REST principles to build an open standard API that can return data in JSON or XML format.
+RESTful open standard API serving Http requests in JSON or XML format.
 
 ###Entity Framework 5 Code First and Migrations
 
@@ -29,7 +29,8 @@ Repository and Unit of Work patterns used to build an effective and scalable dat
 ###Unity IoC Container
 
 
-###SQL Server 2012
+###SQL Server
+
 
 
 ###Log4Net
@@ -41,3 +42,11 @@ Used lossy logging technique to improve performance and ensure that only a confi
 I took the approach of configuring Log4net in code rather than the usual XML approach as I wanted to be able to more quickly spot any problems, errors or omissions and have the benefit of type safety.
 
 ###MongoDB
+
+Used as a caching layer
+
+
+###NUnit and Rhino Mocks
+
+
+###Specflow
