@@ -4,8 +4,17 @@
 	I want to be told the sum of two numbers
 
 @mytag
-Scenario: Add two numbers
-	Given I have entered 50 into the calculator
-	And I have entered 70 into the calculator
-	When I press add
-	Then the result should be 120 on the screen
+Scenario: The dog profile advertisement page show full advert details
+	When I visit a dog advertisement profile
+	Then I should be presented with the dog's name and vital statistics
+	And I should be presented with information about the breed
+	And I should be presented with information and warnings relevant to buying a dog
+
+Scenario: The API allows searching for dogs of a specific breed
+	When I make a GET request to the dogs API with the breedID
+	Then I should be presented with JSON results relevant to the breed
+	And there should be other dogs in the same category in the results
+
+Scenario: The API allows searching for dogs of a specific breed within a specific place
+	When I make a GET request to the dogs API with a breedID and a placeId
+	Then I should be presented with JSON results relevant to the breed and filtered by place

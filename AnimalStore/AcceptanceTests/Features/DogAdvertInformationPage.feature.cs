@@ -66,22 +66,55 @@ namespace AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add two numbers")]
+        [NUnit.Framework.DescriptionAttribute("The dog profile advertisement page show full advert details")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void AddTwoNumbers()
+        public virtual void TheDogProfileAdvertisementPageShowFullAdvertDetails()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The dog profile advertisement page show full advert details", new string[] {
                         "mytag"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.When("I visit a dog advertisement profile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 9
- testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I should be presented with the dog\'s name and vital statistics", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 10
- testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I should be presented with information about the breed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
- testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I should be presented with information and warnings relevant to buying a dog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("The API allows searching for dogs of a specific breed")]
+        public virtual void TheAPIAllowsSearchingForDogsOfASpecificBreed()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The API allows searching for dogs of a specific breed", ((string[])(null)));
+#line 13
+this.ScenarioSetup(scenarioInfo);
+#line 14
+ testRunner.When("I make a GET request to the dogs API with the breedID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 15
+ testRunner.Then("I should be presented with JSON results relevant to the breed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 16
+ testRunner.And("there should be other dogs in the same category in the results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("The API allows searching for dogs of a specific breed within a specific place")]
+        public virtual void TheAPIAllowsSearchingForDogsOfASpecificBreedWithinASpecificPlace()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The API allows searching for dogs of a specific breed within a specific place", ((string[])(null)));
+#line 18
+this.ScenarioSetup(scenarioInfo);
+#line 19
+ testRunner.When("I make a GET request to the dogs API with a breedID and a placeId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
+ testRunner.Then("I should be presented with JSON results relevant to the breed and filtered by pla" +
+                    "ce", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
