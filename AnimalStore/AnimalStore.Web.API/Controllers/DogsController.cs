@@ -46,7 +46,11 @@ namespace AnimalStore.Web.API.Controllers
             return GetPageableDogResults(dogs, page, pageSize, baseUrl);
         }
 
+        // TODO: Acceptance test all these outcomes
         // GET api/dogs?breedid=1&page=1&pagesize=100&placeId=1&format=json
+        // GET api/dogs/breed?breedid=67&page=1&pagesize=30&format=json  -where is breed? No breed when appending?
+        // GET api/dogs/breed?breedid=7&page=1&pagesize=30&format=json
+        // GET api/dogs?breedid=4&page=1&pagesize=30&placeid=12472&format=json  -no breed when appending
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string sortBy = null, int placeId = 0)
         {

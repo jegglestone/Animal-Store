@@ -8,6 +8,7 @@ using AnimalStore.Model;
 using AnimalStore.Common.Constants;
 using System.Device.Location;
 using AnimalStore.Web.API.Wrappers;
+using System.Data.Entity;
 
 namespace AnimalStore.Web.API.Strategies
 {
@@ -104,7 +105,9 @@ namespace AnimalStore.Web.API.Strategies
         public IQueryable<Dog> Filter(int categoryId, int breedToExcludeId)
         {
             var dogsUnsorted = DogsRepository.GetAll()
-                 .Where(x => x.Breed.Category.Id == categoryId && x.Breed.Id != breedToExcludeId);
+                 .Where(x => x.Breed.Category.Id == categoryId 
+                     && x.Breed.Id != breedToExcludeId
+                     ).Include("Breed");
 
             return dogsUnsorted;
         }
@@ -127,7 +130,6 @@ namespace AnimalStore.Web.API.Strategies
     {
         readonly IPlacesRepository _placesRepository;
         readonly IConfiguration _configuration;
-
 
         public DogLocationFilter(IPlacesRepository placesRepository, IConfiguration configuration)
         {

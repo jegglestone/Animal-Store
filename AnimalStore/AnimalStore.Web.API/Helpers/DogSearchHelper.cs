@@ -31,6 +31,24 @@ namespace AnimalStore.Web.API.Helpers
             return matchingDogs;
         }
 
+        public IEnumerable<Dog> ApplyDogLocationAndSortFiltering(IQueryable<Dog> matchingDogs, int breedId, string sortBy, int placeId = 0)
+        {
+            IQueryable<Dog> dogs = AddDogsInSameCategoryToDogsCollection(matchingDogs, breedId);
+
+            IEnumerable<Dog> dogsSorted;
+            if (isLocationSearch(placeId))
+            {
+                dogsSorted = GetDogsInSameRegion(placeId, breedId, dogs);
+                dogsSorted = _dogLocationFilterStrategy.Sort(dogsSorted);
+            }
+            else
+            {
+                dogsSorted = _dogCategoryFilterStrategy.Sort(dogs, sortBy);
+            }
+
+            return dogsSorted;
+        }
+
         public IQueryable<Dog> AddDogsInSameCategoryToDogsCollection(IQueryable<Dog> matchingDogs, int breedId)
         {
             IQueryable<Dog> dogs = null;
@@ -55,24 +73,6 @@ namespace AnimalStore.Web.API.Helpers
             }
 
             return dogs;
-        }
-
-        public IEnumerable<Dog> ApplyDogLocationAndSortFiltering(IQueryable<Dog> matchingDogs, int breedId, string sortBy, int placeId = 0)
-        {
-            IQueryable<Dog> dogs = AddDogsInSameCategoryToDogsCollection(matchingDogs, breedId);
-
-            IEnumerable<Dog> dogsSorted;
-            if (isLocationSearch(placeId))
-            {
-                dogsSorted = GetDogsInSameRegion(placeId, breedId, dogs);
-                dogsSorted = _dogLocationFilterStrategy.Sort(dogsSorted);
-            }
-            else
-            {
-                dogsSorted = _dogCategoryFilterStrategy.Sort(dogs, sortBy);
-            }
-
-            return dogsSorted;
         }
 
         private IEnumerable<Dog> GetDogsInSameRegion(int placeId, int breedId, IQueryable<Dog> dogs)
