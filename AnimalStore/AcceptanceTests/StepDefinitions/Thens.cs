@@ -60,6 +60,25 @@ namespace AcceptanceTests.StepDefinitions
             Assert.That(response.Data.First().PlaceId == 1);
         }
 
+        [Then(@"I should be presented with JSON results relevant to the breed")]
+        public void ThenIShouldBePresentedWithJSONResultsRelevantToTheBreed()
+        {
+            var response = ResponseHelper.GetResponseAs<PageableResults<Dog>>();
+
+            Assert.That(response.Data.First().Breed.Name == "Bulldog");
+            Assert.That(response.Data.First().Breed.Category.Name == "Non-sporting");
+        }
+
+        [Then(@"there should be other dogs in the same category in the results")]
+        public void ThenThereShouldBeOtherDogsInTheSameCategoryInTheResults()
+        {
+            var response = ResponseHelper.GetResponseAs<PageableResults<Dog>>();
+
+            Assert.That(response.Data.Any(x => x.Breed.Name == "Dalmatian"));
+        }
+
+
+
         [Then(@"the response is a status code (.*)")]
         public void ThenTheResponseIsAStatusCode(int expectedStatusCode)
         {

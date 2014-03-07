@@ -68,18 +68,16 @@ namespace AcceptanceTests.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Searching for dogs of a specific breed")]
-        [NUnit.Framework.CategoryAttribute("wip")]
         public virtual void SearchingForDogsOfASpecificBreed()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Searching for dogs of a specific breed", new string[] {
-                        "wip"});
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Searching for dogs of a specific breed", ((string[])(null)));
+#line 6
 this.ScenarioSetup(scenarioInfo);
-#line 8
+#line 7
  testRunner.When("I make a GET request to the dogs API with the breedID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 9
+#line 8
  testRunner.Then("I should be presented with JSON results relevant to the breed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 10
+#line 9
  testRunner.And("there should be other dogs in the same category in the results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -87,16 +85,14 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Searching for dogs of a specific breed within a specific place")]
-        [NUnit.Framework.CategoryAttribute("wip")]
         public virtual void SearchingForDogsOfASpecificBreedWithinASpecificPlace()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Searching for dogs of a specific breed within a specific place", new string[] {
-                        "wip"});
-#line 13
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Searching for dogs of a specific breed within a specific place", ((string[])(null)));
+#line 11
 this.ScenarioSetup(scenarioInfo);
-#line 14
+#line 12
  testRunner.When("I make a GET request to the dogs API with a breedID and a placeId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 15
+#line 13
  testRunner.Then("I should be presented with a JSON response relevant to the breed and filtered by " +
                     "place", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -105,16 +101,14 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("No results found")]
-        [NUnit.Framework.CategoryAttribute("wip")]
         public virtual void NoResultsFound()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No results found", new string[] {
-                        "wip"});
-#line 18
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No results found", ((string[])(null)));
+#line 15
 this.ScenarioSetup(scenarioInfo);
-#line 19
+#line 16
  testRunner.When("there are no matching results in the API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 20
+#line 17
  testRunner.Then("the response is a status code 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

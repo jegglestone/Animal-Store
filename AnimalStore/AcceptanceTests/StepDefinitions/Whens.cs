@@ -55,7 +55,7 @@ namespace AcceptanceTests.StepDefinitions
         public void WhenIMakeGETRequestToTheDogsAPIWithTheBreedId()
         {
             var resourceUri = NavigationHelper.GetAPIUrl("Dogs");
-            resourceUri += "?breedid=1&page=1&pagesize=100&format=json";
+            resourceUri += "?breedid=4&page=1&pagesize=100&format=json";
 
             sendASyncRequest(resourceUri);
         }
