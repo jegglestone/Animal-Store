@@ -73,10 +73,10 @@ namespace AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Nationwide search for any kind of dog")]
-        public virtual void NationwideSearchForAnyKindOfDog()
+        [NUnit.Framework.DescriptionAttribute("Nationwide search for any kind of dog presents search results")]
+        public virtual void NationwideSearchForAnyKindOfDogPresentsSearchResults()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Nationwide search for any kind of dog", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Nationwide search for any kind of dog presents search results", ((string[])(null)));
 #line 8
 this.ScenarioSetup(scenarioInfo);
 #line 5
@@ -87,30 +87,36 @@ this.FeatureBackground();
  testRunner.And("I press the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
  testRunner.Then("I should be presented with a list of dog search results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 12
+ testRunner.And("the search description should say \'Search results 1 to 5 out of 47 results for al" +
+                    "l breeds nationwide.\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Nationwide search for specific kind of dog")]
-        [NUnit.Framework.TestCaseAttribute("Bulldog", "Dalmatian", null)]
-        public virtual void NationwideSearchForSpecificKindOfDog(string breed, string sameCategory, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Nationwide search for specific kind of dog presents search results")]
+        [NUnit.Framework.TestCaseAttribute("Bulldog", "Dalmatian", "7", null)]
+        public virtual void NationwideSearchForSpecificKindOfDogPresentsSearchResults(string breed, string sameCategory, string expectedResultsCount, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Nationwide search for specific kind of dog", exampleTags);
-#line 13
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Nationwide search for specific kind of dog presents search results", exampleTags);
+#line 14
 this.ScenarioSetup(scenarioInfo);
 #line 5
 this.FeatureBackground();
-#line 14
- testRunner.When(string.Format("I have selected a {0} anywhere in the UK", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 15
- testRunner.And("I press the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When(string.Format("I have selected a {0} anywhere in the UK", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 16
- testRunner.And(string.Format("there is less than five matching {0}", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I press the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 17
- testRunner.Then(string.Format("I should be presented with search results for the {0}", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And(string.Format("there is less than five matching {0}", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 18
+ testRunner.Then(string.Format("I should be presented with search results for the {0}", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 19
  testRunner.And(string.Format("some other dogs in the {0}", sameCategory), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 20
+ testRunner.And(string.Format("the search description should say \'Showing results 1 to 5 out of {0} results for " +
+                        "{1} nationwide\'", expectedResultsCount, breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

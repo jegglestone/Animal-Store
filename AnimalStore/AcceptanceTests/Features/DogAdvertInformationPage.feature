@@ -10,13 +10,3 @@ Scenario: The dog profile advertisement page show full advert details
 	And I should be presented with information about the breed
 	And I should be presented with information and warnings relevant to buying a dog
 
-@wip
-Scenario: The API allows searching for dogs of a specific breed
-	When I make a GET request to the dogs API with the breedID
-	Then I should be presented with JSON results relevant to the breed
-	And there should be other dogs in the same category in the results
-
-@wip
-Scenario: The API allows searching for dogs of a specific breed within a specific place
-	When I make a GET request to the dogs API with a breedID and a placeId
-	Then I should be presented with a JSON response relevant to the breed and filtered by place

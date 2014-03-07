@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System.Net.Http;
 using TechTalk.SpecFlow;
 
 namespace AcceptanceTests.StepDefinitions
@@ -53,17 +54,42 @@ namespace AcceptanceTests.StepDefinitions
         [When(@"I make a GET request to the dogs API with the breedID")]
         public void WhenIMakeGETRequestToTheDogsAPIWithTheBreedId()
         {
-            var resourceUrl = NavigationHelper.GetAPIUrl("Dogs");
-            resourceUrl += "?breedid=1&page=1&pagesize=100&format=json"; //TODO: constant
-            Navigate(resourceUrl);
+            var resourceUri = NavigationHelper.GetAPIUrl("Dogs");
+            resourceUri += "?breedid=1&page=1&pagesize=100&format=json";
+
+            sendASyncRequest(resourceUri);
         }
 
         [When(@"I make a GET request to the dogs API with a breedID and a placeId")]
         public void WhenIMakeaGETRequestToTheDogsAPIWithABreedIdAndAPlaceId()
         {
-            var resourceUrl = NavigationHelper.GetAPIUrl("Dogs");
-            resourceUrl += "?breedid=1&page=1&pagesize=100&placeId=1&format=json"; //TODO: constant
-            Navigate(resourceUrl);
+
+            var resourceUri = NavigationHelper.GetAPIUrl("Dogs");
+            resourceUri += "?breedid=1&page=1&pagesize=100&placeId=1&format=json";
+
+            sendASyncRequest(resourceUri);
+        }
+
+        [When(@"there are no matching results in the API")]
+        public void WhenThereAreNoMatchingResultsInTheAPI()
+        {
+            var resourceUri = NavigationHelper.GetAPIUrl("Dogs");
+            resourceUri += "?breedid=999&page=1&pagesize=100&placeId=1&format=json";
+
+            sendASyncRequest(resourceUri);
+        }
+
+
+        private static void sendASyncRequest(string resourceUri)
+        {
+            var httpClient = ScenarioContext.Current.Get<HttpClient>();
+
+            var responseMessage =
+                httpClient
+                    .GetAsync(resourceUri)
+                    .Result;
+
+            ScenarioContext.Current.Set(responseMessage);
         }
 
         private static void SelectNationalSearchCheckBox()

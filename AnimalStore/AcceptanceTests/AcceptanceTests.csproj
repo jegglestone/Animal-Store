@@ -76,6 +76,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DogAdvertInformationPage.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\DogsAPI.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DogsAPI.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\HomePage.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,6 +98,7 @@
     </Compile>
     <Compile Include="Hooks\AfterFeatureHook.cs" />
     <Compile Include="Hooks\BeforeFeatureHook.cs" />
+    <Compile Include="Hooks\ScenarioHooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepDefinitions\Givens.cs" />
     <Compile Include="StepDefinitions\Thens.cs" />
@@ -116,6 +122,10 @@
     <None Include="Features\DogAdvertInformationPage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>DogAdvertInformationPage.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\DogsAPI.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DogsAPI.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\HomePage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

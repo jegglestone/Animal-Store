@@ -5,6 +5,7 @@ using AnimalStore.Model;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
+using System.Net.Http;
 
 namespace AcceptanceTests.StepDefinitions
 {
@@ -58,6 +59,27 @@ namespace AcceptanceTests.StepDefinitions
             Assert.That(response.Data.First().Breed.Category.Name == "Toy");
             Assert.That(response.Data.First().PlaceId == 1);
         }
+
+        [Then(@"the response is a status code (.*)")]
+        public void ThenTheResponseIsAStatusCode(int expectedStatusCode)
+        {
+            var responseMessage =
+                ScenarioContext.Current.Get<HttpResponseMessage>();
+
+            var actualStatusCode = (int)responseMessage.StatusCode;
+
+            Assert.That(actualStatusCode, Is.EqualTo(expectedStatusCode));
+        }
+
+
+        [Then(@"the search description should say '(.*)'")]
+        public void ThenTheSearchDescriptionShouldSay(string expectedSearchDescription)
+        {
+            var actualResultDescription = WebDriverAdapter.WebDriver.FindElement(By.CssSelector("section.content-wrapper > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)"));
+
+            Assert.That(actualResultDescription.Text, Is.EqualTo(expectedSearchDescription));
+        }
+
 
         private static IWebElement GetResultsTable()
         {
