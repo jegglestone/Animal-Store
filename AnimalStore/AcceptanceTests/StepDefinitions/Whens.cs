@@ -74,7 +74,7 @@ namespace AcceptanceTests.StepDefinitions
         public void WhenThereAreNoMatchingResultsInTheAPI()
         {
             var resourceUri = NavigationHelper.GetAPIUrl("Dogs");
-            resourceUri += "?breedid=999&page=1&pagesize=100&placeId=1&format=json";
+            resourceUri += "?breedid=18&page=1&pagesize=100&placeId=1&format=json";
 
             sendASyncRequest(resourceUri);
         }
