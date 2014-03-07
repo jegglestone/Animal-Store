@@ -20,5 +20,5 @@ Scenario: No results found
 	@ignore
 Scenario: Paging through the API
 	When I make a GET request to the dogs API with a breedID and a placeId with a small pagesize
-	And I should be able to navigate the results through paging
+	And I should be able to navigate the results through using the paging links
 

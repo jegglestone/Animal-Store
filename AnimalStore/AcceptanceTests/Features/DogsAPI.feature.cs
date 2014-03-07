@@ -129,7 +129,7 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("I make a GET request to the dogs API with a breedID and a placeId with a small pa" +
                     "gesize", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 23
- testRunner.And("I should be able to navigate the results through paging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I should be able to navigate the results through using the paging links", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
