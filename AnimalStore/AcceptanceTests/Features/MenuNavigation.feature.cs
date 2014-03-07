@@ -96,7 +96,6 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("The top sub menu navigates to different hub pages")]
         [NUnit.Framework.TestCaseAttribute("Home", "Home", null)]
-        [NUnit.Framework.TestCaseAttribute("About", "About", null)]
         [NUnit.Framework.TestCaseAttribute("Contact", "Contact", null)]
         public virtual void TheTopSubMenuNavigatesToDifferentHubPages(string menuItem, string page, string[] exampleTags)
         {

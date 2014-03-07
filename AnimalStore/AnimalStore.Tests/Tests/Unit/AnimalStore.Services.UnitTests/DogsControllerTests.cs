@@ -33,7 +33,7 @@ namespace AnimalStore.Services.UnitTests
         {
             _dogsRepository = MockRepository.GenerateMock<IRepository<Dog>>();
             _breedsRepository = MockRepository.GenerateMock<IRepository<Breed>>();
-            _placesRepository = MockRepository.GenerateMock<PlacesRepository>();
+            _placesRepository = MockRepository.GenerateMock<IPlacesRepository>();
             _unitofWork = MockRepository.GenerateMock<IUnitOfWork>();
             _dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
             _configuration = MockRepository.GenerateMock<IConfiguration>();

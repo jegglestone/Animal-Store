@@ -21,5 +21,4 @@ Scenario Outline: The top sub menu navigates to different hub pages
 Examples:
 	| MenuItem | Page  |
 	| Home     | Home  |
-	| About    | About |
 	| Contact  | Contact |

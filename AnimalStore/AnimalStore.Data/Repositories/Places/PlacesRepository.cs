@@ -5,6 +5,7 @@ using AnimalStore.Model;
 
 namespace AnimalStore.Data.Repositories.Places
 {
+    //TODO: Seperate file
     public interface IPlacesRepository
     {
         IQueryable<Place> GetAll();
