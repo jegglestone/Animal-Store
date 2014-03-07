@@ -1,4 +1,5 @@
 ﻿using AnimalStore.Data.Configuration;
+using AnimalStore.Data.Helpers;
 using AnimalStore.Model;
 using System.Configuration;
 using System.Data.Entity;
@@ -10,7 +11,7 @@ namespace AnimalStore.Data.DataContext
         public IDbSet<Place> Places { get; set; }
 
         public PlacesDataContext()
-            :base(ConnectionStringName) {}
+            : base(ConnectionStringHelper.ConnectionStringName) { }
 
 
         static PlacesDataContext()
@@ -21,14 +22,6 @@ namespace AnimalStore.Data.DataContext
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new PlaceConfiguration());
-        }
-
-        private static string ConnectionStringName
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["AnimalsContextConnectionString"];
-            }
         }
     }
 }

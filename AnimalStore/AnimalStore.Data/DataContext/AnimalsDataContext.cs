@@ -5,6 +5,7 @@ using System.Data.Entity;
 using AnimalStore.Model;
 using AnimalStore.Data.Configuration;
 using AnimalStore.Model.Interfaces;
+using AnimalStore.Data.Helpers;
 
 namespace AnimalStore.Data.DataContext
 {
@@ -17,24 +18,11 @@ namespace AnimalStore.Data.DataContext
         public IDbSet<Category> Categories { get; set; }
 
         public AnimalsDataContext()
-            :base(ConnectionStringName) {}
+            : base(ConnectionStringHelper.ConnectionStringName) { }
 
         static AnimalsDataContext()
         {
             Database.SetInitializer(new AnimalsCustomDatabaseInitialiser());
-        }
-
-        private static string ConnectionStringName
-        {
-            get
-            {
-                if (ConfigurationManager.AppSettings["AnimalsContextConnectionString"] != null)
-                {
-                    return ConfigurationManager.
-                        AppSettings["AnimalsContextConnectionString"];
-                }
-                return "DefaultConnection";
-            }
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

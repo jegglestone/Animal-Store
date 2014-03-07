@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BreedRepositoryTests.cs" />
+    <Compile Include="ConnectionStringHelper.cs" />
     <Compile Include="Fakes\FakeAnimalsDbContext.cs" />
     <Compile Include="Fakes\FakeDbSet.cs" />
     <Compile Include="Fakes\FakeDerivedDbSets.cs" />

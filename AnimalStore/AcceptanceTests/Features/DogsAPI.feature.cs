@@ -113,6 +113,26 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Paging through the API")]
+        [NUnit.Framework.IgnoreAttribute()]
+        [NUnit.Framework.CategoryAttribute("wip")]
+        public virtual void PagingThroughTheAPI()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Paging through the API", new string[] {
+                        "wip",
+                        "ignore"});
+#line 21
+this.ScenarioSetup(scenarioInfo);
+#line 22
+ testRunner.When("I make a GET request to the dogs API with a breedID and a placeId with a small pa" +
+                    "gesize", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 23
+ testRunner.And("I should be able to navigate the results through paging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

@@ -15,3 +15,10 @@ Scenario: Searching for dogs of a specific breed within a specific place
 Scenario: No results found
 	When there are no matching results in the API
 	Then the response is a status code 404
+
+	@wip
+	@ignore
+Scenario: Paging through the API
+	When I make a GET request to the dogs API with a breedID and a placeId with a small pagesize
+	And I should be able to navigate the results through paging
+

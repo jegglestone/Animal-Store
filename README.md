@@ -3,9 +3,7 @@ Animal-Store
 
 Online store for selling animals as pets
 
-This is an application that I've created as a place for browsing and selling animals (well, just dogs for now) as pets.
-
-Advertising : local press, forums, Google? Pet magazines.
+This is an application that I've created as a place for browsing and selling animals (well, just dogs for now) as pets whilst allowing me to try out further features of ASP.Net MVC and Web-API and the Entity Framework amongst other things.
 
 
 ##Technology stack
@@ -31,7 +29,7 @@ Repository and Unit of Work patterns used to build an effective and scalable dat
 
 ###SQL Server
 
-
+Used Entity framework code-first approach to create the Animals and Places databases.
 
 ###Log4Net
 
@@ -43,10 +41,13 @@ I took the approach of configuring Log4net in code rather than the usual XML app
 
 ###MongoDB
 
-Used as a caching layer
-
+Aim to use this as a caching layer to reduce calls to the API in future.
 
 ###NUnit and Rhino Mocks
 
+Used to carry out unit testing of the solution. Developing mainly used TDD (test first) developemenbt to avoid building up technical debt.
+Further tests do need adding to get the test coverage increased to 90%, however ;).
 
 ###Specflow
+
+Used to cary out BDD and run acceptance tests on the Web application and the API.
