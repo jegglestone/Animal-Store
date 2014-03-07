@@ -1,4 +1,5 @@
 ﻿using AnimalStore.Data.Configuration;
+using AnimalStore.Data.Configuration.Initialisers;
 using AnimalStore.Data.Helpers;
 using AnimalStore.Model;
 using System.Configuration;

@@ -53,10 +53,10 @@
     <Compile Include="Configuration\AnimalConfiguration.cs" />
     <Compile Include="Configuration\BreedConfiguration.cs" />
     <Compile Include="Configuration\CategoryConfiguration.cs" />
-    <Compile Include="Configuration\AnimalsCustomDatabaseInitialiser.cs" />
+    <Compile Include="Configuration\Initialisers\AnimalsCustomDatabaseInitialiser.cs" />
     <Compile Include="Configuration\PlaceConfiguration.cs" />
-    <Compile Include="Configuration\PlacesCustomDatabaseInitialiser.cs" />
-    <Compile Include="Configuration\PlacesSqlCommands.cs" />
+    <Compile Include="Configuration\Initialisers\PlacesCustomDatabaseInitialiser.cs" />
+    <Compile Include="Configuration\Initialisers\PlacesSqlCommands.cs" />
     <Compile Include="Configuration\SpeciesConfiguration.cs" />
     <Compile Include="DataContext\AnimalsDataContext.cs" />
     <Compile Include="DataContext\IAnimalsDataContext.cs" />

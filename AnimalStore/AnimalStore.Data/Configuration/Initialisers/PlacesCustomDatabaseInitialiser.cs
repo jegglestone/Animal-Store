@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace AnimalStore.Data.Configuration
+namespace AnimalStore.Data.Configuration.Initialisers
 {
     public class PlacesCustomDatabaseInitialiser : 
         DropCreateDatabaseIfModelChanges<DataContext.PlacesDataContext>

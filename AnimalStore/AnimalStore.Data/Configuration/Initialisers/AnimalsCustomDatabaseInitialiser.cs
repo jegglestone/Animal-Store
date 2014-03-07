@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Data.Entity;
 
-namespace AnimalStore.Data.Configuration
+namespace AnimalStore.Data.Configuration.Initialisers
 {
     public class AnimalsCustomDatabaseInitialiser : 
         DropCreateDatabaseAlways<DataContext.AnimalsDataContext>
@@ -1074,7 +1074,6 @@ namespace AnimalStore.Data.Configuration
             base.Seed(context);
         }
 
-        // TODO: Is this the responsibility of this class? No - sort it out Joe
         private static bool IsDevelopmentEnvironment()
         {
             if (ConfigurationManager.AppSettings["Environment"] == "Development")

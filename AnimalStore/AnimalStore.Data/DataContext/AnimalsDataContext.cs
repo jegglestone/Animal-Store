@@ -6,6 +6,7 @@ using AnimalStore.Model;
 using AnimalStore.Data.Configuration;
 using AnimalStore.Model.Interfaces;
 using AnimalStore.Data.Helpers;
+using AnimalStore.Data.Configuration.Initialisers;
 
 namespace AnimalStore.Data.DataContext
 {

@@ -1,4 +1,4 @@
-﻿namespace AnimalStore.Data.Configuration
+﻿namespace AnimalStore.Data.Configuration.Initialisers
 {
     public static class PlacesSqlCommands
     {
