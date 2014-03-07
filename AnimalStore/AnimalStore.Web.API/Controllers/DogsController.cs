@@ -108,7 +108,7 @@ namespace AnimalStore.Web.API.Controllers
             return false;
         }
 
-        // TODO: unit test
+        // TODO: unit test once moved to a service class
         private string GetBreedSpecificSearchResultDescription(int resultsFrom, int resultsTo, int totalCount, string breedName, int placeId)
         {
             if (placeId != 0)
