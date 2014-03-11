@@ -48,6 +48,8 @@ namespace AnimalStore.Web.API
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IDogSearchHelper, DogSearchHelper>(
                 new HierarchicalLifetimeManager());
+            unity.RegisterType<IDogCategoryService, DogCategoryService>(
+                new HierarchicalLifetimeManager());
             unity.RegisterType<IConfiguration, Configuration>(
                 new TransientLifetimeManager());
 

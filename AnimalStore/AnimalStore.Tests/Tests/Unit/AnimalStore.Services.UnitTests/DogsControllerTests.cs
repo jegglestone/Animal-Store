@@ -23,7 +23,6 @@ namespace AnimalStore.Services.UnitTests
         private IUnitOfWork _unitofWork;
         private DogsController _dogsController;
         private IConfiguration _configuration;
-
         private Category _category;
         private Breed _bloodhound;
         private Breed _beagle;
@@ -62,36 +61,6 @@ namespace AnimalStore.Services.UnitTests
         }
 
         [Test]
-        public void Get_Paged_With_Breed_Returns_MatchingDogs_And_Dogs_In_The_Same_Category_Beneath()
-        {
-            var bloodhoundHuntingDog = new Dog() { Name = "Tip", Breed = _bloodhound };
-            var beagleHuntingDog = new Dog() { Name = "Shep", Breed = _beagle };
-
-            var matchedDogs = new DogSearchResultsListBuilder()
-                .WithAnotherDog(beagleHuntingDog)
-                .WithAnotherDog(bloodhoundHuntingDog)
-                .Build();
-
-            var dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
-
-            dogSearchhelper.Stub(x => x.GetDogsList(3, SearchSortOptions.PRICE_HIGHEST)).Return(matchedDogs);
-
-            dogSearchhelper.Stub(x => x.AddDogsInSameCategoryToDogsCollection(Arg<IQueryable<Dog>>.Is.Anything, Arg<int>.Is.Anything))
-                .Return(matchedDogs.AsQueryable<Dog>());
-
-            dogSearchhelper.Stub(x => x.ApplyDogLocationAndSortFiltering(Arg<IQueryable<Dog>>.Is.Anything, Arg<int>.Is.Anything,
-                Arg<string>.Is.Anything, Arg<int>.Is.Anything)).Return(matchedDogs);
-
-            var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, dogSearchhelper, _configuration, _placesRepository);
-
-            //act
-            var result = dogsController.GetPaged(3, 1, 20, SearchSortOptions.PRICE_HIGHEST);
-
-            Assert.That(result.Data.First(), Is.EqualTo(beagleHuntingDog));
-            Assert.That(result.Data.Contains(bloodhoundHuntingDog));
-        }
-
-        [Test]
         public void Get_Paged_With_Breed_Returns_Correct_Search_Description()
         {
             // arrange
@@ -102,8 +71,7 @@ namespace AnimalStore.Services.UnitTests
             var dogsList = new DogSearchResultsListBuilder().ListOf14Beagels().Build();
 
             _dogSearchhelper.Stub(x => x.GetDogsList(breedId, SearchSortOptions.PRICE_HIGHEST)).Return(dogsList);
-            _dogSearchhelper.Stub(x => x.AddDogsInSameCategoryToDogsCollection(Arg<IQueryable<Dog>>.Is.Anything, Arg<int>.Is.Anything))
-                .Return(dogsList.AsQueryable<Dog>());
+
             _dogSearchhelper.Stub(x => x.ApplyDogLocationAndSortFiltering(Arg<IQueryable<Dog>>.Is.Anything, Arg<int>.Is.Anything, 
                 Arg<string>.Is.Anything, Arg<int>.Is.Anything)).Return(dogsList);
 

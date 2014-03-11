@@ -84,6 +84,57 @@ namespace AnimalStore.Services.UnitTests
             return this;
         }
 
+        internal DogSearchResultsListBuilder ListOf3DalmatiansByCategory(int categoryId, int breedId)
+        {
+            var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = categoryId, Name = "Hunting" };
+            var dalmatian = new Breed() { Name = "Dalmatian", Category = category, Id = breedId, Species = null };
+
+            var dalmatianDog1 = new Dog() { Name = "Tip", Breed = dalmatian };
+            var dalmatianDog2 = new Dog() { Name = "Snoop", Breed = dalmatian };
+            var dalmatianDog3 = new Dog() { Name = "Ron", Breed = dalmatian };
+
+            var matchedDogs = new ObservableCollection<Dog>() 
+            {   dalmatianDog1
+                ,dalmatianDog2
+                ,dalmatianDog3
+            };
+            _dogs.AddRange(matchedDogs);
+            return this;
+        }
+
+        internal DogSearchResultsListBuilder ListOfThreeDuplicateDogs(int categoryId, int breedId)
+        {
+            var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = categoryId, Name = "Hunting" };
+            var dalmatian = new Breed() { Name = "Dalmatian", Category = category, Id = breedId, Species = null };
+            var dalmatianDog = new Dog() { Name = "Tip", Breed = dalmatian };
+
+            var matchedDogs = new ObservableCollection<Dog>() 
+            {   dalmatianDog
+                ,dalmatianDog
+                ,dalmatianDog
+            };
+            _dogs.AddRange(matchedDogs);
+            return this;
+        }
+
+        internal DogSearchResultsListBuilder ListOf3BeagelsByCategory(int categoryId, int breedId)
+        {
+            var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = categoryId, Name = "Hunting" };
+            var beagle = new Breed() { Name = "Beagel", Category = category, Id = breedId, Species = null };
+
+            var beagleHuntingDog1 = new Dog() { Name = "Shep", Breed = beagle };
+            var beagleHuntingDog2 = new Dog() { Name = "Flo", Breed = beagle };
+            var beagleHuntingDog3 = new Dog() { Name = "Rex", Breed = beagle };
+
+            var matchedDogs = new ObservableCollection<Dog>() 
+            {   beagleHuntingDog1
+                ,beagleHuntingDog2
+                ,beagleHuntingDog3
+            };
+            _dogs.AddRange(matchedDogs);
+            return this;
+        }
+
         internal DogSearchResultsListBuilder WithAnotherDog(Dog dog)
         {
             _dogs.Add(dog);

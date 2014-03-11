@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BreedsControllerTests.cs" />
+    <Compile Include="DogCategoryServiceTests.cs" />
     <Compile Include="DogsControllerTests.cs" />
     <Compile Include="DogSearchHelperTests.cs" />
     <Compile Include="ResultsCountHelperTests.cs" />

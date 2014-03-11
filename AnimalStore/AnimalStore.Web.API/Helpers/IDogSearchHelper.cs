@@ -8,8 +8,6 @@ namespace AnimalStore.Web.API.Helpers
     {
         IEnumerable<Dog> GetDogsList(int breedId, string sortBy, int placeId=0);
 
-        IQueryable<Dog> AddDogsInSameCategoryToDogsCollection(IQueryable<Dog> matchingDogs, int breedId);
-
         IEnumerable<Dog> ApplyDogLocationAndSortFiltering(IQueryable<Dog> matchingDogs, int breedId, string sortBy, int placeId = 0);
     }
 }

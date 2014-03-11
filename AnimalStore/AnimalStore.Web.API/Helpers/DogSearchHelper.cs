@@ -12,16 +12,21 @@ namespace AnimalStore.Web.API.Helpers
     {
         private readonly IDogBreedFilterStrategy _dogBreedFilterStrategy;
         private readonly IDogCategoryFilterStrategy _dogCategoryFilterStrategy;
+        private readonly IDogCategoryService _dogCategoryService;
         private readonly IDogLocationFilterStrategy _dogLocationFilterStrategy;
-        private readonly IRepository<Breed> _breedsRepository;
         private readonly IConfiguration _configuration;
 
-        public DogSearchHelper(IDogBreedFilterStrategy dogBreedFilterStrategy, IDogCategoryFilterStrategy dogCategoryFilterStrategy, IDogLocationFilterStrategy dogLocationFilterStrategy, IRepository<Breed> breedsRepository, IConfiguration configuration)
+        public DogSearchHelper(
+            IDogBreedFilterStrategy dogBreedFilterStrategy
+            , IDogCategoryFilterStrategy dogCategoryFilterStrategy
+            , IDogCategoryService dogCategoryService
+            , IDogLocationFilterStrategy dogLocationFilterStrategy
+            , IConfiguration configuration)
         {
             _dogBreedFilterStrategy = dogBreedFilterStrategy;
             _dogCategoryFilterStrategy = dogCategoryFilterStrategy;
+            _dogCategoryService = dogCategoryService;
             _dogLocationFilterStrategy = dogLocationFilterStrategy;
-            _breedsRepository = breedsRepository;
             _configuration = configuration;
         }
 
@@ -33,9 +38,9 @@ namespace AnimalStore.Web.API.Helpers
 
         public IEnumerable<Dog> ApplyDogLocationAndSortFiltering(IQueryable<Dog> matchingDogs, int breedId, string sortBy, int placeId = 0)
         {
-            IQueryable<Dog> dogs = AddDogsInSameCategoryToDogsCollection(matchingDogs, breedId);
-
+            IQueryable<Dog> dogs = _dogCategoryService.AddDogsInSameCategoryToDogsCollection(matchingDogs, breedId);
             IEnumerable<Dog> dogsSorted;
+
             if (isLocationSearch(placeId))
             {
                 dogsSorted = GetDogsInSameRegion(placeId, breedId, dogs);
@@ -49,32 +54,6 @@ namespace AnimalStore.Web.API.Helpers
             return dogsSorted;
         }
 
-        public IQueryable<Dog> AddDogsInSameCategoryToDogsCollection(IQueryable<Dog> matchingDogs, int breedId)
-        {
-            IQueryable<Dog> dogs = null;
-            IQueryable<Dog> dogsInSameCategory = null;
-
-            if (matchingDogs.Count() < _configuration.GetSearchResultsMinimumMatchingNumber())
-            {
-                dogsInSameCategory = GetDogsInSameCategory(breedId);
-            }
-
-            if (dogsInSameCategory != null && matchingDogs != null)
-            {
-                dogs = matchingDogs.Union(dogsInSameCategory);
-            }
-            else if (dogsInSameCategory == null && matchingDogs != null)
-            {
-                dogs = matchingDogs;
-            }
-            else if (dogsInSameCategory != null)
-            {
-                dogs = dogsInSameCategory;
-            }
-
-            return dogs;
-        }
-
         private IEnumerable<Dog> GetDogsInSameRegion(int placeId, int breedId, IQueryable<Dog> dogs)
         {
             // TODO: see if we have enough matching breeds to just return relevant ones
@@ -84,21 +63,6 @@ namespace AnimalStore.Web.API.Helpers
             return dogsInSameRegion.Count(x => x.BreedId == breedId) >= _configuration.GetSearchResultsMinimumMatchingNumber() 
                 ? dogsInSameRegion.Where(x => x.BreedId == breedId) 
                 : dogsInSameRegion;
-        }
-
-        private IQueryable<Dog> GetDogsInSameCategory(int breedId)
-        {
-            int categoryId;
-            try
-            {
-                categoryId = _breedsRepository.GetById(breedId).Category.Id;
-            }
-            catch (NullReferenceException)
-            {
-                return null;
-            }
-
-            return _dogCategoryFilterStrategy.Filter(categoryId, breedId);
         }
 
         private bool isLocationSearch(int placeId)

@@ -190,7 +190,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Services\DogCategoryService.cs" />
     <Compile Include="Helpers\DogSearchHelper.cs" />
+    <Compile Include="Services\IDogCategoryService.cs" />
     <Compile Include="Helpers\IDogSearchHelper.cs" />
     <Compile Include="Helpers\PageableResultsNextPreviousUrlHelper.cs" />
     <Compile Include="Helpers\ResultsCountHelper.cs" />
