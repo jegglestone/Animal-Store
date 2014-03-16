@@ -19,7 +19,7 @@ namespace AnimalStore.Services.UnitTests
         private IRepository<Dog> _dogsRepository;
         private IRepository<Breed> _breedsRepository;
         private IPlacesRepository _placesRepository;
-        private IDogSearchHelper _dogSearchhelper;
+        private IDogSearchManager _dogSearchhelper;
         private IUnitOfWork _unitofWork;
         private DogsController _dogsController;
         private IConfiguration _configuration;
@@ -34,7 +34,7 @@ namespace AnimalStore.Services.UnitTests
             _breedsRepository = MockRepository.GenerateMock<IRepository<Breed>>();
             _placesRepository = MockRepository.GenerateMock<IPlacesRepository>();
             _unitofWork = MockRepository.GenerateMock<IUnitOfWork>();
-            _dogSearchhelper = MockRepository.GenerateMock<IDogSearchHelper>();
+            _dogSearchhelper = MockRepository.GenerateMock<IDogSearchManager>();
             _configuration = MockRepository.GenerateMock<IConfiguration>();
 
             _breedsRepository.Stub(x => x.GetById(Arg<int>.Is.Anything)).Return(
@@ -70,9 +70,9 @@ namespace AnimalStore.Services.UnitTests
 
             var dogsList = new DogSearchResultsListBuilder().ListOf14Beagels().Build();
 
-            _dogSearchhelper.Stub(x => x.GetDogsList(breedId, SearchSortOptions.PRICE_HIGHEST)).Return(dogsList);
+            _dogSearchhelper.Stub(x => x.GetDogsByBreed(breedId)).Return(dogsList);
 
-            _dogSearchhelper.Stub(x => x.ApplyDogLocationAndSortFiltering(Arg<IQueryable<Dog>>.Is.Anything, Arg<int>.Is.Anything, 
+            _dogSearchhelper.Stub(x => x.ApplyDogLocationFilteringAndSorting(Arg<IQueryable<Dog>>.Is.Anything, Arg<int>.Is.Anything, 
                 Arg<string>.Is.Anything, Arg<int>.Is.Anything)).Return(dogsList);
 
             var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper, _configuration, _placesRepository);

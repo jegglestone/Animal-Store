@@ -1,6 +1,7 @@
 ﻿Feature: SearchWidget
 	As a pet buyer
 	I want to be able to search for a pet
+	In order to find one that is right for me
 
 Background: 
 	Given I am on the 'Home' page

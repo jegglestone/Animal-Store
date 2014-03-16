@@ -21,14 +21,14 @@ namespace AnimalStore.Web.API.Controllers
         private readonly IRepository<Dog> _dogsRepository;
         private readonly IRepository<Breed> _breedsRepository;
         private readonly IPlacesRepository _placesRepository;
-        private readonly IDogSearchHelper _dogSearchHelper;
+        private readonly IDogSearchManager _dogSearchManager;
         private readonly IConfiguration _configuration;
 
-        public DogsController(IRepository<Dog> dogsRepository, IRepository<Breed> breedsRepository, IUnitOfWork unitOfWork, IDogSearchHelper dogSearchHelper, IConfiguration configuration, IPlacesRepository placesRepository)
+        public DogsController(IRepository<Dog> dogsRepository, IRepository<Breed> breedsRepository, IUnitOfWork unitOfWork, IDogSearchManager dogSearchManager, IConfiguration configuration, IPlacesRepository placesRepository)
         {
             _unitOfWork = unitOfWork;
             _dogsRepository = dogsRepository;
-            _dogSearchHelper = dogSearchHelper;
+            _dogSearchManager = dogSearchManager;
             _breedsRepository = breedsRepository;
             _placesRepository = placesRepository;
             _configuration = configuration;
@@ -53,9 +53,9 @@ namespace AnimalStore.Web.API.Controllers
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string sortBy = null, int placeId = 0)
         {
-            var sortedDogsList = _dogSearchHelper.GetDogsList(breedId, sortBy, placeId);
+            var sortedDogsList = _dogSearchManager.GetDogsByBreed(breedId);
 
-            sortedDogsList = _dogSearchHelper.ApplyDogLocationAndSortFiltering(sortedDogsList.AsQueryable(), breedId, sortBy, placeId);
+            sortedDogsList = _dogSearchManager.ApplyDogLocationFilteringAndSorting(sortedDogsList.AsQueryable(), breedId, sortBy, placeId);
 
             var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogsByBreed] + "?breedId=" + breedId + "&page=";
 
@@ -99,13 +99,6 @@ namespace AnimalStore.Web.API.Controllers
         private string GetAllBreedsSearchResultDescription(int resultsFrom, int resultsTo, int totalCount, int placeId)
         {
             return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForAllBreeds(), resultsFrom, resultsTo, totalCount);
-        }
-
-        private bool IsLocationSearch(int placeId)
-        {
-            if (placeId != 0)
-                return true;
-            return false;
         }
 
         // TODO: unit test once moved to a service class

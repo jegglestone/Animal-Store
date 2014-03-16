@@ -190,10 +190,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\LocationSearchChecker.cs" />
     <Compile Include="Services\DogCategoryService.cs" />
-    <Compile Include="Helpers\DogSearchHelper.cs" />
+    <Compile Include="Helpers\DogSearchManager.cs" />
     <Compile Include="Services\IDogCategoryService.cs" />
-    <Compile Include="Helpers\IDogSearchHelper.cs" />
+    <Compile Include="Helpers\IDogSearchManager.cs" />
     <Compile Include="Helpers\PageableResultsNextPreviousUrlHelper.cs" />
     <Compile Include="Helpers\ResultsCountHelper.cs" />
     <Compile Include="Models\AppSettingKeys.cs" />
@@ -270,6 +271,7 @@
     <Content Include="App.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Properties\PublishProfiles\animalsapi.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />

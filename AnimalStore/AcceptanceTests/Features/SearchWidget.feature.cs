@@ -32,7 +32,8 @@ namespace AcceptanceTests.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SearchWidget", "As a pet buyer\r\nI want to be able to search for a pet", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SearchWidget", "As a pet buyer\r\nI want to be able to search for a pet\r\nIn order to find one that " +
+                    "is right for me", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -66,8 +67,8 @@ namespace AcceptanceTests.Features
         
         public virtual void FeatureBackground()
         {
-#line 5
 #line 6
+#line 7
  testRunner.Given("I am on the \'Home\' page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
@@ -77,17 +78,17 @@ namespace AcceptanceTests.Features
         public virtual void NationwideSearchForAnyKindOfDogPresentsSearchResults()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Nationwide search for any kind of dog presents search results", ((string[])(null)));
-#line 8
-this.ScenarioSetup(scenarioInfo);
-#line 5
-this.FeatureBackground();
 #line 9
- testRunner.When("I have selected any breed of dog in the UK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
 #line 10
- testRunner.And("I press the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I have selected any breed of dog in the UK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
- testRunner.Then("I should be presented with a list of dog search results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I press the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
+ testRunner.Then("I should be presented with a list of dog search results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 13
  testRunner.And("the search description should say \'Search results 1 to 5 out of 47 results for al" +
                     "l breeds nationwide.\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -100,21 +101,21 @@ this.FeatureBackground();
         public virtual void NationwideSearchForSpecificKindOfDogPresentsSearchResults(string breed, string sameCategory, string expectedResultsCount, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Nationwide search for specific kind of dog presents search results", exampleTags);
-#line 14
-this.ScenarioSetup(scenarioInfo);
-#line 5
-this.FeatureBackground();
 #line 15
- testRunner.When(string.Format("I have selected a {0} anywhere in the UK", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
 #line 16
- testRunner.And("I press the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When(string.Format("I have selected a {0} anywhere in the UK", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 17
- testRunner.And(string.Format("there is less than five matching {0}", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I press the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 18
- testRunner.Then(string.Format("I should be presented with search results for the {0}", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And(string.Format("there is less than five matching {0}", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 19
- testRunner.And(string.Format("some other dogs in the {0}", sameCategory), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then(string.Format("I should be presented with search results for the {0}", breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 20
+ testRunner.And(string.Format("some other dogs in the {0}", sameCategory), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 21
  testRunner.And(string.Format("the search description should say \'Showing results 1 to 5 out of {0} results for " +
                         "{1} nationwide\'", expectedResultsCount, breed), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

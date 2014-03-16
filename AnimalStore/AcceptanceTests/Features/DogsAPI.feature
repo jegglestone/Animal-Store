@@ -1,7 +1,7 @@
 ﻿Feature: DogsAPI
 	In order to consume dog data from the API
 	As a consumer interested in that dogs data
-	I want to get alist of available dogs and optionally filter them on breed and location
+	I want to get a list of available dogs and optionally filter them on breed and location
 
 Scenario: Searching for dogs of a specific breed
 	When I make a GET request to the dogs API with the breedID

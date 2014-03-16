@@ -6,7 +6,7 @@ namespace AnimalStore.Common.Logging
 {
     public static class EventLogHelper
     {
-        public static void InitialiseEventLog()
+       public static void InitialiseEventLog()
        {
            const string EVENT_LOG_NAME = EventLogConstants.EVENT_LOG_NAME;
 

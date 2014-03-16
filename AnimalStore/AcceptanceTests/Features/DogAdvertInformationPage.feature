@@ -1,7 +1,7 @@
 ﻿Feature: DogAdvertInformationPage
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+	As a user who is looking for a pet dog
+	I want to view full details of an advertised dog
+	in order to help me decide if that dog is right for me
 
 @ignore
 Scenario: The dog profile advertisement page show full advert details
