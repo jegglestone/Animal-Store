@@ -28,6 +28,7 @@ namespace AnimalStore.Web.API
             var unity = new UnityContainer();
             unity.RegisterType<DogsController>();
             unity.RegisterType<BreedsController>();
+            unity.RegisterType<PlacesController>();
             unity.RegisterType<IUnitOfWork, UnitOfWork<AnimalsDataContext>>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IContext, AnimalsDataContext>(

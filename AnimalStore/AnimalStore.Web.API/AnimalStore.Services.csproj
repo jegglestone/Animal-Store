@@ -185,6 +185,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\IController.cs" />
     <Compile Include="Controllers\IPageableResults.cs" />
+    <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="DependencyResolution\UnityContainer.cs" />
     <Compile Include="Filters\NullFilter.cs" />
     <Compile Include="Global.asax.cs">

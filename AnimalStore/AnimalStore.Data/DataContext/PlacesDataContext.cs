@@ -12,7 +12,7 @@ namespace AnimalStore.Data.DataContext
         public IDbSet<Place> Places { get; set; }
 
         public PlacesDataContext()
-            : base(ConnectionStringHelper.ConnectionStringName) { }
+            : base(ConnectionStringHelper.PlacesConnectionStringName) { }
 
 
         static PlacesDataContext()
