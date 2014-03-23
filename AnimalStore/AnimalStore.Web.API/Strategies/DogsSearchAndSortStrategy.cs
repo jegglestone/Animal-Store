@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using AnimalStore.Data.Repositories;
-using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Model;
 using AnimalStore.Common.Constants;
 using System.Device.Location;
@@ -128,10 +127,10 @@ namespace AnimalStore.Web.API.Strategies
 
     public sealed class DogLocationFilter : IDogLocationFilterStrategy
     {
-        readonly IPlacesRepository _placesRepository;
+        readonly IRepository<Place> _placesRepository;
         readonly IConfiguration _configuration;
 
-        public DogLocationFilter(IPlacesRepository placesRepository, IConfiguration configuration)
+        public DogLocationFilter(IRepository<Place> placesRepository, IConfiguration configuration)
         {
             _placesRepository = placesRepository;
             _configuration = configuration;

@@ -4,15 +4,14 @@ using System.Web.Http;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Model;
 using AnimalStore.Web.API.Filters;
-using AnimalStore.Data.Repositories.Places;
 
 namespace AnimalStore.Web.API.Controllers
 {
     public class PlacesController : ApiController, IController<Place>
     {
-        private readonly IPlacesRepository _placesRepository;
+        private readonly IRepository<Place> _placesRepository;
 
-        public PlacesController(IPlacesRepository placeRepository)
+        public PlacesController(IRepository<Place> placeRepository)
         {
             _placesRepository = placeRepository;
         }

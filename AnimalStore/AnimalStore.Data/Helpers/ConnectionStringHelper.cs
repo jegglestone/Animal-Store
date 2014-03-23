@@ -21,18 +21,5 @@ namespace AnimalStore.Data.Helpers
                 return "DefaultConnection";
             }
         }
-
-        public static string PlacesConnectionStringName
-        {
-            get
-            {
-                if (ConfigurationManager.AppSettings["PlacesContextConnectionString"] != null)
-                {
-                    return ConfigurationManager.
-                        AppSettings["PlacesContextConnectionString"];
-                }
-                return "DefaultConnection";
-            }
-        }
     }
 }

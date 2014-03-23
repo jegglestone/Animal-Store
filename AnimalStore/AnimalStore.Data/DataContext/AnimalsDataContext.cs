@@ -17,6 +17,7 @@ namespace AnimalStore.Data.DataContext
         public IDbSet<Species> Species { get; set; }
         public IDbSet<Breed> Breeds { get; set; }
         public IDbSet<Category> Categories { get; set; }
+        public IDbSet<Place> Places { get; set; }
 
         public AnimalsDataContext()
             : base(ConnectionStringHelper.ConnectionStringName) { }
@@ -32,6 +33,7 @@ namespace AnimalStore.Data.DataContext
             modelBuilder.Configurations.Add(new BreedConfiguration());
             modelBuilder.Configurations.Add(new SpeciesConfiguration());
             modelBuilder.Configurations.Add(new CategoryConfiguration());
+            modelBuilder.Configurations.Add(new PlaceConfiguration());
         }
 
         public override int SaveChanges()

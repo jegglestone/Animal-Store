@@ -55,20 +55,17 @@
     <Compile Include="Configuration\CategoryConfiguration.cs" />
     <Compile Include="Configuration\Initialisers\AnimalsCustomDatabaseInitialiser.cs" />
     <Compile Include="Configuration\PlaceConfiguration.cs" />
-    <Compile Include="Configuration\Initialisers\PlacesCustomDatabaseInitialiser.cs" />
-    <Compile Include="Configuration\Initialisers\PlacesSqlCommands.cs" />
     <Compile Include="Configuration\SpeciesConfiguration.cs" />
     <Compile Include="DataContext\AnimalsDataContext.cs" />
     <Compile Include="DataContext\IAnimalsDataContext.cs" />
     <Compile Include="DataContext\IContext.cs" />
-    <Compile Include="DataContext\PlacesDataContext.cs" />
     <Compile Include="Helpers\ConnectionStringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Animals\BreedsRepository.cs" />
     <Compile Include="Repositories\Animals\DogsRepository.cs" />
     <Compile Include="Repositories\Animals\GenericRepository.cs" />
     <Compile Include="Repositories\Animals\IRepository.cs" />
-    <Compile Include="Repositories\Places\PlacesRepository.cs" />
+    <Compile Include="Repositories\Animals\PlacesRepository.cs" />
     <Compile Include="UnitsOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitsOfWork\UnitOfWork.cs" />
   </ItemGroup>
