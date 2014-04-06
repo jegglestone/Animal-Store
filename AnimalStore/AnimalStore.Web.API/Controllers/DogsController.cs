@@ -30,7 +30,8 @@ namespace AnimalStore.Web.API.Controllers
             , IUnitOfWork unitOfWork
             , IDogSearchManager dogSearchManager
             , IConfiguration configuration
-            , IPlacesRepository placesRepository)
+            , IPlacesRepository placesRepository
+            )
         {
             _unitOfWork = unitOfWork;
             _dogsRepository = dogsRepository;

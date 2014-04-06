@@ -1,11 +1,7 @@
 ﻿using AnimalStore.Data.Repositories.Places;
 using MongoDB.Driver;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationTests
 {
@@ -17,7 +13,7 @@ namespace IntegrationTests
         [TestFixtureSetUp]
         public void SetUp()
         {
-            MongoClient mongoClient = new MongoClient("Server=localhost:27017");
+            var mongoClient = new MongoClient("Server=localhost:27017");
 
             _placesRepository = new PlacesRepository(mongoClient);
         }

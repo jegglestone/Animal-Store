@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using System.Net.Http;
 using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Data.Repositories.Animals;
@@ -16,6 +17,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using MongoDB.Driver;
 
 namespace AnimalStore.Web.API
 {
@@ -27,34 +29,41 @@ namespace AnimalStore.Web.API
         static void ConfigureApi(HttpConfiguration config)
         {
             var unity = new UnityContainer();
-            unity.RegisterType<DogsController>();
+
             unity.RegisterType<BreedsController>();
+            unity.RegisterType<DogsController>();
             unity.RegisterType<PlacesController>();
+
             unity.RegisterType<IUnitOfWork, UnitOfWork<AnimalsDataContext>>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IContext, AnimalsDataContext>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IRepository<Dog>, DogsRepository>(
+            unity.RegisterType<IAnimalsDataContext, AnimalsDataContext>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IRepository<Breed>, BreedsRepository>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IPlacesRepository, PlacesRepository>(
-                new HierarchicalLifetimeManager());
+            unity.RegisterType<IConfiguration, Configuration>(
+                new TransientLifetimeManager());
             unity.RegisterType<IDogBreedFilterStrategy, DogBreedFilter>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IDogCategoryFilterStrategy, DogCategoryFilter>(
                 new HierarchicalLifetimeManager());
+            unity.RegisterType<IDogCategoryService, DogCategoryService>(
+                new HierarchicalLifetimeManager());
             unity.RegisterType<IDogLocationFilterStrategy, DogLocationFilter>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IAnimalsDataContext, AnimalsDataContext>(
+            unity.RegisterType<IRepository<Dog>, DogsRepository>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IDogSearchManager, DogSearchManager>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IDogCategoryService, DogCategoryService>(
+            unity.RegisterType<IPlacesRepository, PlacesRepository>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IConfiguration, Configuration>(
-                new TransientLifetimeManager());
 
+            unity.RegisterType<MongoClient>(
+                new InjectionFactory(x =>
+                                     new MongoClient("Server=localhost:27017") // needs to come from config. This responsibility needs to move
+            ));
+        
             config.DependencyResolver = new IoCContainer(unity);
         }
 
