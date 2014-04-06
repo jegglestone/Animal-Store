@@ -1,13 +1,12 @@
-﻿using AnimalStore.Data.Repositories;
+﻿using System;
+using System.Linq;
+using AnimalStore.Data.Repositories;
 using AnimalStore.Model;
+using AnimalStore.Web.API.Helpers;
 using AnimalStore.Web.API.Strategies;
 using AnimalStore.Web.API.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace AnimalStore.Web.API.Helpers
+namespace AnimalStore.Web.API.Services
 {
     public class DogCategoryService : IDogCategoryService
     {

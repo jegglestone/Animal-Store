@@ -9,5 +9,6 @@
         public const string NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace = "NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace";
         public const string NationwideSearchResultsDescriptionMessageForAllBreeds = "NationwideSearchResultsDescriptionMessageForAllBreeds";
         public const string SearchRadiusDefaultDistanceInMetres = "SearchRadiusDefaultDistanceInMetres";
+        public const string MongoServer = "MongoServer";
     }
 }

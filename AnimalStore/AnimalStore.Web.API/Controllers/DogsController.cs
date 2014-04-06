@@ -89,7 +89,7 @@ namespace AnimalStore.Web.API.Controllers
 
             var resultsDescription = breedName != null
                 ? GetBreedSpecificSearchResultDescription(resultsFrom, resultsTo, totalCount, breedName, placeId)
-                : GetAllBreedsSearchResultDescription(resultsFrom, resultsTo, totalCount, placeId);
+                : GetAllBreedsSearchResultDescription(resultsFrom, resultsTo, totalCount);
                 
             return new PageableResults<Dog>
             {
@@ -103,7 +103,7 @@ namespace AnimalStore.Web.API.Controllers
             };
         }
 
-        private string GetAllBreedsSearchResultDescription(int resultsFrom, int resultsTo, int totalCount, int placeId)
+        private string GetAllBreedsSearchResultDescription(int resultsFrom, int resultsTo, int totalCount)
         {
             return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForAllBreeds(), resultsFrom, resultsTo, totalCount);
         }
