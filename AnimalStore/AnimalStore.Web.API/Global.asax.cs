@@ -9,6 +9,7 @@ using AnimalStore.Web.API.Controllers;
 using AnimalStore.Web.API.DependencyResolution;
 using AnimalStore.Web.API.Helpers;
 using AnimalStore.Web.API.Strategies;
+using AnimalStore.Web.API.Utilities;
 using AnimalStore.Web.API.Wrappers;
 using Microsoft.Practices.Unity;
 using System.Web.Http;

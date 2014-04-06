@@ -1,7 +1,9 @@
 ﻿using AnimalStore.Common.Constants;
+using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Web.API.Helpers;
+using AnimalStore.Web.API.Utilities;
 using AnimalStore.Web.API.Wrappers;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -17,7 +19,7 @@ namespace AnimalStore.Services.UnitTests
     {
         private IRepository<Dog> _dogsRepository;
         private IRepository<Breed> _breedsRepository;
-        private IRepository<Place> _placesRepository;
+        private IPlacesRepository _placesRepository;
         private IDogSearchManager _dogSearchhelper;
         private IUnitOfWork _unitofWork;
         private DogsController _dogsController;
@@ -31,7 +33,7 @@ namespace AnimalStore.Services.UnitTests
         {
             _dogsRepository = MockRepository.GenerateMock<IRepository<Dog>>();
             _breedsRepository = MockRepository.GenerateMock<IRepository<Breed>>();
-            _placesRepository = MockRepository.GenerateMock<IRepository<Place>>();
+            _placesRepository = MockRepository.GenerateMock<IPlacesRepository>();
             _unitofWork = MockRepository.GenerateMock<IUnitOfWork>();
             _dogSearchhelper = MockRepository.GenerateMock<IDogSearchManager>();
             _configuration = MockRepository.GenerateMock<IConfiguration>();

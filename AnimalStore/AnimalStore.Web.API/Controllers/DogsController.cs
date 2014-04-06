@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
+using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
 using AnimalStore.Data.Repositories;
@@ -9,6 +10,7 @@ using System;
 using AnimalStore.Web.API.Filters;
 using AnimalStore.Web.API.Helpers;
 using AnimalStore.Web.API.Models;
+using AnimalStore.Web.API.Utilities;
 using AnimalStore.Web.API.Wrappers;
 
 namespace AnimalStore.Web.API.Controllers
@@ -19,11 +21,16 @@ namespace AnimalStore.Web.API.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Dog> _dogsRepository;
         private readonly IRepository<Breed> _breedsRepository;
-        private readonly IRepository<Place> _placesRepository;
+        private readonly IPlacesRepository _placesRepository;
         private readonly IDogSearchManager _dogSearchManager;
         private readonly IConfiguration _configuration;
 
-        public DogsController(IRepository<Dog> dogsRepository, IRepository<Breed> breedsRepository, IUnitOfWork unitOfWork, IDogSearchManager dogSearchManager, IConfiguration configuration, IRepository<Place> placesRepository)
+        public DogsController(IRepository<Dog> dogsRepository
+            , IRepository<Breed> breedsRepository
+            , IUnitOfWork unitOfWork
+            , IDogSearchManager dogSearchManager
+            , IConfiguration configuration
+            , IPlacesRepository placesRepository)
         {
             _unitOfWork = unitOfWork;
             _dogsRepository = dogsRepository;
