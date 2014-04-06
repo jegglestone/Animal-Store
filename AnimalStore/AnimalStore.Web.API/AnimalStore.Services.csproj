@@ -208,6 +208,7 @@
     <Compile Include="Helpers\ResultsCountHelper.cs" />
     <Compile Include="Models\AppSettingKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strategies\DogLocationFilter.cs" />
     <Compile Include="Strategies\DogsSearchAndSortStrategy.cs" />
     <Compile Include="Wrappers\Configuration.cs" />
     <Compile Include="Wrappers\IConfiguration.cs" />

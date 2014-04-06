@@ -2,6 +2,7 @@
 using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Data.Repositories.Animals;
+using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
 using AnimalStore.Web.API.Controllers;
@@ -36,7 +37,7 @@ namespace AnimalStore.Web.API
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IRepository<Breed>, BreedsRepository>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IRepository<Place>, PlacesRepository>(
+            unity.RegisterType<IPlacesRepository, PlacesRepository>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IDogBreedFilterStrategy, DogBreedFilter>(
                 new HierarchicalLifetimeManager());

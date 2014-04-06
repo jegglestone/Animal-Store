@@ -70,7 +70,6 @@
     <Compile Include="Repositories\Animals\DogsRepository.cs" />
     <Compile Include="Repositories\Animals\GenericRepository.cs" />
     <Compile Include="Repositories\Animals\IRepository.cs" />
-    <Compile Include="Repositories\Animals\PlacesRepository.cs" />
     <Compile Include="Repositories\Places\IPlacesRepository.cs" />
     <Compile Include="Repositories\Places\PlacesRepository.cs" />
     <Compile Include="UnitsOfWork\IUnitOfWork.cs" />
