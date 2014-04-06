@@ -10,6 +10,5 @@ namespace AnimalStore.Data.DataContext
         IDbSet<Species> Species { get; }
         IDbSet<Breed> Breeds { get; }
         IDbSet<Category> Categories { get; }
-        IDbSet<Place> Places { get; set; }
     }
 }

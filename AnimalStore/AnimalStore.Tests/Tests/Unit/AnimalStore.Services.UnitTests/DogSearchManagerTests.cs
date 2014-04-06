@@ -1,11 +1,10 @@
-﻿using AnimalStore.Data.Repositories;
+﻿using System.Collections.Generic;
 using AnimalStore.Model;
 using AnimalStore.Web.API.Helpers;
 using AnimalStore.Web.API.Strategies;
 using AnimalStore.Web.API.Wrappers;
 using NUnit.Framework;
 using Rhino.Mocks;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace AnimalStore.Services.UnitTests
@@ -18,10 +17,8 @@ namespace AnimalStore.Services.UnitTests
         private readonly IDogCategoryService _dogCategoryService;
         private readonly IDogLocationFilterStrategy _dogLocationFilterStrategy;
         private readonly IConfiguration _configuration;
-
-        private DogSearchResultsListBuilder _dogSearchResultsListBuilder;
+        private readonly DogSearchResultsListBuilder _dogSearchResultsListBuilder;
         private const string _sortColumn = "Something";
-
         private DogSearchManager _dogSearchManager;
 
         public DogSearchManagerTests ()
@@ -31,65 +28,113 @@ namespace AnimalStore.Services.UnitTests
             _dogCategoryService = MockRepository.GenerateMock<IDogCategoryService>();
             _dogLocationFilterStrategy = MockRepository.GenerateMock<IDogLocationFilterStrategy>();
             _configuration = MockRepository.GenerateMock<IConfiguration>();
-
             _dogSearchResultsListBuilder = new DogSearchResultsListBuilder();
+	    }
+
+        [Test]
+        public void GetDogsByBreed_filters_dogs_by_breed()
+        {
+            // arrange
+            var dogBreedFilterStrategy = MockRepository.GenerateMock<IDogBreedFilterStrategy>();
+            var dogSearchResultsListBuilder = new DogSearchResultsListBuilder();
+
+            dogBreedFilterStrategy.Stub(x => x.Filter(Arg<int>.Is.Anything)).Return(
+                dogSearchResultsListBuilder.ListOf14Beagels().Build().AsQueryable()
+                );
+
+            var dogSearchManager = new DogSearchManager(dogBreedFilterStrategy
+                , _dogCategoryFilterStrategy
+                , _dogCategoryService
+                , _dogLocationFilterStrategy
+                , _configuration);
+
+            // act
+            var result = dogSearchManager.GetDogsByBreed(1);
+
+            // assert
+            dogBreedFilterStrategy.AssertWasCalled(x => x.Filter(1));
+            Assert.That(result.Count(), Is.EqualTo(14));
+        }
+
+        [Test]
+        public void ApplyDogLocationFilteringAndSorting_filters_dogs_by_place()
+        {
+            // arrange
+            const int breedId = 3;
+            const int placeId = 1;
+
+            var dogBreedFilterStrategy = MockRepository.GenerateMock<IDogBreedFilterStrategy>();
+            var dogSearchResultsListBuilder = new DogSearchResultsListBuilder();
+            var dogs = dogSearchResultsListBuilder.ListOf14Beagels().Build().AsQueryable();
+            dogBreedFilterStrategy.Stub(x => x.Filter(breedId)).Return(dogs);
+
+            _dogCategoryService.Stub(x => x.AddDogsInSameCategoryToDogsCollection(dogs, breedId)).Return(dogs);
+            _dogLocationFilterStrategy.Stub(x => x.Filter(dogs, placeId)).Return(dogs);
+
+            var dogSearchManager = new DogSearchManager(dogBreedFilterStrategy
+                , _dogCategoryFilterStrategy
+                , _dogCategoryService
+                , _dogLocationFilterStrategy
+                , _configuration);
+
+            // act
+            dogSearchManager.ApplyDogLocationFilteringAndSorting(dogs, breedId, _sortColumn, placeId);
+
+            // assert
+            _dogLocationFilterStrategy.AssertWasCalled(x => x.Filter(dogs, placeId));
+        }
+
+        [Test]
+        public void ApplyDogLocationFilteringAndSorting_calls_sorting_strategy_when_not_filtering_on_place()
+        {
+            // arrange
+            const int breedId = 1;
 
             _dogBreedFilterStrategy.Stub(x => x.Filter(Arg<int>.Is.Anything)).Return(
                 _dogSearchResultsListBuilder.ListOf14Beagels().Build().AsQueryable()
                 );
+
+            var dogs = _dogSearchResultsListBuilder.ListWith30Dogs().Build().AsQueryable();
+            _dogCategoryService.Stub(x => x.AddDogsInSameCategoryToDogsCollection(dogs, breedId)).Return(dogs);
 
             _dogSearchManager = new DogSearchManager(_dogBreedFilterStrategy
                 , _dogCategoryFilterStrategy
                 , _dogCategoryService
                 , _dogLocationFilterStrategy
                 , _configuration);
-	    }
 
-        [Test]
-        public void GetDogsByBreed_filters_dogs_by_breed()
-        {
-            // act
-            var result = _dogSearchManager.GetDogsByBreed(1);
-
-            // assert
-            _dogBreedFilterStrategy.AssertWasCalled(x => x.Filter(1));
-            Assert.That(result.Count(), Is.EqualTo(14));
-        }
-
-
-        //[Test]
-        //public void ApplyDogLocationFilteringAndSorting_filters_dogs_by_place()
-        //{
-        //    // act
-        //    _dogSearchManager.ApplyDogLocationFilteringAndSorting(_dogs, 1, _sortColumn, 1);
-
-        //    // assert
-        //    _dogLocationFilterStrategy.AssertWasCalled(x => x.Filter(_dogs, 1));
-        //}
-
-        [Test]
-        public void ApplyDogLocationFilteringAndSorting_calls_sorting_strategy_when_not_filtering_on_place()
-        {
-            var dogs = _dogSearchResultsListBuilder.ListWith30Dogs().Build().AsQueryable();
-            _dogCategoryService.Stub(x => x.AddDogsInSameCategoryToDogsCollection(dogs, 1)).Return(dogs);
 
             // act
-            _dogSearchManager.ApplyDogLocationFilteringAndSorting(dogs, 1, _sortColumn, 0);
+            _dogSearchManager.ApplyDogLocationFilteringAndSorting(dogs, breedId, _sortColumn, 0);
 
             // assert
             _dogCategoryFilterStrategy.AssertWasCalled(x => x.Sort(dogs, _sortColumn));
         }
 
-        //[Test]
-        //public void ApplyDogLocationFilteringAndSorting_calls_sorting_strategy_when_filtering_on_place()
-        //{
-        //    // act
-        //    _dogSearchHelper.ApplyDogLocationAndSortFiltering(_dogs, 1, _sortColumn, 1);
+        [Test]
+        public void ApplyDogLocationFilteringAndSorting_calls_sorting_strategy_when_filtering_on_place()
+        {
+            // arrange
+            const int placeId = 1;
+            const int breedId = 4;
 
-        //    // assert
-        //    _dogLocationFilterStrategy.AssertWasCalled(x => x.Sort(Arg<IEnumerable<Dog>>.Is.Anything));
-        //}
+            var dogs = _dogSearchResultsListBuilder.ListOf3DalmatiansByCategory(1, breedId).Build().AsQueryable();
 
+            _dogBreedFilterStrategy.Stub(x => x.Filter(breedId)).Return(dogs);
+            _dogCategoryService.Stub(x => x.AddDogsInSameCategoryToDogsCollection(dogs, breedId)).Return(dogs);
+            _dogLocationFilterStrategy.Stub(x => x.Filter(dogs, placeId)).Return(dogs);
 
+            _dogSearchManager = new DogSearchManager(_dogBreedFilterStrategy
+                , _dogCategoryFilterStrategy
+                , _dogCategoryService
+                , _dogLocationFilterStrategy
+                , _configuration);
+
+            // act
+            _dogSearchManager.ApplyDogLocationFilteringAndSorting(dogs, breedId, _sortColumn, placeId);
+
+            // assert
+            _dogLocationFilterStrategy.AssertWasCalled(x => x.Sort(Arg<IEnumerable<Dog>>.Is.Anything));
+        }
     }
 }

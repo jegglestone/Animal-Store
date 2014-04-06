@@ -150,7 +150,7 @@ namespace AnimalStore.Web.API.Strategies
 
             foreach (var dog in dogsList)
             {
-                var place = allPlaces.Single(x => x.Id == dog.PlaceId); // make sure queries collection not db
+                var place = allPlaces.Single(x => int.Parse(x.PlacesID.ToString()) == dog.PlaceId); // make sure queries collection not db
                 var currentDogGeoCode = new GeoCoordinate(place.Latitude, place.Longitude);
                 var distance = originalPlaceGeoCode.GetDistanceTo(currentDogGeoCode);
                 if (distance < _configuration.GetSearchRadiusDefaultDistanceInMetres())

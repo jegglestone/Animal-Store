@@ -89,9 +89,9 @@ namespace AnimalStore.Services.UnitTests
             var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = categoryId, Name = "Hunting" };
             var dalmatian = new Breed() { Name = "Dalmatian", Category = category, Id = breedId, Species = null };
 
-            var dalmatianDog1 = new Dog() { Name = "Tip", Breed = dalmatian };
-            var dalmatianDog2 = new Dog() { Name = "Snoop", Breed = dalmatian };
-            var dalmatianDog3 = new Dog() { Name = "Ron", Breed = dalmatian };
+            var dalmatianDog1 = new Dog() { Name = "Tip", Breed = dalmatian, BreedId = breedId};
+            var dalmatianDog2 = new Dog() { Name = "Snoop", Breed = dalmatian, BreedId = breedId };
+            var dalmatianDog3 = new Dog() { Name = "Ron", Breed = dalmatian, BreedId = breedId };
 
             var matchedDogs = new ObservableCollection<Dog>() 
             {   dalmatianDog1

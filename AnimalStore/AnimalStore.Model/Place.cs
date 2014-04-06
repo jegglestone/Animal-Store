@@ -1,8 +1,13 @@
-﻿namespace AnimalStore.Model
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace AnimalStore.Model
 {
     public class Place
     {
-        public int Id { get; set; }
+        public ObjectId _id { get; set; }
+
+        public int PlacesID { get; set; }
 
         public string Name { get; set; }
 
@@ -20,6 +25,6 @@
 
         public double Latitude { get; set; }
 
-        public int CountryId { get; set; }
+        public int CountryID { get; set; }
     }
 }

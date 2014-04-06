@@ -12,8 +12,6 @@ namespace AnimalStore.Data.UnitTests.Fakes
         public IDbSet<Species> Species { get; set; }
         public IDbSet<Breed> Breeds { get; set; }
         public IDbSet<Category> Categories { get; set; }
-        public IDbSet<Place> Places { get; set; }
-
 
         public FakeAnimalsDbContext()
         {
@@ -23,10 +21,6 @@ namespace AnimalStore.Data.UnitTests.Fakes
             Species = MockRepository.GenerateMock<IDbSet<Species>>();
 
             Database.SetInitializer<FakeAnimalsDbContext>(null);
-
-            //Animals = new FakeAnimalDbSet();
-            //Breeds = new FakeBreedDbSet();
-            //Species = new FakeSpeciesDbSet();
         }
 
         public new int SaveChanges()
