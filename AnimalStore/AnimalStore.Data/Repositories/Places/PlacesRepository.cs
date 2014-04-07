@@ -7,11 +7,13 @@ namespace AnimalStore.Data.Repositories.Places
 {
     public class PlacesRepository : IPlacesRepository
     {
-        readonly MongoServer mongoServer;
+        private readonly MongoServer mongoServer;
+        private const string DATABASE_NAME = "places";
+        private const string PLACES_COLLECTION = "places";
 
         MongoDatabase mongoDatabase
         {
-            get { return mongoServer.GetDatabase("places"); }
+            get { return mongoServer.GetDatabase(DATABASE_NAME); }
         }
 
         public PlacesRepository(MongoClient mongoClient)
@@ -22,7 +24,7 @@ namespace AnimalStore.Data.Repositories.Places
         public IEnumerable<Place> GetAll()
         {
             return mongoDatabase
-                .GetCollection<Place>("places")
+                .GetCollection<Place>(PLACES_COLLECTION)
                 .FindAllAs<Place>();
         }
 
@@ -30,7 +32,7 @@ namespace AnimalStore.Data.Repositories.Places
         {
             var query = Query.EQ("PlacesID", id.ToString());
             return mongoDatabase
-                .GetCollection<Place>("places")
+                .GetCollection<Place>(PLACES_COLLECTION)
                 .FindOneAs<Place>(query);
         }
     }
