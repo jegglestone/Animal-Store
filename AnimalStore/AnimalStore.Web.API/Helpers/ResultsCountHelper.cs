@@ -2,10 +2,14 @@
 {
     public static class ResultsCountHelper
     {
-        public static int GetResultsFrom(int currentPage, int pageSizeLimit)
+        public static int GetResultsFrom(int currentPage, int pageSizeLimit, int numberOfResults)
         {
             if (currentPage == 1)
+            {
+                if (numberOfResults == 0)
+                    return 0;
                 return 1;
+            }
 
             return ((pageSizeLimit) * (currentPage - 1)) + 1;
         }

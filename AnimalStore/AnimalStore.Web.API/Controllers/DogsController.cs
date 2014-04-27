@@ -54,9 +54,9 @@ namespace AnimalStore.Web.API.Controllers
         }
 
         // GET /api/dogs?breedid=1&page=1&pagesize=100&placeId=1&format=json
+        // GET /api/dogs?breedid=4&page=1&pagesize=30&placeid=12472&format=json  TODO: Acceptance test
         // GET /api/dogs/breed?breedid=67&page=1&pagesize=30&format=json         TODO: Acceptance test
         // GET /api/dogs/breed?breedid=7&page=1&pagesize=30&format=json          TODO: Acceptance test
-        // GET /api/dogs?breedid=4&page=1&pagesize=30&placeid=12472&format=json  TODO: Acceptance test
         [HttpGet]
         public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string sortBy = null, int placeId = 0)
         {
@@ -84,7 +84,7 @@ namespace AnimalStore.Web.API.Controllers
             var nextUrl = PageableResultsNextPreviousUrlHelper.BuildNextPageUrl(baseUrl, page, totalPages, pageSize, breedName);
             var prevUrl = PageableResultsNextPreviousUrlHelper.BuildPreviousPageUrl(baseUrl, page, totalPages, pageSize, breedName);
 
-            var resultsFrom = ResultsCountHelper.GetResultsFrom(page, pageSize);
+            var resultsFrom = ResultsCountHelper.GetResultsFrom(page, pageSize, totalCount);
             var resultsTo = ResultsCountHelper.GetResultsTo(totalCount, totalPages, page, pageSize);
 
             var resultsDescription = breedName != null

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using AcceptanceTests.Utils;
 using AnimalStore.Model;
 using NUnit.Framework;
@@ -50,14 +49,14 @@ namespace AcceptanceTests.StepDefinitions
             ThenIShouldBePresentedWithSearchResultsForTheBreed(breed);
         }
 
-        [Then(@"I should be presented with a JSON response relevant to the breed and filtered by place")]
-        public void ThenIShouldBePresentedWithJSONResultsRelevantToTheBreedAndFilteredByPlace()
+        [Then(@"I should be presented with a JSON response relevant to the breed and filtered by (.*)")]
+        public void ThenIShouldBePresentedWithJSONResultsRelevantToTheBreedAndFilteredByPlace(int placeId)
         {
             var response = ResponseHelper.GetResponseAs<PageableResults<Dog>>();
 
             Assert.That(response.Data.First().Breed.Name == "Affenpinscher");
             Assert.That(response.Data.First().Breed.Category.Name == "Toy");
-            Assert.That(response.Data.First().PlaceId == 1);
+            Assert.That(response.Data.First().PlaceId == placeId);
         }
 
         [Then(@"I should be presented with JSON results relevant to the breed")]
@@ -77,7 +76,13 @@ namespace AcceptanceTests.StepDefinitions
             Assert.That(response.Data.Any(x => x.Breed.Name == "Dalmatian"));
         }
 
+        [When(@"I should be able to navigate the results through using the paging links")]
+        public void WhenIShouldBeAbleToNavigateTheResultsThroughUsingThePagingLinks()
+        {
+            var response = ResponseHelper.GetResponseAs<PageableResults<Dog>>();
 
+            Assert.That(response.Data.Count() == 5);
+        }
 
         [Then(@"the response is a status code (.*)")]
         public void ThenTheResponseIsAStatusCode(int expectedStatusCode)
@@ -89,7 +94,6 @@ namespace AcceptanceTests.StepDefinitions
 
             Assert.That(actualStatusCode, Is.EqualTo(expectedStatusCode));
         }
-
 
         [Then(@"the search description should say '(.*)'")]
         public void ThenTheSearchDescriptionShouldSay(string expectedSearchDescription)
@@ -104,7 +108,5 @@ namespace AcceptanceTests.StepDefinitions
         {
             return WebDriverAdapter.WebDriver.FindElement(By.XPath("/html/body/div/section/table"));
         }
-
-
     }
 }

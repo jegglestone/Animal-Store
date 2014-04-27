@@ -10,6 +10,19 @@ namespace AcceptanceTests.StepDefinitions
     [Binding]
     public class Whens : Steps
     {
+        private enum breeds
+        {
+            Affenpinscher = 1,
+            Bulldog = 4,
+            AustralianCattleDog = 18
+        }
+
+        private enum places
+        {
+            AbKettleby = 1,
+            Leeds = 12472
+        }
+
         [When(@"I select the '(.*)' option from the main menu")]
         [When(@"I click on a '(.*)'")]
         public void WhenIClickOnA(string linkText)
@@ -55,17 +68,16 @@ namespace AcceptanceTests.StepDefinitions
         public void WhenIMakeGETRequestToTheDogsAPIWithTheBreedId()
         {
             var resourceUri = NavigationHelper.GetAPIUrl("Dogs");
-            resourceUri += "?breedid=4&page=1&pagesize=100&format=json";
+            resourceUri += "?breedid=" + (int)breeds.Bulldog + "&page=1&pagesize=100&format=json";
 
             sendASyncRequest(resourceUri);
         }
 
-        [When(@"I make a GET request to the dogs API with a breedID and a placeId")]
-        public void WhenIMakeaGETRequestToTheDogsAPIWithABreedIdAndAPlaceId()
+        [When(@"I make a GET request to the dogs API with a breedID and a (.*)")]
+        public void WhenIMakeaGETRequestToTheDogsAPIWithABreedIdAndAPlaceId(int placeId)
         {
-
             var resourceUri = NavigationHelper.GetAPIUrl("Dogs");
-            resourceUri += "?breedid=1&page=1&pagesize=100&placeId=1&format=json";
+            resourceUri += "?breedid=" + (int)breeds.Affenpinscher + "&page=1&pagesize=100&placeId=" + placeId + "&format=json";
 
             sendASyncRequest(resourceUri);
         }
@@ -74,11 +86,18 @@ namespace AcceptanceTests.StepDefinitions
         public void WhenThereAreNoMatchingResultsInTheAPI()
         {
             var resourceUri = NavigationHelper.GetAPIUrl("Dogs");
-            resourceUri += "?breedid=18&page=1&pagesize=100&placeId=1&format=json";
+            resourceUri += "?breedid=" + (int)breeds.AustralianCattleDog + "&page=1&pagesize=100&placeId=" + (int)places.AbKettleby + "&format=json";
 
             sendASyncRequest(resourceUri);
         }
 
+        [When(@"I make a GET request to the dogs API with a breedID and a placeId with a small pagesize")]
+        public void WhenIMakeAGETRequestToTheDogsAPIWithABreedIDAndAPlaceIdWithASmallPagesize()
+        {
+            var resourceUri = NavigationHelper.GetAPIUrl("Dogs");
+            resourceUri += "?breedid=" + (int)breeds.Bulldog + "&page=1&pagesize=5&placeid=" + (int)places.Leeds + "&format=json";
+            sendASyncRequest(resourceUri);
+        }
 
         private static void sendASyncRequest(string resourceUri)
         {

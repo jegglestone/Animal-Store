@@ -13,43 +13,46 @@ namespace AnimalStore.Services.UnitTests
             public void GetResultsFrom_Returns_The_Ordinal_Position_Of_The_First_Record_In_The_First_Page()
             {
                 const int currentPage = 1;
+                const int numberofResults = 3;
                 const int pageSizeLimit = 10;
 
                 //act
-                var result = ResultsCountHelper.GetResultsFrom(currentPage, pageSizeLimit);
+                var result = ResultsCountHelper.GetResultsFrom(currentPage, pageSizeLimit, numberofResults);
 
                 Assert.That(result, Is.EqualTo(1));
+            }
+
+            [Test]
+            public void GetResultsFrom_Returns_Zero_When_There_Are_No_records_In_The_First_Page()
+            {
+                const int currentPage = 1;
+                const int numberofResults = 0;
+                const int pageSizeLimit = 10;
+
+                var result = ResultsCountHelper.GetResultsFrom(currentPage, numberofResults, pageSizeLimit);
+
+                Assert.That(result, Is.EqualTo(0));
             }
 
             [Test]
             public void GetResultsFrom_Returns_The_Ordinal_Position_Of_The_First_Record_In_The_Second_Page()
             {
                 const int currentPage = 2;
+                const int numberofResults = 30;
                 const int pageSizeLimit = 10;
 
                 //act
-                var result = ResultsCountHelper.GetResultsFrom(currentPage, pageSizeLimit);
+                var result = ResultsCountHelper.GetResultsFrom(currentPage, pageSizeLimit, numberofResults);
 
                 Assert.That(result, Is.EqualTo(11));
             }
 
             [TestCase(3, 10, 21, TestName = "Third page of 4 with page size 0f 10 returns 21")]
             [TestCase(4, 10, 31, TestName = "Final page of 4 with page size 0f 10 returns 31")]
-            public void GetResultsFrom_Returns_The_Ordinal_Position_Of_The_First_Record_In_The_nth_Page(int currentPage, int pageSizeLimit, int expected)
-            {
-                //act
-                var result = ResultsCountHelper.GetResultsFrom(currentPage, pageSizeLimit);
-
-                Assert.That(result, Is.EqualTo(expected));
-            }
-
-            [TestCase(3, 10, 21, TestName = "Third page of 4 with page size 0f 10 returns 21")]
-            [TestCase(3, 10, 21, TestName = "Third page of 4 with page size 0f 10 returns 21")]
-            [TestCase(4, 10, 31, TestName = "Final page of 4 with page size 0f 10 returns 31")]
             public void GetResultsFrom_Returns_The_Ordinal_Position_Of_The_First_Record_In_The_nth_Page_With_Odd_Number_Of_Records(int currentPage, int pageSizeLimit, int expected)
             {
                 //act
-                var result = ResultsCountHelper.GetResultsFrom(currentPage, pageSizeLimit);
+                var result = ResultsCountHelper.GetResultsFrom(currentPage, pageSizeLimit, 40);
 
                 Assert.That(result, Is.EqualTo(expected));
             }
