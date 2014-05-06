@@ -29,7 +29,7 @@ namespace AnimalStore.Services.UnitTests
                 const int numberofResults = 0;
                 const int pageSizeLimit = 10;
 
-                var result = ResultsCountHelper.GetResultsFrom(currentPage, numberofResults, pageSizeLimit);
+                var result = ResultsCountHelper.GetResultsFrom(currentPage, pageSizeLimit, numberofResults);
 
                 Assert.That(result, Is.EqualTo(0));
             }
