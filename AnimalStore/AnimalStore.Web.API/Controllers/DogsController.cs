@@ -54,7 +54,7 @@ namespace AnimalStore.Web.API.Controllers
         }
 
         // GET /api/dogs?breedid=1&page=1&pagesize=100&placeId=1&format=json
-        // GET /api/dogs?breedid=4&page=1&pagesize=30&placeid=12472&format=json  TODO: Acceptance test
+        // GET /api/dogs?breedid=4&page=1&pagesize=30&placeid=12472&format=json 
         // GET /api/dogs/breed?breedid=67&page=1&pagesize=30&format=json         TODO: Acceptance test
         // GET /api/dogs/breed?breedid=7&page=1&pagesize=30&format=json          TODO: Acceptance test
         [HttpGet]

@@ -32,9 +32,9 @@ namespace AcceptanceTests.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DogsAPI", "In order to consume dog data from the API\nAs a consumer interested in that dogs d" +
-                    "ata\nI want to get a list of available dogs and optionally filter them on breed a" +
-                    "nd location", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DogsAPI", "In order to consume dog data from the API\r\nAs a consumer interested in that dogs " +
+                    "data\r\nI want to get a list of available dogs and optionally filter them on breed" +
+                    " and location", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
