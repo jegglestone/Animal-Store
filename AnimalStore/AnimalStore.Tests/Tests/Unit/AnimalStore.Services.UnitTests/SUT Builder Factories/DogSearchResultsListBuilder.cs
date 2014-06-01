@@ -58,6 +58,18 @@ namespace AnimalStore.Services.UnitTests
             return this;
         }
 
+        internal DogSearchResultsListBuilder ListOf3DogsWithConfigurableLocation(int breedId, int placeId1, int placeId2, int placeId3)
+        {
+            var dogs = new List<Dog>()
+            {
+                new Dog() {BreedId = breedId, PlaceId = placeId1},
+                new Dog() {BreedId = breedId, PlaceId = placeId2},
+                new Dog() {BreedId = breedId, PlaceId = placeId3},
+            };
+            _dogs.AddRange((dogs));
+            return this;
+        }
+
         internal DogSearchResultsListBuilder ListOf14Beagels()
         {
             var category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };

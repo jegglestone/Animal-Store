@@ -23,7 +23,6 @@ namespace AnimalStore.Web.API.Strategies
             return dogsUnsorted.OrderBy(dog => dog.Distance);
         }
 
-        //TODO: hefty unit testing
         public IEnumerable<Dog> Filter(IQueryable<Dog> dogs, int placeId)
         {
             var originalPlace = _placesRepository.GetById(placeId);

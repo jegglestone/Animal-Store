@@ -108,15 +108,13 @@ namespace AnimalStore.Web.API.Controllers
             return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForAllBreeds(), resultsFrom, resultsTo, totalCount);
         }
 
-        // TODO: unit test once moved to a service class
         private string GetBreedSpecificSearchResultDescription(int resultsFrom, int resultsTo, int totalCount, string breedName, int placeId)
         {
-            if (placeId != 0)
-            {
-                var placeName = GetPlaceName(placeId);
-                return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace(), resultsFrom, resultsTo, totalCount, breedName, placeName);
-            }
-            return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreed(), resultsFrom, resultsTo, totalCount, breedName);
+          if (placeId == 0)
+            return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreed(), resultsFrom, resultsTo, totalCount,
+              breedName);
+          var placeName = GetPlaceName(placeId);
+          return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace(), resultsFrom, resultsTo, totalCount, breedName, placeName);
         }
 
         private string GetPlaceName(int placeId)

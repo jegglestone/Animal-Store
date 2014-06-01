@@ -2,7 +2,6 @@
 using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Data.Repositories;
-using AnimalStore.Web.API.Helpers;
 using AnimalStore.Web.API.Utilities;
 using AnimalStore.Web.API.Wrappers;
 using NUnit.Framework;
@@ -24,9 +23,6 @@ namespace AnimalStore.Services.UnitTests
         private IUnitOfWork _unitofWork;
         private DogsController _dogsController;
         private IConfiguration _configuration;
-        private Category _category;
-        private Breed _bloodhound;
-        private Breed _beagle;
 
         [TestFixtureSetUp]
         public void DogsControllerTestsSetup()
@@ -45,11 +41,6 @@ namespace AnimalStore.Services.UnitTests
             _configuration.Stub(x => x.GetNationwideSearchResultsDescriptionMessageForSpecificBreed()).Return("Showing results {0} to {1} out of {2} results for {3} nationwide");
 
             _dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper, _configuration, _placesRepository);
-
-            _category = new Category() { Description = "Dogs for hunting foxes and badgers etc.", Id = 3, Name = "Hunting" };
-
-            _bloodhound = new Breed() { Name = "Bloodhound", Category = _category, Id = 3, Species = null };
-            _beagle = new Breed() { Name = "Beagel", Category = _category, Id = 3, Species = null };
 
             StubDogsRepository();
         }
