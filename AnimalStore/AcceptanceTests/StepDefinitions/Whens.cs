@@ -52,6 +52,14 @@ namespace AcceptanceTests.StepDefinitions
             SelectNationalSearchCheckBox();
         }
 
+        [When(@"I have selected a (.*) within a (.*)")]
+        public void WhenIHaveSelectedABulldogWithinALeeds(string breed, string location)
+        {
+            SelectBreedByText(breed);
+
+            FillLocationTextBox(location);
+        }
+
         [When(@"I press the search button")]
         public void WhenIPressTheSearchButton()
         {
@@ -124,6 +132,15 @@ namespace AcceptanceTests.StepDefinitions
             var dropdown = new SelectElement(WebDriverAdapter.WebDriver.FindElement(By.Id("SelectedBreed")));
             dropdown.SelectByText(text);
         }
+
+
+        private void FillLocationTextBox(string location)
+        {
+            var locationTextBox = WebDriverAdapter.WebDriver.FindElement(By.CssSelector("#Location"));
+
+            locationTextBox.SendKeys(location);
+        }
+
 
         private static void Navigate(string url)
         {

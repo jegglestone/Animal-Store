@@ -12,12 +12,6 @@ namespace AnimalStore.Services.UnitTests
     [TestFixture]
     public class DogLocationFilterTests
     {
-        [SetUp]
-        public void Setup()
-        {
-
-        }
-
         [Test]
         public void DogLocationFilter_Returns_Items_Within_A_Configured_Radius_Of_A_Place()
         {

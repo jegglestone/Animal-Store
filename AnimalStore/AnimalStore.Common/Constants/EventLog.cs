@@ -2,6 +2,6 @@
 {
     internal static class EventLogConstants
     {
-        public const string EVENT_LOG_NAME = "AnimalStore.Events";
+        public static readonly string EVENT_LOG_NAME = "AnimalStore.Events";
     }
 }

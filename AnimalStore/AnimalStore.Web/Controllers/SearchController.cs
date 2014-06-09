@@ -37,6 +37,9 @@ namespace AnimalStore.Web.Controllers
 
             _session[SessionStoreKeys.SearchViewModel] = searchViewModel;
 
+            if (searchResults == null)
+                return RedirectToAction("Index", "Home", searchViewModel); // pass some TempData here to say place not found
+
             return View("Dogs", searchResults);
         }
 

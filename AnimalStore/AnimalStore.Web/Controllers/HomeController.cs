@@ -20,11 +20,11 @@ namespace AnimalStore.Web.Controllers
             _contactInformation = contactInformation;
         }
 
-        public ViewResult Index()
+        public ViewResult Index(SearchViewModel searchViewModel)
         {
             ViewBag.Message = ConfigurationManager.AppSettings[AppSettingKeys.ApplicationMainSlogan];
 
-            _searchViewModel.BreedsSelectList = new SelectList(_searchRepository.GetBreeds(), "id", "name");
+            PopulateBreedSelectList(searchViewModel);
 
             return View(_searchViewModel);
         }
@@ -48,6 +48,18 @@ namespace AnimalStore.Web.Controllers
         public ActionResult Find()
         {
             throw new System.NotImplementedException();
+        }
+
+        private void PopulateBreedSelectList(SearchViewModel searchViewModel)
+        {
+            if (searchViewModel == null)
+            {
+                _searchViewModel.BreedsSelectList = new SelectList(_searchRepository.GetBreeds(), "id", "name");
+                return;
+            }
+
+            _searchViewModel.BreedsSelectList = searchViewModel.BreedsSelectList 
+                ?? new SelectList(_searchRepository.GetBreeds(), "id", "name");
         }
     }
 }

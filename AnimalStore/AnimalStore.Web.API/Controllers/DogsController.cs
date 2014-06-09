@@ -71,57 +71,6 @@ namespace AnimalStore.Web.API.Controllers
             return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName, placeId);
         }
 
-        private PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl, string breedName = null, int placeId = 0)
-        {
-            IEnumerable<Dog> enumerable = dogs as IList<Dog> ?? dogs.ToList();
-            var totalCount = enumerable.Count();
-
-            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
-
-            var pagedResults = enumerable.Skip((page - 1) * pageSize)
-                .Take(pageSize);
-
-            var nextUrl = PageableResultsNextPreviousUrlHelper.BuildNextPageUrl(baseUrl, page, totalPages, pageSize, breedName);
-            var prevUrl = PageableResultsNextPreviousUrlHelper.BuildPreviousPageUrl(baseUrl, page, totalPages, pageSize, breedName);
-
-            var resultsFrom = ResultsCountHelper.GetResultsFrom(page, pageSize, totalCount);
-            var resultsTo = ResultsCountHelper.GetResultsTo(totalCount, totalPages, page, pageSize);
-
-            var resultsDescription = breedName != null
-                ? GetBreedSpecificSearchResultDescription(resultsFrom, resultsTo, totalCount, breedName, placeId)
-                : GetAllBreedsSearchResultDescription(resultsFrom, resultsTo, totalCount);
-                
-            return new PageableResults<Dog>
-            {
-                Data = pagedResults,
-                SearchDescription = resultsDescription,
-                NextPage = nextUrl,
-                PrevPage = prevUrl,
-                CurrentPageNumber = page,
-                TotalCount = totalCount,
-                TotalPages = totalPages
-            };
-        }
-
-        private string GetAllBreedsSearchResultDescription(int resultsFrom, int resultsTo, int totalCount)
-        {
-            return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForAllBreeds(), resultsFrom, resultsTo, totalCount);
-        }
-
-        private string GetBreedSpecificSearchResultDescription(int resultsFrom, int resultsTo, int totalCount, string breedName, int placeId)
-        {
-          if (placeId == 0)
-            return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreed(), resultsFrom, resultsTo, totalCount,
-              breedName);
-          var placeName = GetPlaceName(placeId);
-          return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace(), resultsFrom, resultsTo, totalCount, breedName, placeName);
-        }
-
-        private string GetPlaceName(int placeId)
-        {
-            return _placesRepository.GetById(placeId).Name;
-        }
-
         // GET api/dogs/5
         [HttpGet]
         public Dog Get(int id)
@@ -160,6 +109,62 @@ namespace AnimalStore.Web.API.Controllers
         {
             _dogsRepository.Delete(id);
             _unitOfWork.Save();
+        }
+
+        private PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl, string breedName = null, int placeId = 0)
+        {
+            IEnumerable<Dog> enumerable = dogs as IList<Dog> ?? dogs.ToList();
+            var totalCount = enumerable.Count();
+
+            if (totalCount == 0)
+            {
+                return null;
+            }
+
+            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+
+            var pagedResults = enumerable.Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var nextUrl = PageableResultsNextPreviousUrlHelper.BuildNextPageUrl(baseUrl, page, totalPages, pageSize, breedName);
+            var prevUrl = PageableResultsNextPreviousUrlHelper.BuildPreviousPageUrl(baseUrl, page, totalPages, pageSize, breedName);
+
+            var resultsFrom = ResultsCountHelper.GetResultsFrom(page, pageSize, totalCount);
+            var resultsTo = ResultsCountHelper.GetResultsTo(totalCount, totalPages, page, pageSize);
+
+            var resultsDescription = breedName != null
+                ? GetBreedSpecificSearchResultDescription(resultsFrom, resultsTo, totalCount, breedName, placeId)
+                : GetAllBreedsSearchResultDescription(resultsFrom, resultsTo, totalCount);
+
+            return new PageableResults<Dog>
+            {
+                Data = pagedResults,
+                SearchDescription = resultsDescription,
+                NextPage = nextUrl,
+                PrevPage = prevUrl,
+                CurrentPageNumber = page,
+                TotalCount = totalCount,
+                TotalPages = totalPages
+            };
+        }
+
+        private string GetAllBreedsSearchResultDescription(int resultsFrom, int resultsTo, int totalCount)
+        {
+            return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForAllBreeds(), resultsFrom, resultsTo, totalCount);
+        }
+
+        private string GetBreedSpecificSearchResultDescription(int resultsFrom, int resultsTo, int totalCount, string breedName, int placeId)
+        {
+            if (placeId == 0)
+                return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreed(), resultsFrom, resultsTo, totalCount,
+                  breedName);
+            var placeName = GetPlaceName(placeId);
+            return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace(), resultsFrom, resultsTo, totalCount, breedName, placeName);
+        }
+
+        private string GetPlaceName(int placeId)
+        {
+            return _placesRepository.GetById(placeId).Name;
         }
     }
 }

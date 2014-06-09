@@ -24,3 +24,13 @@ Scenario Outline: Nationwide search for specific kind of dog presents search res
 
 	| breed   | same category | expectedResultsCount |
 	| Bulldog | Dalmatian     | 7                    |
+
+Scenario Outline: Local search for a specific kind of dog presents local results
+	When I have selected a <breed> within a <location>
+	And I press the search button
+	Then I should be presented with search results for that <breed> within the area of <location>
+
+	Examples: 
+
+	| breed   | location | 
+	| Bulldog | Leeds    | 

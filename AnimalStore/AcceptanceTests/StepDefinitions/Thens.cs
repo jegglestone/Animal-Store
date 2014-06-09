@@ -43,6 +43,18 @@ namespace AcceptanceTests.StepDefinitions
             Assert.That(resultsTableBody.Text.Contains(breed));
         }
 
+        [Then(@"I should be presented with search results for that (.*) within the area of (.*)")]
+        public void ThenIShouldBePresentedWithSearchResultsForThatBulldogWithinKmOfTheLeeds(string breed, string location)
+        {
+            var resultsTableBody = GetResultsTable();
+
+            Assert.That(resultsTableBody.Text.Contains("Name:"));
+            Assert.That(resultsTableBody.Text.Contains("Age:"));
+            Assert.That(resultsTableBody.Text.Contains(breed));
+            Assert.That(resultsTableBody.Text.Contains(location));
+        }
+
+
         [Then(@"some other dogs in the (.*)")]
         public void ThenSomeOtherDogsInTheSameCategory(string breed)
         {

@@ -8,7 +8,7 @@ namespace AnimalStore.Common.Logging
     {
        public static void InitialiseEventLog()
        {
-           const string EVENT_LOG_NAME = EventLogConstants.EVENT_LOG_NAME;
+           var EVENT_LOG_NAME = EventLogConstants.EVENT_LOG_NAME;
 
            try
            {
