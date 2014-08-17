@@ -52,6 +52,7 @@
     <Compile Include="Breed.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Dog.cs" />
+    <Compile Include="Settings\AppSettingKeys.cs" />
     <Compile Include="PageableResults.cs" />
     <Compile Include="Interfaces\IAuditInfo.cs" />
     <Compile Include="Place.cs" />

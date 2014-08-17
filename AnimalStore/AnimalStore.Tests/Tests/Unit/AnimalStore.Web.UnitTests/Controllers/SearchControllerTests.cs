@@ -117,7 +117,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 searchController.Dogs(_searchViewModel);
 
                 // assert
-                searchRepository.AssertWasCalled(x => x.GetDogs(1, 25, 4, SearchSortOptions.PRICE_LOWEST));
+                searchRepository.AssertWasCalled(x => x.GetDogsByBreed(1, 25, 4, SearchSortOptions.PRICE_LOWEST));
             }
 
             [Test]
@@ -134,7 +134,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                     };
 
                 var searchRepository = MockRepository.GenerateMock<ISearchAPIFacade>();
-                searchRepository.Stub(x => x.GetDogs(1, 25, 3, SearchSortOptions.PRICE_LOWEST)).Return(pageableResults);
+                searchRepository.Stub(x => x.GetDogsByBreed(1, 25, 3, SearchSortOptions.PRICE_LOWEST)).Return(pageableResults);
 
                 _searchViewModel.IsNationalSearch = true;
                 _searchViewModel.SelectedBreed = 3;
@@ -192,7 +192,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 var pageableResults = new PageableResults<Dog>(){ Data = _dogs };
 
                 var searchRepository = MockRepository.GenerateMock<ISearchAPIFacade>();
-                searchRepository.Stub(x => x.GetDogs(_pageNumber, 25, _selectedBreed, sortBy)).Return(pageableResults);
+                searchRepository.Stub(x => x.GetDogsByBreed(_pageNumber, 25, _selectedBreed, sortBy)).Return(pageableResults);
 
                 var session = SessionStateHelper.FakeHttpContext("http://localhost/test?sortBy=price");
 
@@ -221,7 +221,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 var pageableResults = new PageableResults<Dog>() { Data = _dogs };
 
                 var searchRepository = MockRepository.GenerateMock<ISearchAPIFacade>();
-                searchRepository.Stub(x => x.GetDogs(_pageNumber, 25, _selectedBreed, sortBy)).Return(pageableResults);
+                searchRepository.Stub(x => x.GetDogsByBreed(_pageNumber, 25, _selectedBreed, sortBy)).Return(pageableResults);
 
                 var session = SessionStateHelper.FakeHttpContext("http://localhost/test?sortBy=" + sortBy);
                 session["SearchViewModel"] = _searchViewModel;
@@ -250,7 +250,7 @@ namespace AnimalStore.Web.UnitTests.Controllers
                 var pageableResults = new PageableResults<Dog>() { Data = _dogs };
 
                 var searchRepository = MockRepository.GenerateMock<ISearchAPIFacade>();
-                searchRepository.Stub(x => x.GetDogs(_pageNumber, 25, _selectedBreed, sortBy)).Return(pageableResults);
+                searchRepository.Stub(x => x.GetDogsByBreed(_pageNumber, 25, _selectedBreed, sortBy)).Return(pageableResults);
 
                 var session = SessionStateHelper.FakeHttpContext("http://localhost/test?sortBy=" + sortBy);
                 session["searchViewModel"] = null;

@@ -15,7 +15,7 @@ namespace AnimalStore.Common.UnitTests
             var log = logManager.GetLogger(typeof(LogManagerTests));
 
             //assert
-            Assert.That(log, Is.TypeOf<Logging.LoggerAdapter>());
+            Assert.That(log, Is.TypeOf<Logging.Log4NetLoggerAdapter>());
         }
     }
 }

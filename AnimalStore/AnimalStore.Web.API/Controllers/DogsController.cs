@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
+using AnimalStore.Common.Configuration;
 using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
@@ -7,11 +8,10 @@ using AnimalStore.Data.Repositories;
 using System.Linq;
 using System.Web.Http;
 using System;
+using AnimalStore.Model.Settings;
 using AnimalStore.Web.API.Filters;
 using AnimalStore.Web.API.Helpers;
-using AnimalStore.Web.API.Models;
 using AnimalStore.Web.API.Utilities;
-using AnimalStore.Web.API.Wrappers;
 
 namespace AnimalStore.Web.API.Controllers
 {

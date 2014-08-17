@@ -7,7 +7,8 @@ namespace AnimalStore.Web.Repository
     {
         IList<Breed> GetBreeds();
         PageableResults<Dog> GetDogs(int page, int pageSize);
-        PageableResults<Dog> GetDogs(int page, int pageSize, int breedId, string sortBy=null);
+        PageableResults<Dog> GetDogsByBreed(int page, int pageSize, int breedId, string sortBy=null);
+        PageableResults<Dog> GetDogsByBreedAndLocation(int breedId, int page, int pageSize, int placeId, string sortBy = null);
         Dog GetDogDetails(int id);
     }
 }

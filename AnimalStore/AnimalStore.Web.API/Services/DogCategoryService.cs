@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
+using AnimalStore.Common.Configuration;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Model;
 using AnimalStore.Web.API.Helpers;
 using AnimalStore.Web.API.Strategies;
-using AnimalStore.Web.API.Wrappers;
 
 namespace AnimalStore.Web.API.Services
 {

@@ -206,7 +206,6 @@
     <Compile Include="Utilities\IDogSearchManager.cs" />
     <Compile Include="Helpers\PageableResultsNextPreviousUrlHelper.cs" />
     <Compile Include="Helpers\ResultsCountHelper.cs" />
-    <Compile Include="Models\AppSettingKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strategies\DogBreedFilter.cs" />
     <Compile Include="Strategies\DogCategoryFilter.cs" />
@@ -216,8 +215,6 @@
     <Compile Include="Strategies\IDogCategoryFilterStrategy.cs" />
     <Compile Include="Strategies\IDogFilterStrategy.cs" />
     <Compile Include="Strategies\IDogLocationFilterStrategy.cs" />
-    <Compile Include="Wrappers\Configuration.cs" />
-    <Compile Include="Wrappers\IConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\animated-overlay.gif" />

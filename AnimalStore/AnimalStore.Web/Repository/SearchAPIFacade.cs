@@ -60,7 +60,6 @@ namespace AnimalStore.Web.Repository
             }
             catch (Exception e)
             {
-                //TODO: Configurable
                 _exceptionHelper.HandleException("Response from Breeds service resulted in an error in GetBreeds()", e, (typeof (SearchAPIFacade)));
             }
             finally
@@ -77,7 +76,7 @@ namespace AnimalStore.Web.Repository
             return GetDogsByResponse(response);
         }
 
-        public PageableResults<Dog> GetDogs(int page, int pageSize, int breedId, string sortBy = null)
+        public PageableResults<Dog> GetDogsByBreed(int page, int pageSize, int breedId, string sortBy = null)
         {
             var url = sortBy != null 
                              ? string.Format("{0}{1}?page={2}&pageSize={3}&breedid={4}&sortBy={5}&format=json", _dogs_Url, "/breed", page, pageSize, breedId, sortBy)
@@ -86,6 +85,16 @@ namespace AnimalStore.Web.Repository
             var response = _webAPIRequestWrapper.GetResponse(url);
             return GetDogsByResponse(response);
         }
+
+        public PageableResults<Dog> GetDogsByBreedAndLocation(int breedId, int page, int pageSize, int placeId, string sortBy = null)
+        {
+           throw new NotImplementedException(); 
+        }
+
+        // GET /api/dogs?breedid=1&page=1&pagesize=100&placeId=1&format=json
+        // GET /api/dogs?breedid=4&page=1&pagesize=30&placeid=12472&format=json 
+        // GET /api/dogs/breed?breedid=67&page=1&pagesize=30&format=json         
+        // GET /api/dogs/breed?breedid=7&page=1&pagesize=30&format=json         
 
         public Dog GetDogDetails(int id)
         {
@@ -134,7 +143,6 @@ namespace AnimalStore.Web.Repository
             }
             catch (Exception e)
             {
-                //TODO: Configurable
                 _exceptionHelper.HandleException("Response from Dogs service resulted in an error in GetDogs()", e, (typeof(SearchAPIFacade)));
             }
             finally

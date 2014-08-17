@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AnimalStore.Common.Configuration;
 using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Model;
 using AnimalStore.Web.API.Strategies;
-using AnimalStore.Web.API.Wrappers;
 using NUnit.Framework;
 using Rhino.Mocks;
 

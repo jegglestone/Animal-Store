@@ -8,37 +8,42 @@ using AnimalStore.Common.Constants;
 
 namespace AnimalStore.Common.Logging
 {
-    public class LogManager : ILogManager
+  public class LogManager : ILogManager
+  {
+    static LogManager()
     {
-        static LogManager()
-        {
-            var layout = new SimpleLayout();
-            layout.ActivateOptions();
+      var layout = new SimpleLayout();
+      layout.ActivateOptions();
 
-            var logAppender = new EventLogAppender {Layout = layout, LogName = EventLogConstants.EVENT_LOG_NAME};
-            logAppender.ActivateOptions();
+      var logAppender = new EventLogAppender {Layout = layout, LogName = EventLogConstants.EVENT_LOG_NAME};
+      logAppender.ActivateOptions();
 
-            var lossyAppender = new BufferingForwardingAppender
-                {
-                    Lossy = true,
-                    BufferSize = 10,
-                    Evaluator = new log4net.Core.LevelEvaluator(log4net.Core.Level.Error)
-                };
-            lossyAppender.AddAppender(logAppender);
-            lossyAppender.ActivateOptions();
+      var lossyAppender = new BufferingForwardingAppender
+      {
+        Lossy = true,
+        BufferSize = 10,
+        Evaluator = new log4net.Core.LevelEvaluator(log4net.Core.Level.Error)
+      };
+      lossyAppender.AddAppender(logAppender);
+      lossyAppender.ActivateOptions();
 
-            var hierarchy = (Hierarchy)log4net.LogManager.GetRepository();
-            Logger root = hierarchy.Root;
+      var hierarchy = (Hierarchy) log4net.LogManager.GetRepository();
+      Logger root = hierarchy.Root;
 
-            root.Level = log4net.Core.Level.All;
+      root.Level = log4net.Core.Level.All;
 
-            BasicConfigurator.Configure(lossyAppender);
-        }
-
-        public ILoggerWrapper GetLogger(Type type)
-        {
-            var logger = log4net.LogManager.GetLogger(type);
-            return new LoggerAdapter(logger);
-        }
+      BasicConfigurator.Configure(lossyAppender);
     }
+
+    public ILoggerWrapper GetLogger(Type type)
+    {
+      if (Helpers.Environment.IsNotDevelopment())
+        return new AzureLoggerAdapter();
+      else
+      {
+        var logger = log4net.LogManager.GetLogger(type);
+        return new Log4NetLoggerAdapter(logger);        
+      }
+    }
+  }
 }

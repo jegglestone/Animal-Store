@@ -30,10 +30,9 @@ namespace AnimalStore.Web.Controllers
         [HttpGet]
         public ActionResult Dogs(SearchViewModel searchViewModel)
         {
-            PageableResults<Dog> searchResults = null;
-
-            if (searchViewModel.IsNationalSearch)
-                searchResults = HandleNationalDogSearch(searchViewModel);
+            PageableResults<Dog> searchResults = searchViewModel.IsNationalSearch 
+                ? HandleNationalDogSearch(searchViewModel) 
+                : HandleLocalDogSearch(searchViewModel);
 
             _session[SessionStoreKeys.SearchViewModel] = searchViewModel;
 
@@ -78,8 +77,13 @@ namespace AnimalStore.Web.Controllers
             var defaultPageSize = _configuration.GetDefaultSearchResultPageSize(); 
 
             return !IsSearchingForAnyBreed(viewModel.SelectedBreed)
-                ? _searchRepository.GetDogs(viewModel.PageNumber, defaultPageSize, viewModel.SelectedBreed, viewModel.SortBy) 
+                ? _searchRepository.GetDogsByBreed(viewModel.PageNumber, defaultPageSize, viewModel.SelectedBreed, viewModel.SortBy) 
                 : _searchRepository.GetDogs(viewModel.PageNumber, defaultPageSize);
+        }
+
+        private PageableResults<Dog> HandleLocalDogSearch(SearchViewModel searchViewModel)
+        {
+            throw new System.NotImplementedException();
         }
 
         private static bool IsSearchingForAnyBreed(int selectedBreed)

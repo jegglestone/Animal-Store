@@ -17,7 +17,7 @@ namespace AnimalStore.Web.API
 
             ConfigureMediaTypeMappings();
 
- //           CreateEventLogFileIfNotExists();
+            CreateEventLogFileIfNotExists();
 
             _config.Routes.MapHttpRoute(
                 name: "DefaultApi",

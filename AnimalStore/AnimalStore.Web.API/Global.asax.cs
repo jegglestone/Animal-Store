@@ -1,18 +1,18 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
+using AnimalStore.Common.Configuration;
 using AnimalStore.Data.DataContext;
 using AnimalStore.Data.Repositories;
 using AnimalStore.Data.Repositories.Animals;
 using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
+using AnimalStore.Model.Settings;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Web.API.DependencyResolution;
 using AnimalStore.Web.API.Helpers;
-using AnimalStore.Web.API.Models;
 using AnimalStore.Web.API.Strategies;
 using AnimalStore.Web.API.Utilities;
-using AnimalStore.Web.API.Wrappers;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -20,7 +20,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using MongoDB.Driver;
 using AnimalStore.Web.API.Services;
-using Configuration = AnimalStore.Web.API.Wrappers.Configuration;
+using Configuration = AnimalStore.Common.Configuration.Configuration;
 
 namespace AnimalStore.Web.API
 {
@@ -61,9 +61,10 @@ namespace AnimalStore.Web.API
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IPlacesRepository, PlacesRepository>(
                 new HierarchicalLifetimeManager());
-
             unity.RegisterType<MongoClient>(
-                new InjectionFactory(x => new MongoClient(ConfigurationManager.AppSettings[AppSettingKeys.MongoServer])
+                new InjectionFactory(
+                  x => new MongoClient(
+                    ConfigurationManager.AppSettings[AppSettingKeys.MongoServer])
             ));
         
             config.DependencyResolver = new IoCContainer(unity);

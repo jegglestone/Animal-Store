@@ -110,7 +110,7 @@ namespace AnimalStore.Web.UnitTests.Repositories
                 _webAPIRequestWrapper, _responseStreamHelper);
 
             // act
-            var result = searchRepository.GetDogs(1, 20, 4, "dalmatian");
+            var result = searchRepository.GetDogsByBreed(1, 20, 4, "dalmatian");
 
             // assert
             Assert.That(result.Data.Count() == _dogsList.Count);
