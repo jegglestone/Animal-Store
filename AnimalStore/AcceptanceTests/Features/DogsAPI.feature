@@ -16,7 +16,6 @@ Scenario Outline: Searching for dogs of a specific breed within a specific place
 	| Ab kettleby | 1     |
 	| Leeds       | 12472 |
 
-
 Scenario: No results found
 	When there are no matching results in the API
 	Then the response is a status code 404

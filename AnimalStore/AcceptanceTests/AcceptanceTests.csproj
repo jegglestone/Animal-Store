@@ -81,11 +81,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DogsAPI.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\HomePage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HomePage.feature</DependentUpon>
-    </Compile>
     <Compile Include="Features\MenuNavigation.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -126,10 +121,6 @@
     <None Include="Features\DogsAPI.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>DogsAPI.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\HomePage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>HomePage.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\MenuNavigation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

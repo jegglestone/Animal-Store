@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-namespace AnimalStore.Data.Repositories
+namespace AnimalStore.Data.Repositories.Animals
 {
-    public interface IRepository<T> :IDisposable 
+  public interface IRepository<T> : IDisposable 
         where T : class
     {
         IQueryable<T> GetAll();

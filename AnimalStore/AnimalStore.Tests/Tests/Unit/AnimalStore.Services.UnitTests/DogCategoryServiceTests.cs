@@ -1,16 +1,12 @@
 ﻿using AnimalStore.Common.Configuration;
-using AnimalStore.Data.Repositories;
+using AnimalStore.Data.Repositories.Animals;
 using AnimalStore.Model;
-using AnimalStore.Web.API.Helpers;
 using AnimalStore.Web.API.Services;
 using AnimalStore.Web.API.Strategies;
 using NUnit.Framework;
 using Rhino.Mocks;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnimalStore.Services.UnitTests
 {

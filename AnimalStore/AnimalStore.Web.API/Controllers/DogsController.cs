@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using AnimalStore.Common.Configuration;
+using AnimalStore.Data.Repositories.Animals;
 using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Data.UnitsOfWork;
 using AnimalStore.Model;
-using AnimalStore.Data.Repositories;
 using System.Linq;
 using System.Web.Http;
 using System;

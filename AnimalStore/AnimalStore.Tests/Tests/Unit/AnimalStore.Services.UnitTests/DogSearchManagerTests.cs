@@ -19,7 +19,7 @@ namespace AnimalStore.Services.UnitTests
 				private readonly IDogLocationFilterStrategy _dogLocationFilterStrategy;
 				private readonly IConfiguration _configuration;
 				private readonly DogSearchResultsListBuilder _dogSearchResultsListBuilder;
-				private const string _sortColumn = "Something";
+				private const string _sortColumn = "Name";
 				private DogSearchManager _dogSearchManager;
 
 				public DogSearchManagerTests ()
@@ -132,7 +132,7 @@ namespace AnimalStore.Services.UnitTests
 								, _configuration);
 
 						// act
-						_dogSearchManager.ApplyDogLocationFilteringAndSorting(dogs, breedId, _sortColumn, placeId);
+						_dogSearchManager.ApplyDogLocationFilteringAndSorting(dogs, breedId, null, placeId);
 
 						// assert
 						_dogLocationFilterStrategy.AssertWasCalled(x => x.Sort(Arg<IEnumerable<Dog>>.Is.Anything));

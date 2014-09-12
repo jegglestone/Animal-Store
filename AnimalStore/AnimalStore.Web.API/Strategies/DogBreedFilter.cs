@@ -1,5 +1,5 @@
 using System.Linq;
-using AnimalStore.Data.Repositories;
+using AnimalStore.Data.Repositories.Animals;
 using AnimalStore.Model;
 
 namespace AnimalStore.Web.API.Strategies

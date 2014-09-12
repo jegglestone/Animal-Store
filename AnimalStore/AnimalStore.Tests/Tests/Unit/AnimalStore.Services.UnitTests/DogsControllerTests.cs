@@ -1,8 +1,8 @@
 ﻿using AnimalStore.Common.Configuration;
 using AnimalStore.Common.Constants;
+using AnimalStore.Data.Repositories.Animals;
 using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Web.API.Controllers;
-using AnimalStore.Data.Repositories;
 using AnimalStore.Web.API.Utilities;
 using NUnit.Framework;
 using Rhino.Mocks;

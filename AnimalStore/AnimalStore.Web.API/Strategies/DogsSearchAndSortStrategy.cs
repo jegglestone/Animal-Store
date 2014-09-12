@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using AnimalStore.Data.Repositories;
+using AnimalStore.Data.Repositories.Animals;
 using AnimalStore.Model;
 using AnimalStore.Common.Constants;
 

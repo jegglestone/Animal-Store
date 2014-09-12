@@ -106,11 +106,11 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void NoResultsFound()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No results found", ((string[])(null)));
-#line 20
+#line 19
 this.ScenarioSetup(scenarioInfo);
-#line 21
+#line 20
  testRunner.When("there are no matching results in the API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 22
+#line 21
  testRunner.Then("the response is a status code 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -121,12 +121,12 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void LimitingResultsByPageSize()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Limiting results by page size", ((string[])(null)));
-#line 24
+#line 23
 this.ScenarioSetup(scenarioInfo);
-#line 25
+#line 24
  testRunner.When("I make a GET request to the dogs API with a breedID and a placeId with a small pa" +
                     "gesize", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 26
+#line 25
  testRunner.And("I should be able to navigate the results through using the paging links", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

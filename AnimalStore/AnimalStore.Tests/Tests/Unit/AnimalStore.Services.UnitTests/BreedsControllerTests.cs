@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AnimalStore.Data.Repositories;
+using AnimalStore.Data.Repositories.Animals;
 using AnimalStore.Model;
 using AnimalStore.Web.API.Controllers;
 using NUnit.Framework;

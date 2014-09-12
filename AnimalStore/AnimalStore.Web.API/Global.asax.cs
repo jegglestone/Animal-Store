@@ -2,7 +2,6 @@
 using System.Data.SqlClient;
 using AnimalStore.Common.Configuration;
 using AnimalStore.Data.DataContext;
-using AnimalStore.Data.Repositories;
 using AnimalStore.Data.Repositories.Animals;
 using AnimalStore.Data.Repositories.Places;
 using AnimalStore.Data.UnitsOfWork;
