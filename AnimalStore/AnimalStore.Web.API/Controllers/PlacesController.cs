@@ -6,6 +6,8 @@ using AnimalStore.Model;
 
 namespace AnimalStore.Web.API.Controllers
 {
+  using System;
+
   public class PlacesController : ApiController, IController<Place>
   {
     private readonly IPlacesRepository _placesRepository;
@@ -46,10 +48,11 @@ namespace AnimalStore.Web.API.Controllers
       var places = _placesRepository.GetAll();
 
       return places.FirstOrDefault(
-        x => x.Name == location 
-          || x.AltName == location
-          || x.County == location
-          || x.Postcode == location).PlacesID;
+        x => String.Equals(x.Name, location, StringComparison.CurrentCultureIgnoreCase)
+          || String.Equals(x.AltName, location, StringComparison.CurrentCultureIgnoreCase)
+          || String.Equals(x.County, location, StringComparison.CurrentCultureIgnoreCase)
+          || String.Equals(x.Postcode, location, StringComparison.CurrentCultureIgnoreCase))
+       .PlacesID;
     }
   }
 }

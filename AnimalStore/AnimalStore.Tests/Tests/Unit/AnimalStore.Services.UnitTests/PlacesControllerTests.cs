@@ -108,5 +108,23 @@ namespace AnimalStore.Services.UnitTests
         });
       return placesRepository;
     }
+
+    [TestCase("walker", 1)]
+    [TestCase("horsforth", 2)]
+    public void Get_WhenGivenALocationString_InLowerCase_Returns_LocationId(
+      string lowerCasePlaceName, int expectedPlaceId)
+    {
+      // arrange
+      var placesRepository = PlacesRepository();
+
+      var placesController = new PlacesController(
+        placesRepository);
+
+      // act
+      int place = placesController.GetByLocation(lowerCasePlaceName);
+
+      // assert
+      Assert.That(place == expectedPlaceId);
+    }
   }
 }
