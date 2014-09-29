@@ -3,7 +3,6 @@ using System.Linq;
 using AnimalStore.Common.Configuration;
 using AnimalStore.Data.Repositories.Animals;
 using AnimalStore.Model;
-using AnimalStore.Web.API.Helpers;
 using AnimalStore.Web.API.Strategies;
 
 namespace AnimalStore.Web.API.Services
@@ -23,7 +22,8 @@ namespace AnimalStore.Web.API.Services
       _dogCategoryFilterStrategy = dogCategoryFilterStrategy;
     }
 
-    public IQueryable<Dog> AddDogsInSameCategoryToDogsCollection(IQueryable<Dog> matchingBreedDogs, int breedId)
+    public IQueryable<Dog> AddDogsInSameCategoryToDogsCollection(
+      IQueryable<Dog> matchingBreedDogs, int breedId)
     {
       IQueryable<Dog> dogs = null;
       IQueryable<Dog> dogsInSameCategory = null;

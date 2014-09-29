@@ -1,7 +1,6 @@
 ﻿using AnimalStore.Common.Constants;
 namespace AnimalStore.Web.API.Helpers
 {
-    //TODO: unit tests
     public static class PageableResultsNextPreviousUrlHelper
     {
         public static string BuildNextPageUrl(string baseUrl, int page, int totalPages, int pageSize, string breedName = null)

@@ -9,9 +9,7 @@ using AnimalStore.Model;
 using AnimalStore.Model.Settings;
 using AnimalStore.Web.API.Controllers;
 using AnimalStore.Web.API.DependencyResolution;
-using AnimalStore.Web.API.Helpers;
 using AnimalStore.Web.API.Strategies;
-using AnimalStore.Web.API.Utilities;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -52,11 +50,11 @@ namespace AnimalStore.Web.API
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IDogCategoryService, DogCategoryService>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IDogLocationFilterStrategy, DogLocationFilterStrategy>(
+            unity.RegisterType<IDogLocationFilter, DogLocationFilter>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IRepository<Dog>, DogsRepository>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IDogSearchManager, DogSearchManager>(
+            unity.RegisterType<IDogSearchService, DogSearchService>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IPlacesRepository, PlacesRepository>(
                 new HierarchicalLifetimeManager());

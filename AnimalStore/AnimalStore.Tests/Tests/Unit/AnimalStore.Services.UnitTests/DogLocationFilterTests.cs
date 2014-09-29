@@ -65,7 +65,7 @@ namespace AnimalStore.Services.UnitTests
                 1, sunderland.PlacesID, durhamNearby.PlacesID, midlandsFarAway.PlacesID
                 ).Build();
 
-            var dogLocationFilter = new DogLocationFilterStrategy(placesRepository, configuration);
+            var dogLocationFilter = new DogLocationFilter(placesRepository, configuration);
 
             // act
             var filteredDogs = dogLocationFilter.Filter(dogs.AsQueryable(), sunderland.PlacesID).ToList();

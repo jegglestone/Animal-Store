@@ -1,63 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="AnimalStore.Web.API.Strategies.DogsSearchAndSortStrategy" Collapsed="true">
-    <Position X="2.25" Y="1.75" Width="1.5" />
+    <Position X="2.25" Y="1.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAEAAAAAAACAAAAA=</HashCode>
       <FileName>Strategies\DogsSearchAndSortStrategy.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="AnimalStore.Web.API.Strategies.DogBreedFilter">
+  <Class Name="AnimalStore.Web.API.Strategies.DogBreedFilterStrategy">
     <Position X="1" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Strategies\DogsSearchAndSortStrategy.cs</FileName>
+      <FileName>Strategies\DogBreedFilterStrategy.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="AnimalStore.Web.API.Strategies.DogCategoryFilter">
+  <Class Name="AnimalStore.Web.API.Strategies.DogCategoryFilterStrategy">
     <Position X="3.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Strategies\DogsSearchAndSortStrategy.cs</FileName>
+      <FileName>Strategies\DogCategoryFilterStrategy.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="AnimalStore.Web.API.Strategies.DogLocationFilter">
+  <Class Name="AnimalStore.Web.API.Strategies.DogLocationFilterStrategy">
     <Position X="5.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAABAAAACAAAEAAAAAAAA=</HashCode>
-      <FileName>Strategies\DogsSearchAndSortStrategy.cs</FileName>
+      <FileName>Strategies\DogLocationFilterStrategy.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="AnimalStore.Web.API.Strategies.IDogFilterStrategy">
-    <Position X="2.25" Y="5.25" Width="1.5" />
+    <Position X="2.25" Y="5.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Strategies\DogsSearchAndSortStrategy.cs</FileName>
+      <FileName>Strategies\IDogFilterStrategy.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AnimalStore.Web.API.Strategies.IDogBreedFilterStrategy">
-    <Position X="3.5" Y="7" Width="1.5" />
+    <Position X="3.5" Y="7" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Strategies\DogsSearchAndSortStrategy.cs</FileName>
+      <FileName>Strategies\IDogBreedFilterStrategy.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AnimalStore.Web.API.Strategies.IDogCategoryFilterStrategy">
-    <Position X="1" Y="7" Width="1.5" />
+    <Position X="1" Y="7" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Strategies\DogsSearchAndSortStrategy.cs</FileName>
+      <FileName>Strategies\IDogCategoryFilterStrategy.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AnimalStore.Web.API.Strategies.IDogLocationFilterStrategy">
     <Position X="5.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Strategies\DogsSearchAndSortStrategy.cs</FileName>
+      <FileName>Strategies\IDogLocationFilterStrategy.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

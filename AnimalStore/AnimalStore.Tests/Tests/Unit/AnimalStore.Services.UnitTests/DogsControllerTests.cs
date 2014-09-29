@@ -1,25 +1,25 @@
-﻿using AnimalStore.Common.Configuration;
-using AnimalStore.Common.Constants;
-using AnimalStore.Data.Repositories.Animals;
-using AnimalStore.Data.Repositories.Places;
-using AnimalStore.Web.API.Controllers;
-using AnimalStore.Web.API.Utilities;
-using NUnit.Framework;
-using Rhino.Mocks;
-using System;
-using System.Linq;
-using AnimalStore.Data.UnitsOfWork;
-using AnimalStore.Model;
-
-namespace AnimalStore.Services.UnitTests
+﻿namespace AnimalStore.Services.UnitTests
 {
-    [TestFixture]
+  using Common.Configuration;
+  using Common.Constants;
+  using Data.Repositories.Animals;
+  using Data.Repositories.Places;
+  using Web.API.Controllers;
+  using NUnit.Framework;
+  using Rhino.Mocks;
+  using System;
+  using System.Linq;
+  using Data.UnitsOfWork;
+  using Model;
+  using Web.API.Services;
+
+  [TestFixture]
     public class DogsControllerTests
     {
         private IRepository<Dog> _dogsRepository;
         private IRepository<Breed> _breedsRepository;
         private IPlacesRepository _placesRepository;
-        private IDogSearchManager _dogSearchhelper;
+        private IDogSearchService _dogSearchhelper;
         private IUnitOfWork _unitofWork;
         private DogsController _dogsController;
         private IConfiguration _configuration;
@@ -31,7 +31,7 @@ namespace AnimalStore.Services.UnitTests
             _breedsRepository = MockRepository.GenerateMock<IRepository<Breed>>();
             _placesRepository = MockRepository.GenerateMock<IPlacesRepository>();
             _unitofWork = MockRepository.GenerateMock<IUnitOfWork>();
-            _dogSearchhelper = MockRepository.GenerateMock<IDogSearchManager>();
+            _dogSearchhelper = MockRepository.GenerateMock<IDogSearchService>();
             _configuration = MockRepository.GenerateMock<IConfiguration>();
 
             _breedsRepository.Stub(x => x.GetById(Arg<int>.Is.Anything)).Return(

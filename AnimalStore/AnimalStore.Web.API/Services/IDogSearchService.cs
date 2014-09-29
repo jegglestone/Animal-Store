@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AnimalStore.Model;
-
-namespace AnimalStore.Web.API.Utilities
+﻿namespace AnimalStore.Web.API.Services
 {
-    public interface IDogSearchManager
+  using System.Collections.Generic;
+  using System.Linq;
+  using Model;
+
+  public interface IDogSearchService
     {
         IEnumerable<Dog> GetDogsByBreed(int breedId);
 

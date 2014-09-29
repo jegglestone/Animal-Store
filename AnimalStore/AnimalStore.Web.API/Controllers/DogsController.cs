@@ -11,24 +11,25 @@ using System;
 using AnimalStore.Model.Settings;
 using AnimalStore.Web.API.Filters;
 using AnimalStore.Web.API.Helpers;
-using AnimalStore.Web.API.Utilities;
 
 namespace AnimalStore.Web.API.Controllers
 {
-    [NullFilter]
+  using Services;
+
+  [NullFilter]
     public class DogsController : ApiController, IPageableResults<Dog>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Dog> _dogsRepository;
         private readonly IRepository<Breed> _breedsRepository;
         private readonly IPlacesRepository _placesRepository;
-        private readonly IDogSearchManager _dogSearchManager;
+        private readonly IDogSearchService _dogSearchManager;
         private readonly IConfiguration _configuration;
 
         public DogsController(IRepository<Dog> dogsRepository
             , IRepository<Breed> breedsRepository
             , IUnitOfWork unitOfWork
-            , IDogSearchManager dogSearchManager
+            , IDogSearchService dogSearchManager
             , IConfiguration configuration
             , IPlacesRepository placesRepository
             )
