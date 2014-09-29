@@ -7,12 +7,12 @@ using AnimalStore.Model;
 
 namespace AnimalStore.Web.API.Strategies
 {
-    public sealed class DogLocationFilter : IDogLocationFilterStrategy
+    public sealed class DogLocationFilterStrategy : IDogLocationFilterStrategy
     {
         readonly IPlacesRepository _placesRepository;
         readonly IConfiguration _configuration;
 
-        public DogLocationFilter(IPlacesRepository placesRepository, IConfiguration configuration)
+        public DogLocationFilterStrategy(IPlacesRepository placesRepository, IConfiguration configuration)
         {
             _placesRepository = placesRepository;
             _configuration = configuration;

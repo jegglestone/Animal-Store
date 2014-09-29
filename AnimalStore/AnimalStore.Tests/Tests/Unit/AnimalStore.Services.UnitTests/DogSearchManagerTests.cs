@@ -10,7 +10,9 @@ using System.Linq;
 
 namespace AnimalStore.Services.UnitTests
 {
-		[TestFixture]
+	using Web.API.Services;
+
+	[TestFixture]
 		public class DogSearchManagerTests
 		{
 				private readonly IDogBreedFilterStrategy _dogBreedFilterStrategy;
@@ -23,14 +25,14 @@ namespace AnimalStore.Services.UnitTests
 				private DogSearchManager _dogSearchManager;
 
 				public DogSearchManagerTests ()
-			  {
-						  _dogBreedFilterStrategy = MockRepository.GenerateMock<IDogBreedFilterStrategy>();
-						  _dogCategoryFilterStrategy = MockRepository.GenerateMock<IDogCategoryFilterStrategy>();
-						  _dogCategoryService = MockRepository.GenerateMock<IDogCategoryService>();
-						  _dogLocationFilterStrategy = MockRepository.GenerateMock<IDogLocationFilterStrategy>();
-						  _configuration = MockRepository.GenerateMock<IConfiguration>();
-						  _dogSearchResultsListBuilder = new DogSearchResultsListBuilder();
-			  }
+				{
+							_dogBreedFilterStrategy = MockRepository.GenerateMock<IDogBreedFilterStrategy>();
+							_dogCategoryFilterStrategy = MockRepository.GenerateMock<IDogCategoryFilterStrategy>();
+							_dogCategoryService = MockRepository.GenerateMock<IDogCategoryService>();
+							_dogLocationFilterStrategy = MockRepository.GenerateMock<IDogLocationFilterStrategy>();
+							_configuration = MockRepository.GenerateMock<IConfiguration>();
+							_dogSearchResultsListBuilder = new DogSearchResultsListBuilder();
+				}
 
 				[Test]
 				public void GetDogsByBreed_filters_dogs_by_breed()

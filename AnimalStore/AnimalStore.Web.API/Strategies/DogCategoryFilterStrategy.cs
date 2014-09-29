@@ -6,9 +6,9 @@ using AnimalStore.Model;
 
 namespace AnimalStore.Web.API.Strategies
 {
-    public sealed class DogCategoryFilter : DogsSearchAndSortStrategy, IDogCategoryFilterStrategy
+    public sealed class DogCategoryFilterStrategy : DogsSearchAndSortStrategy, IDogCategoryFilterStrategy
     {
-        public DogCategoryFilter(IRepository<Dog> dogsRepository)
+        public DogCategoryFilterStrategy(IRepository<Dog> dogsRepository)
         {
             DogsRepository = dogsRepository;
         }

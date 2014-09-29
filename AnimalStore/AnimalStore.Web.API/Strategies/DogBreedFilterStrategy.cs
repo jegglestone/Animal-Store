@@ -4,9 +4,9 @@ using AnimalStore.Model;
 
 namespace AnimalStore.Web.API.Strategies
 {
-    public sealed class DogBreedFilter : DogsSearchAndSortStrategy, IDogBreedFilterStrategy
+    public sealed class DogBreedFilterStrategy : DogsSearchAndSortStrategy, IDogBreedFilterStrategy
     {
-        public DogBreedFilter(IRepository<Dog> dogsRepository)
+        public DogBreedFilterStrategy(IRepository<Dog> dogsRepository)
         {
             DogsRepository = dogsRepository;
         }

@@ -207,9 +207,9 @@
     <Compile Include="Helpers\PageableResultsNextPreviousUrlHelper.cs" />
     <Compile Include="Helpers\ResultsCountHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Strategies\DogBreedFilter.cs" />
-    <Compile Include="Strategies\DogCategoryFilter.cs" />
-    <Compile Include="Strategies\DogLocationFilter.cs" />
+    <Compile Include="Strategies\DogBreedFilterStrategy.cs" />
+    <Compile Include="Strategies\DogCategoryFilterStrategy.cs" />
+    <Compile Include="Strategies\DogLocationFilterStrategy.cs" />
     <Compile Include="Strategies\DogsSearchAndSortStrategy.cs" />
     <Compile Include="Strategies\IDogBreedFilterStrategy.cs" />
     <Compile Include="Strategies\IDogCategoryFilterStrategy.cs" />

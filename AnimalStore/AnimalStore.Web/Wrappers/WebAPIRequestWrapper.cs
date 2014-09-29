@@ -25,7 +25,8 @@ namespace AnimalStore.Web.Wrappers
             }
             catch (Exception e)
             {
-                _exceptionHelper.HandleException("Web Service not available", e, (GetType()));
+                _exceptionHelper.HandleException(
+                  "Web Service not available", e, (GetType()));
             }
             return null;
         }

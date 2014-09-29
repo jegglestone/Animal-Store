@@ -5,6 +5,7 @@ namespace AnimalStore.Web.Wrappers.Interfaces
 {
     public interface IDataContractJsonSerializerWrapper
     {
-        object ReadObject(Stream stream, DataContractJsonSerializer dataContractJsonSerializer);
+        object ReadObject(
+          Stream stream, DataContractJsonSerializer dataContractJsonSerializer);
     }
 }

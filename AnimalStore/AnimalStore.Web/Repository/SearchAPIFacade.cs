@@ -109,8 +109,10 @@ namespace AnimalStore.Web.Repository
       int placeId = GetPlaceIdForLocation(location);
 
       var url = sortBy != null
-        ? string.Format("{0}?page={1}&pageSize={2}&placeId={3}&sortBy={4}format=json", _dogs_Url, page, pageSize, placeId, sortBy)
-        : string.Format("{0}?page={1}&pageSize={2}&placeId={3}&format=json", _dogs_Url, page, pageSize, placeId);
+        ? string.Format("{0}?page={1}&pageSize={2}&placeId={3}&sortBy={4}format=json", 
+          _dogs_Url, page, pageSize, placeId, sortBy)
+        : string.Format("{0}?page={1}&pageSize={2}&placeId={3}&format=json", 
+          _dogs_Url, page, pageSize, placeId);
 
       var response = _webAPIRequestWrapper.GetResponse(url);
       return GetDogsByResponse(response);
@@ -121,10 +123,10 @@ namespace AnimalStore.Web.Repository
       int placeId = GetPlaceIdForLocation(location);
 
       var url = sortBy != null
-        ? string.Format("{0}{1}?page={2}&pageSize={3}&breedid={4}&placeId={5}&sortBy={6}&format=json"
-          , _dogs_Url, "/breed", page, pageSize, breedId, placeId, sortBy)
-        : string.Format("{0}{1}?page={2}&pageSize={3}&breedid={4}&placeId={5}&format=json"
-          , _dogs_Url, "/breed", page, pageSize, breedId, placeId);
+        ? string.Format("{0}{1}?page={2}&pageSize={3}&breedid={4}&placeId={5}&sortBy={6}&format=json",
+          _dogs_Url, "/breed", page, pageSize, breedId, placeId, sortBy)
+        : string.Format("{0}{1}?page={2}&pageSize={3}&breedid={4}&placeId={5}&format=json",
+          _dogs_Url, "/breed", page, pageSize, breedId, placeId);
 
       var response = _webAPIRequestWrapper.GetResponse(url);
       return GetDogsByResponse(response);

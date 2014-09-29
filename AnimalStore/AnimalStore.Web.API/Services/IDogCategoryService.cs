@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
-
-namespace AnimalStore.Web.API.Helpers
+﻿namespace AnimalStore.Web.API.Services
 {
-    public interface IDogCategoryService
+  using System.Linq;
+
+  public interface IDogCategoryService
     {
-        IQueryable<AnimalStore.Model.Dog> AddDogsInSameCategoryToDogsCollection(IQueryable<AnimalStore.Model.Dog> matchingBreedDogs, int breedId);
+        IQueryable<Model.Dog> AddDogsInSameCategoryToDogsCollection(IQueryable<AnimalStore.Model.Dog> matchingBreedDogs, int breedId);
     }
 }

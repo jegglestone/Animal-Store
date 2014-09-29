@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AnimalStore.Common.Configuration;
-using AnimalStore.Model;
-using AnimalStore.Web.API.Helpers;
-using AnimalStore.Web.API.Strategies;
-
-namespace AnimalStore.Web.API.Utilities
+﻿namespace AnimalStore.Web.API.Utilities
 {
+  using System.Collections.Generic;
+  using System.Linq;
+  using Common.Configuration;
+  using Model;
+  using Helpers;
+  using Strategies;
+  using Services;
+
   public class DogSearchManager : IDogSearchManager
   {
     private readonly IDogBreedFilterStrategy _dogBreedFilterStrategy;
@@ -35,9 +36,13 @@ namespace AnimalStore.Web.API.Utilities
       return matchingDogs;
     }
 
-    public IEnumerable<Dog> ApplyDogLocationFilteringAndSorting(IQueryable<Dog> matchingDogs, int breedId, string sortBy, int placeId = 0)
+    public IEnumerable<Dog> ApplyDogLocationFilteringAndSorting(
+      IQueryable<Dog> matchingDogs, int breedId, string sortBy, int placeId = 0)
     {
-      IQueryable<Dog> dogs = _dogCategoryService.AddDogsInSameCategoryToDogsCollection(matchingDogs, breedId);
+      IQueryable<Dog> dogs = 
+        _dogCategoryService.AddDogsInSameCategoryToDogsCollection(
+          matchingDogs, breedId);
+
       IEnumerable<Dog> dogsSorted;
 
       if (LocationSearchChecker.IsLocationSearch(placeId))
@@ -56,14 +61,16 @@ namespace AnimalStore.Web.API.Utilities
       return dogsSorted;
     }
 
-    private IEnumerable<Dog> GetDogsInSameRegion(int placeId, int breedId, IQueryable<Dog> dogs)
+    private IEnumerable<Dog> GetDogsInSameRegion(
+      int placeId, int breedId, IQueryable<Dog> dogs)
     {
       var dogsResults = _dogLocationFilterStrategy.Filter(dogs, placeId);
 
       var dogsInSameRegion = dogsResults as IList<Dog> ?? dogsResults.ToList();
-      return dogsInSameRegion.Count(x => x.BreedId == breedId) >= _configuration.GetSearchResultsMinimumMatchingNumber()
-        ? dogsInSameRegion.Where(x => x.BreedId == breedId)
-        : dogsInSameRegion;
+      return dogsInSameRegion.Count(x => x.BreedId == breedId) 
+        >= _configuration.GetSearchResultsMinimumMatchingNumber()
+          ? dogsInSameRegion.Where(x => x.BreedId == breedId)
+          : dogsInSameRegion;
     }
   }
 }

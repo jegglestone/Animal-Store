@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-using AnimalStore.Data.Repositories.Places;
-using AnimalStore.Model;
-
-namespace AnimalStore.Web.API.Controllers
+﻿namespace AnimalStore.Web.API.Controllers
 {
   using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Web.Http;
+  using Data.Repositories.Places;
+  using Model;
 
   public class PlacesController : ApiController, IController<Place>
   {

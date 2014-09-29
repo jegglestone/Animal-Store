@@ -46,13 +46,13 @@ namespace AnimalStore.Web.API
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IConfiguration, Configuration>(
                 new TransientLifetimeManager());
-            unity.RegisterType<IDogBreedFilterStrategy, DogBreedFilter>(
+            unity.RegisterType<IDogBreedFilterStrategy, DogBreedFilterStrategy>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IDogCategoryFilterStrategy, DogCategoryFilter>(
+            unity.RegisterType<IDogCategoryFilterStrategy, DogCategoryFilterStrategy>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IDogCategoryService, DogCategoryService>(
                 new HierarchicalLifetimeManager());
-            unity.RegisterType<IDogLocationFilterStrategy, DogLocationFilter>(
+            unity.RegisterType<IDogLocationFilterStrategy, DogLocationFilterStrategy>(
                 new HierarchicalLifetimeManager());
             unity.RegisterType<IRepository<Dog>, DogsRepository>(
                 new HierarchicalLifetimeManager());
