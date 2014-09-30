@@ -3,7 +3,9 @@ using System.Web.Mvc;
 
 namespace AnimalStore.Web.Controllers
 {
-    [OutputCache(CacheProfile = "ControllerOutputCacheProfile")]
+  using ViewModels;
+
+  [OutputCache(CacheProfile = "ControllerOutputCacheProfile")]
     public class DogController : Controller
     {
         private readonly ISearchAPIFacade _searchRepository;
@@ -16,7 +18,7 @@ namespace AnimalStore.Web.Controllers
         //
         // GET: /Dog/Details/5
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, SearchViewModel searchViewModel)
         {
             // get dog
             var dog = _searchRepository.GetDogDetails(id);

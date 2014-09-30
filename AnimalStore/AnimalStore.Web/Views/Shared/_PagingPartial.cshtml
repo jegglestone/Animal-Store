@@ -6,52 +6,58 @@
 
 @if (Model.TotalPages > 1)
 {
-    int selectedBreed;
-    bool isNationalSearch;
-    string sortBy;
+  int selectedBreed;
+  bool isNationalSearch;
+  string sortBy;
 
-    if (!string.IsNullOrEmpty(Request[QuerystringKeys.SelectedBreed]))
-    {
-        selectedBreed = int.Parse(Request.QueryString[QuerystringKeys.SelectedBreed]);
-        Session[SessionStoreKeys.SelectedBreed] = selectedBreed;
-    }
-    else
-    {
-        selectedBreed = Session[SessionStoreKeys.SelectedBreed] != null
-                            ? int.Parse(Session[SessionStoreKeys.SelectedBreed].ToString())
-                            : 1;
-    }
+  if (!string.IsNullOrEmpty(Request[QuerystringKeys.SelectedBreed]))
+  {
+    selectedBreed = int.Parse(Request.QueryString[QuerystringKeys.SelectedBreed]);
+    Session[SessionStoreKeys.SelectedBreed] = selectedBreed;
+  }
+  else
+  {
+    selectedBreed = Session[SessionStoreKeys.SelectedBreed] != null
+      ? int.Parse(Session[SessionStoreKeys.SelectedBreed].ToString())
+      : 1;
+  }
 
-    if (!string.IsNullOrEmpty(Request[QuerystringKeys.IsNationalSearch]))
-    {
-        isNationalSearch = bool.Parse(Request.QueryString[QuerystringKeys.IsNationalSearch]);
-        Session[SessionStoreKeys.IsNationalSearch] = isNationalSearch;
-    }
-    else
-    {
-        isNationalSearch = Session == null || bool.Parse(Session[SessionStoreKeys.IsNationalSearch].ToString());
-    }
-    
-    if (!string.IsNullOrEmpty(Request[QuerystringKeys.SortBy]))
-    {
-        sortBy = Request.QueryString[QuerystringKeys.SortBy];
-        Session[SessionStoreKeys.SortBy] = sortBy;
-    }
-    else
-    {
-        sortBy = Session[SessionStoreKeys.SortBy] != null 
-            ? Session[SessionStoreKeys.SortBy].ToString() 
-            : SearchSortOptions.DEFAULT;
-    }
+  if (!string.IsNullOrEmpty(Request[QuerystringKeys.IsNationalSearch]))
+  {
+    isNationalSearch = bool.Parse(Request.QueryString[QuerystringKeys.IsNationalSearch]);
+    Session[SessionStoreKeys.IsNationalSearch] = isNationalSearch;
+  }
+  else
+  {
+    isNationalSearch = Session == null || bool.Parse(Session[SessionStoreKeys.IsNationalSearch].ToString());
+  }
 
-    for (var i = 1; i < Model.TotalPages + 1; i++)
+  if (!string.IsNullOrEmpty(Request[QuerystringKeys.SortBy]))
+  {
+    sortBy = Request.QueryString[QuerystringKeys.SortBy];
+    Session[SessionStoreKeys.SortBy] = sortBy;
+  }
+  else
+  {
+    sortBy = Session[SessionStoreKeys.SortBy] != null
+      ? Session[SessionStoreKeys.SortBy].ToString()
+      : SearchSortOptions.DEFAULT;
+  }
+
+  if (!string.IsNullOrEmpty(Request[QuerystringKeys.PageNumber]))
+  {
+    int pageNumber = int.Parse(Request.QueryString[QuerystringKeys.PageNumber]);
+    Session[SessionStoreKeys.PageNumber] = pageNumber;
+  }
+
+  for (var i = 1; i < Model.TotalPages + 1; i++)
+  {
+    @Html.ActionLink(i.ToString(CultureInfo.InvariantCulture), "Dogs", "Search", new SearchViewModel
     {
-         @Html.ActionLink(i.ToString(CultureInfo.InvariantCulture), "Dogs", "Search", new SearchViewModel
-         {
-                SelectedBreed = selectedBreed,
-                IsNationalSearch = isNationalSearch,
-                PageNumber = i,
-                SortBy = sortBy,
-         }, htmlAttributes: null)
-    }
+      SelectedBreed = selectedBreed,
+      IsNationalSearch = isNationalSearch,
+      PageNumber = i,
+      SortBy = sortBy,
+    }, htmlAttributes: null)
+  }
 }

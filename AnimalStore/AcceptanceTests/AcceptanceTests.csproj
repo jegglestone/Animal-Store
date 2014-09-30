@@ -91,7 +91,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchWidget.feature</DependentUpon>
     </Compile>
-    <Compile Include="Hooks\AfterFeatureHook.cs" />
+    <Compile Include="Hooks\AfterTestRunHook.cs" />
     <Compile Include="Hooks\BeforeFeatureHook.cs" />
     <Compile Include="Hooks\ScenarioHooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

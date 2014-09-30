@@ -355,6 +355,7 @@
     <Content Include="Views\Search\Dogs.cshtml" />
     <Content Include="Views\Shared\_PagingPartial.cshtml" />
     <Content Include="Views\Dog\Details.cshtml" />
+    <Content Include="Views\Shared\_ReturnToResultsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

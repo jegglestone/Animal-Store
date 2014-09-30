@@ -4,65 +4,70 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script>
-    $(function () {
-        $("#tabs").tabs();
-    });
+  $(function () {
+    $("#tabs").tabs();
+  });
 </script>
 
 <div id="tabs">
-    <ul>
-        <li><a href="#fragment-1"><span>Dogs</span></a></li>
-        <li><a href="#fragment-2"><span>Services</span></a></li>
-        <li><a href="#fragment-3"><span>Breeders</span></a></li>
-    </ul>
-    <div id="fragment-1">
-        @using (Html.BeginForm("Dogs", "Search", Model, FormMethod.Get))
-        {           
-            <table style="clear: left">
-                <tr>
-                    <td colspan ="2"><h5>Find dogs locally or nationally</h5></td>
-                </tr>
-                <tr>
-                    <td colspan ="2"><p class="normal-Paragraph">Search through thousands of adverts for dogs and puppies for sale in the UK.</p></td>
-                </tr> 
-                <tr>
-                    <td colspan="2" style="padding: 0 0 0 0;">
-                        <table>
-                            <tr>
-                                <td colspan="3">Breed: </td>
-                                <td>@Html.DropDownListFor(x => x.SelectedBreed,
-                                                          Model.BreedsSelectList,
-                                                          SearchViewModel.AnyBreed,
-                                                           new { @onChange="$('SelectedBreedText') = this.value; alert('hello world');" }
-                                                          )
-                                </td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2">Within: </td>
-                                <td>@Html.RadioButtonFor(x => x.IsNationalSearch, false, new {@class="radio"})</td>
-                                <td>A Town or Postcode</td>
-                                <td>@Html.TextBoxFor(x => x.Location, new { value = "Town or Postcode"})</td>
-                            </tr>
-                            <tr>
-                                <td>@Html.RadioButtonFor(x => x.IsNationalSearch, true, new {@class="radio"})</td> 
-                                <td colspan="2">UK</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr><td colspan="2"><input type="submit" name="submit" id="search" value="Go" /></td></tr>
-            </table>    
-        }
-    </div>
-    <div id="fragment-2">
-        <h5>Find Services</h5>
-        Select service-type and area/postcode
-    </div>
-    <div id="fragment-3">
-        <h5>Find Breeders</h5>
-        Select breed type and area/postcode.
-    </div>
+  <ul>
+    <li><a href="#fragment-1"><span>Dogs</span></a></li>
+    <li><a href="#fragment-2"><span>Services</span></a></li>
+    <li><a href="#fragment-3"><span>Breeders</span></a></li>
+  </ul>
+  <div id="fragment-1" class="SearchTab">
+    @using (Html.BeginForm("Dogs", "Search", Model, FormMethod.Get))
+    {
+      <table style="clear: left">
+        <tr>
+          <td colspan="2"><h5>Find dogs locally or nationally</h5></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <p class="normal-Paragraph">
+             Search through thousands of adverts for dogs and puppies for sale in the UK.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="padding: 0 0 0 0;">
+            <table>
+              <tr>
+                <td colspan="3">Breed: </td>
+                <td>
+                  @Html.DropDownListFor(x => x.SelectedBreed,
+                    Model.BreedsSelectList,
+                    SearchViewModel.AnyBreed,
+                    new { @onChange = "$('SelectedBreedText') = this.value; alert('hello world');" }
+                    )
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="2">Within: </td>
+              <td>@Html.RadioButtonFor(x => x.IsNationalSearch, false, new { @class = "radio" })</td>
+              <td>A Town or Postcode</td>
+              <td>@Html.TextBoxFor(x => x.Location, new { value = "Town or Postcode" })</td>
+            </tr>
+            <tr>
+              <td>@Html.RadioButtonFor(x => x.IsNationalSearch, true, new { @class = "radio" })</td>
+              <td colspan="2">UK</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr><td colspan="2"><input type="submit" name="submit" id="search" value="Go" /></td></tr>
+    </table>
+    }
+  </div>
+  <div id="fragment-2" class="SearchTab">
+    <h5>Find Services</h5>
+    Select service-type and area/postcode
+  </div>
+  <div id="fragment-3" class="SearchTab">
+    <h5>Find Breeders</h5>
+    Select breed type and area/postcode.
+  </div>
 </div>
 <script type="text/javascript">
-    $("#tabs").tabs();
+  $("#tabs").tabs();
 </script>
