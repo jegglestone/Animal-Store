@@ -10,6 +10,9 @@ using System.Web.Http;
 
 namespace AnimalStore.Web.Repository
 {
+  using System.Linq;
+  using System.Runtime.Serialization.Json;
+
   public class SearchAPIFacade : ISearchAPIFacade
   {
     private string _API_base_URL
@@ -104,24 +107,64 @@ namespace AnimalStore.Web.Repository
       return GetDogsByResponse(response);
     }
 
-    public PageableResults<Dog> GetDogsByLocation(int page, int pageSize, string location, string sortBy = null)
+    public List<Place> GetPlaces(string location)
     {
-      int placeId = GetPlaceIdForLocation(location);
+      var places = new List<Place>();
 
+      var placeLookupUrl = string.Format(
+        "{0}?location={1}", _places_Url, location);
+      var placeLookupResponse =
+        _webAPIRequestWrapper.GetResponse(placeLookupUrl);
+
+      try
+      {
+        using (var stream =
+          _responseStreamHelper.GetResponseStream(placeLookupResponse))
+        {
+          var dataContractJsonSerializer = new DataContractJsonSerializer(
+            typeof(List<Place>));
+
+          var apiResponseData =
+            dataContractJsonSerializer.ReadObject(stream);
+
+          if (apiResponseData != null)
+          {
+            places = (List<Place>)apiResponseData;
+          }
+        }
+      }
+      catch (HttpResponseException)
+      {
+        // TODO: 404 not found - do something
+      }
+      catch (Exception e)
+      {
+        _exceptionHelper.HandleException(
+          "Response from places service resulted in an error in GetDogsByBreedAndLocation()",
+          e,
+          (typeof(SearchAPIFacade)));
+      }
+      finally
+      {
+        DisposeOfWebResponse(placeLookupResponse);
+      }
+      return places;
+    }
+
+    public PageableResults<Dog> GetDogsByLocation(int page, int pageSize, int placeId, string sortBy = null)
+    {
       var url = sortBy != null
-        ? string.Format("{0}?page={1}&pageSize={2}&placeId={3}&sortBy={4}format=json", 
-          _dogs_Url, page, pageSize, placeId, sortBy)
-        : string.Format("{0}?page={1}&pageSize={2}&placeId={3}&format=json", 
+        ? string.Format("{0}?page={1}&pageSize={2}&placeId={3}&sortBy={4}format=json",
+          _dogs_Url, page, pageSize, placeId)
+        : string.Format("{0}?page={1}&pageSize={2}&placeId={3}&format=json",
           _dogs_Url, page, pageSize, placeId);
 
       var response = _webAPIRequestWrapper.GetResponse(url);
       return GetDogsByResponse(response);
     }
 
-    public PageableResults<Dog> GetDogsByBreedAndLocation(int breedId, int page, int pageSize, string location, string sortBy = null)
+    public PageableResults<Dog> GetDogsByBreedAndLocation(int breedId, int page, int pageSize, int placeId, string sortBy = null)
     {
-      int placeId = GetPlaceIdForLocation(location);
-
       var url = sortBy != null
         ? string.Format("{0}{1}?page={2}&pageSize={3}&breedid={4}&placeId={5}&sortBy={6}&format=json",
           _dogs_Url, "/breed", page, pageSize, breedId, placeId, sortBy)
@@ -203,46 +246,6 @@ namespace AnimalStore.Web.Repository
       }
 
       return _dogs;
-    }
-
-    private int GetPlaceIdForLocation(string location)
-    {
-      int placeId = 0;
-      var placeLookupUrl = string.Format(
-        "{0}?location={1}", _places_Url, location);
-      var placeLookupResponse = 
-        _webAPIRequestWrapper.GetResponse(placeLookupUrl);
-
-      try
-      {
-        using (var stream = 
-          _responseStreamHelper.GetResponseStream(placeLookupResponse))
-        {
-          var apiResponseData = 
-            _dataContractJsonSerializerWrapper.ReadObject(stream,
-            DataContractJsonSerializerFactory.GetDataContractJsonSerializer(typeof(int)));
-          if (apiResponseData != null)
-          {
-            placeId = (int)apiResponseData;
-          }
-        }
-      }
-      catch (HttpResponseException)
-      {
-        // TODO: 404 not found - do something
-      }
-      catch (Exception e)
-      {
-        _exceptionHelper.HandleException(
-          "Response from places service resulted in an error in GetDogsByBreedAndLocation()", 
-          e, 
-          (typeof(SearchAPIFacade)));
-      }
-      finally
-      {
-        DisposeOfWebResponse(placeLookupResponse);
-      }
-      return placeId;
     }
 
     private static void DisposeOfWebResponse(WebResponse response)

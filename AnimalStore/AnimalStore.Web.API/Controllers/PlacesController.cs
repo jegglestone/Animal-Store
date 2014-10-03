@@ -42,16 +42,17 @@
     //
     // GET: /Places?location={location}
     [HttpGet]
-    public int GetByLocation(string location)
+    public IEnumerable<Place> GetByLocation(string location)
     {
-      var places = _placesRepository.GetAll();
-
-      return places.FirstOrDefault(
+      var places = _placesRepository.GetAll().Where(
         x => String.Equals(x.Name, location, StringComparison.CurrentCultureIgnoreCase)
-          || String.Equals(x.AltName, location, StringComparison.CurrentCultureIgnoreCase)
-          || String.Equals(x.County, location, StringComparison.CurrentCultureIgnoreCase)
-          || String.Equals(x.Postcode, location, StringComparison.CurrentCultureIgnoreCase))
-       .PlacesID;
+             || String.Equals(x.AltName, location, StringComparison.CurrentCultureIgnoreCase)
+             || String.Equals(x.County, location, StringComparison.CurrentCultureIgnoreCase)
+             || String.Equals(x.Postcode, location, StringComparison.CurrentCultureIgnoreCase)
+             || x.Postcode.Contains(location));
+
+      return places;
     }
   }
 }
+

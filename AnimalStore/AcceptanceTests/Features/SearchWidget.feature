@@ -32,5 +32,29 @@ Scenario Outline: Local search for a specific kind of dog presents local results
 
 	Examples: 
 
-	| breed   | location | 
-	| Bulldog | Leeds    | 
+	| breed         | location |
+	| Bulldog       | Leeds    |
+
+
+Scenario Outline: Postcode search for a specific kind of dog presents local results
+	When I have selected a <breed> within a <postcode>
+	And I press the search button
+	Then I should be presented with search results for that <breed> within the area of <location>
+
+	Examples: 
+
+	| breed         | location       | postcode |
+	| Affenpinscher | Ab Kettleby    | LE14 3   |
+	| Affenpinscher | Leicestershire | LE14     |
+
+	@wip
+Scenario Outline: Ambiguous postcode search goes to disambiguation
+	When I have selected a <breed> within a <postcode>
+	And I press the search button
+	Then I should be presented with disambiguation
+
+	Examples: 
+
+	| breed         | location       | postcode |
+	| Affenpinscher | Ab Kettleby    | LE1      |
+	

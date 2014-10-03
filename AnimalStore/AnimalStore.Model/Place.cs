@@ -1,29 +1,40 @@
-﻿using MongoDB.Bson;
-
-namespace AnimalStore.Model
+﻿namespace AnimalStore.Model
 {
-    public class Place
-    {
-        public ObjectId _id { get; set; }
+  using System.Runtime.Serialization;
+  using MongoDB.Bson;
 
-        public int PlacesID { get; set; }
+  [DataContract]
+  public class Place
+  {
+    public ObjectId _id { get; set; }
 
-        public string Name { get; set; }
+    [DataMember(Name="places_id")]
+    public int PlacesID { get; set; }
 
-        public string AltName { get; set; }
+    [DataMember(Name = "name")]
+    public string Name { get; set; }
 
-        public string Type { get; set; }
+    [DataMember(Name = "alt_name")]
+    public string AltName { get; set; }
 
-        public string County { get; set; }
+    [DataMember(Name = "type")]
+    public string Type { get; set; }
 
-        public string Country { get; set; }
+    [DataMember(Name = "county")]
+    public string County { get; set; }
 
-        public string Postcode { get; set; }
+    [DataMember(Name = "country")]
+    public string Country { get; set; }
 
-        public double Longitude { get; set; }
+    [DataMember(Name = "postcode")]
+    public string Postcode { get; set; }
 
-        public double Latitude { get; set; }
+    [DataMember(Name = "longitude")]
+    public double Longitude { get; set; }
 
-        public int CountryID { get; set; }
-    }
+    [DataMember(Name = "latitude")]
+    public double Latitude { get; set; }
+
+    public int CountryID { get; set; }
+  }
 }

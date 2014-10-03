@@ -141,6 +141,54 @@ this.FeatureBackground();
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Postcode search for a specific kind of dog presents local results")]
+        [NUnit.Framework.TestCaseAttribute("Affenpinscher", "Ab Kettleby", "LE14 3", null)]
+        [NUnit.Framework.TestCaseAttribute("Affenpinscher", "Leicestershire", "LE14", null)]
+        public virtual void PostcodeSearchForASpecificKindOfDogPresentsLocalResults(string breed, string location, string postcode, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Postcode search for a specific kind of dog presents local results", exampleTags);
+#line 39
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
+#line 40
+ testRunner.When(string.Format("I have selected a {0} within a {1}", breed, postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 41
+ testRunner.And("I press the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
+ testRunner.Then(string.Format("I should be presented with search results for that {0} within the area of {1}", breed, location), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Ambiguous postcode search goes to disambiguation")]
+        [NUnit.Framework.CategoryAttribute("wip")]
+        [NUnit.Framework.TestCaseAttribute("Affenpinscher", "Ab Kettleby", "LE1", null)]
+        public virtual void AmbiguousPostcodeSearchGoesToDisambiguation(string breed, string location, string postcode, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "wip"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ambiguous postcode search goes to disambiguation", @__tags);
+#line 51
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
+#line 52
+ testRunner.When(string.Format("I have selected a {0} within a {1}", breed, postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 53
+ testRunner.And("I press the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 54
+ testRunner.Then("I should be presented with disambiguation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

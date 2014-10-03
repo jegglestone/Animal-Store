@@ -1,0 +1,24 @@
+﻿@using AnimalStore.Web.ViewModels
+@model AmbiguousLocationViewModel
+
+<h2>title</h2>
+<ul>
+  @foreach (var place in Model.Places)
+  {
+    <li>
+      @Html.ActionLink(
+        place.Name + ", " + place.Postcode, 
+        "Dogs", 
+        "Search", 
+        new SearchViewModel
+        {
+          PlaceId = place.PlacesID,
+          IsNationalSearch = false,
+          Location = Model.SearchViewModel.Location,
+          PageNumber = 1,
+          SelectedBreed = Model.SearchViewModel.SelectedBreed,
+        }, 
+        null)
+    </li>
+  }
+</ul>

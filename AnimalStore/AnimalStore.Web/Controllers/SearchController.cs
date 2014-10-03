@@ -8,6 +8,9 @@ using AnimalStore.Web.Wrappers.Interfaces;
 
 namespace AnimalStore.Web.Controllers
 {
+  using System.Collections.Generic;
+  using System.Linq;
+
   [OutputCache(CacheProfile = "ControllerOutputCacheProfile")]
   public class SearchController : Controller
   {
@@ -35,9 +38,21 @@ namespace AnimalStore.Web.Controllers
     [HttpGet]
     public ActionResult Dogs(SearchViewModel searchViewModel)
     {
-      PageableResults<Dog> searchResults = searchViewModel.IsNationalSearch
-        ? HandleNationalDogSearch(searchViewModel)
-        : HandleLocalDogSearch(searchViewModel);
+      PageableResults<Dog> searchResults;
+      if (searchViewModel.IsNationalSearch)
+        searchResults = HandleNationalDogSearch(searchViewModel);
+      else
+      {
+        if (searchViewModel.PlaceId == 0)
+        {
+          var places = _searchRepository.GetPlaces(searchViewModel.Location);
+          if (places.Count != 1) return AmbiguousLocations(searchViewModel, places);
+
+          searchViewModel.PlaceId = places.First().PlacesID;
+        }
+        searchResults = HandleLocalDogSearch(
+          searchViewModel);
+      }
 
       _session[SessionStoreKeys.SearchViewModel] = searchViewModel;
 
@@ -62,6 +77,15 @@ namespace AnimalStore.Web.Controllers
       searchViewModel.PageNumber = 1;
 
       return RedirectToAction("Dogs", BuildRouteValuesForDogsSearchViewModel(searchViewModel));
+    }
+
+    private ActionResult AmbiguousLocations(SearchViewModel search, List<Place> places)
+    {
+      return View("AmbiguousLocation", new AmbiguousLocationViewModel
+      {
+        SearchViewModel = search,
+        Places = places
+      });
     }
 
     private static RouteValueDictionary BuildRouteValuesForDogsSearchViewModel(SearchViewModel searchViewModel)
@@ -106,15 +130,14 @@ namespace AnimalStore.Web.Controllers
           searchViewModel.SelectedBreed,
           searchViewModel.PageNumber,
           defaultPageSize,
-          searchViewModel.Location,
+          searchViewModel.PlaceId,
           searchViewModel.SortBy)
         : _searchRepository.GetDogsByLocation(
           searchViewModel.PageNumber, 
           defaultPageSize,
-          searchViewModel.Location,
+          searchViewModel.PlaceId,
           searchViewModel.SortBy);
     }
-
 
     private static void SetPageNumber(SearchViewModel searchViewModel)
     {

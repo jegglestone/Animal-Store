@@ -7,6 +7,8 @@ using Rhino.Mocks;
 
 namespace AnimalStore.Services.UnitTests
 {
+  using System.Linq;
+
   [TestFixture]
   public class PlacesControllerTests
   {
@@ -22,10 +24,11 @@ namespace AnimalStore.Services.UnitTests
         placesRepository);
 
       // act
-      int place = placesController.GetByLocation(placeName);
+      List<Place> places = 
+        placesController.GetByLocation(placeName).ToList();
 
       // assert
-      Assert.That(place == expectedPlaceId);
+      Assert.That(places.First().PlacesID == expectedPlaceId);
     }
 
     [TestCase("Chillingham", 1)]
@@ -40,10 +43,11 @@ namespace AnimalStore.Services.UnitTests
         placesRepository);
 
       // act
-      int place = placesController.GetByLocation(altPlaceName);
+      List<Place> places =
+        placesController.GetByLocation(altPlaceName).ToList();
 
       // assert
-      Assert.That(place == expectedPlaceId);
+      Assert.That(places.First().PlacesID == expectedPlaceId);
     }
 
     [TestCase("North Tyneside", 1)]
@@ -58,10 +62,11 @@ namespace AnimalStore.Services.UnitTests
         placesRepository);
 
       // act
-      int place = placesController.GetByLocation(county);
+      List<Place> places =
+        placesController.GetByLocation(county).ToList();
 
       // assert
-      Assert.That(place == expectedPlaceId);
+      Assert.That(places.First().PlacesID == expectedPlaceId);
     }
 
     [TestCase("NE28 7XX", 1)]
@@ -76,10 +81,100 @@ namespace AnimalStore.Services.UnitTests
         placesRepository);
 
       // act
-      int place = placesController.GetByLocation(postcode);
+      List<Place> places =
+        placesController.GetByLocation(postcode).ToList();
 
       // assert
-      Assert.That(place == expectedPlaceId);
+      Assert.That(places.First().PlacesID == expectedPlaceId);
+    }
+
+    [TestCase("walker", 1)]
+    [TestCase("horsforth", 2)]
+    public void Get_WhenGivenALocationString_InLowerCase_Returns_LocationId(
+      string lowerCasePlaceName, int expectedPlaceId)
+    {
+      // arrange
+      var placesRepository = PlacesRepository();
+
+      var placesController = new PlacesController(
+        placesRepository);
+
+      // act
+      List<Place> places =
+        placesController.GetByLocation(lowerCasePlaceName).ToList();
+
+      // assert
+      Assert.That(places.First().PlacesID == expectedPlaceId);
+    }
+
+    [Test]
+    public void Get_WhenTwoMatchingPlaces_Returns_Both()
+    {
+      var placesRepository = MockRepository.GenerateMock<IPlacesRepository>();
+      placesRepository.Stub(x => x.GetAll()).Return(
+        new List<Place>
+        {
+          new Place
+          {
+            PlacesID = 1, 
+            Name = "Walker", 
+            County = "North Tyneside", 
+            Postcode = "LE14 3"
+          },
+          new Place
+          {
+            PlacesID = 2, 
+            Name = "Middleton", 
+            County = "Northamptonshire", 
+            Postcode = "LE16 8"
+          },
+        });
+
+      var placesController = new PlacesController(
+        placesRepository);
+
+      // act
+      var places =
+        placesController.GetByLocation("LE1").ToList();
+
+      // assert
+      Assert.That(places.Count == 2);
+    }
+
+    [Test]
+    public void Get_WhenMatchingCounty_Returns_AllTownsWithinCounty()
+    {
+      const string County = "Northamptonshire";
+
+      var placesRepository = MockRepository.GenerateMock<IPlacesRepository>();
+      placesRepository.Stub(x => x.GetAll()).Return(
+        new List<Place>
+        {
+          new Place
+          {
+            PlacesID = 1, 
+            Name = "Achurch", 
+            County = County, 
+            Postcode = "PE8 5"
+          },
+          new Place
+          {
+            PlacesID = 2, 
+            Name = "Abthorpe", 
+            County = County, 
+            Postcode = "NN12 8"
+          },
+        });
+
+      var placesController = new PlacesController(
+        placesRepository);
+
+      // act
+      var places =
+        placesController.GetByLocation(County).ToList();
+
+      // assert
+      Assert.That(places.Count == 2);
     }
 
     private static IPlacesRepository PlacesRepository()
@@ -107,24 +202,6 @@ namespace AnimalStore.Services.UnitTests
           },
         });
       return placesRepository;
-    }
-
-    [TestCase("walker", 1)]
-    [TestCase("horsforth", 2)]
-    public void Get_WhenGivenALocationString_InLowerCase_Returns_LocationId(
-      string lowerCasePlaceName, int expectedPlaceId)
-    {
-      // arrange
-      var placesRepository = PlacesRepository();
-
-      var placesController = new PlacesController(
-        placesRepository);
-
-      // act
-      int place = placesController.GetByLocation(lowerCasePlaceName);
-
-      // assert
-      Assert.That(place == expectedPlaceId);
     }
   }
 }

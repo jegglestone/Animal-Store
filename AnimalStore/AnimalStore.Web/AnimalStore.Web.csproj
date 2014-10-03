@@ -190,6 +190,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="ViewModels\AmbiguousPlacesViewModel.cs" />
     <Compile Include="ViewModels\QuerystringKeys.cs" />
     <Compile Include="ViewModels\SessionStoreKeys.cs" />
     <Compile Include="Wrappers\Configuration.cs" />
@@ -356,6 +357,7 @@
     <Content Include="Views\Shared\_PagingPartial.cshtml" />
     <Content Include="Views\Dog\Details.cshtml" />
     <Content Include="Views\Shared\_ReturnToResultsPartial.cshtml" />
+    <Content Include="Views\Search\AmbiguousLocation.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
