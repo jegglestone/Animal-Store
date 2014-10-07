@@ -9,6 +9,7 @@
   int selectedBreed;
   bool isNationalSearch;
   string sortBy;
+  int placeId = 0;
 
   if (!string.IsNullOrEmpty(Request[QuerystringKeys.SelectedBreed]))
   {
@@ -50,6 +51,12 @@
     Session[SessionStoreKeys.PageNumber] = pageNumber;
   }
 
+  if (!string.IsNullOrEmpty(Request[QuerystringKeys.PlaceId]))
+  {
+    placeId = int.Parse(Request.QueryString[QuerystringKeys.PlaceId]);
+    Session[SessionStoreKeys.PlaceId] = placeId;
+  }
+
   for (var i = 1; i < Model.TotalPages + 1; i++)
   {
     @Html.ActionLink(i.ToString(CultureInfo.InvariantCulture), "Dogs", "Search", new SearchViewModel
@@ -58,6 +65,7 @@
       IsNationalSearch = isNationalSearch,
       PageNumber = i,
       SortBy = sortBy,
+      PlaceId = placeId,
     }, null)
   }
 }

@@ -10,6 +10,7 @@ namespace AnimalStore.Web.Controllers
 {
   using System.Collections.Generic;
   using System.Linq;
+  using System.Web.WebPages;
 
   [OutputCache(CacheProfile = "ControllerOutputCacheProfile")]
   public class SearchController : Controller
@@ -39,7 +40,7 @@ namespace AnimalStore.Web.Controllers
     public ActionResult Dogs(SearchViewModel searchViewModel)
     {
       PageableResults<Dog> searchResults;
-      if (searchViewModel.IsNationalSearch)
+      if (searchViewModel.IsNationalSearch  || searchViewModel.Location.IsEmpty())
         searchResults = HandleNationalDogSearch(searchViewModel);
       else
       {

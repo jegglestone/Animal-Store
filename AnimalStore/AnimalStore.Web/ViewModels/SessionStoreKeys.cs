@@ -7,5 +7,6 @@
     public const string IsNationalSearch = "IsNationalSearch";
     public const string SortBy = "SortBy";
     public const string PageNumber = "PageNumber";
+    public const string PlaceId = "PlaceId";
   }
 }

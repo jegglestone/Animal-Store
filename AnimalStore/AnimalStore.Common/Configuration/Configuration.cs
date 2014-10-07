@@ -7,27 +7,38 @@ namespace AnimalStore.Common.Configuration
   {
     private static string _nationwideSearchResultsDescriptionMessageForAllBreeds
     {
-      get { return ConfigurationManager.AppSettings[AppSettingKeys.NationwideSearchResultsDescriptionMessageForAllBreeds]; }
+      get { return ConfigurationManager.AppSettings[
+        AppSettingKeys.NationwideSearchResultsDescriptionMessageForAllBreeds]; }
     }
 
     private static string _nationwideSearchResultsDescriptionMessageForSpecificBreed
     {
-      get { return ConfigurationManager.AppSettings[AppSettingKeys.NationwideSearchResultsDescriptionMessageForSpecificBreed]; }
+      get { return ConfigurationManager.AppSettings[
+        AppSettingKeys.NationwideSearchResultsDescriptionMessageForSpecificBreed]; }
     }
 
     private static string _nationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace
     {
-      get { return ConfigurationManager.AppSettings[AppSettingKeys.NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace]; }
+      get { return ConfigurationManager.AppSettings[
+        AppSettingKeys.NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace]; }
+    }
+
+    private static string _localSearchResultsDescriptionMessageForAllBreeds
+    {
+      get { return ConfigurationManager.AppSettings[
+        AppSettingKeys.LocalSearchResultsDescriptionMessageForAllBreeds]; }
     }
 
     private static int _searchResultsMinimumMatchingNumber
     {
-      get { return int.Parse(ConfigurationManager.AppSettings[AppSettingKeys.SearchResultsMinimumMatchingNumber]); }
+      get { return int.Parse(ConfigurationManager.
+        AppSettings[AppSettingKeys.SearchResultsMinimumMatchingNumber]); }
     }
 
     private static int _searchRadiusDefaultDistanceInMetres
     {
-      get { return int.Parse(ConfigurationManager.AppSettings[AppSettingKeys.SearchRadiusDefaultDistanceInMetres]); }
+      get { return int.Parse(ConfigurationManager.AppSettings[
+        AppSettingKeys.SearchRadiusDefaultDistanceInMetres]); }
     }
 
     private static string _environment
@@ -48,6 +59,11 @@ namespace AnimalStore.Common.Configuration
     public string GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace()
     {
       return _nationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace;
+    }
+
+    public string GetLocalSearchResultsDescriptionMessageForAllBreeds()
+    {
+      return _localSearchResultsDescriptionMessageForAllBreeds;
     }
 
     public int GetSearchResultsMinimumMatchingNumber()

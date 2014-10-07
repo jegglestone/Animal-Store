@@ -14,6 +14,8 @@
       "NationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace";
     public const string NationwideSearchResultsDescriptionMessageForAllBreeds =
       "NationwideSearchResultsDescriptionMessageForAllBreeds";
+    public const string LocalSearchResultsDescriptionMessageForAllBreeds =
+      "LocalSearchResultsDescriptionMessageForAllBreeds";
     public const string SearchRadiusDefaultDistanceInMetres = 
       "SearchRadiusDefaultDistanceInMetres";
     public const string Environment =

@@ -18,10 +18,10 @@ namespace AnimalStore.Services.UnitTests
         {
             var animalsListWith30Items = new List<Dog>()
             {
-                new Dog() { Name = "dog1", CreatedOn = DateTime.Today.AddHours(-1), Id=1 },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1), Id=2 },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1), Id=3 },
-                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1), Id=4 },
+                new Dog() { Name = "dog1", CreatedOn = DateTime.Today.AddHours(-1), Id=1, PlaceId = 3},
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1), Id=2, PlaceId = 3 },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1), Id=3, PlaceId = 3 },
+                new Dog() { Name = "dog2", CreatedOn = DateTime.Today.AddHours(-1), Id=4, PlaceId = 1 },
                 new Dog() { Name = "Flossie", CreatedOn = DateTime.Today.AddHours(-1), Id=5 },
 
                 new Dog() { Name = "dog", CreatedOn = DateTime.Today },

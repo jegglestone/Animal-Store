@@ -1,7 +1,7 @@
 ﻿@using AnimalStore.Web.ViewModels
 @model AmbiguousLocationViewModel
 
-<h2>title</h2>
+<h2>Select Location</h2>
 <ul>
   @foreach (var place in Model.Places)
   {
@@ -12,11 +12,11 @@
         "Search", 
         new SearchViewModel
         {
-          PlaceId = place.PlacesID,
-          IsNationalSearch = false,
-          Location = Model.SearchViewModel.Location,
-          PageNumber = 1,
           SelectedBreed = Model.SearchViewModel.SelectedBreed,
+          IsNationalSearch = false,
+          PageNumber = 1,                     
+          PlaceId = place.PlacesID,
+          Location = Model.SearchViewModel.Location,
         }, 
         null)
     </li>

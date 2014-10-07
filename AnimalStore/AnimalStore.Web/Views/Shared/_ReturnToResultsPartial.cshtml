@@ -6,7 +6,9 @@
     ? int.Parse(Session[SessionStoreKeys.SelectedBreed].ToString())
     : 1;
 
-  var isNationalSearch = Session == null || bool.Parse(Session[SessionStoreKeys.IsNationalSearch].ToString());
+  var isNationalSearch = Session == null
+                         || (Session[SessionStoreKeys.IsNationalSearch] != null
+                             && bool.Parse(Session[SessionStoreKeys.IsNationalSearch].ToString()));
 
   var sortBy = Session[SessionStoreKeys.SortBy] != null
     ? Session[SessionStoreKeys.SortBy].ToString()
@@ -15,12 +17,17 @@
   var pageNumber = Session[SessionStoreKeys.PageNumber] != null
     ? int.Parse(Session[SessionStoreKeys.PageNumber].ToString())
     : 1;
-}
 
+  var placeId = Session[SessionStoreKeys.PlaceId] != null
+    ? int.Parse(Session[SessionStoreKeys.PlaceId].ToString()) 
+    : 0;
+}
+    
 @Html.ActionLink("Return to results", "Dogs", "Search", new SearchViewModel
          {
            SelectedBreed = selectedBreed,
            IsNationalSearch = isNationalSearch,
            PageNumber = pageNumber,
            SortBy = sortBy,
+           PlaceId = placeId
          }, null)

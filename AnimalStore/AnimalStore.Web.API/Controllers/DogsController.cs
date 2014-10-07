@@ -44,22 +44,32 @@ namespace AnimalStore.Web.API.Controllers
 
         // GET api/dogs
         [HttpGet]
-        public PageableResults<Dog> GetPaged(int page = 1, int pageSize = 25)
+        public PageableResults<Dog> GetPaged(int page = 1, int pageSize = 25, int placeId=0)
         {
-            var dogs = _dogsRepository.GetAll()
-                .OrderByDescending(a => a.CreatedOn);
+          IOrderedQueryable<Dog> dogs;
+          if(placeId == 0)
+            dogs = _dogsRepository.GetAll()
+              .OrderByDescending(a => a.CreatedOn);
+          else
+          {
+            dogs = _dogsRepository.GetAll()
+              .Where(x => x.PlaceId == placeId)
+               .OrderByDescending(a => a.CreatedOn); ;
+          }
 
             var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogs] + "?page=";
 
-            return GetPageableDogResults(dogs, page, pageSize, baseUrl);
+            return GetPageableDogResults(dogs, page, pageSize, baseUrl, null, placeId);
         }
+
+        //TODO: problem - to do any sorting you have to have a breed. Need more overloads.
 
         // GET /api/dogs?breedid=1&page=1&pagesize=100&placeId=1&format=json
         // GET /api/dogs?breedid=4&page=1&pagesize=30&placeid=12472&format=json 
         // GET /api/dogs/breed?breedid=67&page=1&pagesize=30&format=json         TODO: Acceptance test
         // GET /api/dogs/breed?breedid=7&page=1&pagesize=30&format=json          TODO: Acceptance test
         [HttpGet]
-        public PageableResults<Dog> GetPaged(int breedId, int page, int pageSize, string sortBy = null, int placeId = 0)
+        public PageableResults<Dog> GetPagedByBreed(int breedId, int page, int pageSize, string sortBy = null, int placeId = 0)
         {
             var sortedDogsList = _dogSearchManager.GetDogsByBreed(breedId);
 
@@ -135,7 +145,7 @@ namespace AnimalStore.Web.API.Controllers
 
             var resultsDescription = breedName != null
                 ? GetBreedSpecificSearchResultDescription(resultsFrom, resultsTo, totalCount, breedName, placeId)
-                : GetAllBreedsSearchResultDescription(resultsFrom, resultsTo, totalCount);
+                : GetAllBreedsSearchResultDescription(resultsFrom, resultsTo, totalCount, placeId);
 
             return new PageableResults<Dog>
             {
@@ -149,18 +159,31 @@ namespace AnimalStore.Web.API.Controllers
             };
         }
 
-        private string GetAllBreedsSearchResultDescription(int resultsFrom, int resultsTo, int totalCount)
+        private string GetAllBreedsSearchResultDescription(
+          int resultsFrom, int resultsTo, int totalCount, int placeId)
         {
-            return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForAllBreeds(), resultsFrom, resultsTo, totalCount);
+          if (placeId == 0)
+            return string.Format(
+              _configuration.GetNationwideSearchResultsDescriptionMessageForAllBreeds(), 
+              resultsFrom, resultsTo, totalCount);
+
+          var placeName = GetPlaceName(placeId);
+          return string.Format(_configuration.GetLocalSearchResultsDescriptionMessageForAllBreeds(),
+            resultsFrom, resultsTo, totalCount, placeName);
         }
 
-        private string GetBreedSpecificSearchResultDescription(int resultsFrom, int resultsTo, int totalCount, string breedName, int placeId)
+        private string GetBreedSpecificSearchResultDescription(
+          int resultsFrom, int resultsTo, int totalCount, string breedName, int placeId)
         {
             if (placeId == 0)
-                return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreed(), resultsFrom, resultsTo, totalCount,
-                  breedName);
+                return string.Format(
+                  _configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreed(), 
+                  resultsFrom, resultsTo, totalCount,breedName);
+
             var placeName = GetPlaceName(placeId);
-            return string.Format(_configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace(), resultsFrom, resultsTo, totalCount, breedName, placeName);
+            return string.Format(
+              _configuration.GetNationwideSearchResultsDescriptionMessageForSpecificBreedAndPlace(), 
+              resultsFrom, resultsTo, totalCount, breedName, placeName);
         }
 
         private string GetPlaceName(int placeId)

@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using AnimalStore.Common.Helpers;
-using AnimalStore.Model;
-using AnimalStore.Web.Helpers;
-using AnimalStore.Web.Wrappers.Interfaces;
-using AnimalStore.Web.Factories;
-using System.Web.Http;
-
-namespace AnimalStore.Web.Repository
+﻿namespace AnimalStore.Web.Repository
 {
-  using System.Linq;
-  using System.Runtime.Serialization.Json;
+  using System;
+  using System.Collections.Generic;
+  using System.IO;
+  using System.Net;
+  using Common.Helpers;
+  using Model;
+  using Helpers;
+  using Wrappers.Interfaces;
+  using Factories;
+  using System.Web.Http;
 
   public class SearchAPIFacade : ISearchAPIFacade
   {
@@ -66,8 +64,8 @@ namespace AnimalStore.Web.Repository
       {
         using (var stream = _responseStreamHelper.GetResponseStream(response))
         {
-          var apiResponseData = _dataContractJsonSerializerWrapper.ReadObject(stream,
-            DataContractJsonSerializerFactory.GetDataContractJsonSerializer(typeof (List<Breed>)));
+          var apiResponseData =
+            DeserializeAPIResponseData(stream, typeof (List<Breed>));
           if (apiResponseData != null)
           {
             _breeds = (List<Breed>) apiResponseData;
@@ -89,9 +87,10 @@ namespace AnimalStore.Web.Repository
 
     public PageableResults<Dog> GetDogs(int page, int pageSize)
     {
-      var response = _webAPIRequestWrapper.GetResponse(
-        string.Format("{0}?page={1}&pageSize={2}&format=json", _dogs_Url, page, pageSize));
-      return GetDogsByResponse(response);
+      var url =string.Format("{0}?page={1}&pageSize={2}&format=json", 
+          _dogs_Url, page, pageSize) ;
+
+      return GetDogsByResponse(url);
     }
 
     public PageableResults<Dog> GetDogsByBreed(
@@ -103,8 +102,7 @@ namespace AnimalStore.Web.Repository
         : string.Format("{0}{1}?page={2}&pageSize={3}&breedid={4}&format=json"
           , _dogs_Url, "/breed", page, pageSize, breedId);
 
-      var response = _webAPIRequestWrapper.GetResponse(url);
-      return GetDogsByResponse(response);
+      return GetDogsByResponse(url);
     }
 
     public List<Place> GetPlaces(string location)
@@ -121,11 +119,8 @@ namespace AnimalStore.Web.Repository
         using (var stream =
           _responseStreamHelper.GetResponseStream(placeLookupResponse))
         {
-          var dataContractJsonSerializer = new DataContractJsonSerializer(
-            typeof(List<Place>));
-
           var apiResponseData =
-            dataContractJsonSerializer.ReadObject(stream);
+            DeserializeAPIResponseData(stream, typeof (List<Place>));
 
           if (apiResponseData != null)
           {
@@ -135,7 +130,7 @@ namespace AnimalStore.Web.Repository
       }
       catch (HttpResponseException)
       {
-        // TODO: 404 not found - do something
+        places = null;
       }
       catch (Exception e)
       {
@@ -154,13 +149,12 @@ namespace AnimalStore.Web.Repository
     public PageableResults<Dog> GetDogsByLocation(int page, int pageSize, int placeId, string sortBy = null)
     {
       var url = sortBy != null
-        ? string.Format("{0}?page={1}&pageSize={2}&placeId={3}&sortBy={4}format=json",
-          _dogs_Url, page, pageSize, placeId)
+        ? string.Format("{0}?page={1}&pageSize={2}&placeId={3}&sortBy={4}&format=json",
+          _dogs_Url, page, pageSize, placeId, sortBy)
         : string.Format("{0}?page={1}&pageSize={2}&placeId={3}&format=json",
           _dogs_Url, page, pageSize, placeId);
 
-      var response = _webAPIRequestWrapper.GetResponse(url);
-      return GetDogsByResponse(response);
+      return GetDogsByResponse(url);
     }
 
     public PageableResults<Dog> GetDogsByBreedAndLocation(int breedId, int page, int pageSize, int placeId, string sortBy = null)
@@ -171,8 +165,7 @@ namespace AnimalStore.Web.Repository
         : string.Format("{0}{1}?page={2}&pageSize={3}&breedid={4}&placeId={5}&format=json",
           _dogs_Url, "/breed", page, pageSize, breedId, placeId);
 
-      var response = _webAPIRequestWrapper.GetResponse(url);
-      return GetDogsByResponse(response);
+      return GetDogsByResponse(url);
     }
 
     // GET /api/dogs?breedid=1&page=1&pagesize=100&placeId=1&format=json
@@ -189,8 +182,8 @@ namespace AnimalStore.Web.Repository
       {
         using (var stream = _responseStreamHelper.GetResponseStream(response))
         {
-          var apiResponseData = _dataContractJsonSerializerWrapper.ReadObject(stream,
-            DataContractJsonSerializerFactory.GetDataContractJsonSerializer(typeof (Dog)));
+          var apiResponseData =
+            DeserializeAPIResponseData(stream, typeof(Dog));
           if (apiResponseData != null)
           {
             dog = (Dog) apiResponseData;
@@ -199,8 +192,7 @@ namespace AnimalStore.Web.Repository
       }
       catch (HttpResponseException)
       {
-        // TODO: 404 not found - do something
-
+        dog = null;
       }
       catch (Exception e)
       {
@@ -217,16 +209,16 @@ namespace AnimalStore.Web.Repository
       return dog;
     }
 
-    private PageableResults<Dog> GetDogsByResponse(WebResponse response)
+    private PageableResults<Dog> GetDogsByResponse(string url)
     {
+      var response = _webAPIRequestWrapper.GetResponse(url);
+
       try
       {
         using (var stream = _responseStreamHelper.GetResponseStream(response))
         {
           var apiResponseData = 
-            _dataContractJsonSerializerWrapper.ReadObject(stream,
-              DataContractJsonSerializerFactory
-                .GetDataContractJsonSerializer(typeof (PageableResults<Dog>)));
+            DeserializeAPIResponseData(stream, typeof (PageableResults<Dog>));
           if (apiResponseData != null)
           {
             _dogs = (PageableResults<Dog>) apiResponseData;
@@ -246,6 +238,12 @@ namespace AnimalStore.Web.Repository
       }
 
       return _dogs;
+    }
+
+    private object DeserializeAPIResponseData(Stream stream, Type type)
+    {
+      return _dataContractJsonSerializerWrapper.ReadObject(stream,
+        DataContractJsonSerializerFactory.GetDataContractJsonSerializer(type));
     }
 
     private static void DisposeOfWebResponse(WebResponse response)
