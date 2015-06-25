@@ -23,10 +23,13 @@ namespace AnimalStore.Web.API.Strategies
 
         public IQueryable<Dog> Filter(int categoryId, int breedToExcludeId)
         {
-            var dogsUnsorted = DogsRepository.GetAll()
-                .Where(x => x.Breed.Category.Id == categoryId 
-                            && x.Breed.Id != breedToExcludeId
-                ).Include("Breed");
+            var dogsUnsorted = DogsRepository
+              .GetAll()
+              .Where(
+                x => x.Breed.Category.Id == categoryId 
+                 && x.Breed.Id != breedToExcludeId
+              )
+              .Include("Breed");
 
             return dogsUnsorted;
         }

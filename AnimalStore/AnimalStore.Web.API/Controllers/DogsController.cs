@@ -57,29 +57,44 @@ namespace AnimalStore.Web.API.Controllers
                .OrderByDescending(a => a.CreatedOn); ;
           }
 
-            var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogs] + "?page=";
+          var baseUrl = 
+            ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogs] + "?page=";
 
-            return GetPageableDogResults(dogs, page, pageSize, baseUrl, null, placeId);
+          return GetPageableDogResults(dogs, page, pageSize, baseUrl, null, placeId);
         }
-
-        //TODO: problem - to do any sorting you have to have a breed. Need more overloads.
 
         // GET /api/dogs?breedid=1&page=1&pagesize=100&placeId=1&format=json
         // GET /api/dogs?breedid=4&page=1&pagesize=30&placeid=12472&format=json 
         // GET /api/dogs/breed?breedid=67&page=1&pagesize=30&format=json         TODO: Acceptance test
         // GET /api/dogs/breed?breedid=7&page=1&pagesize=30&format=json          TODO: Acceptance test
         [HttpGet]
-        public PageableResults<Dog> GetPagedByBreed(int breedId, int page, int pageSize, string sortBy = null, int placeId = 0)
+        public PageableResults<Dog> GetPagedByBreed(
+          int page, int pageSize, int breedId=0, string sortBy = null, int placeId = 0)
         {
-            var sortedDogsList = _dogSearchManager.GetDogsByBreed(breedId);
+          IEnumerable<Dog> sortedDogsList;
+          if (breedId != 0)
+          {
+            sortedDogsList = _dogSearchManager.GetDogsByBreed(breedId);
 
-            sortedDogsList = _dogSearchManager.ApplyDogLocationFilteringAndSorting(sortedDogsList.AsQueryable(), breedId, sortBy, placeId);
+            sortedDogsList =
+              _dogSearchManager.ApplyDogLocationFilteringAndSorting(
+                sortedDogsList.AsQueryable(), breedId, sortBy, placeId);
+          }
+          else
+          {
+            sortedDogsList =
+              _dogSearchManager.GetAllDogs();
+          }
 
-            var baseUrl = ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogsByBreed] + "?breedId=" + breedId + "&page=";
+          var baseUrl = 
+             ConfigurationManager.AppSettings[AppSettingKeys.BaseUrlPagedDogsByBreed] + "?breedId=" + breedId + "&page=";
 
-            var breedName = _breedsRepository.GetById(breedId).Name;
+          string breedName = null;
+          if (breedId != 0)
+            breedName = _breedsRepository.GetById(breedId).Name;
 
-            return GetPageableDogResults(sortedDogsList, page, pageSize, baseUrl, breedName, placeId);
+          return GetPageableDogResults(
+            sortedDogsList, page, pageSize, baseUrl, breedName, placeId);
         }
 
         // GET api/dogs/5
@@ -122,7 +137,8 @@ namespace AnimalStore.Web.API.Controllers
             _unitOfWork.Save();
         }
 
-        private PageableResults<Dog> GetPageableDogResults(IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl, string breedName = null, int placeId = 0)
+        private PageableResults<Dog> GetPageableDogResults(
+          IEnumerable<Dog> dogs, int page, int pageSize, string baseUrl, string breedName = null, int placeId = 0)
         {
             IEnumerable<Dog> enumerable = dogs as IList<Dog> ?? dogs.ToList();
             var totalCount = enumerable.Count();

@@ -76,7 +76,7 @@
       var dogsController = new DogsController(_dogsRepository, _breedsRepository, _unitofWork, _dogSearchhelper, _configuration, _placesRepository);
 
       //act
-      var result = dogsController.GetPagedByBreed(breedId, page, pageSize, SearchSortOptions.PRICE_HIGHEST);
+      var result = dogsController.GetPagedByBreed(page, pageSize, breedId, SearchSortOptions.PRICE_HIGHEST);
 
       Assert.That(result.SearchDescription, Is.EqualTo("Showing results 6 to 10 out of 14 results for Beagel nationwide"));
     }

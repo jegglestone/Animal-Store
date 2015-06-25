@@ -29,6 +29,12 @@
       _configuration = configuration;
     }
 
+    public IEnumerable<Dog> GetAllDogs()
+    {
+      var matchingDogs = _dogBreedFilterStrategy.Filter();
+      return matchingDogs;
+    }
+
     public IEnumerable<Dog> GetDogsByBreed(int breedId)
     {
       var matchingDogs = _dogBreedFilterStrategy.Filter(breedId);

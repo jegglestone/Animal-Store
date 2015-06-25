@@ -1,6 +1,10 @@
 ﻿namespace AnimalStore.Web.API.Strategies
 {
-    public interface IDogBreedFilterStrategy : IDogFilterStrategy
-    {
-    }
+  using System.Linq;
+  using Model;
+
+  public interface IDogBreedFilterStrategy : IDogFilterStrategy
+  {
+      IQueryable<Dog> Filter();
+  }
 }

@@ -18,5 +18,12 @@ namespace AnimalStore.Web.API.Strategies
 
             return dogsUnsorted;
         }
+
+        public IQueryable<Dog> Filter()
+        {
+          var dogsUnsorted = DogsRepository.GetAll();
+
+          return dogsUnsorted;
+        }
     }
 }

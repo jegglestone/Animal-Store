@@ -5,9 +5,12 @@
   using Model;
 
   public interface IDogSearchService
-    {
-        IEnumerable<Dog> GetDogsByBreed(int breedId);
+  {
+    IEnumerable<Dog> GetAllDogs();
 
-        IEnumerable<Dog> ApplyDogLocationFilteringAndSorting(IQueryable<Dog> matchingDogs, int breedId, string sortBy, int placeId = 0);
-    }
+    IEnumerable<Dog> GetDogsByBreed(int breedId);
+
+    IEnumerable<Dog> ApplyDogLocationFilteringAndSorting(
+      IQueryable<Dog> matchingDogs, int breedId, string sortBy, int placeId = 0);
+  }
 }

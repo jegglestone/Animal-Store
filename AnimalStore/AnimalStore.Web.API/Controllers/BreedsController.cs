@@ -21,7 +21,11 @@ namespace AnimalStore.Web.API.Controllers
         [HttpGet]
         public IEnumerable<Breed> Get()
         {
-            var breeds = _breedsRepository.GetAll().ToList().OrderByDescending(x => x.Name).Reverse();
+            var breeds = _breedsRepository
+              .GetAll()
+              .ToList()
+              .OrderByDescending(x => x.Name)
+              .Reverse();
 
             return breeds;
         }
